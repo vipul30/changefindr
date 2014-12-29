@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>Boomerang 2.0 - Docs</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="images/boomerang-logo.png" alt="Boomerang Logo">
+                </a>
+            </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hide"><a href="changelog.html">Changelog</a></li>
+                <li>
+                    <a href="https://wrapbootstrap.com/theme/boomerang-multipurpose-template-WB021609D" target="_blank">    
+						Purchase Boomerang
+                    </a>
+                </li>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar" role="tablist">
+                    <li class=""><a href="#overview">Overview</a>
+                        <ul class="">
+                            <li><a href="#overview-1">What is included</a></li>
+                            <li><a href="#overview-2">Supported browsers</a></li>
+                            <li><a href="#overview-3">Getting started</a></li>
+                            <li><a href="#overview-4">Basic template</a></li>
+                            <li><a href="#overview-5">Features</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#css">CSS, LESS - Structure</a>
+                        <ul class="">
+                            <li><a href="#css-1">Variables</a></li>
+                            <li><a href="#css-2">Customize/compile LESS files</a></li>
+                        </ul>
+                    </li>
+                    <li class="hide"><a href="#js">JS - Structure</a>
+                        <ul class="">
+                            <li><a href="#js-1">What is included</a></li>
+                            <li><a href="#js-2">How to use wp.app.js file</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#assets">Assets</a>
+                        <ul class="">
+                            <li><a href="#assets-1">What is included</a></li>
+                            <li><a href="#assets-2">What should I keep</a></li>
+                            <li><a href="#assets-3">Linking the wp.app.js file</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#template">Template customization</a>
+                        <ul class="">
+                            <li><a href="#template-1">Set a new base color</a></li>
+                            <li><a href="#template-2">Boxed or fluid</a></li>
+                            <li><a href="#template-4">Headers and navbars</a></li>
+                            <li><a href="#template-5">Mobile navigations</a></li>
+                            <li><a href="#template-6">Top header</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        
+        	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        		<div class="row" id="overview">
+                	<div class="col-md-6">
+                    	<h2 class="sub-header">1. Overview - Welcome!</h2>
+                    	<p>
+                        Thank you for purchasing Boomerang. We are glad to announce you that the new version of Boomerang is the result of a great work wich came from a strong passion for making things simpler and more flexible. There are still plenty of great ideas that will be implemented very soon.
+                        </p>
+                        <p>
+                        Boomerang 2 - MultiPurspose Template is a complete solution for businesses, corporates, creatives, real estate agencies, job portals, model agencies, news and magazines, schools and colleges, medical institutions. This template contains a variety of features that can be adapted for any situation. We have included, also, a shop template for those who want to start selling products in a nice and efficient way.
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                    	<h2 class="sub-header">Latest versions</h2>
+                        <table class="table table-bordered table-responsive">
+                        	<thead>
+                            	<tr>
+                                	<th>#</th>
+                                    <th>Version</th>
+                                    <th>Date of release</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                	<td>1</td>
+                                    <td>1.0</td>
+                                    <td>06-10-2014</td>
+                                    <td>Initial release</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        		
+                <!-- OVERVIEW - What is included -->
+                <div class="row" id="overview-1">
+                	<div class="col-md-12">
+                    	<h2 class="sub-header">What is included</h2>
+                        <p>
+                        Once purchased, unzip the compressed folder to see the directory structure of Boomerang. You'll see something like this:
+                        </p>
+
+<pre>
+    <code class="bash">
+    boomerang/
+    ├── assets/
+    │   ├── bootstrap/
+    │   ├── ...
+    ├── css/
+    │   ├── global-style.css
+    ├── font-awesome/
+    ├── images/
+    ├── js/
+    │   ├── jquery.js
+    │   ├── wp.app.js
+    │   ├── wp.swicther.js
+    │   └── ...
+    ├── less/
+    │   ├── buttons.less
+    │   ├── global-style.less
+    │   ├── mobile-nav.less
+    │   ├── shortcodes.less
+    │   ├── theme.less
+    │   ├── variables
+    │   ├──├── variables.less
+    │   ├──├── ...
+    └── index.html
+    └── about.html
+    └── ...
+    </code>
+</pre>
+
+                        <strong>assets</strong> - Contains all the plug-ins we used in this template
+                        <br>
+                        <strong>css</strong> - Contains the compiled version LESS styles unified in one file (global-style.css)
+                        <br>
+                        <strong>docs</strong> - Contains the documentation that will help you modify/customize this template
+                        <br>
+                        <strong>font-awesome</strong> - Contains all the Font Awesome icon fonts
+                        <br>
+                        <strong>images</strong> - The place where all the images are stored
+                        <br>
+                        <strong>js</strong> - Contains all the necessary files to make the website to work smoothly and the config file (wp.app.js) where all the initialization are done.
+                        <br>
+                        <strong>less</strong> - The folder you were looking for. All you need to customize your website is located within this folder. You will love the simplicity we brang to the process of customization.
+                    </div>
+                </div>
+                <!-- OVERVIEW - Supported browsers -->
+                <div class="row" id="overview-2">
+                    <div class="col-md-12">
+                        <h2 class="sub-header">Supported browsers</h2>
+                        <p>
+                        Since Boomerang is built on <a href="http://getbootstrap.com/" title="Open Bootstrap official website in a new page" target="_blank">Bootstrap 3</a> framework, it <a href="http://getbootstrap.com/getting-started/#support" title="Find out more info on Bootstrap official website" target="_blank">supports</a> the same browsers as Bootstrap. 
+                        <br><br>
+                        Bootstrap is built to work best in the latest desktop and mobile browsers, meaning older browsers might display differently styled, though fully functional, renderings of certain components.
+                        </p>
+
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <td></td>
+                              <th>Chrome</th>
+                              <th>Firefox</th>
+                              <th>Internet Explorer</th>
+                              <th>Opera</th>
+                              <th>Safari</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th>Android</th>
+                              <td class="text-success"><span class="glyphicon glyphicon-ok"></span> <span class="sr-only">Supported</span></td>
+                              <td class="text-success"><span class="glyphicon glyphicon-ok"></span> <span class="sr-only">Supported</span></td>
+                              <td class="text-muted" rowspan="3" style="vertical-align: middle;">N/A</td>
+                              <td class="text-danger"><span class="glyphicon glyphicon-remove"></span> <span class="sr-only">Not Supported</span></td>
+                              <td class="text-muted">N/A</td>
+                            </tr>
+                            <tr>
+                              <th>iOS</th>
+                              <td class="text-success"><span class="glyphicon glyphicon-ok"></span> <span class="sr-only">Supported</span></td>
+                              <td class="text-muted">N/A</td>
+                              <td class="text-danger"><span class="glyphicon glyphicon-remove"></span> <span class="sr-only">Not Supported</span></td>
+                              <td class="text-success"><span class="glyphicon glyphicon-ok"></span> <span class="sr-only">Supported</span></td>
+                            </tr>
+                            <tr>
+                              <th>Mac OS X</th>
+                              <td class="text-success"><span class="glyphicon glyphicon-ok"></span> <span class="sr-only">Supported</span></td>
+                              <td class="text-success"><span class="glyphicon glyphicon-ok"></span> <span class="sr-only">Supported</span></td>
+                              <td class="text-success"><span class="glyphicon glyphicon-ok"></span> <span class="sr-only">Supported</span></td>
+                              <td class="text-success"><span class="glyphicon glyphicon-ok"></span> <span class="sr-only">Supported</span></td>
+                            </tr>
+                            <tr>
+                              <th>Windows</th>
+                              <td class="text-success"><span class="glyphicon glyphicon-ok"></span> <span class="sr-only">Supported</span></td>
+                              <td class="text-success"><span class="glyphicon glyphicon-ok"></span> <span class="sr-only">Supported</span></td>
+                              <td class="text-success"><span class="glyphicon glyphicon-ok"></span> <span class="sr-only">Supported</span></td>
+                              <td class="text-success"><span class="glyphicon glyphicon-ok"></span> <span class="sr-only">Supported</span></td>
+                              <td class="text-danger"><span class="glyphicon glyphicon-remove"></span> <span class="sr-only">Not Supported</span></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        
+                        <p>
+                         Internet Explorer 8 and 9 are also supported, however, please be aware that some CSS3 properties and HTML5 elements are not fully supported by these browsers. In addition, Internet Explorer 8 requires the use of Respond.js to enable media query support.
+                        </p>
+
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th scope="col" class="col-xs-4">Feature</th>
+                              <th scope="col" class="col-xs-4">Internet Explorer 8</th>
+                              <th scope="col" class="col-xs-4">Internet Explorer 9</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row"><code>border-radius</code></th>
+                              <td class="text-danger"><span class="glyphicon glyphicon-remove"></span> Not supported</td>
+                              <td class="text-success"><span class="glyphicon glyphicon-ok"></span> Supported</td>
+                            </tr>
+                            <tr>
+                              <th scope="row"><code>box-shadow</code></th>
+                              <td class="text-danger"><span class="glyphicon glyphicon-remove"></span> Not supported</td>
+                              <td class="text-success"><span class="glyphicon glyphicon-ok"></span> Supported</td>
+                            </tr>
+                            <tr>
+                              <th scope="row"><code>transform</code></th>
+                              <td class="text-danger"><span class="glyphicon glyphicon-remove"></span> Not supported</td>
+                              <td class="text-success"><span class="glyphicon glyphicon-ok"></span> Supported, with <code>-ms</code> prefix</td>
+                            </tr>
+                            <tr>
+                              <th scope="row"><code>transition</code></th>
+                              <td colspan="2" class="text-danger"><span class="glyphicon glyphicon-remove"></span> Not supported</td>
+                            </tr>
+                            <tr>
+                              <th scope="row"><code>placeholder</code></th>
+                              <td colspan="2" class="text-danger"><span class="glyphicon glyphicon-remove"></span> Not supported</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        
+                        <a href="http://getbootstrap.com/getting-started/#support" title="Find out more about this section on the official Bootstrap website" target="_blank">Click here for more info on Bootstrap official website</a>
+                    </div>
+                </div>
+
+                <!-- OVERVIEW - Getting started -->
+                <div class="row" id="overview-3">
+                    <div class="col-md-12">
+                        <h2 class="sub-header">Getting started</h2>
+                        <p>
+                        To start working with Boomerang you can use a basic <strong>_template-basic-css.html</strong> or <strong>_template-basic-less.html</strong> (we recommend to use the less template version only for development purpose, so you can test less modification directly on your browser), or take the completely functional pages included in this package.
+                        <br><br>
+                        We provide you both CSS and LESS standalone versions which are completely identical in design and functions.
+                        <br><br>
+                        <strong>CSS Version</strong>: Our style is represented by a single file named global-style.css which can be found in the CSS folder. It contains all the needed styles and it is identical with the less files, the single difference is that, for performance reasons, we have unified all the LESS files in the single  CSS file. <link href="css/global-style.css" media="screen" rel="stylesheet">
+                        <br><br>
+                        <strong>LESS Version</strong>: You can find all the required files in the LESS folder. You will see that the customization is incredibly easy to do since all variables are located in a single file (variables.less) and all variable names are commented. 
+                        <br><br>
+                        Use LESS if you want to modify Boomerang. We built it Bootstrap way so you won't find big difference. Use less/variables.less to modify different styles, use theme.less to remove needless components. <a href="#css-4" title="Go to Compiling LESS files">For more info about compiling LESS files, click here</a>
+                        <br><br>
+                        If you want to start from scratch, the best way is to use our template where all startup files are already included and ready to be used. You can find template.html file both for CSS and LESS version in the root folder.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- OVERVIEW - Basic template -->
+                <div class="row" id="overview-4">
+                    <div class="col-md-12">
+                    <h2 class="sub-header">Basic template</h2>
+                    <p>
+                    Note that the basic template does not come with any additional plugin installed. It contains only the essential styles and script - Bootstrap, Font Awesome, Boomerang global style and UI Kit. To install a plugin or implement a feature go to the <a href="#components">Components</a> or <a href="#widgets">Widgets</a> section where you will find more details for this matter.
+                    </p>
+                    <h5><strong>_template-basic-css.html</strong></h5>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta name="robots" content="index, follow"&gt;
+    &lt;title&gt;Boomerang 2 - MultiPurpose Template&lt;/title&gt;
+
+    &lt;!-- Essential styles --&gt;
+    &lt;link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" type="text/css"&gt;
+    &lt;link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css"&gt; 
+    &lt;link rel="stylesheet" href="assets/fancybox/jquery.fancybox.css?v=2.1.5" media="screen"&gt; 
+     
+    &lt;!-- Boomerang styles --&gt;
+    &lt;link id="wpStylesheet" type="text/css" href="css/global-style.css" rel="stylesheet" media="screen"&gt; 
+
+    &lt;!-- Favicon --&gt;
+    &lt;link href="images/favicon.png" rel="icon" type="image/png"&gt;
+
+    &lt;!-- Required JS --&gt;
+    &lt;script src="js/jquery.js"&gt;&lt;/script&gt;
+    &lt;script src="js/jquery-ui.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;!-- Here comes the page content --&gt;
+
+&lt;!-- Essential JS --&gt;
+&lt;script src="js/modernizr.custom.js"&gt;&lt;/script&gt;
+&lt;script src="assets/bootstrap/js/bootstrap.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.mousewheel-3.0.6.pack.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.easing.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.metadata.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.hoverup.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.hoverdir.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.stellar.js"&gt;&lt;/script&gt;
+
+&lt;!-- Forms --&gt;
+&lt;script src="assets/ui-kit/js/jquery.powerful-placeholder.min.js"&gt;&lt;/script&gt; 
+
+&lt;!-- Assets  --&gt;
+&lt;script src="assets/responsive-mobile-nav/js/jquery.dlmenu.js"&gt;&lt;/script&gt;
+&lt;script src="assets/hover-dropdown/bootstrap-hover-dropdown.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/page-scroller/jquery.ui.totop.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/mixitup/jquery.mixitup.js"&gt;&lt;/script&gt;
+&lt;script src="assets/mixitup/jquery.mixitup.init.js"&gt;&lt;/script&gt;
+&lt;script src="assets/fancybox/jquery.fancybox.pack.js?v=2.1.5"&gt;&lt;/script&gt;
+&lt;script src="assets/bootstrap/js/tooltip.js"&gt;&lt;/script&gt;
+&lt;script src="assets/bootstrap/js/popover.js"&gt;&lt;/script&gt;
+
+&lt;!-- Boomerang App JS --&gt;
+&lt;script src="js/wp.app.js"&gt;&lt;/script&gt;
+&lt;!--[if lt IE 9]&gt;
+    &lt;script src="js/html5shiv.js"&gt;&lt;/script&gt;
+    &lt;script src="js/respond.min.js"&gt;&lt;/script&gt;
+&lt;![endif]--&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+                    <br> 
+
+                    <h5><strong>_template-basic-less.html</strong></h5>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta name="robots" content="index, follow"&gt;
+    &lt;title&gt;Boomerang 2 - MultiPurpose Template&lt;/title&gt;
+
+    &lt;!-- Essential styles --&gt;
+    &lt;link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" type="text/css"&gt;
+    &lt;link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css"&gt; 
+    &lt;link rel="stylesheet" href="assets/fancybox/jquery.fancybox.css?v=2.1.5" media="screen"&gt; 
+     
+    &lt;!-- Boomerang styles --&gt;
+    &lt;link type="text/less" href="less/global-style.less" rel="stylesheet/less" media="screen"&gt; 
+
+    &lt;!-- Favicon --&gt;
+    &lt;link href="images/favicon.png" rel="icon" type="image/png"&gt;
+
+    &lt;!-- Required JS --&gt;
+    &lt;script src="js/jquery.js"&gt;&lt;/script&gt;
+    &lt;script src="js/jquery-ui.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;!-- Here comes the page content --&gt;
+
+&lt;!-- Essential JS --&gt;
+&lt;script src="js/modernizr.custom.js"&gt;&lt;/script&gt;
+&lt;script src="assets/bootstrap/js/bootstrap.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.mousewheel-3.0.6.pack.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.easing.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.metadata.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.hoverup.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.hoverdir.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.stellar.js"&gt;&lt;/script&gt;
+
+&lt;!-- Forms --&gt;
+&lt;script src="assets/ui-kit/js/jquery.powerful-placeholder.min.js"&gt;&lt;/script&gt; 
+
+&lt;!-- Assets  --&gt;
+&lt;script src="assets/responsive-mobile-nav/js/jquery.dlmenu.js"&gt;&lt;/script&gt;
+&lt;script src="assets/hover-dropdown/bootstrap-hover-dropdown.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/page-scroller/jquery.ui.totop.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/mixitup/jquery.mixitup.js"&gt;&lt;/script&gt;
+&lt;script src="assets/mixitup/jquery.mixitup.init.js"&gt;&lt;/script&gt;
+&lt;script src="assets/fancybox/jquery.fancybox.pack.js?v=2.1.5"&gt;&lt;/script&gt;
+&lt;script src="assets/bootstrap/js/tooltip.js"&gt;&lt;/script&gt;
+&lt;script src="assets/bootstrap/js/popover.js"&gt;&lt;/script&gt;
+
+&lt;!-- Boomerang App JS --&gt;
+&lt;script src="js/wp.app.js"&gt;&lt;/script&gt;
+&lt;!--[if lt IE 9]&gt;
+    &lt;script src="js/html5shiv.js"&gt;&lt;/script&gt;
+    &lt;script src="js/respond.min.js"&gt;&lt;/script&gt;
+&lt;![endif]--&gt;
+
+&lt;!-- LESS JS --&gt;
+&lt;script type="text/javascript"&gt;
+    // LESS options
+    less = {
+        env: "development",
+        logLevel: 2
+    };
+&lt;/script&gt;
+&lt;script src="js/less.js"&gt;&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;  
+</pre>
+
+                    </div>
+                </div>
+
+                <!-- OVERVIEW - Features -->
+                <div class="row" id="overview-5">
+                    <div class="col-md-12">
+                        <h2 class="sub-header">Features</h2>
+
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="">
+                                    <td><strong>Mobile ready</strong></td>
+                                    <td>Our template is ready to work on any device resolution. </td>
+
+                                </tr>
+                                <tr class="">
+                                    <td><strong>40+ Prebuild pages</strong></td>
+                                    <td>With over 40 prebuild pages, now you have everything you need to start you website fresh and with no difficulties.</td>
+
+                                </tr>
+                                <tr class="">
+                                    <td><strong>Over 300 icons</strong></td>
+                                    <td>Font Awesome is the best option when it comes for scalables and vectorial icons.</td>
+
+                                </tr>
+                                <tr class="">
+                                    <td><strong>Beautiful media gallery</strong></td>
+                                    <td>Open photos, videos and other externat content in a nice and modern lightbox.</td>
+
+                                </tr>
+                                <tr class="">
+                                    <td><strong>Fully Customizable Headers</strong></td>
+                                    <td>Each page can have its own custom header with different height and background image or slider.</td>
+
+                                </tr>
+                                <tr>
+                                    <td><strong>Interactive Elements</strong></td>
+                                    <td>Counters, pie charts, horizontal progress bars, icon progress bars, elements with animation</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Portfolio</strong></td>
+                                    <td>Choose between 6 different portfolio single layouts and 4 different portfolio list layouts combined with different number of columns</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Blog Masonry Layout</strong></td>
+                                    <td>Make your blog page display in masonry layout</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>LayerSlider ($15 value)</strong></td>
+                                    <td>Create a responsive (mobile friendly) or fullwidth slider with must-see-effects</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Retina Ready</strong></td>
+                                    <td>This theme includes high resolution icons</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Multiple Sidebars</strong></td>
+                                    <td>Choose between 6 different portfolio single layouts and 4 different portfolio list layouts combined with different number of columns</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Slide Bar Menu</strong></td>
+                                    <td>Boomerang comes with an amazing side menu widget area.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Modern, Professional Design</strong></td>
+                                    <td>This theme is designed by a team of professional designers focused on user-experience and unique design style.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Fully Responsive</strong></td>
+                                    <td>Boomerang is a fully responsive template and works perfectly on all screen sizes and mobile devices.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Extremely Customizable</strong></td>
+                                    <td>Unlimited colors and sizes for all elements, 500+ Google fonts and a robust backend offers a solution for a variety of business or personal uses.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Flexible Layout</strong></td>
+                                    <td>Use our demo layout or create your own visually different experience using our modular shortcodes</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Modular Shortcodes</strong></td>
+                                    <td>Get creative with unlimited combinations of easy-to-use shortcodes and quickly create any type of page you like.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Perfect Code</strong></td>
+                                    <td>Coded in HTML5, CCS3 and jQuery, this skillfully constructed theme is 100% valid.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Modular Contact Page</strong></td>
+                                    <td>You can set any combination between Google maps, Contact Form and regular content.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <p>
+                        NOTE: If you want to find out more about the included components, please <a href="#components" target="_blank" title="Go to Components section">click here</a>
+                        </p>                        
+                    </div>
+                </div>
+                
+                <!-- CSS: General -->
+                <div class="row" id="css">
+                    <div class="col-md-12">
+                        <h2 class="sub-header">2. CSS, LESS - Structure</h2>
+                        <p>
+                        Boomerang is built with LESS. All variables used cand be found within the variables folder. You will find many files in there. They contain variables values for each color for the predefined styles (ex: blue, red, dark), but the structure is all the same.
+                        </p>  
+                        <p>
+                        We use LESS only for development. All the compiled styles can be found within the CSS folder. They are organized and each style contains its base color name.
+                        </p>      
+                    </div>
+                </div>
+
+                <!-- CSS: Variables -->
+                <div class="row" id="css-1">
+                    <div class="col-md-12">
+                        <h2 class="sub-header">Variables</h2>
+                        <p>
+                        All <strong>variables</strong> are in the variables folder from the LESS folder. All variables lines are commented so you can easily understand what are they for. You can easily modify <strong>colors</strong>, <strong>fonts</strong>, <strong>sizes</strong>, <strong>border radiuses</strong>, <strong>heading sizes</strong>, <strong>navbar elements</strong> and much more.
+                        </p>
+                        <p>
+                        Next, we will explain the most important things you need to know before starting to customize your website.
+                        </p>      
+                        <hr>
+
+                        <h4>Main colors and backgrounds</h4>
+                        <p>
+                        There are 4 important colors that we used in this template for components, buttons and so on: base, alternative base, light and dark. Each color is represented by a class(base, base-alt, light, dark) which can be applied on many HTML components to change backgrounds (see the pricing page so you can see what we mean by that).
+                        </p>
+                        <p>
+                        In the next table we will include all the background color variables:
+                        </p>
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                                    <th style="width:20%;">Variable name</th>
+                                    <th>Description</th>
+                                    <th>Class name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="highlight">
+                                    <td><strong>bgBase</strong></td>
+                                    <td>The base color of the website (ex: blue)</td>
+                                    <td><code>.base</code></td>
+                                </tr>
+                                <tr class="highlight">
+                                    <td><strong>cBaseContrast</strong></td>
+                                    <td>The color used on bgBase backgrounds</td>
+                                    <td><code></code></td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>bgAlt</strong></td>
+                                    <td>The alternative base color (ex: green)</td>
+                                    <td><code>.base-alt</code></td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>cAltContrast</strong></td>
+                                    <td>The color used on bgAlt backgrounds</td>
+                                    <td><code></code></td>
+                                </tr>
+                                <tr class="highlight">
+                                    <td><strong>bgLight</strong></td>
+                                    <td>The light color (ex: gray)</td>
+                                    <td><code>.light</code></td>
+                                </tr>
+                                <tr class="highlight">
+                                    <td><strong>cLightContrast</strong></td>
+                                    <td>The color used on bgLight backgrounds</td>
+                                    <td><code></code></td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>bgDark</strong></td>
+                                    <td>The dark color (ex: black).</td>
+                                    <td><code>.dark</code></td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>cDarkContrast</strong></td>
+                                    <td>The color used on bgDark backgrounds</td>
+                                    <td><code></code></td>
+                                </tr>
+                                <tr class="highlight">
+                                    <td><strong>bgLightGray</strong></td>
+                                    <td>The lighter color used for alternating section backgrounds.</td>
+                                    <td><code>.light-gray</code></td>
+                                </tr>
+                                <tr class="highlight">
+                                    <td><strong>cLightGrayContrast</strong></td>
+                                    <td>The color used on bgLightGray backgrounds</td>
+                                    <td><code></code></td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>layoutBg</strong></td>
+                                    <td>The main layout background color applied on the whole body element</td>
+                                    <td>N/A</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>headerBg</strong></td>
+                                    <td>Used for the main header when available. See header 3 example from the style builder.</td>
+                                    <td>N/A</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>footerBg</strong></td>
+                                    <td>The main footer background color.</td>
+                                    <td>N/A</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>footerBg</strong></td>
+                                    <td>The main footer background color.</td>
+                                    <td>N/A</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                        There are many more color variables included. We mentioned only the important ones. You can find them in the "Advanced customization" area from variables.less file.
+                        </p>
+
+                        
+                    </div>
+                </div>
+
+                 <!-- CSS: Create a custom style -->
+                <div class="row" id="css-2">
+                    <div class="col-md-12">
+                        <h2 class="sub-header">Customize template and compile LESS files</h2>
+                        <p>
+                        Next, you will find all the necessary steps needed to create a new customized stylesheet. If you are not experienced with LESS, we suggest you follow our instructions so everything goes smoothly.
+                        </p>
+
+                        <h4>Important files from the less folder:</h4>
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                                    <th style="width:20%;">File name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="">
+                                    <td><strong>global-style.less</strong></td>
+                                    <td>Containes all the imports and responsive media queries. This unifies all the needed styles in a single file (global-style.css)</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>theme.less</strong></td>
+                                    <td>This is the place where all the styles cand be found, except buttons and shortcodes</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>buttons.less</strong></td>
+                                    <td>All the buttons classes cand be found within this file</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>shortcodes.less</strong></td>
+                                    <td>We used this file to customize some of the Bootstrap components styles</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>variables.less</strong></td>
+                                    <td>The place where all the variables can be found</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Tools needed:</h4>
+                        <ul>
+                            <li>
+                                <strong>Code editor</strong>: We recomment Sublime Text 3, but any other text editor should work just fine. <a href="http://www.sublimetext.com/3" target="_blank">Download it here</a>
+                            </li>
+                            <li>
+                                <strong>LESS compiler</strong>: We recomment Koala App. It's one of the best we found out there and it has some great functionalities that will help you a lot. <a href="http://koala-app.com/" target="_blank">Download it here</a>
+                            </li>
+                            <li>
+                                <strong>Boomerang 2 - MultiPurpose Template</strong>: Be sure you have created your work enviornment and unpacked the template's content in there.
+                            </li>
+                        </ul>
+
+                        <h4>Other info</h4>
+                        <p>
+                        The important folders you will work with are <strong>less</strong> and <strong>css</strong>.
+                        LESS folder containes all the variables and styles, while CSS containes only the unified and compiled version of less files in css format.
+                        </p>
+                        <p>
+                        In less -> variables you will find many files. You will only use <strong>variables.less</strong>. The other files are used for each pre-defined styles.
+                        <br><br>
+                        The variable file is formed from 2 sections: Easy customization (we have included all the important variables so you can easily change their values) and Advanced customization (we have included all the variables that we considered that won't be modified so often).
+                        </p>
+                        <p>
+                        That's all. Now let's get to the customization part:
+                        </p>
+                        
+                        <h4>Customize and compile</h4>
+                        <ol>
+                            <li>
+                                Open Koala App and include the Boomerang root folder. Seek the global-style.less and open it.
+                                When you press "Compile", it automatically creates a css folder and puts the compiled file with the same name and .css extension. After that, as long as you keep the Koala App opened in this state and have the "Auto Compile" option checked it will re-compile this file each time you make modifications in it or a dependency file and save it. So that's a really cool feature if you don't want to create a LESS enviornment for this. For those who want to work with LESS files in their project we will explain more in depth in a separate section.
+                            </li>
+                            <li>Open Sublime Text 3 and include the Boomerang root folder</li>
+                            <li>
+                                Open <strong>variables.less</strong>. You will see that each category of variables (backgrounds, colors, header, layout etc) is very well delimited and commented so you can easily figure out what are they doing.</li>
+                            <li>
+                                Now, this is the part where you will play and create you own design. Change colors, background, fonts (choose any font from Google Fonts library and import it within this file), border radiuses, navbar etc.
+                            </li>
+                            <li>
+                                After you are done, save all the files. If the global-styles is not already compiled, go in Koala App and compile it. We recommend before compiling to select from Output Style the "Compress" option. It will compress the css file so it will decrease a lot the KB number.
+                            </li>
+                        </ol>
+
+                        <p>
+                        This was just a brief introduction about creating a custom style. You can find more about how to customize each component in the "Template Customization" section.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ASSETS - What is included -->
+                <div class="row" id="assets">
+                    <div class="col-md-12">
+                        <h2 class="sub-header">3. Assets</h2>
+                        <p>
+                        Boomerang 2 is loaded with great features and new plug-ins. All this can be found within the assets folder. They are nicely organized so you can easily find them whenever you want. Next, we will present all the plug-ins used in Boomerang 2:
+                        </p>
+                        
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                                    <th style="width:20%;">Plugin name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="">
+                                    <td><strong>Animate</strong></td>
+                                    <td>A cross-browser library of CSS animations. As easy to use as an easy thing. 
+<a href="http://daneden.github.io/animate.css" target="_blank">http://daneden.github.io/animate.css</a></td>
+
+                                </tr>
+                                <tr class="">
+                                    <td><strong>Bootstrap</strong></td>
+                                    <td>
+                                        Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web. 
+                                        <a href="http://getbootstrap.com/" target="_blank">http://getbootstrap.com/</a>
+                                    </td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>Easy Pie Chart</strong></td>
+                                    <td>Easy pie chart is a jQuery plugin that uses the canvas element to render simple pie charts for single values. These charts are highly customizable, very easy to implement, scale to the resolution of the display of the client to provide sharp charts even on retina displays, and use requestAnimationFrame for smooth animations on modern devices. <a href="http://rendro.github.io/easy-pie-chart/" target="_blank">http://rendro.github.io/easy-pie-chart/</a></td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>Fancybox</strong></td>
+                                    <td>Modern lightbox for media showing. <a href="http://www.fancybox.net" target="_blank">http://www.fancybox.net</a></td>
+
+                                </tr>
+                                <tr class="">
+                                    <td><strong>Hover dropdown</strong></td>
+                                    <td>Boostrap extension that makes navabar dropdown toggable on hover. It can be easily deactivated if not needed.</td>
+
+                                </tr>
+                                <tr class="">
+                                    <td><strong>Layer Slider</strong></td>
+                                    <td>LayerSlider is a premium multi-purpose slider for creating image galleries, content sliders, and mind-blowing slideshows with must-see effects. <a href="http://kreaturamedia.com/layerslider-responsive-jquery-slider-plugin/" target="_blank">http://kreaturamedia.com/layerslider-responsive-jquery-slider-plugin/</a></td>
+
+                                </tr>
+                                <tr>
+                                    <td><strong>Masonry</strong></td>
+                                    <td> It works by placing elements in optimal position based on available vertical space, sort of like a mason fitting stones in a wall. <a href="http://masonry.desandro.com/" target="_blank">http://masonry.desandro.com/</a></td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>Milestone counter</strong></td>
+                                    <td>
+                                    Milestone counter is for animating numbers in certain intervals.
+                                    <td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mix it up</strong></td>
+                                    <td>jQuery plugin for applying filters on elemnts, such portfolio projects.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Page scroller</strong></td>
+                                    <td>Easy and important scroll-to-top functionality</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Owl carousel</strong></td>
+                                    <td>
+                                    Touch enabled jQuery plugin that lets you create beautiful responsive carousel slider. <a href="http://owlgraphic.com/owlcarousel/" target="_blank">http://owlgraphic.com/owlcarousel/</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Responsive mobile nav</strong></td>
+                                    <td>
+                                        Boomerang 2 comes with two mobile navs. The first one is the default Bootstrap collapse navbar. The second one is a customized mobile nav made especially for Boomerang 2 which is more intuitive and works much better on smaller devices. You can easily switch to one or another. 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Sky forms</strong></td>
+                                    <td>
+                                        Sky Forms Pro is a set of beautiful form elements with large amount of javascript features: validation, masking, modals, ajax submit, datepickers. It allows you to create forms of any complexity and for any needs: login, registration, contacts, review, order, comment, checkout, etc.
+                                        <a href="http://voky.com.ua/showcase/sky-forms-pro/" target="_blank">http://voky.com.ua/showcase/sky-forms-pro/</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Social buttons</strong></td>
+                                    <td>
+                                        Responsive social buttons with full funtionality. Love them or hate them, social sharing buttons appear to be with us for a while. It seemed like we were constantly making custom buttons for every single project, so we decided to create a super flexible system that would work in any container.
+                                        <a href="http://kurtnoble.com/labs/rrssb/" target="_blank">http://kurtnoble.com/labs/rrssb/</a> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Timeline</strong></td>
+                                    <td>
+                                        We have included a reposnive timeline layout for those who want organizing events or news in a timescale format.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Video JS</strong></td>
+                                    <td>
+                                        Video.js is a JavaScript and CSS library that makes it easier to work with and build on HTML5 video. This is also known as an HTML5 Video Player. Video.js provides a common controls skin built in HTML/CSS, fixes cross-browser inconsistencies, adds additional features like fullscreen and subtitles, manages the fallback to Flash or other playback technologies when HTML5 video isn't supported, and also provides a consistent JavaScript API for interacting with the video.
+                                        <a href="http://www.videojs.com/">http://www.videojs.com/</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row" id="assets-2">
+                    <div class="col-md-12">
+                        <h2 class="sub-header">What should i keep</h2>
+                        <p>
+                        Many of you won't need every single plug-in included in this template. That's why we worked on making this easier for you to select only the things you need and implement them easily into your project. We made a short list with what should you keep in order to have a fully function website including only the most importat assets.
+                        </p>
+
+                        <ol>
+                            <li>
+                                <strong>Bootstrap</strong>
+                            </li>
+                            <li>
+                                <strong>Fancybox</strong>
+                            </li>
+                            <li>
+                                <strong>Hover dropdown</strong>
+                            </li>
+                            <li>
+                                <strong>Owl carousel</strong>
+                            </li>
+                            <li>
+                                <strong>Sky forms</strong>
+                            </li>
+                            <li>
+                                <strong>UI kit</strong>
+                            </li>
+                        </ol>
+
+                        <p>
+                        That is the list with the essential assets you should keep no matter what. Anyway, we recommend not to remove anything definively. We haven't included all the assets in every page. Most of the assets are included only in the pages they are used. You can find more info about installing each asset on "Components" and "Widgets" sections.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row" id="assets-3">
+                    <div class="col-md-12">
+                        <h2 class="sub-header">Linking the wp.app.js file</h2>
+                        <p>
+                        Every asset has its initalization script in the wp.app.js file. We recommend not to remove anything, unless you are sure about what you do.
+                        </p>
+                        <p>
+                        For keeping it clean, our suggestion is to do the same thing when you add some other plug-ins you need and add the initalization scripts in wp.app.js file.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="row" id="template">
+                    <div class="col-md-12">
+                        <h2 class="sub-header">4. Template customization</h2>
+                        <p>
+                        Now it is time for us to tell you all the little secrets you need to know before starting customizing the template. We have included lots of freatures and possibilities for you so you can optimize any component as you want. You will see this by the time you will play with this template. We will start from the top and finish with the bottom.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row" id="template-1">
+                    <div class="col-md-12">
+                        <h2 class="sub-header">Set a new base color</h2>
+                        <p>
+                        Most of you won't need to modify the layout too much, but rather to replace only the base color with the one you need. First, take a look on the "CSS, LESS - Structure" chapter before staring here, if you didn't already.
+                        </p>
+                        <ol>
+                            <li>Now, all you need to do is to open <strong>less -> variables -> variables.less</strong></li>
+                            <li>Copy and pase all the contents from one of the example files (ex: variables-red.less, NOT variables-dark/flat/bw).</li>
+                            <li>Replace the <code>@bgBase</code> variable value with the color you want (HEX or RGB/RGBA)</li>
+                            <li>Follow the same steps from "Customize/compile LESS files"</li>
+                        </ol>
+
+                    </div>
+                </div>
+
+                <div class="row" id="template-2">
+                    <div class="col-md-12">
+                        <h2 class="sub-header">Boxed or fluid</h2>
+                        <p>
+                        You can choose to make your website <strong>fluid</strong> or <strong>boxed</strong>.
+                        That's a really easy thing to do.
+                        </p>
+                        
+                        <h4>Boxed layout</h4>
+                        <p>
+                        On the <code>body</code> tag, add the class <code>.body-boxed</code>
+                        </p>
+<pre>
+&lt;div class="body-wrap body-boxed"&gt;
+    ...
+&lt;/div&gt;
+</pre>
+                    </div>
+                </div>
+
+                <div class="row hide" id="template-3">
+                    <div class="col-md-12">
+                        <h2 class="sub-header">Set a background image on body</h2>
+
+
+                    </div>
+                </div>
+
+                <div class="row" id="template-4">
+                    <div class="col-md-12">
+                        <h2 class="sub-header">Headers and navbars</h2>
+                        <p>
+                        As you could see in the style builder, we have included 3 different headers + 1 header customized for cover pages with image background. Soon, there will be even more header structures, but for now we will show how to implement and customize these ones.
+                        </p>
+                        <p>
+                        Each header contents can be found in the <strong>headers</strong> folder. Choose the one you want then copy-paste it in your website header section.
+                        </p>
+
+                        <h4>Navbar customization</h4>
+                        <p>
+                        To change navbar background color, text color, fonts, sizes you will need to open variables.less again an change the variable from the table below. After you are done, follow the steps from "Customize/compile LESS files".
+                        </p>
+
+                        <a href="images/navbar-legend.jpg" target="_blank">See the image with all the variables</a>
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                                    <th style="width:20%;">Variable name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="">
+                                    <td><strong>navbarBg</strong></td>
+                                    <td>The main navbar wrapper background</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>navbarElementBg</strong></td>
+                                    <td>The navbar element background</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>navbarElementBgHover</strong></td>
+                                    <td>The navbar element background on hover</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>navbarElementBorderColor</strong></td>
+                                    <td>We used this file to customize some of the Bootstrap components styles</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>cNavbarElement</strong></td>
+                                    <td>The navbar element text color</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>cNavbarElementHover</strong></td>
+                                    <td>The navbar element text color on hover</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>navbarToggle</strong></td>
+                                    <td>The color of the mobile nav collapse button</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>navbarDropdown</strong></td>
+                                    <td>The navbar dropdown wrapper backgroun</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>navbarDropdownElementHover</strong></td>
+                                    <td>The navbar dropdown element backgroun</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>navbarDropdownElementBorder</strong></td>
+                                    <td>The border color between dropdown elements</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>cNavbarDropdown</strong></td>
+                                    <td>The navbar dropdown text color</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>cNavbarDropdownHover</strong></td>
+                                    <td>The navbar dropdown text color on hover</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Navbar shadow option</h4>
+                        <p>
+                        You can easily drop a shadow below the navbar wrapper by adding <code>navbar-shadow</code> on the navbar-wp element.
+                        </p>
+<pre>
+&lt;div class="navbar navbar-wp navbar-shadow"&gt;
+    ...
+&lt;/div>
+</pre>
+                        <br>
+                        <h4>Navbar arrow option</h4>
+                        <p>
+                        You can easily apply an arrow when the dropdown is opened by putting <code>navbar-arrow</code> on the navbar-wp element.
+                        </p>
+<pre>
+&lt;div class="navbar navbar-wp navbar-arrow"&gt;
+    ...
+&lt;/div>
+</pre>
+                        <a href="images/navbar-arrow.jpg" target="_blank">See the image example</a>
+                        <br>
+                        <br>
+
+                        <h4>Sticky navbar option</h4>
+                        <p>
+                        You can easily apply an arrow when the dropdown is opened by putting <code>navbar-arrow</code> on the navbar-wp element. We used Bootstrap's affix functionality so you can easily set any offset value and navbar configuration.
+                        </p>
+<pre>
+&lt;div class="navbar navbar-wp navbar-fixed affix-top" data-spy="affix" data-offset-top="150" role="navigation"&gt;
+    ...
+&lt;/div&gt;
+</pre>
+
+                    </div>
+                </div>
+
+                <div class="row" id="template-5">
+                    <div class="col-md-12">
+                        <h2 class="sub-header">Mobile navigations</h2>
+                        <p>
+                        Boomerang 2 comes with two mobile navigations: One is the Bootstrap's default and the second one is the one we wanted to implement in this version - Boomerang navbar. The reason ... we wanted an easier and more intuitive mobile navigation especially for touch devices.
+                        </p>
+                        <p>
+                        You will find in the <strong>headers</strong> folder from the pakache root two versions for each header file: <strong>header-standard-1</strong> and <strong>header-standard-1-alt</strong>. The structure is identical, but the mobile nav is different. In the files with "alt" termination is used the new Boomerang mobile nav, while in the other ones is the Bootstrap's default.
+                        </p>
+                        <a href="images/mobile-nav.jpg" target="_blank">See the image with the mobile nav versions</a>
+                        <br>
+
+                        <h4>Bootstrap mobile nav</h4>
+                        <p>
+                        For the Bootstrap's mobile nav you won't need to modify anything, but we want to show you the difference between the two nav versions so you can easily opt the the one that fits your project requirements.
+<br><br>
+                        Search for <code>.navbar-toggle</code>. This is the button element used to do all the action.
+                        </p>
+<pre>
+&lt;!-- Mobile menu button --&gt;
+&lt;button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"&gt;
+    &lt;i class="fa fa-bars icon-custom"&gt;&lt;/i&gt;
+&lt;/button&gt;
+</pre>
+                        <br>
+
+                        <h4>Boomerang mobile nav</h4>
+                        <p>
+                        Search for <code>.navbar-toggle</code>. This is the button element used to do all the action.
+                        Remove the existing one and replace with the following:
+                        </p>
+
+<pre>
+&lt;!-- Mobile menu button --&gt;
+&lt;button type="button" class="navbar-toggle navbar-toggle-mobile-nav dl-trigger hidden-sm hidden-lg"&gt;
+    &lt;i class="fa fa-bars icon-custom"&gt;&lt;/i&gt;
+&lt;/button&gt;
+</pre>
+                        <br>
+                        <p>
+                        Add the scripts below on the bottom of your page, as seen on any layout page from the package. This is responsible for the Boomerang's new mobile nav behavior. 
+                        </p>
+<pre>
+&lt;script src="assets/responsive-mobile-nav/js/jquery.dlmenu.js"&gt;&lt;/script&gt;
+&lt;script src="assets/responsive-mobile-nav/js/jquery.dlmenu..autofill.js"&gt;&lt;/script&gt;
+</pre>
+                        <p>That's all you need to do</p>
+                    </div>
+                </div>
+
+                <div class="row" id="template-6">
+                    <div class="col-md-12">
+                        <h2 class="sub-header">Top header</h2>
+                        <p>
+                        You have the option to include a top header above the page navbar (ex: header-standard-3). You can choose the for the white or the dark version. The colors can be modified in the <strong>variables.less</strong> from the variables folder.
+                        </p>
+                        <a href="images/top-header-white.jpg" target="_blank">See the white top header example image</a>
+                        <br>
+                        <a href="images/top-header-dark.jpg" target="_blank">See the dark top header example image</a>
+                        <br>
+                        <br>
+
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                                    <th style="width:20%;">Variable name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="highlight">
+                                    <td><strong>topNavBgWhite</strong></td>
+                                    <td>Variable used for the white/light top header background</td>
+                                </tr>
+                                <tr class="highlight">
+                                    <td><strong>cTopNavWhite</strong></td>
+                                    <td>The white/light top header text color</td>
+                                </tr>
+                                <tr class="highlight">
+                                    <td><strong>cTopNavLinkWhite</strong></td>
+                                    <td>The white/light top header link color</td>
+                                </tr>
+                                <tr class="highlight">
+                                    <td><strong>cTopNavLinkHoverWhite</strong></td>
+                                    <td>The white/light top header link color on hover</td>
+                                </tr>
+
+                                <tr class="">
+                                    <td><strong>topNavBgDark</strong></td>
+                                    <td>Variable used for the dark top header background</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>cTopNavDark</strong></td>
+                                    <td>The dark top header text color</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>cTopNavLinkDark</strong></td>
+                                    <td>The dark top header link color</td>
+                                </tr>
+                                <tr class="">
+                                    <td><strong>cTopNavLinkHoverDark</strong></td>
+                                    <td>The dark top header link color on hover</td>
+                                </tr>
+
+                                <tr class="highlight">
+                                    <td><strong>topNavTextSize</strong></td>
+                                    <td>Set the top header font size value</td>
+                                </tr>
+                                <tr class="highlight">
+                                    <td><strong>topNavTextWeight</strong></td>
+                                    <td>Set the top header font weight value (400, 500, 600, 700)</td>
+                                </tr>
+                                <tr class="highlight">
+                                    <td><strong>topNavTextStyle</strong></td>
+                                    <td>Set the top header text transform option (capitalize, uppercase, lowercase)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p>* For compiling the LESS files, follow the same steps from "Customize/compile LESS files"</p>
+                        <br>
+
+                        <h4>Light top header</h4>
+<pre>
+&lt;div class="top-header"&gt;
+    ...
+&lt;/div&gt;
+</pre>
+                        <br>
+
+                        <h4>Dark top header</h4>
+                        <p>
+                        For switching to the dark top header add <code>.top-header-dark</code> class as below:
+                        </p>
+<pre>
+&lt;div class="top-header top-header-dark"&gt;
+    ...
+&lt;/div&gt;
+</pre>
+
+                    </div>
+                </div>
+
+        	</div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $('body').scrollspy({ target: '.nav-sidebar' })
+    </script>
+  </body>
+</html>
