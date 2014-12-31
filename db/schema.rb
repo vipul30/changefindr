@@ -16,6 +16,42 @@ ActiveRecord::Schema.define(version: 20140707111715) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "campaign", primary_key: "campaignid", force: true do |t|
+    t.integer  "charityid",                                           null: false
+    t.string   "title",         limit: 500
+    t.string   "description",   limit: 5000
+    t.decimal  "raiseamount",                precision: 19, scale: 4
+    t.datetime "startdate"
+    t.datetime "enddate"
+    t.integer  "isapproved",    limit: 2
+    t.integer  "isactive",      limit: 2
+    t.decimal  "currentamount",              precision: 19, scale: 4
+    t.integer  "userid"
+  end
+
+  create_table "charity", primary_key: "charityid", force: true do |t|
+    t.string  "charityname",   limit: 50
+    t.string  "website",       limit: 500
+    t.string  "logo",          limit: 1000
+    t.string  "description",   limit: 5000
+    t.string  "facebookurl",   limit: 500
+    t.string  "twitterurl",    limit: 500
+    t.string  "googleplusurl", limit: 500
+    t.string  "contantname",   limit: 500
+    t.string  "email",         limit: 500
+    t.integer "isapproved",    limit: 2
+    t.integer "isfeatured",    limit: 2
+    t.integer "userid"
+  end
+
+  create_table "merchant", primary_key: "merchantid", force: true do |t|
+    t.string "merchantname",    limit: 500,  null: false
+    t.string "logo",            limit: 50
+    t.string "checkbalanceurl", limit: 1000
+    t.string "phonenumber",     limit: 50
+    t.string "description",     limit: 500
+  end
+
   create_table "widgets", force: true do |t|
     t.string   "name"
     t.text     "description"
