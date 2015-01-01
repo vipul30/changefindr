@@ -1,0 +1,106 @@
+ <section class="slice slice-lg bg-image" style="background-image:url(images/backgrounds/full-bg-1.jpg)">
+        <div class="wp-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3">                   
+                        <div class="wp-block default user-form no-margin">
+                            <div class="form-header">
+                                <h2>Create your account</h2>
+                            </div>
+                            <div class="form-body">
+                                <%= form_for(@user, :url => {:action => 'create'}, :html => {:class => 'sky-form'}) do |f| %>
+                                
+                                <!-- form action="sign_up/register" id="frmRegister" class="sky-form" method="post" -->                                    
+                                    <fieldset class="no-padding"> 
+
+                                     <section class="no-margin">
+                                            <div class="row">
+
+                                                <section class="col-xs-6">
+                                                    <label class="input">
+                                                        <i class="icon-append fa fa-user"></i>
+                                                        <input type="text" name="user[firstname]" required="true" placeholder="First name">
+                                                    </label>
+                                                </section>
+                                                <section class="col-xs-6">
+                                                    <label class="input">
+                                                        <i class="icon-append fa fa-user"></i>
+                                                        <input type="text" name="user[lastname]" placeholder="Last name">
+                                                    </label>
+                                                </section>
+                                            </div> 
+                                            
+                                        </section>
+
+                                        <section class=""> 
+                                            <div class="row">
+                                                
+                                                <div class="col-xs-6">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label class="input">
+                                                                <i class="icon-append fa fa-envelope-o"></i>
+                                                                <input type="email" name="user[email]" placeholder="E-mail">
+                                                                <b class="tooltip tooltip-bottom-right">This will be your username</b>
+                                                            </label>
+                                                        </div>  
+                                                    </div>               
+                                                </div>
+                                            </div>   
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="input">
+                                                            <i class="icon-append fa fa-lock"></i>
+                                                            <input type="password" name="password" placeholder="Password">
+                                                            <b class="tooltip tooltip-bottom-right">Needed to enter the website</b>
+                                                        </label>
+                                                    </div>               
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="input">
+                                                            <i class="icon-append fa fa-lock"></i>
+                                                            <input type="password" name="confirmpassword" placeholder="Confirm Password">
+                                                            <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+                                                        </label>
+                                                    </div>               
+                                                </div>
+                                            </div>   
+                                        </section>
+                                        
+                                       
+                                    </fieldset>  
+
+                                    <fieldset>
+                                        
+                                        
+                                      
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" name="subscription" id="subscription">
+                                                        <i></i> I accept the <a href="#">terms and conditions</a> of this website.
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-4">
+
+                                                   <button class="btn btn-alt btn-icon btn-icon-right btn-icon-go pull-right" type="submit">
+                                                        <span>Register now</span>
+                                                    </button>
+                                                </div>
+                                        </section>
+                                    </fieldset>
+                                <!--/form-->
+                                <% end %>  
+                            </div>
+                            <div class="form-footer">
+                                <p>Already have an account? <a href="sign-in">Click here to sign in.</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

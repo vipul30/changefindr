@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  get 'home/index'
+  get 'sign_in/index'
+
+  #get 'sign_up/new'
+
+  #get 'home/index'
+  post 'sign_up/create'
+  post 'sign_in/login'
 
   root :to => "home#index"
   match ':controller(/:action(/:id))', :via => :get
