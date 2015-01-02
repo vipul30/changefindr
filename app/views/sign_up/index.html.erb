@@ -8,67 +8,103 @@
                                 <h2>Create your account</h2>
                             </div>
                             <div class="form-body">
-                                <%= form_for(@user, :url => {:action => 'create'}, :html => {:class => 'sky-form'}) do |f| %>
-                                
-                                <!-- form action="sign_up/register" id="frmRegister" class="sky-form" method="post" -->                                    
+                                <%= form_for(@user, :url => {:action => 'create'}, :html => {:class => 'sky-form', :id => "myform"}) do |f| %>
+                                                                   
                                     <fieldset class="no-padding"> 
 
                                      <section class="no-margin">
                                             <div class="row">
 
                                                 <section class="col-xs-6">
+                                                    <div class="alert alert-danger fade in" id="msg_firstname" style="display:none">
+                                                        Please enter first name.
+                                                    </div>
+
                                                     <label class="input">
                                                         <i class="icon-append fa fa-user"></i>
-                                                        <input type="text" name="user[firstname]" required="true" placeholder="First name">
+                                                        <%= f.text_field :firstname, :placeholder=>"First Name", :required => "true", :id => 'firstname' %>
+                                                        
                                                     </label>
                                                 </section>
                                                 <section class="col-xs-6">
+                                                    <div class="alert alert-danger fade in" id="msg_lastname" style="display:none">
+                                                        Please enter last name.
+                                                    </div>
+
                                                     <label class="input">
                                                         <i class="icon-append fa fa-user"></i>
-                                                        <input type="text" name="user[lastname]" placeholder="Last name">
+                                                        <%= f.text_field :lastname, :placeholder=>"Last Name", :required => "true", :id => 'lastname'  %>
+                                                        
                                                     </label>
                                                 </section>
-                                            </div> 
-                                            
+                                                
+                                            </div>
                                         </section>
-
-                                        <section class=""> 
+                                         <section class=""> 
+                                            
                                             <div class="row">
                                                 
                                                 <div class="col-xs-6">
                                                     <div class="form-group">
                                                         <div class="form-group">
+                                                        <div class="alert alert-danger fade in" id="msg_email" style="display:none">
+                                                            Please enter a valid email.
+                                                        </div>
+                                                           
                                                             <label class="input">
                                                                 <i class="icon-append fa fa-envelope-o"></i>
-                                                                <input type="email" name="user[email]" placeholder="E-mail">
+                                                                <%= f.text_field :email, :placeholder=>"Email", :required => "true", :id => 'email'  %>
                                                                 <b class="tooltip tooltip-bottom-right">This will be your username</b>
                                                             </label>
                                                         </div>  
-                                                    </div>               
+                                                    </div>  
+
+
                                                 </div>
+
+
                                             </div>   
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
+                                                  
+
                                                         <label class="input">
                                                             <i class="icon-append fa fa-lock"></i>
-                                                            <input type="password" name="password" placeholder="Password">
+                                                            <input type="password" id="password" name="password" placeholder="Password">
                                                             <b class="tooltip tooltip-bottom-right">Needed to enter the website</b>
                                                         </label>
                                                     </div>               
                                                 </div>
+                                            </div>
+                                                 <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="input">
                                                             <i class="icon-append fa fa-lock"></i>
-                                                            <input type="password" name="confirmpassword" placeholder="Confirm Password">
+                                                            <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password">
                                                             <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
                                                         </label>
-                                                    </div>               
+                                                    </div>  
+
+                                                    <div class="" id="passwordStrength"></div>             
                                                 </div>
-                                            </div>   
+                                                
+                                            </div>
+                                              
                                         </section>
-                                        
+
+                                        <div class="row">
+                                            <div class"col-xs-12 text-center">
+                                                
+                                                        <h5>or</h5>
+                                                        <a href="/auth/facebook" id="sign_in"><img alt="Facebook login button" border="0" src="/assets/facebook-login-button.png" 
+                                                        class="img-responsive img-rounded fill"
+                                                        style="width: 200px;"></a>
+                                                            
+                                                
+                                        </div>
+                                    </div>
                                        
                                     </fieldset>  
 
@@ -80,13 +116,13 @@
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <label class="checkbox">
-                                                        <input type="checkbox" name="subscription" id="subscription">
+                                                        <input type="checkbox" id="termscheckbox" name="subscription" id="subscription">
                                                         <i></i> I accept the <a href="#">terms and conditions</a> of this website.
                                                     </label>
                                                 </div>
                                                 <div class="col-md-4">
 
-                                                   <button class="btn btn-alt btn-icon btn-icon-right btn-icon-go pull-right" type="submit">
+                                                   <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in pull-right" type="button">
                                                         <span>Register now</span>
                                                     </button>
                                                 </div>
@@ -104,3 +140,128 @@
             </div>
         </div>
     </section>
+
+    <script>
+
+    var isValidPassword = false;
+
+    $('#register_button').click(function () {
+
+        // do validation
+        var isValid = validateForm();
+
+        //console.log('form valid= ' + isValid);
+
+        if (isValid && isValidPassword) {
+
+            $('#register_button').attr("disabled", true);
+            document.getElementById("myform").submit();
+        }
+
+        return false;
+    });
+
+    function validateForm() {
+
+        //console.log('comes in validateform ', $('#firstname').val());
+
+        var isValid = true;
+
+        if ($('#firstname').val() == 0) {
+
+            isValid = false;
+            $('#msg_firstname').show();
+        } else {
+
+            $('#msg_firstname').html('').hide();
+        }
+
+        if ($('#lastname').val() == 0) {
+
+            isValid = false;
+            $('#msg_lastname').show();
+        } else {
+
+            $('#msg_lastname').html('').hide();
+        }
+
+        var ba = $("#email").val();
+        if ($("#email").val() == 0 || !isEmail(ba)) {
+
+            isValid = false;
+            $('#msg_email').show();
+        } else {
+
+            $('#msg_email').html('').hide();
+        }
+
+       
+        return isValid;
+    }
+
+    // disable the facebook and register buttons until terms and conditions is checked
+    $("#termscheckbox").change(function () {
+        if (this.checked) {
+            $('#register_button').attr("disabled", false);
+            
+        } else {
+            $$('#register_button').attr("disabled", true);
+        }
+    });
+
+    
+
+    $(document).ready(function() {
+ 
+        $('#register_button').attr("disabled", true);
+
+        $('#password, #confirmpassword').on('keyup', function(e) {
+     
+            if($('#password').val() == '' && $('#confirmpassword').val() == '')
+            {
+                $('#passwordStrength').removeClass().html('');
+     
+                isValidPassword = false;
+            }
+     
+
+     
+            // Must have capital letter, numbers and lowercase letters
+            var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+     
+            // Must have either capitals and lowercase letters or lowercase and numbers
+            var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+     
+            // Must be at least 6 characters long
+            var okRegex = new RegExp("(?=.{6,}).*", "g");
+     
+            if (okRegex.test($(this).val()) === false) {
+                // If ok regex doesn't match the password
+                $('#passwordStrength').removeClass().addClass('alert alert-danger').html('Password must be 6 characters long.');
+     
+            } else if (strongRegex.test($(this).val())) {
+                // If reg ex matches strong password
+                $('#passwordStrength').removeClass().addClass('alert alert-success').html('Good password');
+
+                if($('#password').val() != '' && $('#confirmpassword').val() != '' && $('#password').val() != $('#confirmpassword').val())
+                {
+                    //console.log('passwords dont match');
+                    $('#passwordStrength').removeClass().addClass('alert alert-danger').html('Passwords do not match.');
+                    isValidPassword = false;
+                }
+
+            } else if (mediumRegex.test($(this).val())) {
+                // If medium password matches the reg ex
+                $('#passwordStrength').removeClass().addClass('alert alert-info').html('Make your password stronger with more capital letters, more numbers and special characters.');
+            } else {
+                // If password is ok
+                $('#passwordStrength').removeClass().addClass('alert alert-danger').html('Weak Password, try using numbers and capital letters.');
+            }
+
+            
+            
+            isValidPassword = true;
+        });
+    });
+
+    </script>

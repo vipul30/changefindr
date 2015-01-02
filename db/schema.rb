@@ -44,6 +44,21 @@ ActiveRecord::Schema.define(version: 20140707111715) do
     t.integer "userid"
   end
 
+  create_table "facebook_user", force: true do |t|
+    t.string "first_name", limit: 100
+    t.string "last_name",  limit: nil
+    t.string "email",      limit: nil
+    t.string "location",   limit: 100
+    t.string "uid",        limit: 100
+    t.string "image",      limit: 500
+    t.string "gender",     limit: 50
+    t.date   "birthday"
+    t.string "url",        limit: 500
+    t.string "locale",     limit: 100
+    t.string "username",   limit: nil
+    t.string "time_zone",  limit: 50
+  end
+
   create_table "merchant", primary_key: "merchantid", force: true do |t|
     t.string "merchantname",    limit: 500,  null: false
     t.string "logo",            limit: 50
@@ -53,15 +68,15 @@ ActiveRecord::Schema.define(version: 20140707111715) do
   end
 
   create_table "user", primary_key: "userid", force: true do |t|
-    t.string "gender",        limit: 1
-    t.date   "birthdate"
-    t.date   "created"
-    t.date   "modified"
-    t.string "email",         limit: 50
-    t.string "firstname",     limit: 50
-    t.string "lastname",      limit: 50
-    t.string "password_hash", limit: 1000
-    t.string "salt",          limit: 1000
+    t.string   "gender",        limit: 1
+    t.date     "birthdate"
+    t.datetime "created"
+    t.datetime "modified"
+    t.string   "email",         limit: 50
+    t.string   "firstname",     limit: 50
+    t.string   "lastname",      limit: 50
+    t.string   "password_hash", limit: 1000
+    t.string   "salt",          limit: 1000
   end
 
   create_table "widgets", force: true do |t|

@@ -9,9 +9,6 @@ class SignUpController < ApplicationController
 
     @user.created = Time.now
     @user.modified = Time.now
-  	#email = params[:email]
-  	#firstname = params[:firstname]
-  	#lastname = params[:lastname]
   	password = params[:password]
 
   	@user.salt = SecureRandom.hex
@@ -31,13 +28,6 @@ def user_params
       params.require(:user).permit(:firstname, :lastname, :email, :password)
 end
 
-  private
-
-  def generate_hash(password, salt)
-  	digest = OpenSSL::Digest::SHA256.new
-  	digest.update(password)
-  	digest.update(salt)
-  	digest.to_s
-  end	
+  
 
 end
