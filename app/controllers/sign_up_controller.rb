@@ -25,8 +25,9 @@ class SignUpController < ApplicationController
 
       @user.save
 
-      session[:user_firstname] = user.first_name
-      session[:username] = user.email
+      session[:user_firstname] = @user.firstname
+      session[:username] = @user.email
+      flash[:notice] = "Thank you for registering.  You are now logged in."
       redirect_to(:controller => "home", :action => "index")
       
     end
