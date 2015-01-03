@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
 protect_from_forgery
 
 
-
   def generate_hash(password, salt)
   	digest = OpenSSL::Digest::SHA256.new
   	digest.update(password)
@@ -16,5 +15,7 @@ protect_from_forgery
   def verify_password(password, salt, password_hash)
   	password_hash == generate_hash(password, salt)
   end
+
+  
 
 end

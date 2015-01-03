@@ -1,4 +1,4 @@
- <section class="slice slice-lg bg-image" style="background-image:url(images/backgrounds/full-bg-1.jpg)">
+ <section class="slice slice-lg bg-image" style="background-image:url(/images/backgrounds/full-bg-1.jpg)">
         <div class="wp-section">
             <div class="container">
                 <div class="row">
@@ -15,7 +15,7 @@
                                      <section class="no-margin">
                                             <div class="row">
 
-                                                <section class="col-xs-6">
+                                                <section class="col-xs-6" style="padding-right:20px; border-right: 1px solid #ccc;">
                                                     <div class="alert alert-danger fade in" id="msg_firstname" style="display:none">
                                                         Please enter first name.
                                                     </div>
@@ -25,8 +25,8 @@
                                                         <%= f.text_field :firstname, :placeholder=>"First Name", :required => "true", :id => 'firstname' %>
                                                         
                                                     </label>
-                                                </section>
-                                                <section class="col-xs-6">
+                                                
+                                                    <br/>
                                                     <div class="alert alert-danger fade in" id="msg_lastname" style="display:none">
                                                         Please enter last name.
                                                     </div>
@@ -36,16 +36,9 @@
                                                         <%= f.text_field :lastname, :placeholder=>"Last Name", :required => "true", :id => 'lastname'  %>
                                                         
                                                     </label>
-                                                </section>
-                                                
-                                            </div>
-                                        </section>
-                                         <section class=""> 
-                                            
-                                            <div class="row">
-                                                
-                                                <div class="col-xs-6">
-                                                    <div class="form-group">
+
+                                                    <br/>
+                                                     <div class="form-group">
                                                         <div class="form-group">
                                                         <div class="alert alert-danger fade in" id="msg_email" style="display:none">
                                                             Please enter a valid email.
@@ -58,27 +51,15 @@
                                                             </label>
                                                         </div>  
                                                     </div>  
-
-
-                                                </div>
-
-
-                                            </div>   
-                                            <div class="row">
-                                                <div class="col-md-6">
+                                                    
                                                     <div class="form-group">
-                                                  
-
                                                         <label class="input">
                                                             <i class="icon-append fa fa-lock"></i>
                                                             <input type="password" id="password" name="password" placeholder="Password">
                                                             <b class="tooltip tooltip-bottom-right">Needed to enter the website</b>
                                                         </label>
-                                                    </div>               
-                                                </div>
-                                            </div>
-                                                 <div class="row">
-                                                <div class="col-md-6">
+                                                    </div>  
+                                                    
                                                     <div class="form-group">
                                                         <label class="input">
                                                             <i class="icon-append fa fa-lock"></i>
@@ -87,24 +68,41 @@
                                                         </label>
                                                     </div>  
 
-                                                    <div class="" id="passwordStrength"></div>             
-                                                </div>
+                                                    <div class="" id="passwordStrength"></div>   
+
+                                                </section>
+
+                                               
+
+                                                <section class="col-xs-6" style="text-align: center;">
+                                                     <br/><br/><br/>
+                                                     <h5>or</h5>
+                                                        
+                                                        <a href="/auth/facebook" id="sign_in" onclick="acceptedTerms();"><img alt="Facebook login button" border="0" src="/images/facebook-register.png" 
+                                                        class="img-responsive img-rounded fill center-block"
+                                                        ></a>
+
+                                                </section>
                                                 
                                             </div>
-                                              
+
+                                            <div class="row" style="text-align:center">
+                                                
+                                                <div class"col-xs-12">
+                                                    <div class="alert alert-danger fade in" id="msg_terms" style="display:none">
+                                                            Please read and accept the terms and conditions.
+                                                        </div>
+                                                        <label>
+                                                        <input type="checkbox" id="termscheckbox" name="subscription" id="subscription">
+                                                        <i></i> I accept the <a href="#">terms and conditions</a> of this website.
+                                                    </label>
+                                                </div>
+                                            
+
+                                            </div>
+
                                         </section>
 
-                                        <div class="row">
-                                            <div class"col-xs-12 text-center">
-                                                
-                                                        <h5>or</h5>
-                                                        <a href="/auth/facebook" id="sign_in"><img alt="Facebook login button" border="0" src="/assets/facebook-login-button.png" 
-                                                        class="img-responsive img-rounded fill"
-                                                        style="width: 200px;"></a>
-                                                            
-                                                
-                                        </div>
-                                    </div>
                                        
                                     </fieldset>  
 
@@ -114,18 +112,14 @@
                                       
                                         <section>
                                             <div class="row">
-                                                <div class="col-md-8">
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" id="termscheckbox" name="subscription" id="subscription">
-                                                        <i></i> I accept the <a href="#">terms and conditions</a> of this website.
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-4">
-
-                                                   <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in pull-right" type="button">
+                                                <div class="col-md-12">
+                                                    
+                                                    <br>
+                                                    <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button">
                                                         <span>Register now</span>
                                                     </button>
                                                 </div>
+                                                
                                         </section>
                                     </fieldset>
                                 <!--/form-->
@@ -137,6 +131,9 @@
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
         </div>
     </section>
@@ -144,6 +141,18 @@
     <script>
 
     var isValidPassword = false;
+
+    function acceptedTerms() {
+        if ($('#termscheckbox').is(':checked')) {
+            $('#msg_terms').hide;
+            return true;
+        } else {
+            $('#msg_terms').show();
+            event.preventDefault()
+            return false;
+
+        }
+    }
 
     $('#register_button').click(function () {
 
@@ -195,17 +204,25 @@
             $('#msg_email').html('').hide();
         }
 
+        if ($('#password, #confirmpassword').val() == 0)
+        {
+            $('#passwordStrength').removeClass().addClass('alert alert-danger').html('Please enter a password');
+            isValid = false;
+        }
+
        
         return isValid;
     }
 
-    // disable the facebook and register buttons until terms and conditions is checked
+    // disable the register button until terms and conditions is checked
     $("#termscheckbox").change(function () {
         if (this.checked) {
             $('#register_button').attr("disabled", false);
+            $('#msg_terms').hide;
             
         } else {
             $$('#register_button').attr("disabled", true);
+            $('#msg_terms').show;
         }
     });
 
@@ -214,6 +231,7 @@
     $(document).ready(function() {
  
         $('#register_button').attr("disabled", true);
+
 
         $('#password, #confirmpassword').on('keyup', function(e) {
      

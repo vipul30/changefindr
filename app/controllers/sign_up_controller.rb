@@ -1,23 +1,37 @@
 class SignUpController < ApplicationController
   def index
     @user = User.new
+    session[:return_to] ||= request.referer
   end
 
   def create
 
     @user = User.new(user_params)
 
-    @user.created = Time.now
-    @user.modified = Time.now
-  	password = params[:password]
+    found_user = User.where(:email => @user.email).first
+    
+    if found_user
+      flash[:notice] = "Email already exists for this user.  Please either login with this email or use a different email."
+      render :action => :index
+      
 
-  	@user.salt = SecureRandom.hex
-  	@user.password_hash = generate_hash(password,@user.salt)
+    else
+      @user.created = Time.now
+      @user.modified = Time.now
+      password = params[:password]
 
+      @user.salt = SecureRandom.hex
+      @user.password_hash = generate_hash(password,@user.salt)
 
-  	@user.save
+      @user.save
 
-  	redirect_to('/home')
+      session[:user_firstname] = user.first_name
+      session[:username] = user.email
+      redirect_to(:controller => "home", :action => "index")
+      
+    end
+
+    
 
   end
 
