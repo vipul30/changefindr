@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140707111715) do
+ActiveRecord::Schema.define(version: 20150104033943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,18 +30,23 @@ ActiveRecord::Schema.define(version: 20140707111715) do
   end
 
   create_table "charity", primary_key: "charityid", force: true do |t|
-    t.string  "charityname",   limit: 50
-    t.string  "website",       limit: 500
-    t.string  "logo",          limit: 1000
-    t.string  "description",   limit: 5000
-    t.string  "facebookurl",   limit: 500
-    t.string  "twitterurl",    limit: 500
-    t.string  "googleplusurl", limit: 500
-    t.string  "contantname",   limit: 500
-    t.string  "email",         limit: 500
-    t.integer "isapproved",    limit: 2
-    t.integer "isfeatured",    limit: 2
-    t.integer "userid"
+    t.string   "charityname",         limit: 50
+    t.string   "website",             limit: 500
+    t.string   "logo",                limit: 1000
+    t.string   "description",         limit: 5000
+    t.string   "facebookurl",         limit: 500
+    t.string   "twitterurl",          limit: 500
+    t.string   "googleplusurl",       limit: 500
+    t.string   "contantname",         limit: 500
+    t.string   "email",               limit: 500
+    t.integer  "isapproved",          limit: 2
+    t.integer  "isfeatured",          limit: 2
+    t.integer  "userid"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "logoimage",           limit: 500
   end
 
   create_table "facebook_user", force: true do |t|

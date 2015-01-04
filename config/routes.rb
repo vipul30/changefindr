@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'cause/index'
+
+  get 'cause/new'
+
+  get 'cause/edit'
+
+  get 'cause/show'
+
+  get 'cause/delete'
+
   get 'sign_in/index'
 
   
@@ -8,6 +18,8 @@ Rails.application.routes.draw do
 
   post 'sign_up/create'
   post 'sign_in/login'
+
+  post 'cause/create'
 
   root :to => "home#index"
   match ':controller(/:action(/:id))', :via => :get

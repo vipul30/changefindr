@@ -33,11 +33,17 @@ gem 'rename'
 # debugger
 gem 'byebug', '~> 3.5.1'
 
+# creates a shorter url like biy.ly
+gem 'shortener', '~> 0.3.1'
+
 # facebook authentication
 gem 'omniauth-facebook', '~> 2.0.0'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+
+# Easy upload management for ActiveRecord.  For image upload
+gem 'paperclip', '~> 4.2.1'
 
 # Use unicorn as the app server
 gem 'unicorn'
