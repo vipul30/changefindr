@@ -9,7 +9,19 @@
                             </div>
                             <div class="form-body">
                                 <%= form_for(@user, :url => {:action => 'create'}, :html => {:class => 'sky-form', :id => "myform"}) do |f| %>
-                                                                   
+
+                                    <% if @user.errors.any? %>
+                                      <div class="alert alert-danger fade in">
+                                        <p><b>Please correct the following <%= pluralize(@user.errors.count, "error") %>:</b></p>
+                                     
+                                        <ul>
+                                        <% @user.errors.full_messages.each do |msg| %>
+                                          <li><%= msg %></li>
+                                        <% end %>
+                                        </ul>
+                                      </div>
+                                    <% end %>
+
                                     <fieldset class="no-padding"> 
 
                                      <section class="no-margin">
@@ -159,7 +171,10 @@
         // do validation
         var isValid = validateForm();
 
-        //console.log('form valid= ' + isValid);
+        console.log('form valid= ' + isValid);
+        console.log('form valid password= ' + isValidPassword);
+
+        
 
         if (isValid && isValidPassword) {
 
@@ -176,41 +191,12 @@
 
         var isValid = true;
 
-        if ($('#firstname').val() == 0) {
-
-            isValid = false;
-            $('#msg_firstname').show();
-        } else {
-
-            $('#msg_firstname').html('').hide();
-        }
-
-        if ($('#lastname').val() == 0) {
-
-            isValid = false;
-            $('#msg_lastname').show();
-        } else {
-
-            $('#msg_lastname').html('').hide();
-        }
-
-        var ba = $("#email").val();
-        if ($("#email").val() == 0 || !isEmail(ba)) {
-
-            isValid = false;
-            $('#msg_email').show();
-        } else {
-
-            $('#msg_email').html('').hide();
-        }
-
         if ($('#password, #confirmpassword').val() == 0)
         {
             $('#passwordStrength').removeClass().addClass('alert alert-danger').html('Please enter a password');
             isValid = false;
         }
-
-       
+ 
         return isValid;
     }
 
@@ -233,7 +219,7 @@
         $('#register_button').attr("disabled", true);
 
 
-        $('#password, #confirmpassword').on('keyup', function(e) {
+        $('#password').on('keyup', function(e) {
      
             if($('#password').val() == '' && $('#confirmpassword').val() == '')
             {
@@ -277,6 +263,34 @@
             }
 
             
+            
+            isValidPassword = true;
+        });
+
+
+        $('#confirmpassword').on('keyup', function(e) {
+     
+            if($('#password').val() == '' && $('#confirmpassword').val() == '')
+            {
+                $('#passwordStrength').removeClass().html('');
+     
+                isValidPassword = false;
+            }
+
+            if($('#password').val() != $('#confirmpassword').val())
+            {
+                $('#passwordStrength').removeClass().addClass('alert alert-danger').html('Passwords do not match.');
+     
+                isValidPassword = false;
+            }
+
+            if($('#password').val() == $('#confirmpassword').val())
+            {
+                $('#passwordStrength').removeClass().addClass('alert alert-success').html('Passwords match.');
+     
+                isValidPassword = true;
+            }
+     
             
             isValidPassword = true;
         });

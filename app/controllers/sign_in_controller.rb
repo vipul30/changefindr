@@ -32,38 +32,55 @@ class SignInController < ApplicationController
 		auth = env["omniauth.auth"]
 
 		# check if this user already exists with a regular login
-		found_user = User.where(:email => auth.info.email).first
+		#found_user = User.where(:email => auth.info.email).first
     
-    	if found_user
-      		flash[:notice] = "Email already exists for this user.  Please either login with this email or use a different email."
-      		redirect_to  :controller => :sign_up, :action => :index
-    	else
+    	#if found_user
+      	#	flash[:notice] = "Email already exists for this user.  Please either login with this email or use a different email."
+      	#	redirect_to  :controller => :sign_up, :action => :index
+    	#else
 
-			user = FacebookUser.where(uid: auth.uid).first
+		user = User.where(provideruid: auth.uid).first
 
 
-			if (!user)
-
-			  user = FacebookUser.new	
-		      user.first_name = auth.info.first_name
-			  user.last_name = auth.info.last_name
-			  user.email = auth.info.email
-			  user.location = auth.info.location
-			  user.uid = auth.uid
-			  user.image = auth.info.image
-			  user.gender = auth.extra.raw_info.gender
-			  user.birthday = Date.strptime(auth.extra.raw_info.birthday, "%m/%d/%Y")
-			  user.url = auth.extra.raw_info.link
-			  user.locale = auth.extra.raw_info.locale
-			  user.username = auth.extra.raw_info.username
-			  user.time_zone = auth.extra.raw_info.timezone
-	      	  user.save
-			end
-	 
-	 		session[:user_firstname] = user.first_name
-		    session[:username] = user.email
+		if (!user)
+		  user = User.new	
+	      user.firstname = auth.info.first_name
+		  user.lastname = auth.info.last_name
+		  user.provider = auth.provider
+		  user.email = auth.info.email
+		  user.location = auth.info.location
+		  user.provideruid = auth.uid
+		  #user.image = auth.info.image
+		  user.gender = auth.extra.raw_info.gender
+		  user.birthday = Date.strptime(auth.extra.raw_info.birthday, "%m/%d/%Y")
+		  user.providerurl = auth.extra.raw_info.link
+		  user.locale = auth.extra.raw_info.locale
+		  user.providerusername = auth.extra.raw_info.username
+		  user.timezone = auth.extra.raw_info.timezone
+		  user.created = Time.now
+     	  user.modified = Time.now
+      	  
+      	  if user.save
+      	  	session[:user_firstname] = user.firstname
+			session[:username] = user.email
+		    flash[:notice] = "Thank you for registering.  You are now logged in."
 		    redirect_to(:controller => "home", :action => "index")
+		    return
+      	  else
+      	  	
+      	  	# If save fails, redisplay the form so user can fix problems
+      	  	flash[:notice] = "A user with the same Facebook email already exists."
+        	redirect_to(:controller => "sign_up", :action => "index")
+        	#render :controller => 'sign_up', :action => 'index'
+        	return
+      	  end
+
 		end
+	 
+	 	session[:user_firstname] = user.firstname
+		session[:username] = user.email
+		redirect_to(:controller => "home", :action => "index")
+		return
 
 	end
 

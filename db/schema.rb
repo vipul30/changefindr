@@ -73,15 +73,23 @@ ActiveRecord::Schema.define(version: 20150104033943) do
   end
 
   create_table "user", primary_key: "userid", force: true do |t|
-    t.string   "gender",        limit: 1
-    t.date     "birthdate"
+    t.string   "gender",           limit: 50
     t.datetime "created"
     t.datetime "modified"
-    t.string   "email",         limit: 50
-    t.string   "firstname",     limit: 50
-    t.string   "lastname",      limit: 50
-    t.string   "password_hash", limit: 1000
-    t.string   "salt",          limit: 1000
+    t.string   "email",            limit: 50
+    t.string   "firstname",        limit: 50
+    t.string   "lastname",         limit: 50
+    t.string   "password_hash",    limit: 1000
+    t.string   "salt",             limit: 1000
+    t.string   "location",         limit: 250
+    t.string   "provider",         limit: 100
+    t.string   "imageurl",         limit: 500
+    t.date     "birthday"
+    t.string   "providerurl",      limit: 250
+    t.string   "locale",           limit: 250
+    t.string   "providerusername", limit: 250
+    t.string   "timezone",         limit: 50
+    t.string   "provideruid",      limit: 100
   end
 
   create_table "widgets", force: true do |t|
