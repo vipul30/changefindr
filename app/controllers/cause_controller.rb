@@ -6,6 +6,7 @@ class CauseController < ApplicationController
 
     @cause = Charity.new
 
+
   end
 
 
@@ -15,9 +16,22 @@ class CauseController < ApplicationController
     @cause.created = Time.now
     @cause.modified = Time.now
 
+    user = User.where(email: session[:username]).first
+
+    if (user == nil)
+      flash[:notice] = "Your user session is invalid.  Please login and try submission again."
+      redirect_to(:controller => "home", :action => "index")
+      return
+    end
+
+    @cause.email = user.email
+    @cause.userid = user.userid
+    @cause.contactname = user.firstname + ' ' + user.lastname
+
     if @cause.save
         flash[:notice] = "Thank you for submission.  We will contact you once your cause is approved."
         redirect_to(:controller => "home", :action => "index")
+        return
     else
       # If save fails, redisplay the form so user can fix problems
       render('new')
@@ -27,6 +41,13 @@ class CauseController < ApplicationController
   end
 
   def edit
+    @cause = Charity.where(charityid: params[:id]).first
+    byebug
+  end
+
+
+  def update
+
   end
 
   def show

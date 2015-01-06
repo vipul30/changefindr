@@ -1,2 +1,142 @@
-<h1>Cause#edit</h1>
-<p>Find me in app/views/cause/edit.html.erb</p>
+
+       
+    <!-- MAIN CONTENT -->
+    	
+
+    <section class="slice slice-lg bg-image" style="background-image:url(/images/backgrounds/full-bg-2.jpg)">
+        <div class="wp-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7 col-md-offset-1 col-sm-5 col-sm-offset-1">
+                    	<div class="row">
+                    		
+						 <% if session[:user_firstname] == nil %>
+						 <br/><br/><br/><br/><br/><br/>
+						 	<p>It's easy to create your own cause and start raising funds through unused gift card donations.  Simply
+						 	<a href="/sign_up/index">register</a> 
+						 	 and complete a short form.  We will contact you once we have reviewed your information.
+						 	</p>
+						 <% else %>
+                    		<div class="col-md-12">
+
+							<div class="wp-block default user-form no-margin">
+	                            <div class="form-header">
+	                                <h2>Tell us about your cause</h2>
+	                            </div>
+
+						      <div class="form-body">
+                                <%= form_for(@cause, :url => {:action => 'update'}, :html => {:class => 'sky-form', :id => "myform"}) do |f| %>
+
+                                    <%= render(:partial => "cause_form", :locals => {:f => f}) %>
+
+
+                                    <fieldset>          
+                                      
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    
+                                                    <br>
+                                                    <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button"
+                                                    onClick="this.form.submit(); this.disabled=true;"
+                                                    >
+                                                        <span>Update Cause</span>
+                                                    </button>
+                                                </div>
+                                                
+                                        </section>
+                                    </fieldset>
+
+                                <!--/form-->
+                                <% end %>  
+                            </div>
+
+                            
+			            </div>
+			       		 </div>
+
+			       		 <% end %>
+			    </div>
+                    </div>
+                    <div class="col-md-4">
+                    	<!-- SIDEBAR - BLOG -->
+                    	<div class="sidebar">
+	
+							<!-- NEWSLETTER WIDGET -->
+	                        <div class="panel panel-default panel-sidebar-1">
+	                            <div class="panel-heading"><h2>Sign up for our newsletter</h2></div>
+	                            <form class="sky-form" role="form">
+	                                <div class="panel-body">
+	                                    <p>
+	                                        Sign up if you would like to receive occasional treats from us.
+	                                    </p>
+	                                    <section>
+	                                        <div class="form-group">
+	                                            <label class="label sr-only">Password</label>
+	                                            <label class="input">
+	                                                <input type="email" name="email" placeholder="name@example.com">
+	                                            </label>
+	                                        </div>     
+	                                    </section>
+	                                    
+	                                </div>
+	                                <button type="submit" class="btn btn-lg btn-block-bm btn-alt btn-icon btn-icon-right btn-envelope">
+	                                    <span>Sign Me Up</span>
+	                                </button>
+	                            </form>   
+	                        </div>
+
+							<!-- TESTIMONIAL WIDGET --> 
+	                        <div class="panel panel-default panel-sidebar-1">
+	                            <div class="panel-heading"><h2>Testimonials</h2></div>
+	                            <div class="owl-carousel owl-carousel-single">
+	                                <div>
+	                                    <div class="wp-block testimonial style-1 base">
+	                                       
+	                                        <div class="wp-block-body"> 
+	                                            <p>
+	                                                <i class="fa fa-quote-left"></i>Changefindr made it very easy to collect funds through unused gift cards.
+	                                            </p>
+	                                        </div>
+	                                        <div class="testimonial-author light">  
+	                                            
+	                                            <div class="author-info">
+	                                                <span class="author-name">Ounie Phakousonh</span>
+	                                                <small class="author-pos">CoderDojo</small>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                
+	                            </div>
+
+	                             <div class="owl-carousel owl-carousel-single">
+	                                <div>
+	                                    <div class="wp-block testimonial style-1 base">
+	                                       
+	                                        <div class="wp-block-body"> 
+	                                            <p>
+	                                                <i class="fa fa-quote-left"></i>Changefindr gives me the opportunity to contribute to my favourite cause even in difficult times.
+	                                            </p>
+	                                        </div>
+	                                        <div class="testimonial-author light">  
+	                                            
+	                                            <div class="author-info">
+	                                                <span class="author-name">Seema Makker</span>
+	                                                <small class="author-pos">Donor</small>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                
+	                            </div>
+	                        </div>
+
+    					</div>                    
+    				</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   

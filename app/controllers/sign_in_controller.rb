@@ -18,11 +18,13 @@ class SignInController < ApplicationController
 	      # mark user as logged in
 	      session[:user_firstname] = found_user.firstname
 	      session[:username] = found_user.email
-	      flash[:notice] = "You are now logged in."
+	      flash[:notice] = "You are logged in."
 	      redirect_to(:controller => 'home', :action => 'index')
+	      return
 	    else
 	      flash[:notice] = "Invalid username/password combination."
-	      redirect_to(:action => 'login')
+	      redirect_to(:action => 'index')
+	      return
 	    end
 	end
 

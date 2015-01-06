@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'sign_in/index'
 
   
+
   # for facebook
   get 'auth/:provider/callback', to: 'sign_in#login_facebook'
   get 'auth/failure', to: redirect('/')

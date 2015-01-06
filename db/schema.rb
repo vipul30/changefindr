@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20150105185049) do
     t.string   "facebookurl",         limit: 500
     t.string   "twitterurl",          limit: 500
     t.string   "googleplusurl",       limit: 500
-    t.string   "contantname",         limit: 500
+    t.string   "contactname",         limit: 500
     t.string   "email",               limit: 500
     t.integer  "isapproved",          limit: 2
     t.integer  "isfeatured",          limit: 2

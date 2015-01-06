@@ -1,20 +1,17 @@
 class Charity < ActiveRecord::Base
     self.table_name = 'charity'
     self.primary_key = :charityid
-	has_attached_file :logo , {	
-		:path => ":rails_root/public/images/cause/:basename.#{Time.now}.:extension"
-	}
+	has_attached_file :logo, {	:path => "#{Rails.root}/public/images/photo_attachment/:id/:style/:basename.:extension",
+								  :url => "/images/photo_attachment/:id/:style/:basename.:extension" }
 
-	has_attached_file :image1 , {	
-		:path => ":rails_root/public/images/cause/:basename.#{Time.now}.:extension"
-	}
+	has_attached_file :image1 , { :path => "#{Rails.root}/public/photo_attachment/:id/:style/:basename.:extension",
+								  :url => "#{Rails.root}/public/photo_attachment/:id/:style/:basename.:extension"
+								}
 
-	has_attached_file :image2 , {	
-		:path => ":rails_root/public/images/cause/:basename.#{Time.now}.:extension"
-	}
+	has_attached_file :image2, {	:path => "#{Rails.root}/public/photo_attachment/:id/:style/:basename.:extension"}
 
-	has_attached_file :image3 , {	
-		:path => ":rails_root/public/images/cause/:basename.#{Time.now}.:extension"
+	has_attached_file :image3, {	
+		:path => "#{Rails.root}/public/photo_attachment/:id/:style/:basename.:extension"
 	}
 
 	validates :charityname, :presence => { :message => "Please enter the name of your cause." },
