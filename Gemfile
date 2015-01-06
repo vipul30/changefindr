@@ -48,6 +48,8 @@ gem 'paperclip', '~> 4.2.1'
 # Use unicorn as the app server
 gem 'unicorn'
 
+gem 'validate_url', '~> 1.0.0'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

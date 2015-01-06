@@ -1,616 +1,235 @@
-<section id="navMobile" class="aside-menu left">
-    <form class="form-horizontal form-search">
-        <div class="input-group">
-            <input type="search" class="form-control" placeholder="Search...">
-            <span class="input-group-btn">
-                <button id="btnHideMobileNav" class="btn btn-close" type="button" title="Hide sidebar"><i class="fa fa-times"></i></button>
-            </span>
-        </div>
-    </form>
-    <div id="dl-menu" class="dl-menuwrapper">
-        <ul class="dl-menu"></ul>
-    </div>
-</section> 
 
-
-<!-- MAIN WRAPPER -->
-<div class="body-wrap">
-        
+       
     <!-- MAIN CONTENT -->
-    	<div class="pg-opt">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-6">
-                    <h2>Blog</h2>
-                </div>
-                <div class="col-xs-6">
-                    <ol class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li class="active">Large grid</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    	</div>
+    	
 
-    <section class="slice bg-white">
+    <section class="slice slice-lg bg-image" style="background-image:url(/images/backgrounds/full-bg-2.jpg)">
         <div class="wp-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-7 col-md-offset-1 col-sm-5 col-sm-offset-1">
                     	<div class="row">
-                    		<div class="col-md-6">
-		                    	<!-- Standard image post example -->
-		                    	<div class="post-item style2 no-padding">
-		                    		<div class="post-content-wr">
-				                        <div class="post-meta-top">
-				                            <div class="post-image">
-				                            	<a href="#">
-				                            						                            			<img src="images/prv/blog/blog-img-1_1280x800.jpg" alt="">
-				                            						                            	</a>
-				                            </div>
-				                            <h2 class="post-title">
-				                            	<a href="#">The true sign of intelligence is not knowledge but imagination</a>
-				                            </h2>
-				                        </div>
-				                        <div class="post-content clearfix">
-				                            <div class="post-tags">Posted in <a href="#">HOTELS</a>, <a href="#">SPECIAL PROMOS</a>, <a href="#">SUMMER</a></div>
-				                            <div class="post-comments"><strong>23</strong>comments</div>
-				                            <div class="post-desc">
-				                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-				                            </div>
-				                        </div>
-				                        <div class="post-meta-bot clearfix">
-				                            <span class="post-author">WRITTEN BY <a href="#">MARC JACOBS</a></span>
-				                            <a href="#" class="btn btn-sm btn-base">Read more</a>
-				                        </div>
-				                    </div>
-			                    </div>
-			                </div>
-			                <div class="col-md-6">
-			                    <!-- Standard image post example -->
-			                    <div class="post-item style2 no-padding">
-		                    		<div class="post-content-wr">
-				                        <div class="post-meta-top">
-				                            <div class="post-image">
-				                            	<a href="#">
-				                            						                            			<img src="images/prv/blog/blog-img-2_1280x800.jpg" alt="">
-				                            						                            	</a>
-				                            </div>
-				                            <h2 class="post-title">
-				                            	<a href="#">Always do your best. What you plant now, you will harvest later</a>
-				                            </h2>
-				                        </div>
-				                        <div class="post-content clearfix">
-				                            <div class="post-tags">Posted in <a href="#">HOTELS</a>, <a href="#">SPECIAL PROMOS</a>, <a href="#">SUMMER</a></div>
-				                            <div class="post-comments"><strong>23</strong>comments</div>
-				                            <div class="post-desc">
-				                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-				                            </div>
-				                        </div>
-				                        <div class="post-meta-bot clearfix">
-				                            <span class="post-author">WRITTEN BY <a href="#">MARC JACOBS</a></span>
-				                            <a href="#" class="btn btn-sm btn-base">Read more</a>
-				                        </div>
-				                    </div>
-			                    </div>
-			                </div>
+                    		<div class="col-md-12">
+
+							<div class="wp-block default user-form no-margin">
+	                            <div class="form-header">
+	                                <h2>Tell us about your cause</h2>
+	                            </div>
+
+						<div class="form-body">
+                                <%= form_for(@cause, :url => {:action => 'create'}, :html => {:class => 'sky-form', :id => "myform"}) do |f| %>
+
+                                    <% if @cause.errors.any? %>
+                                      <div class="alert alert-danger fade in">
+                                        <p><b>Please correct the following <%= pluralize(@cause.errors.count, "error") %>:</b></p>
+                                     
+                                        <ul>
+                                        <% @cause.errors.messages.values.each do |msg| %>
+                                            <%msg.each do  |m| %>
+                                                <li><%= m %></li>
+                                            <%end %>
+                                        <% end %>
+                                        </ul>
+                                      </div>
+                                    <% end %>
+
+
+                                    <fieldset class="no-padding"> 
+
+                                     <section class="no-margin">
+                                            <div class="row">
+
+                                                <section class="col-xs-12">
+                                                   
+                                                	<label>What is the name of your cause?</label>
+                                                    <label class="input">
+
+                                                        <i class="icon-append fa fa-user"></i>
+                                                        <%= f.text_field :charityname, :placeholder=>"Cause Name" %>                                               
+                                                    </label>
+                                                
+                                                    <br/>
+                                                    
+
+                                                    <label>What is the URL of your cause?</label>
+                                                    <label class="input">
+
+                                                        <i class="icon-append fa fa-globe"></i>
+                                                        <%= f.text_field :website, :placeholder=>"Website" %>                                                       
+                                                    </label>
+
+                                                    <br/>                                             
+                                                    
+                                                    <label>What is the URL of your facebook page? (Optional)</label>
+                                                    <label class="input">
+                                                    	
+                                                        <i class="icon-append fa fa-globe"></i>
+                                                        <%= f.text_field :facebookurl, :placeholder=>"http://www.facebook.com/mycause" %>
+                                             
+                                                    </label>
+
+                                                    <br/>
+                                                    
+                                                    <label>Description</label>
+                                                    <label class="input">
+					                                    
+					                                    <%= f.text_area :description, :placeholder=>"Brief description of your cause.", :class=>"form-control"  %>
+					                                    
+					                                </label>
+                                           
+                                                    <br/>
+
+                                                    <label>Please upload a logo for your cause.</label>
+                                                    <label class="input">
+                                                    	
+                                                        <i class="icon-append fa fa-upload"></i>
+                                                        <%= f.file_field :logo %>	
+                                             
+                                                    </label>
+
+                                                    <br/>
+
+                                                    <label>Please upload an image for your cause.  This will be used as a banner for your page.  (Optional)</label>
+                                                    <label class="input">
+                                                    	
+                                                        <i class="icon-append fa fa-upload"></i>
+                                                        <%= f.file_field :image1 %>	
+                                             
+                                                    </label>
+
+                                                    <br/>
+
+                                                    <label>Please upload an image for your cause.  This will be used as a banner for your page.  (Optional)</label>
+                                                    <label class="input">
+                                                    	
+                                                        <i class="icon-append fa fa-upload"></i>
+                                                        <%= f.file_field :image2 %>	
+                                             
+                                                    </label>
+
+                                                     <br/>
+
+                                                    <label>Please upload an image for your cause.  This will be used as a banner for your page.  (Optional)</label>
+                                                    <label class="input">
+                                                    	
+                                                        <i class="icon-append fa fa-upload"></i>
+                                                        <%= f.file_field :image3 %>	
+                                             
+                                                    </label>
+                                                      
+                                                </section>
+                                          
+                                            </div>
+
+
+                                        </section>
+
+                                       
+                                    </fieldset>  
+
+                                    <fieldset>
+                                        
+                                      
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    
+                                                    <br>
+                                                    <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="submit">
+                                                        <span>Submit Cause For Approval</span>
+                                                    </button>
+                                                </div>
+                                                
+                                        </section>
+                                    </fieldset>
+                                <!--/form-->
+                                <% end %>  
+                            </div>
+
+                            
 			            </div>
-			            <div class="row">
-			            	<div class="col-md-6">
-			                    <!-- Video post example - 4 skins to apply: base, base-alt, light, dark and the shadowed class if you want to apply a ncie shadow on the video wrapper -->
-			                    <div class="post-item style2 no-padding">
-		                    		<div class="post-content-wr">
-				                        <div class="post-meta-top">
-				                            <div class="post-video">
-						                        						                        <video id="video1" controls preload="none" poster="images/prv/blog/blog-img-5_1280x800.jpg" class="video-js vjs-styled-skin base">
-						                          
-					                                <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
-					                                <source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm">
-					                            </video>
-				                            </div>
-				                            <h2 class="post-title">
-				                            	<a href="#">In order to succeed, we must first believe that we can</a>
-				                            </h2>
-				                        </div>
-				                        <div class="post-content clearfix">
-				                            <div class="post-tags">Posted in <a href="#">HOTELS</a>, <a href="#">SPECIAL PROMOS</a>, <a href="#">SUMMER</a></div>
-				                            <div class="post-comments"><strong>23</strong>comments</div>
-				                            <div class="post-desc">
-				                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-				                            </div>
-				                        </div>
-				                        <div class="post-meta-bot clearfix">
-				                            <span class="post-author">WRITTEN BY <a href="#">MARC JACOBS</a></span>
-				                            <a href="#" class="btn btn-sm btn-base">Read more</a>
-				                        </div>
-				                    </div>
-			                    </div>
-			                </div>
-			                <div class="col-md-6">
-			                    <!-- Carousel image post example -->
-			                    <div class="post-item style2 no-padding">
-		                    		<div class="post-content-wr">
-				                        <div class="post-meta-top">
-				                            <div class="post-image">
-				                            	<a href="#">
-				                            						                            			<div id="basicCarousel" class="carousel carousel-4 slide color-two-l" data-ride="carousel">
-								                            <!-- Indicators -->
-								                            <ol class="carousel-indicators">
-								                                <li data-target="#basicCarousel" data-slide-to="0" class="active"></li>
-								                                <li data-target="#basicCarousel" data-slide-to="1" class="active"></li>
-								                            </ol>
-								                            
-								                            <div class="carousel-inner">
-								                                <div class="item item-dark active">
-								                                    <img src="images/prv/blog/blog-img-4_1280x800.jpg" alt="" class="img-responsive">
-								                                </div>
-								                                <div class="item item-dark">
-								                                    <img src="images/prv/blog/blog-img-5_1280x800.jpg" alt="" class="img-responsive" class="img-responsive">
-								                                </div>
-								                            </div>
-								                            
-								                            <!-- Controls -->
-								                            <a class="left carousel-control" href="#basicCarousel" data-slide="prev">
-								                                <i class="fa fa-angle-left"></i>
-								                            </a>
-								                            <a class="right carousel-control" href="#basicCarousel" data-slide="next">
-								                                <i class="fa fa-angle-right"></i>
-								                            </a>     
-								                        </div>
-				                            						                            	</a>
-				                            </div>
-				                            <h2 class="post-title">
-				                            	<a href="#">Always do your best. What you plant now, you will harvest later</a>
-				                            </h2>
-				                        </div>
-				                        <div class="post-content clearfix">
-				                            <div class="post-tags">Posted in <a href="#">HOTELS</a>, <a href="#">SPECIAL PROMOS</a>, <a href="#">SUMMER</a></div>
-				                            <div class="post-comments"><strong>23</strong>comments</div>
-				                            <div class="post-desc">
-				                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-				                            </div>
-				                        </div>
-				                        <div class="post-meta-bot clearfix">
-				                            <span class="post-author">WRITTEN BY <a href="#">MARC JACOBS</a></span>
-				                            <a href="#" class="btn btn-sm btn-base">Read more</a>
-				                        </div>
-				                    </div>
-			                    </div>
-			                </div>
-			            </div>
-			            <div class="row">
-			            	<div class="col-md-6">
-			            		<div class="post-item style2 no-padding">
-		                    		<div class="post-content-wr">
-				                        <div class="post-meta-top">
-				                            <div class="post-image">
-				                            	<a href="#">
-				                            						                            			<img src="images/prv/blog/blog-img-6_1280x800.jpg" alt="">
-				                            						                            	</a>
-				                            </div>
-				                            <h2 class="post-title">
-				                            	<a href="#">Always do your best. What you plant now, you will harvest later</a>
-				                            </h2>
-				                        </div>
-				                        <div class="post-content clearfix">
-				                            <div class="post-tags">Posted in <a href="#">HOTELS</a>, <a href="#">SPECIAL PROMOS</a>, <a href="#">SUMMER</a></div>
-				                            <div class="post-comments"><strong>23</strong>comments</div>
-				                            <div class="post-desc">
-				                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-				                            </div>
-				                        </div>
-				                        <div class="post-meta-bot clearfix">
-				                            <span class="post-author">WRITTEN BY <a href="#">MARC JACOBS</a></span>
-				                            <a href="#" class="btn btn-sm btn-base">Read more</a>
-				                        </div>
-				                    </div>
-			                    </div>
-			            	</div>
-			            	<div class="col-md-6">
-			                    <!-- Standard image post example -->
-			                    <div class="post-item style2 no-padding">
-		                    		<div class="post-content-wr">
-				                        <div class="post-meta-top">
-				                            <div class="post-image">
-				                            	<a href="#">
-				                            						                            			<img src="images/prv/blog/blog-img-5_1280x800.jpg" alt="">
-				                            						                            	</a>
-				                            </div>
-				                            <h2 class="post-title">
-				                            	<a href="#">Always do your best. What you plant now, you will harvest later</a>
-				                            </h2>
-				                        </div>
-				                        <div class="post-content clearfix">
-				                            <div class="post-tags">Posted in <a href="#">HOTELS</a>, <a href="#">SPECIAL PROMOS</a>, <a href="#">SUMMER</a></div>
-				                            <div class="post-comments"><strong>23</strong>comments</div>
-				                            <div class="post-desc">
-				                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-				                            </div>
-				                        </div>
-				                        <div class="post-meta-bot clearfix">
-				                            <span class="post-author">WRITTEN BY <a href="#">MARC JACOBS</a></span>
-				                            <a href="#" class="btn btn-sm btn-base">Read more</a>
-				                        </div>
-				                    </div>
-			                    </div>
-			                </div>
-			            </div>
-			            <div class="row">
-                    		<div class="col-md-6">
-		                    	<!-- Standard image post example -->
-		                    	<div class="post-item style2 no-padding">
-		                    		<div class="post-content-wr">
-				                        <div class="post-meta-top">
-				                            <div class="post-image">
-				                            	<a href="#">
-				                            						                            			<img src="images/prv/blog/blog-img-1_1280x800.jpg" alt="">
-				                            						                            	</a>
-				                            </div>
-				                            <h2 class="post-title">
-				                            	<a href="#">The true sign of intelligence is not knowledge but imagination</a>
-				                            </h2>
-				                        </div>
-				                        <div class="post-content clearfix">
-				                            <div class="post-tags">Posted in <a href="#">HOTELS</a>, <a href="#">SPECIAL PROMOS</a>, <a href="#">SUMMER</a></div>
-				                            <div class="post-comments"><strong>23</strong>comments</div>
-				                            <div class="post-desc">
-				                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-				                            </div>
-				                        </div>
-				                        <div class="post-meta-bot clearfix">
-				                            <span class="post-author">WRITTEN BY <a href="#">MARC JACOBS</a></span>
-				                            <a href="#" class="btn btn-sm btn-base">Read more</a>
-				                        </div>
-				                    </div>
-			                    </div>
-			                </div>
-			                <div class="col-md-6">
-			                    <!-- Standard image post example -->
-			                    <div class="post-item style2 no-padding">
-		                    		<div class="post-content-wr">
-				                        <div class="post-meta-top">
-				                            <div class="post-image">
-				                            	<a href="#">
-				                            						                            			<img src="images/prv/blog/blog-img-2_1280x800.jpg" alt="">
-				                            						                            	</a>
-				                            </div>
-				                            <h2 class="post-title">
-				                            	<a href="#">Always do your best. What you plant now, you will harvest later</a>
-				                            </h2>
-				                        </div>
-				                        <div class="post-content clearfix">
-				                            <div class="post-tags">Posted in <a href="#">HOTELS</a>, <a href="#">SPECIAL PROMOS</a>, <a href="#">SUMMER</a></div>
-				                            <div class="post-comments"><strong>23</strong>comments</div>
-				                            <div class="post-desc">
-				                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-				                            </div>
-				                        </div>
-				                        <div class="post-meta-bot clearfix">
-				                            <span class="post-author">WRITTEN BY <a href="#">MARC JACOBS</a></span>
-				                            <a href="#" class="btn btn-sm btn-base">Read more</a>
-				                        </div>
-				                    </div>
-			                    </div>
-			                </div>
-			            </div>
+			        </div>
+			    </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                     	<!-- SIDEBAR - BLOG -->
                     	<div class="sidebar">
-	<!-- Search blog -->
-    <div class="section-title-wr">
-	   <h3 class="section-title left"><span>Search our blog</span></h3>
-    </div>
-	<div class="widget">
-        <form class="form-light form-horizontal" role="form">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search blog...">
-                <span class="input-group-btn">
-                    <button class="btn btn-base" type="button">Go</button>
-                </span>
-            </div>
-        </form>
-    </div>
+	
+							<!-- NEWSLETTER WIDGET -->
+	                        <div class="panel panel-default panel-sidebar-1">
+	                            <div class="panel-heading"><h2>Sign up for our newsletter</h2></div>
+	                            <form class="sky-form" role="form">
+	                                <div class="panel-body">
+	                                    <p>
+	                                        Sign up if you would like to receive occasional treats from us.
+	                                    </p>
+	                                    <section>
+	                                        <div class="form-group">
+	                                            <label class="label sr-only">Password</label>
+	                                            <label class="input">
+	                                                <input type="email" name="email" placeholder="name@example.com">
+	                                            </label>
+	                                        </div>     
+	                                    </section>
+	                                    
+	                                </div>
+	                                <button type="submit" class="btn btn-lg btn-block-bm btn-alt btn-icon btn-icon-right btn-envelope">
+	                                    <span>Sign Me Up</span>
+	                                </button>
+	                            </form>   
+	                        </div>
 
-    <!-- Categories -->
-    <div class="section-title-wr">
-	   <h3 class="section-title left"><span>Categories</span></h3>
-    </div>
-	<div class="widget">
-        <ul class="categories highlight">
-            <li><a href="#">Web design (23)</a></li>
-            <li><a href="#">Online business (100)</a></li>
-            <li><a href="#">Marketing strategy (7)</a></li>
-            <li><a href="#">Technology (33)</a></li>
-            <li><a href="#">About finance (123)</a></li>
-        </ul>
-    </div>
+							<!-- TESTIMONIAL WIDGET --> 
+	                        <div class="panel panel-default panel-sidebar-1">
+	                            <div class="panel-heading"><h2>Testimonials</h2></div>
+	                            <div class="owl-carousel owl-carousel-single">
+	                                <div>
+	                                    <div class="wp-block testimonial style-1 base">
+	                                       
+	                                        <div class="wp-block-body"> 
+	                                            <p>
+	                                                <i class="fa fa-quote-left"></i>Changefindr made it very easy to collect funds through unused gift cards.
+	                                            </p>
+	                                        </div>
+	                                        <div class="testimonial-author light">  
+	                                            
+	                                            <div class="author-info">
+	                                                <span class="author-name">Ounie Phakousonh</span>
+	                                                <small class="author-pos">CoderDojo</small>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                
+	                            </div>
 
-    <!-- LATEST COMMENTS -->
-    <div class="section-title-wr">
-        <h3 class="section-title left"><span>Latest comments</span></h3>
-    </div>
-    <div class="widget-container widget-recent widget-recent-boxed widget-recent-comments">
-		<div class="inner">
-			<ul>
-				<li class="clearfix">
-					<a href="#" class="post-thumb" hidefocus="true">
-                                                    <img src="images/temp/thumb-6.jpg" alt="">
-                             
-                    </a>
-                    <span class="comment-author"><a href="#" hidefocus="true">GECHI CHAN</a> commented</span>
-                    <span class="comment-entry">Sed molestie augue sit amet leo consequat posuere. Estibu lum ante ipsum primis in faucibus</span>
-				</li>
-                <li class="clearfix">
-                    <a href="#" class="post-thumb" hidefocus="true">
-                                                    <img src="images/temp/thumb-7.jpg" alt="">
-                             
-                    </a>
-                    <span class="comment-author"><a href="#" hidefocus="true">MAGGIE SAND</a> commented</span>
-                    <span class="comment-entry">Estibu lum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae</span>
-                </li>
-                <li class="clearfix">
-                    <a href="#" class="post-thumb" hidefocus="true">
-                                                    <img src="images/temp/thumb-8.jpg" alt="">
-                             
-                    </a>
-                    <span class="comment-author"><a href="#" hidefocus="true">VINCE JAMIESON</a> commented</span>
-                    <span class="comment-entry">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris.</span>
-                </li>
-                <li class="clearfix">
-                    <a href="#" class="post-thumb" hidefocus="true">
-                                                    <img src="images/temp/thumb-9.jpg" alt="">
-                             
-                    </a>
-                    <span class="comment-author"><a href="#" hidefocus="true">KEIRA BENSON</a> commented</span>
-                    <span class="comment-entry">Vivamus hendrerit arcu seditur erat molestie vehicula. Rediters auctor neque eu tellus</span>
-                </li>
-                <li class="clearfix">
-                    <a href="#" class="post-thumb" hidefocus="true">
-                                                    <img src="images/temp/thumb-10.jpg" alt="">
-                             
-                    </a>
-                    <span class="comment-author"><a href="#" hidefocus="true">MICHAEL JONES</a> commented</span>
-                    <span class="comment-entry">Rediters auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim.</span>
-                </li>
-			</ul>
-		</div>
-	</div>
+	                             <div class="owl-carousel owl-carousel-single">
+	                                <div>
+	                                    <div class="wp-block testimonial style-1 base">
+	                                       
+	                                        <div class="wp-block-body"> 
+	                                            <p>
+	                                                <i class="fa fa-quote-left"></i>Changefindr gives me the opportunity to contribute to my favourite cause even in difficult times.
+	                                            </p>
+	                                        </div>
+	                                        <div class="testimonial-author light">  
+	                                            
+	                                            <div class="author-info">
+	                                                <span class="author-name">Seema Makker</span>
+	                                                <small class="author-pos">Donor</small>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                
+	                            </div>
+	                        </div>
 
-	<!-- ARCHIVE -->
-    <div class="section-title-wr">
-	   <h3 class="section-title left"><span>Archive</span></h3>
-    </div>
-	<div class="widget">
-        <ul class="categories highlight">
-            <li><a href="#">July 2014</a></li>
-            <li><a href="#">June 2014</a></li>
-            <li><a href="#">May 2014</a></li>
-            <li><a href="#">April 2014</a></li>
-            <li><a href="#">March 2014</a></li>
-        </ul>
-    </div>
-    
-	<!-- TAG CLOUD -->
-    <div class="section-title-wr">
-	   <h3 class="section-title left"><span>Tag cloud</span></h3>
-    </div>
-	<div class="widget">
-		<div class="tagcloud base clearfix">
-			<a href="#" hidefocus="true"><span>Rooms</span></a>
-			<a href="#" hidefocus="true"><span>Simple</span></a>
-			<a href="#" hidefocus="true"><span>Decorated</span></a>
-			<a href="#" hidefocus="true"><span>Wood</span></a>
-			<a href="#" hidefocus="true"><span>Furniture</span></a>
-			<a href="#" hidefocus="true"><span>Feature</span></a>
-            <a href="#" hidefocus="true"><span>Conditioning</span></a>
-            <a href="#" hidefocus="true"><span>Hotels</span></a>
-			<a href="#" hidefocus="true"><span>Glasses</span></a>
-            <a href="#" hidefocus="true"><span>Rooms</span></a>
-            <a href="#" hidefocus="true"><span>Simple</span></a>
-            <a href="#" hidefocus="true"><span>Decorated</span></a>
-            <a href="#" hidefocus="true"><span>Wood</span></a>
-            <a href="#" hidefocus="true"><span>Furniture</span></a>
-            <a href="#" hidefocus="true"><span>Feature</span></a>
-            <a href="#" hidefocus="true"><span>Conditioning</span></a>
-            <a href="#" hidefocus="true"><span>Hotels</span></a>
-            <a href="#" hidefocus="true"><span>Glasses</span></a>
-		</div>
-	</div>
-
-	<!-- CALENDAR -->
-    <div class="section-title-wr">
-	   <h3 class="section-title left"><span>Event calendar</span></h3>
-    </div>
-    <div class="widget">
-        <form action="" class="sky-form">         
-            <div id="dpInline"></div>
-        </form> 
-    </div>
-
-    <!-- Date Picker - Init JS -->
-    <script type="text/javascript">
-        $(function(){            
-            // Inline datepicker
-            $('#dpInline').datepicker({
-                dateFormat: 'dd.mm.yy',
-                prevText: '<i class="fa fa-chevron-left"></i>',
-                nextText: '<i class="fa fa-chevron-right"></i>'
-            });            
-        });         
-    </script>
-
-    <!-- TABS -->
-    <div class="section-title-wr">
-       <h3 class="section-title left"><span>Tab widget</span></h3>
-    </div>
-    <div class="widget">
-        <div class="tabs-framed">
-            <ul class="tabs clearfix">
-                <li><a href="#tab-1" data-toggle="tab">Comments</a></li>
-                <li><a href="#tab-2" data-toggle="tab">Quick links</a></li>
-            </ul>
-
-            <div class="tab-content">
-                <!-- Tab 1 -->
-                <div class="tab-pane fade in active" id="tab-1">
-                    <div class="tab-body">
-                        <div class="widget-recent">
-                            <div class="inner">
-                                <ul>
-                                    <li class="clearfix">
-                                        <a href="#" class="post-thumb" hidefocus="true">
-                                                                                    <img src="images/temp/thumb-6.jpg" alt="">
-                                           
-                                        </a> 
-                                        <span class="comment-author"><a href="#" hidefocus="true">GECHI CHAN</a> commented</span>
-                                        <span class="comment-entry">Sed molestie augue sit amet leo consequat posuere. Estibu lum ante ipsum.</span>
-                                    </li>
-                                    <li class="clearfix">
-                                        <a href="#" class="post-thumb" hidefocus="true">
-                                                                                    <img src="images/temp/thumb-7.jpg" alt="">
-                                            
-                                        </a>
-                                        <span class="comment-author"><a href="#" hidefocus="true">MAGGIE SAND</a> commented</span>
-                                        <span class="comment-entry">Estibu lum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia.</span>
-                                    </li>
-                                    <li class="clearfix">
-                                        <a href="#" class="post-thumb" hidefocus="true">
-                                                                                    <img src="images/temp/thumb-8.jpg" alt="">
-                                            
-                                        </a>
-                                        <span class="comment-author"><a href="#" hidefocus="true">VINCE JAMIESON</a> commented</span>
-                                        <span class="comment-entry">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                                    </li>
-                                    <li class="clearfix">
-                                        <a href="#" class="post-thumb" hidefocus="true">
-                                                                                    <img src="images/temp/thumb-9.jpg" alt="">
-                                            
-                                        </a>
-                                        <span class="comment-author"><a href="#" hidefocus="true">KEIRA BENSON</a> commented</span>
-                                        <span class="comment-entry">Vivamus hendrerit arcu seditur erat molestie.</span>
-                                    </li>
-                                    <li class="clearfix">
-                                        <a href="#" class="post-thumb" hidefocus="true">
-                                                                                    <img src="images/temp/thumb-10.jpg" alt="">
-                                            
-                                        </a>
-                                        <span class="comment-author"><a href="#" hidefocus="true">MICHAEL JONES</a> commented</span>
-                                        <span class="comment-entry">Rediters auctor neque eu tellus rhoncus ut eleifend.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="tab-2">
-                    <div class="tab-body">
-                        <div class="widget-recent">
-                            <div class="inner">
-                                <ul class="recent">
-                                    <li>
-                                        <a href="#">Dorlorem ipsum et mea dolor sit amet, fierent adipisci iracundia est ei usu timeam persius ea</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dorlorem ipsum et mea dolor sit amet, fierent adipisci iracundia est ei usu timeam persius ea</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dorlorem ipsum et mea dolor sit amet, fierent adipisci iracundia est ei usu timeam persius ea</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dorlorem ipsum et mea dolor sit amet, fierent adipisci iracundia est ei usu timeam persius ea</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dorlorem ipsum et mea dolor sit amet, fierent adipisci iracundia est ei usu timeam persius ea</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>                    </div>
+    					</div>                    
+    				</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="col">
-                       <h4>Contact us</h4>
-                       <ul>
-                            <li>5th Avenue, New York - United States</li>
-                            <li>Phone: +10 724 1234 567 | Fax: +10 724 1234 567 </li>
-                            <li>Email: <a href="mailto:hello@example.com" title="Email Us">hello@example.com</a></li>
-                            <li>Skype: <a href="skype:my.business?call" title="Skype us">my-business</a></li>
-                            <li>Creating great templates is our passion</li>
-                        </ul>
-                     </div>
-                </div>
-                
-                <div class="col-md-3">
-                    <div class="col">
-                        <h4>Mailing list</h4>
-                        <p>Sign up if you would like to receive occasional treats from us.</p>
-                        <form class="form-horizontal form-light">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Your email address...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-base" type="button">Go!</button>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                
-                <div class="col-md-3">
-                    <div class="col col-social-icons">
-                        <h4>Follow us</h4>
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-skype"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                        <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        <a href="#"><i class="fa fa-flickr"></i></a>
-                    </div>
-                </div>
-
-                 <div class="col-md-3">
-                    <div class="col">
-                        <h4>About us</h4>
-                        <p class="no-margin">
-                        Boomerang MultiPurpose Template is a multi-solution product made with simplicity in mind so you can benefit as much as possible from it.
-                        <br><br>
-                        <a href="#" class="btn btn-block btn-base btn-icon fa-check"><span>Try it now</span></a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <hr>
-            
-            <div class="row">
-                <div class="col-lg-9 copyright">
-                    2014 © Web Pixels. All rights reserved.
-                    <a href="#">Terms and conditions</a>
-                </div>
-                <div class="col-lg-3">
-                    <a href="http://www.webpixels.ro" title="Made with love by Web Pixels" target="_blank" class="">
-                        <img src="images/webpixels-footer-logo.png" alt="Web Pixels - Designing Forward | Logo" class="pull-right">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
-</div>
+   

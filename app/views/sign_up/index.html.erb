@@ -15,12 +15,23 @@
                                         <p><b>Please correct the following <%= pluralize(@user.errors.count, "error") %>:</b></p>
                                      
                                         <ul>
-                                        <% @user.errors.full_messages.each do |msg| %>
-                                          <li><%= msg %></li>
+                                        <% @user.errors.messages.values.each do |msg| %>
+                                            <%msg.each do  |m| %>
+                                                <li><%= m %></li>
+                                            <%end %>
                                         <% end %>
                                         </ul>
                                       </div>
                                     <% end %>
+
+<style>
+.field_with_errors {
+  @extend .control-group !required;
+  @extend .error !required;
+  @extend .icon-append !required;
+}
+
+</style>
 
                                     <fieldset class="no-padding"> 
 

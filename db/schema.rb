@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150104033943) do
+ActiveRecord::Schema.define(version: 20150105185049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,26 +42,24 @@ ActiveRecord::Schema.define(version: 20150104033943) do
     t.integer  "isapproved",          limit: 2
     t.integer  "isfeatured",          limit: 2
     t.integer  "userid"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
-    t.string   "logoimage",           limit: 500
-  end
-
-  create_table "facebook_user", force: true do |t|
-    t.string "first_name", limit: 100
-    t.string "last_name",  limit: nil
-    t.string "email",      limit: nil
-    t.string "location",   limit: 100
-    t.string "uid",        limit: 100
-    t.string "image",      limit: 500
-    t.string "gender",     limit: 50
-    t.date   "birthday"
-    t.string "url",        limit: 500
-    t.string "locale",     limit: 100
-    t.string "username",   limit: nil
-    t.string "time_zone",  limit: 50
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.datetime "created"
+    t.datetime "modified"
+    t.string   "image1_file_name"
+    t.string   "image1_content_type"
+    t.integer  "image1_file_size"
+    t.datetime "image1_updated_at"
+    t.string   "image2_file_name"
+    t.string   "image2_content_type"
+    t.integer  "image2_file_size"
+    t.datetime "image2_updated_at"
+    t.string   "image3_file_name"
+    t.string   "image3_content_type"
+    t.integer  "image3_file_size"
+    t.datetime "image3_updated_at"
   end
 
   create_table "merchant", primary_key: "merchantid", force: true do |t|
