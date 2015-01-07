@@ -58,51 +58,106 @@
                                            
                                                     <br/>
 
-                                                    <label>Please upload a logo for your cause.</label>
-                                                    <label class="input">
-                                                    	
-                                                        <i class="icon-append fa fa-upload"></i>
-                                                        <%= f.file_field :logo %>	
+                                                    <div class="row">
 
-                                                        <% 
-                                                            if @cause.logo != nil
-                                                        %>
-                                                                <%= image_tag @cause.logo.url(:thumb) %>
-                                                        <% end %>
+                                                        <div class="col-xs-5">
+                                                            <label>Please upload a logo for your cause.</label>
+                                                            <label class="input">
+                                                            	
+                                                                <i class="icon-append fa fa-upload"></i>
+                                                                <%= f.file_field :logo %>	
+                                                            </label>
+                                                        </div>
 
-                                                       
-                                             
-                                                    </label>
 
-                                                    <br/>
-
-                                                    <label>Please upload an image for your cause.  This will be used as a banner for your page.  (Optional)</label>
-                                                    <label class="input">
-                                                    	
-                                                        <i class="icon-append fa fa-upload"></i>
-                                                        <%= f.file_field :image1 %>	
-                                             
-                                                    </label>
+                                                        <div class="col-xs-7">
+                                                            <% 
+                                                                if (!@cause.logo.url.include? "missing_thumb.png")
+                                                            %>
+                                                                    <label>Current Logo</label><br/>
+                                                                    <%= image_tag @cause.logo.url(:thumb) %>
+                                                            <% end %>
+                                                        </div>                                                          
+                                            
+                                                        
+                                                    </div>
 
                                                     <br/>
 
-                                                    <label>Please upload an image for your cause.  This will be used as a banner for your page.  (Optional)</label>
-                                                    <label class="input">
-                                                    	
-                                                        <i class="icon-append fa fa-upload"></i>
-                                                        <%= f.file_field :image2 %>	
-                                             
-                                                    </label>
+                                                    <div class="row">
+
+                                                        <div class="col-xs-5">
+                                                            <label>Please upload an image for your cause.  This will be used as a banner for your page.  (Optional)</label>
+                                                            <label class="input">
+                                                            	
+                                                                <i class="icon-append fa fa-upload"></i>
+                                                                <%= f.file_field :image1 %>	
+                                                     
+                                                            </label>
+                                                        </div>
+
+
+                                                        <div class="col-xs-7">
+                                                            <% 
+                                                                if (!@cause.image1.url.include? "missing_thumb.png")
+                                                            %>
+                                                                    <label>Current Banner Image 1</label><br/>
+                                                                    <%= image_tag @cause.image1.url(:thumb) %>
+                                                            <% end %>
+                                                        </div>                                                          
+                                            
+                                                    </div>
+
+
+                                                    <br/>
+
+                                                    <div class="row">
+                                                    <div class="col-xs-5">
+                                                        <label>Please upload an image for your cause.  This will be used as a banner for your page.  (Optional)</label>
+                                                        <label class="input">
+                                                        	
+                                                            <i class="icon-append fa fa-upload"></i>
+                                                            <%= f.file_field :image2 %>	
+                                                 
+                                                        </label>
+                                                     </div>
+
+
+                                                        <div class="col-xs-7">
+                                                            <% 
+                                                                if (!@cause.image2.url.include? "missing_thumb.png")
+                                                            %>
+                                                                    <label>Current Banner Image 2</label><br/>
+                                                                    <%= image_tag @cause.image2.url(:thumb) %>
+                                                            <% end %>
+                                                        </div>                                                          
+                                            
+                                                    </div>
 
                                                      <br/>
 
-                                                    <label>Please upload an image for your cause.  This will be used as a banner for your page.  (Optional)</label>
-                                                    <label class="input">
-                                                    	
-                                                        <i class="icon-append fa fa-upload"></i>
-                                                        <%= f.file_field :image3 %>	
-                                             
-                                                    </label>
+                                                    <div class="row">
+                                                        <div class="col-xs-5">
+                                                        <label>Please upload an image for your cause.  This will be used as a banner for your page.  (Optional)</label>
+                                                        <label class="input">
+                                                        	
+                                                            <i class="icon-append fa fa-upload"></i>
+                                                            <%= f.file_field :image3 %>	
+                                                 
+                                                        </label>
+                                                        </div>
+
+
+                                                        <div class="col-xs-7">
+                                                            <% 
+                                                                if (!@cause.image3.url.include? "missing_thumb.png")
+                                                            %>
+                                                                    <label>Current Banner Image 3</label><br/>
+                                                                    <%= image_tag @cause.image1.url(:thumb) %>
+                                                            <% end %>
+                                                        </div>                                                          
+                                            
+                                                    </div>
                                                       
                                                 </section>
                                           

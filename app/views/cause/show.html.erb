@@ -1,2 +1,112 @@
-<h1>Cause#show</h1>
-<p>Find me in app/views/cause/show.html.erb</p>
+<br/><br/><br/>
+
+    <section class="slice bg-white">
+        <div class="wp-section shop">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="product-gallery">
+                                    <div class="primary-image">
+                                        <a href="<%=@cause.logo.url%>" class="theater" rel="group">
+                                            <img src="<%=@cause.logo.url%>" class="img-responsive" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="owl-carousel owl-carousel-5 style-2">
+                                        
+                                        <% if @cause.image1.exists? %>
+                                            <div class="item">
+                                                <a href="<%=@cause.image1.url%>" class="theater" rel="group">
+                                                    <img src="<%=@cause.image1.url%>" alt="">
+                                                </a>
+                                            </div>
+                                        <% end %>
+
+                                        <% if @cause.image2.exists? %>
+                                        <div class="item">
+                                            <a href="<%=@cause.image2.url%>" class="theater" rel="group">
+                                                <img src="<%=@cause.image2.url%>" alt="">
+                                            </a>
+                                        </div>
+                                        <% end %>
+
+                                        <% if @cause.image3.exists? %>
+                                        <div class="item">
+                                            <a href="<%=@cause.image3.url%>" class="theater" rel="group">
+                                                <img src="<%=@cause.image3.url%>" alt="">
+                                            </a>
+                                        </div>
+                                        <% end %>
+
+                                       
+                                    </div>
+                                </div>
+
+                                <br/><br/>
+                                
+                            </div>
+                            <div class="col-md-5">
+                                <div class="product-info">
+                                    <h3 class="product-title"><%= @cause.charityname %></h3>
+                                    <div class="rating pull-left">
+                                        <%= link_to "Cause Website", @cause.website, target: "_blank" %>
+
+                                    </div>
+                                    
+                                    <span class="clearfix"></span> 
+
+
+                                    <br/>
+                                    <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button"
+                                                    onClick="#"
+                                                    >
+                                                        <span>Donate Unused Gift Card</span>
+                                    </button>
+                                    <br/>
+                                    <hr>
+                                    <br/>
+                                    <p>
+                                        <label>Share this link with your friends.</label>
+                                        <%= short_url(@shortcauseurl) %>
+                                    </p>
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Tabs -->
+                                <div class="tabs-framed mt-20">
+                                    <ul class="tabs clearfix">
+                                        <li class="active"><a href="#tab-1" data-toggle="tab">About Cause</a></li>
+                                        
+                                    </ul>
+
+                                    <div class="tab-content">
+
+                                        <!-- Tab 1 -->
+                                        <div class="tab-pane fade in active" id="tab-1">
+                                            <div class="tab-body">
+                                                
+                                                <p>
+                                                    <%= @cause.description %>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <%= render partial: "layouts/sidebar1" %>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

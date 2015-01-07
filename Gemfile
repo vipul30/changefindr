@@ -50,6 +50,10 @@ gem 'unicorn'
 
 gem 'validate_url', '~> 1.0.0'
 
+gem 'clipboard', '~> 1.0.5'
+
+
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

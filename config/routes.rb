@@ -21,10 +21,12 @@ Rails.application.routes.draw do
   post 'sign_in/login'
 
   post 'cause/create'
+  post 'cause/update'
 
   root :to => "home#index"
   match ':controller(/:action(/:id))', :via => :get
 
+  match '/:id' => "shortener/shortened_urls#show", :via => :get
 
   resources :widgets
 

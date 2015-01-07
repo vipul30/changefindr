@@ -1,18 +1,27 @@
 class Charity < ActiveRecord::Base
     self.table_name = 'charity'
     self.primary_key = :charityid
-	has_attached_file :logo, {	:path => "#{Rails.root}/public/images/photo_attachment/:id/:style/:basename.:extension",
-								  :url => "/images/photo_attachment/:id/:style/:basename.:extension" }
+	has_attached_file :logo, {	styles: {thumb: "75x75#"},
+								:path => "#{Rails.root}/public/images/photo_attachment/:id/:style/:basename.:extension",
+								:url => "/images/photo_attachment/:id/:style/:basename.:extension",
+								:default_url => "/images/photo_attachment/missing_thumb.png" }
 
-	has_attached_file :image1 , { :path => "#{Rails.root}/public/photo_attachment/:id/:style/:basename.:extension",
-								  :url => "#{Rails.root}/public/photo_attachment/:id/:style/:basename.:extension"
+	has_attached_file :image1 , {	styles: {thumb: "60x60#"},
+									:path => "#{Rails.root}/public/images/photo_attachment/:id/:style/:basename.:extension",
+									:url => "/images/photo_attachment/:id/:style/:basename.:extension",
+									:default_url => "/images/photo_attachment/missing_thumb.png"
 								}
 
-	has_attached_file :image2, {	:path => "#{Rails.root}/public/photo_attachment/:id/:style/:basename.:extension"}
+	has_attached_file :image2, {	styles: {thumb: "60x60#"},
+								:path => "#{Rails.root}/public/images/photo_attachment/:id/:style/:basename.:extension",
+								:url => "/images/photo_attachment/:id/:style/:basename.:extension",
+								:default_url => "/images/photo_attachment/missing_thumb.png"
+							    }
 
-	has_attached_file :image3, {	
-		:path => "#{Rails.root}/public/photo_attachment/:id/:style/:basename.:extension"
-	}
+	has_attached_file :image3, {styles: {thumb: "60x60#"},
+								:path => "#{Rails.root}/public/images/photo_attachment/:id/:style/:basename.:extension",
+								:url => "/images/photo_attachment/:id/:style/:basename.:extension",
+								:default_url => "/images/photo_attachment/missing_thumb.png" }
 
 	validates :charityname, :presence => { :message => "Please enter the name of your cause." },
 	                        :length => { :maximum => 25 }

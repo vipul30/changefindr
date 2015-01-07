@@ -9,10 +9,9 @@ class CauseController < ApplicationController
 
   end
 
-
   def create
 
-    @cause = Charity.new(user_params)
+    @cause = Charity.new(cause_params)
     @cause.created = Time.now
     @cause.modified = Time.now
 
@@ -42,22 +41,40 @@ class CauseController < ApplicationController
 
   def edit
     @cause = Charity.where(charityid: params[:id]).first
-    byebug
+
   end
 
 
   def update
+    # Find an existing object using form parameters
+    @cause = Charity.where(charityid: params[:id]).first
+
+    
+    @cause.modified = Time.now
+
+
+    # Update the object
+    if @cause.update_attributes(cause_params)
+      # If update succeeds, redirect to the index action
+      flash[:notice] = "Updated Cause"
+      redirect_to(:action => 'show', :id => @cause.charityid)
+    else
+      # If update fails, redisplay the form so user can fix problems
+      render('edit')
+    end
 
   end
 
   def show
+    @cause = Charity.where(charityid: params[:id]).first
+    @shortcauseurl = request.host_with_port + "/cause/show/" +  @cause.charityid.to_s
   end
 
   def delete
   end
 
-  def user_params
-    params.require(:charity).permit(:charityname,:website,:facebookurl,:description,:logo,:image1,:image2,:image3)
+  def cause_params
+    params.require(:charity).permit(:charityname,:website,:facebookurl,:description,:logo,:image1,:image2,:image3,:isapproved,:isfeatured)
   end
 
 end
