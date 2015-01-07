@@ -1,2 +1,66 @@
-<h1>Cause#index</h1>
-<p>Find me in app/views/cause/index.html.erb</p>
+
+
+
+
+<div class="row">
+	<div class="col-md-5">
+		<%= will_paginate @causes , renderer: BootstrapPagination::Rails %>
+	</div>
+</div>	
+
+
+<div class="row">
+	<div class="col-md-5">
+		<%= form_for(Charity, :method => 'get') do |f| %>
+		
+  <% content_tag :label do %>
+    Search term:
+    <%= text_field_tag :search, params[:search] %>
+  <% end %>
+<% end %>
+	</div>
+</div>	
+
+
+
+
+
+<section class="slice bg-white animate-hover-slide">
+        <div class="wp-section work">
+            <div class="container">
+               
+                
+                <div class="row">          
+                    <div id="ulSorList">
+    
+    <% @causes.each do |cause| %>
+
+                        <div class="mix category_1 col-lg-4 col-md-4 col-sm-6" data-cat="1">
+                            <div class="wp-block inverse">
+                                <div class="figure">
+                                    <img alt="" src="<%=cause.logo.url%>" class="img-responsive">
+                                    <div class="figcaption bg-base"></div>
+                                    <div class="figcaption-btn">
+                                        <a href="<%=cause.logo.url%>" class="btn btn-lg btn-b-white theater"><i class="fa fa-credit-card"></i> Donate</a>
+                                        <a href="<%= "http://" +  @userhost + "/cause/show/" +  cause.charityid.to_s %>" class="btn btn-lg btn-b-white"><i class="fa fa-plus-circle"></i> View Details</a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <h2><%= cause.charityname %></h2>
+                                        
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+    <% end %>      
+
+
+                      
+                        <div class="gap"></div>
+                    </div>                                   
+                </div>
+        	</div>    	
+        </div>
+    </section>
