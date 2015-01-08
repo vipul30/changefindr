@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   get 'sign_in/index'
 
+  get 'cause/autocomplete_charity_charityname'
   
 
   # for facebook
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
 
   post 'cause/create'
   post 'cause/update'
+  post '/cause/causeautocomplete'
 
   root :to => "home#index"
   match ':controller(/:action(/:id))', :via => :get

@@ -17,6 +17,9 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
+gem 'jquery-ui-rails', '~> 5.0.3'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -55,6 +58,8 @@ gem 'clipboard', '~> 1.0.5'
 gem 'will_paginate', '~> 3.0.7'
 
 gem 'will_paginate-bootstrap', '~> 1.0.1'
+
+gem 'rails3-jquery-autocomplete'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

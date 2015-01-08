@@ -14,6 +14,60 @@ a:link, a:visited, a:hover, a:active {
     color: #3498db;
     
     }
+
+
+.ui-helper-hidden-accessible { display:none; }
+ul.ui-autocomplete {
+    list-style: none;
+}
+
+.ui-autocomplete { height: 200px; overflow-y: scroll; overflow-x: auto; }
+
+.ui-menu .ui-menu-item .ui-menu-item-icon {
+    background-repeat: no-repeat;
+    background-position: 2px, 0;
+    background-size: 16px;
+    padding-left: 23px;
+}
+
+.ui-autocomplete li {
+        
+        background-color: white;
+        display:block;
+        width:300px;
+        height:50px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        border-bottom: 1px solid rgba(82,168,236,.8);
+        /*font-size:medium;
+        border: 1px solid rgba(82,168,236,.8);
+        border-top-right-radius:.25em;
+        border-top-left-radius:.25em;
+        border-bottom-right-radius:.25em;
+        border-bottom-left-radius:.25em;
+        z-index: 9000;*/
+    }
+    .ui-autocomplete li a {
+        color: black;
+        margin-left: 10px;
+    }
+
+    .ui-autocomplete li a:hover {
+        color: black;
+        background-color:#3498DB; 
+    }
+    .ui-autocomplete li:hover { 
+        background-color:#3498DB; 
+    }
+
+    .ui-autocomplete {
+        height: 200px;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+
+
 </style>
 
 <!-- MAIN WRAPPER -->
@@ -98,6 +152,7 @@ a:link, a:visited, a:hover, a:active {
 <script src="/js/wp.switcher.js"></script>
 <script type="text/javascript" src="/js/wp.ga.js"></script>
 
+javascript_include_tag "autocomplete-rails.js"
 
 </body>
 </html> 

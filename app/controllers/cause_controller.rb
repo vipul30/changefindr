@@ -2,6 +2,8 @@ class CauseController < ApplicationController
   def index
     @causes = Charity.where(isapproved: true).order('modified DESC').page(params[:page]).per_page(9)
   
+    @cause = Charity.new
+
     @userhost = request.host_with_port
   end
 
@@ -79,5 +81,21 @@ class CauseController < ApplicationController
   def cause_params
     params.require(:charity).permit(:charityname,:website,:facebookurl,:description,:logo,:image1,:image2,:image3,:isapproved,:isfeatured)
   end
+
+  #autocomplete :charity, :charityname, :full => true
+
+  def causeautocomplete
+    searchtext = params['searchText']
+
+    # this will do a like search ignoring case
+    @searchcauseresults = Charity.where("charityname ILIKE ?", "%" + searchtext + "%")
+                                 .where(isapproved: true)
+    
+    
+
+    render :json => @searchcauseresults
+
+  end
+
 
 end
