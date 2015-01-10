@@ -61,6 +61,8 @@ gem 'will_paginate-bootstrap', '~> 1.0.1'
 
 gem 'rails3-jquery-autocomplete'
 
+gem 'zeroclipboard-rails', '~> 0.1.0'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

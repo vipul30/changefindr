@@ -1,32 +1,46 @@
 
+<div class="pg-opt">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Step 1: Select the cause you want to support</h2>
+                </div>
+               
+            </div>
+        </div>
+    </div>
 
-
-
+<br/><br/>
 <section class="slice bg-white animate-hover-slide">
         <div class="wp-section work">
             <div class="container">
 
-<div class="input-group merged">
-    <span class="input-group-addon"><i class="icon-append fa fa-search"></i></span>
-    <input class="form-control" style="width:270px" type="text"
-           placeholder="Search For A Cause"
-           name="searchcause"
-           id="searchcause"
-           value="">
-</div>
+<div class="row">
+
+    <div class="col-md-6">
+        <br/>
+            <div class="input-group merged">
+                <span class="input-group-addon"><i class="icon-append fa fa-search"></i></span>
+                <input class="form-control" style="width:270px" type="text"
+                       placeholder="Search For A Cause"
+                       name="searchcause"
+                       id="searchcause"
+                       value="">
+            </div>
+    </div>
          
 
-<div class="row">
-	<div class="col-md-5">
+
+	<div class="col-md-6">
 		<%= will_paginate @causes , renderer: BootstrapPagination::Rails %>
 	</div>
 </div>	
 
 
-                <div class="row">          
+                <div class="row">       
                     <div id="ulSorList">
     
-    <% @causes.each do |cause| %>
+                        <% @causes.each do |cause| %>
 
                         <div class="mix category_1 col-lg-4 col-md-4 col-sm-6" data-cat="1">
                             <div class="wp-block inverse">
@@ -47,10 +61,9 @@
                                 </div>
                             </div>
                         </div>
-    <% end %>      
 
+                        <% end %>      
 
-                      
                         <div class="gap"></div>
                     </div>                                   
                 </div>

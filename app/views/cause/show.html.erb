@@ -13,37 +13,52 @@
                                             <img src="<%=@cause.logo.url%>" class="img-responsive" alt="">
                                         </a>
                                     </div>
-                                    <div class="owl-carousel owl-carousel-5 style-2">
-                                        
+                                   
+                                </div>
+
+
+                                <% if @cause.image1.exists? %>
+                                <div id="workCarousel" class="carousel carousel-4 slide color-two-l" data-ride="carousel">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators hide">
+                                        <li data-target="#homepageCarousel" data-slide-to="0" class="active"></li>
+                                    </ol>
+                                    
+                                    <div class="carousel-inner">
+
+
                                         <% if @cause.image1.exists? %>
-                                            <div class="item">
-                                                <a href="<%=@cause.image1.url%>" class="theater" rel="group">
-                                                    <img src="<%=@cause.image1.url%>" alt="">
-                                                </a>
+                                            <div class="item item-dark active">
+                                                <img src="<%=@cause.image1.url%>" alt="" class="img-responsive">
                                             </div>
                                         <% end %>
 
                                         <% if @cause.image2.exists? %>
-                                        <div class="item">
-                                            <a href="<%=@cause.image2.url%>" class="theater" rel="group">
-                                                <img src="<%=@cause.image2.url%>" alt="">
-                                            </a>
-                                        </div>
+                                            <div class="item item-dark">
+                                                <img src="<%=@cause.image2.url%>" alt="" class="img-responsive">
+                                            </div>
                                         <% end %>
 
                                         <% if @cause.image3.exists? %>
-                                        <div class="item">
-                                            <a href="<%=@cause.image3.url%>" class="theater" rel="group">
-                                                <img src="<%=@cause.image3.url%>" alt="">
-                                            </a>
-                                        </div>
+                                            <div class="item item-dark">
+                                                <img src="<%=@cause.image3.url%>" alt="" class="img-responsive">
+                                            </div>
                                         <% end %>
 
-                                       
                                     </div>
+                                    
+                                    <!-- Controls -->
+                                    <a class="left carousel-control" href="#workCarousel" data-slide="prev">
+                                        <i class="fa fa-angle-left"></i>
+                                    </a>
+                                    <a class="right carousel-control" href="#workCarousel" data-slide="next">
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>     
+                            
                                 </div>
+                                <% end %>
 
-                                <br/><br/>
+                                <br/><br/><br/><br/>
                                 
                             </div>
                             <div class="col-md-5">
@@ -68,8 +83,14 @@
                                     <br/>
                                     <p>
                                         <label>Share this link with your friends.</label>
-                                        <%= short_url(@shortcauseurl) %>
-                                    </p>
+                                        
+                                    
+
+                                    
+  <button class='my_clip_button' data-clipboard-target='fe_text' data-clipboard-text='<%= short_url(@shortcauseurl) %>' id='d_clip_button' title='Click me to copy to clipboard.'>
+    <%= short_url(@shortcauseurl) %>
+  </button>
+  </p>
 
                                     
                                 </div>
@@ -110,3 +131,14 @@
             </div>
         </div>
     </section>
+
+    <script>
+  $(document).ready(function() {
+    var clip = new ZeroClipboard($("#d_clip_button"))
+  });
+
+  $("#clear-test").on("click", function(){
+    $("#fe_text").val("Copy me!");
+    $("#testarea").val("");
+  });
+</script>
