@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'aboutus/index'
+
+  get 'faq/index'
+
+  get 'howitworks/index'
+
   get 'cause/index'
 
   get 'cause/new'

@@ -77,10 +77,7 @@
                             </form>
                         </div>
                     </li>
-                    <li class="dropdown dropdown-meganav mega-dropdown-fluid">
-                        <a href="/home">Home</a>
-                        
-                    </li>
+                    
 
                     <li class="dropdown dropdown-meganav mega-dropdown-fluid">
                         <a href="/cause/index">Browse Causes</a>
@@ -88,10 +85,12 @@
                     </li>
 
                     <li class="dropdown dropdown-meganav mega-dropdown-fluid">
-                        <a href="/cause/new">Start Fundraiser</a>
-                        
+                        <a href="/cause/new">Start Fundraiser</a> 
                     </li>
 
+                    <li class="dropdown dropdown-meganav mega-dropdown-fluid">
+                        <a href="/howitworks/index">How It Works</a> 
+                    </li>
                     
 
                      <% if session[:user_firstname] == nil %>
@@ -125,7 +124,7 @@
                                 <div class="dropdown-form">
                                     <form class="form-horizontal form-light p-15" role="form">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="I want to find ...">
+                                            <input type="text" class="form-control" placeholder="Search For A Cause">
                                             <span class="input-group-btn">
                                                 <button class="btn btn-base" type="button">Go</button>
                                             </span>
