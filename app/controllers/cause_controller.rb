@@ -53,9 +53,19 @@ class CauseController < ApplicationController
   def update
     # Find an existing object using form parameters
     @cause = Charity.where(charityid: params[:id]).first
-
-    
     @cause.modified = Time.now
+
+    if params["chkboximg1"] == "true"
+      @cause.image1 = nil
+    end
+
+    if params["chkboximg2"] == "true"
+      @cause.image2 = nil
+    end
+
+    if params["chkboximg3"] == "true"
+      @cause.image3 = nil
+    end
 
 
     # Update the object
@@ -91,8 +101,6 @@ class CauseController < ApplicationController
     @searchcauseresults = Charity.where("charityname ILIKE ?", "%" + searchtext + "%")
                                  .where(isapproved: true)
     
-    
-
     render :json => @searchcauseresults
 
   end

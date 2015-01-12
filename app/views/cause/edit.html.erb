@@ -29,13 +29,15 @@
 							
 									
                                    
+                                    <% if session[:roleid] == 1 || session[:userid] == :userid%>
 					                   Is approved for accepting gift card donations?&nbsp;&nbsp;               
 					                  <%= f.check_box :isapproved %>
 					                                    
-					                <br/><br/>
+					                   <br/><br/>
 
 					                  Is this a featured cause?&nbsp;&nbsp;           
 					                  <%= f.check_box :isfeatured %>
+                                    <% end %>
 					                                    
 					                 
 

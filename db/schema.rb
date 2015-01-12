@@ -70,6 +70,12 @@ ActiveRecord::Schema.define(version: 20150107052121) do
     t.string "description",     limit: 500
   end
 
+  create_table "role", primary_key: "roleid", force: true do |t|
+    t.string   "name",     limit: 50
+    t.datetime "created"
+    t.datetime "modified"
+  end
+
   create_table "shortened_urls", force: true do |t|
     t.integer  "owner_id"
     t.string   "owner_type", limit: 20
@@ -102,6 +108,7 @@ ActiveRecord::Schema.define(version: 20150107052121) do
     t.string   "providerusername", limit: 250
     t.string   "timezone",         limit: 50
     t.string   "provideruid",      limit: 100
+    t.integer  "roleid"
   end
 
   create_table "widgets", force: true do |t|

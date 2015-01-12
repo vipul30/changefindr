@@ -65,8 +65,10 @@
                                                             <label class="input">
                                                             	
                                                                 <i class="icon-append fa fa-upload"></i>
-                                                                <%= f.file_field :logo %>	
+                                                                <%= f.file_field :logo, :id => 'clearlogo' %>
+                                                                
                                                             </label>
+                                                            <button id="clearbtn1" type="button">Clear</button>
                                                         </div>
 
 
@@ -91,9 +93,10 @@
                                                             <label class="input">
                                                             	
                                                                 <i class="icon-append fa fa-upload"></i>
-                                                                <%= f.file_field :image1 %>	
-                                                     
+                                                                <%= f.file_field :image1, :id => 'clearfile1' %>	
+                                                                
                                                             </label>
+                                                            <button id="clear1" type="button">Clear</button>
                                                         </div>
 
 
@@ -103,6 +106,10 @@
                                                             %>
                                                                     <label>Current Banner Image 1</label><br/>
                                                                     <%= image_tag @cause.image1.url(:thumb) %>
+                                                                    <br />
+                                                                    <input type="checkbox" name="chkboximg1" value="true">
+                                                                    Delete Image 1
+                                                                    </input>
                                                             <% end %>
                                                         </div>                                                          
                                             
@@ -117,9 +124,10 @@
                                                         <label class="input">
                                                         	
                                                             <i class="icon-append fa fa-upload"></i>
-                                                            <%= f.file_field :image2 %>	
+                                                            <%= f.file_field :image2, :id => 'clearfile2' %>	
                                                  
                                                         </label>
+                                                        <button id="clear2" type="button">Clear</button>
                                                      </div>
 
 
@@ -129,6 +137,10 @@
                                                             %>
                                                                     <label>Current Banner Image 2</label><br/>
                                                                     <%= image_tag @cause.image2.url(:thumb) %>
+                                                                    <br />
+                                                                    <input type="checkbox" name="chkboximg2" value="true">
+                                                                    Delete Image 2
+                                                                    </input>
                                                             <% end %>
                                                         </div>                                                          
                                             
@@ -142,9 +154,10 @@
                                                         <label class="input">
                                                         	
                                                             <i class="icon-append fa fa-upload"></i>
-                                                            <%= f.file_field :image3 %>	
+                                                            <%= f.file_field :image3, :id => 'clearfile3' %>	
                                                  
                                                         </label>
+                                                        <button id="clear3" type="button">Clear</button>
                                                         </div>
 
 
@@ -153,7 +166,11 @@
                                                                 if (!@cause.image3.url.include? "missing_thumb.png")
                                                             %>
                                                                     <label>Current Banner Image 3</label><br/>
-                                                                    <%= image_tag @cause.image1.url(:thumb) %>
+                                                                    <%= image_tag @cause.image3.url(:thumb) %>
+                                                                    <br />
+                                                                    <input type="checkbox" name="chkboximg3" value="true">
+                                                                    Delete Image 3
+                                                                    </input>
                                                             <% end %>
                                                         </div>                                                          
                                             
@@ -169,4 +186,24 @@
                                        
                                     </fieldset>  
 
+<script>
+
+$("#clearbtn1").on("click", function () {
+    $('#clearlogo').val("");
+});
+
+
+$("#clear1").on("click", function () {
+    $('#clearfile1').val("");
+});
+
+
+$("#clear2").on("click", function () {
+    $('#clearfile2').val("");
+});
+
+$("#clear3").on("click", function () {
+    $('#clearfile3').val("");
+});
+</script>
                                    

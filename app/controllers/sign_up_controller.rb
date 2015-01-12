@@ -1,7 +1,7 @@
 class SignUpController < ApplicationController
   def index
     @user = User.new
-    session[:return_to] ||= request.referer
+    session[:return_to] = Rails.application.routes.recognize_path(request.referrer)
   end
 
   def create
@@ -18,6 +18,7 @@ class SignUpController < ApplicationController
     #else
       @user.created = Time.now
       @user.modified = Time.now
+      @user.roleid = 2 # everyone starts off as a reguler user
       password = params[:password]
 
       @user.salt = SecureRandom.hex
@@ -26,8 +27,10 @@ class SignUpController < ApplicationController
       if @user.save
         session[:user_firstname] = @user.firstname
         session[:username] = @user.email
+        session[:userid] = @user.userid
+        session[:roleid] = @user.roleid
         flash[:notice] = "Thank you for registering.  You are now logged in."
-        redirect_to(:controller => "home", :action => "index")
+        redirect_to session[:return_to]
       else
         # If save fails, redisplay the form so user can fix problems
         render('index')

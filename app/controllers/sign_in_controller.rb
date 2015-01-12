@@ -1,5 +1,7 @@
 class SignInController < ApplicationController
   def index
+  	session[:return_to] = Rails.application.routes.recognize_path(request.referrer)
+
   end
 
   def login
@@ -18,12 +20,14 @@ class SignInController < ApplicationController
 	      # mark user as logged in
 	      session[:user_firstname] = found_user.firstname
 	      session[:username] = found_user.email
+	      session[:userid] = found_user.userid
+		  session[:roleid] = found_user.roleid
 	      flash[:notice] = "You are logged in."
-	      redirect_to(:controller => 'home', :action => 'index')
+	      redirect_to session[:return_to]
 	      return
 	    else
 	      flash[:notice] = "Invalid username/password combination."
-	      redirect_to(:action => 'index')
+	      render('index')
 	      return
 	    end
 	end
@@ -61,27 +65,34 @@ class SignInController < ApplicationController
 		  user.timezone = auth.extra.raw_info.timezone
 		  user.created = Time.now
      	  user.modified = Time.now
+     	  user.roleid = 2 # everyone starts off as a reguler user
       	  
       	  if user.save
       	  	session[:user_firstname] = user.firstname
 			session[:username] = user.email
+			session[:userid] = user.userid
+			session[:roleid] = user.roleid
 		    flash[:notice] = "Thank you for registering.  You are now logged in."
-		    redirect_to(:controller => "home", :action => "index")
+		    redirect_to session[:return_to]
 		    return
       	  else
       	  	
       	  	# If save fails, redisplay the form so user can fix problems
       	  	flash[:notice] = "A user with the same Facebook email already exists."
-        	redirect_to(:controller => "sign_up", :action => "index")
-        	#render :controller => 'sign_up', :action => 'index'
+        	redirect_to session[:return_to]
         	return
       	  end
 
 		end
 	 
+
 	 	session[:user_firstname] = user.firstname
 		session[:username] = user.email
-		redirect_to(:controller => "home", :action => "index")
+		session[:userid] = user.userid
+		session[:roleid] = user.roleid
+
+		redirect_to session[:return_to]
+		
 		return
 
 	end
@@ -90,6 +101,8 @@ class SignInController < ApplicationController
 	    # mark user as logged out
 	    session[:user_firstname] = nil
 	    session[:username] = nil
+	    session[:userid] = nil
+	    session[:roleid] = nil
 	    flash[:notice] = "Logged out"
 	    redirect_to(:controller => "home", :action => "index")
   end

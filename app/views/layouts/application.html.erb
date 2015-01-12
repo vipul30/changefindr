@@ -152,6 +152,60 @@ ul.ui-autocomplete {
         skin: 'borderlessdark3d',
         hoverPrevNext: true,
     });
+
+
+
+
+  $("#searchcausemain").autocomplete({
+
+
+        source: function (request, response) {
+            $.ajax({
+                url: '/cause/causeautocomplete', type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+
+                    console.log('success: ', data)
+
+                    // data is an array of objects and must be transformed for autocomplete to use
+                    var array = data.error ? [] : $.map(data, function (m) {
+                        return {
+                            id: m.charityid,
+                            name: m.charityname,
+                            logo: m.logo
+                            
+                        };
+                    });
+                    response(array);
+
+
+                },
+                failure: function (data) {
+                    console.log('autcomplete failed');
+                }
+            })
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            //console.log('comes in selected item');
+            event.preventDefault();
+            window.location.href = "/cause/show/" + ui.item.id;
+ 
+        }
+    })
+    .data("ui-autocomplete")._renderItem = function (ul, item) {
+
+        console.log("rendering item logo= ", item.logo);
+
+        return $('<li class="ui-menu-item-with-icon" style="margin-top:10px"></li>')
+            .data("item.ui-autocomplete", item.charityname)
+            .append('<a><img src="' + item.logo + '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + item.name + '</a>')
+            .appendTo(ul);
+    };
+
+
+
+
 </script>
 
 <!-- Boomerang App JS -->

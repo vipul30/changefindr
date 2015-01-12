@@ -55,7 +55,9 @@
                                 <div class="row">
                                     <div class="col-xs-9">
                                         <h2><%= cause.charityname %></h2>
-                                        
+                                        <% if session[:roleid] == 1 || session[:userid] == :userid%>
+                                            <%= link_to "Edit", controller: "cause", action: "edit", id: cause.charityid %>
+                                        <% end %>
                                     </div>
                                    
                                 </div>

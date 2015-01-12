@@ -5,8 +5,6 @@ class HomeController < ApplicationController
 
 	@causes = Charity.limit(20).order("RANDOM()").where(isapproved: true)
 
-
-
 	@userhost = request.host_with_port
 
   end

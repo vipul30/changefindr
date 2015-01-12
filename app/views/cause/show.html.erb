@@ -73,22 +73,17 @@
 
 
                                     <br/>
-                                    <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button"
-                                                    onClick="#"
-                                                    >
+                                    <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button" onClick="#">
                                                         <span>Donate Unused Gift Card</span>
                                     </button>
                                     <br/>
                                     <hr>
                                     <br/>
                                     <p>
-                                        <label>Share this link with your friends.</label>
-                                        
-                                    
-
-                                    
+                                        <label style="text-decoration: underline;">Share this link with your friends</label>
+                                          <%= short_url(@shortcauseurl) %>                            
   <button class='my_clip_button' data-clipboard-target='fe_text' data-clipboard-text='<%= short_url(@shortcauseurl) %>' id='d_clip_button' title='Click me to copy to clipboard.'>
-    <%= short_url(@shortcauseurl) %>
+    Copy
   </button>
   </p>
 
