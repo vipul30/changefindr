@@ -18,6 +18,7 @@ Rails.application.configure do
 
   config.serve_static_assets = true
 
+  config.assets.compile = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
