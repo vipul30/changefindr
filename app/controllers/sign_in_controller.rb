@@ -85,7 +85,7 @@ class SignInController < ApplicationController
 
 		end
 	 
-		UserMailer.welcome_email(user).deliver
+		UserMailer.welcome_email(user)
 
 		
 	 	session[:user_firstname] = user.firstname
