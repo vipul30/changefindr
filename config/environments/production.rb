@@ -87,13 +87,13 @@ Rails.application.configure do
     enable_starttls_auto: true  
   }
 
-  #config.action_mailer.smtp_settings = {
-  #  address:              'smtpout.secureserver.net',
-  #  port:                 80,
-  #  domain:               'changefindr.heroku.com',
-  #  user_name:            'no-reply@changefindr.com',
-  #  password:             'Changefindr#1',
-  #  authentication:       'plain',
-  #  enable_starttls_auto: true  
+  config.action_mailer.smtp_settings = {
+    address:              'smtpout.secureserver.net',
+    port:                 80,
+    domain:               'changefindr.heroku.com',
+    user_name:            'no-reply@changefindr.com',
+    password:             'Changefindr#1',
+    authentication:       'plain',
+    enable_starttls_auto: true  
   }
 end
