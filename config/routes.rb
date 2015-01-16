@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   get 'sign_in/index'
 
   get 'cause/autocomplete_charity_charityname'
+
+  get 'home/mailerlayout'
   
 
   # for facebook

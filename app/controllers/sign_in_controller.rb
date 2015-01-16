@@ -85,7 +85,7 @@ class SignInController < ApplicationController
 
 		end
 	 
-		UserMailer.welcome_email(user)
+		UserMailer.welcome_email(user, request.host_with_port).deliver
 
 		
 	 	session[:user_firstname] = user.firstname

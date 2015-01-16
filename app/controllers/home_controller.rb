@@ -8,4 +8,10 @@ class HomeController < ApplicationController
 	@userhost = request.host_with_port
 
   end
+
+  def mailerlayout
+  	
+  	render ('user_mailer/mailerlayout')
+  end
+
 end

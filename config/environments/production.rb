@@ -77,12 +77,22 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.smtp_settings = {
+  #  address:              'smtp.mandrillapp.com',
+  #  port:                 587,
+  #  domain:               'changefindr.heroku.com',
+  #  user_name:            'app32878214@heroku.com',
+  #  password:             'N9y_H4yuRGCZ7gYx49UPUA',
+  #  authentication:       'plain',
+  #  enable_starttls_auto: true  
+  #}
+
   config.action_mailer.smtp_settings = {
-    address:              'smtp.mandrillapp.com',
-    port:                 587,
+    address:              'smtpout.secureserver.net',
+    port:                 80,
     domain:               'changefindr.heroku.com',
-    user_name:            'app32878214@heroku.com',
-    password:             'N9y_H4yuRGCZ7gYx49UPUA',
+    user_name:            'no-reply@changefindr.com',
+    password:             'Changefindr#1',
     authentication:       'plain',
     enable_starttls_auto: true  
   }
