@@ -147,8 +147,9 @@
                                         <% if @causes[i+k] != nil %>
                                             <div class="col-md-3">
                                                 <div class="wp-block inverse">
-                                                    <div class="figure">
-                                                        <img alt="" src="<%=@causes[i+k].logo.url%>" class="img-responsive">
+                                                    <div class="figure" style="min-height:150px">
+                                                        <img alt="" src="<%=@causes[i+k].logo.url%>" class="img-responsive"
+                                                        style="margin: auto auto; height: auto; width: auto; max-height:150px; max-width:200px;" >
                                                         <div class="figcaption bg-base"></div>
                                                         <div class="figcaption-btn">
                                                             <a href="#" class="btn btn-xs btn-b-white theater"><i class="fa fa-credit-card"></i> Donate</a>

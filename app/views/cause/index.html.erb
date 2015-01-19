@@ -45,7 +45,7 @@
                         <div class="mix category_1 col-lg-4 col-md-4 col-sm-6" data-cat="1">
                             <div class="wp-block inverse">
                                 <div class="figure" style="min-height:150px">
-                                    <img alt="" src="<%=cause.logo.url%>" class="img-responsive"
+                                    <img alt="" src="<%=cause.logo.url%>" class="img-responsive center-block"
                                     style="margin: auto auto; height: auto; width: auto; max-height:150px; max-width:200px;" 
                                     >
                                     <div class="figcaption bg-base"></div>
@@ -55,7 +55,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-9" style="text-align:center">
+                                    <div class="col-xs-9 center-block" style="text-align:center">
                                         <h2><%= cause.charityname %></h2>
                                         <% if session[:roleid] == 1 || session[:userid] == :userid%>
                                             <%= link_to "Edit", controller: "cause", action: "edit", id: cause.charityid %>
