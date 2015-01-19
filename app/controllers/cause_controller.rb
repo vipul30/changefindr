@@ -1,6 +1,7 @@
 class CauseController < ApplicationController
   def index
-    @causes = Charity.where(isapproved: true).order('modified DESC').page(params[:page]).per_page(9)
+    #@causes = Charity.where(isapproved: true).order('modified DESC').page(params[:page]).per_page(9)
+    @causes = Charity.where(isapproved: true).order('charityname ASC').page(params[:page]).per_page(9)
   
     @cause = Charity.new
 

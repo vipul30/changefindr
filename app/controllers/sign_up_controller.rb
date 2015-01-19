@@ -29,6 +29,7 @@ class SignUpController < ApplicationController
         session[:username] = @user.email
         session[:userid] = @user.userid
         session[:roleid] = @user.roleid
+        UserMailer.welcome_email(@user, request.host_with_port).deliver
         flash[:notice] = "Thank you for registering.  You are now logged in."
         redirect_to session[:return_to]
       else

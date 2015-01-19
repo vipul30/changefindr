@@ -73,6 +73,7 @@ class SignInController < ApplicationController
 			session[:userid] = user.userid
 			session[:roleid] = user.roleid
 		    flash[:notice] = "Thank you for registering.  You are now logged in."
+		    UserMailer.welcome_email(user, request.host_with_port).deliver
 		    redirect_to session[:return_to]
 		    return
       	  else
@@ -85,7 +86,7 @@ class SignInController < ApplicationController
 
 		end
 	 
-		UserMailer.welcome_email(user, request.host_with_port).deliver
+		
 
 		
 	 	session[:user_firstname] = user.firstname

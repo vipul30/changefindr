@@ -29,19 +29,19 @@
 
                                         <% if @cause.image1.exists? %>
                                             <div class="item item-dark active">
-                                                <img src="<%=@cause.image1.url%>" alt="" class="img-responsive">
+                                                <img src="<%=@cause.image1.url%>" style="max-height:350px;min-height:350px" alt="" class="img-responsive">
                                             </div>
                                         <% end %>
 
                                         <% if @cause.image2.exists? %>
                                             <div class="item item-dark">
-                                                <img src="<%=@cause.image2.url%>" alt="" class="img-responsive">
+                                                <img src="<%=@cause.image2.url%>" style="max-height:350px;min-height:350px" alt="" class="img-responsive">
                                             </div>
                                         <% end %>
 
                                         <% if @cause.image3.exists? %>
                                             <div class="item item-dark">
-                                                <img src="<%=@cause.image3.url%>" alt="" class="img-responsive">
+                                                <img src="<%=@cause.image3.url%>" style="max-height:350px;min-height:350px" alt="" class="img-responsive">
                                             </div>
                                         <% end %>
 

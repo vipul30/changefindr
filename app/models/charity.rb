@@ -24,7 +24,7 @@ class Charity < ActiveRecord::Base
 								:default_url => "/images/photo_attachment/missing_thumb.png" }
 
 	validates :charityname, :presence => { :message => "Please enter the name of your cause." },
-	                        :length => { :maximum => 25 }
+	                        :length => { :maximum => 50 }
 
 	validates :description, :presence => { :message => "Please enter a description for your cause." },
 	                        :length => { :maximum => 5000, :message => "Description must be less than 5000 characters." }
