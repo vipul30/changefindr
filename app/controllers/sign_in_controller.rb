@@ -17,6 +17,17 @@ class SignInController < ApplicationController
 	      end
 	    end
 	    if authorized_user
+
+	      # check if user has verified the email address by clicking on the registration verify link
+	      verfieduser = User.where(:isVerified => true).first
+
+	      if (!verfieduser)
+	      	# todo: resend verification link
+	      	flash[:notice] = "Please verify your registration by clicking on the link from the email sent."
+	      	render('index')
+	      	return
+	      end
+
 	      # mark user as logged in
 	      session[:user_firstname] = found_user.firstname
 	      session[:username] = found_user.email
@@ -66,6 +77,7 @@ class SignInController < ApplicationController
 		  user.created = Time.now
      	  user.modified = Time.now
      	  user.roleid = 2 # everyone starts off as a reguler user
+     	  user.isVerified = true # by default user is verified as having a valid email from facebook
       	  
       	  if user.save
       	  	session[:user_firstname] = user.firstname
@@ -79,7 +91,7 @@ class SignInController < ApplicationController
       	  else
       	  	
       	  	# If save fails, redisplay the form so user can fix problems
-      	  	flash[:notice] = "A user with the same Facebook email already exists."
+      	  	flash[:notice] = "A user with the same Facebook email address already exists."
         	redirect_to session[:return_to]
         	return
       	  end

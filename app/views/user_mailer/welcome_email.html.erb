@@ -43,12 +43,15 @@
                                              <td style="font-family: Helvetica, arial, sans-serif; font-size: 14px; color: #7a6e67; text-align:left; line-height: 24px;">
                                                 Thank you for registering with Changefindr.
                                                 <br/>
-                                                Your username is <%= @user.email %>.  <br/>Please login at
-                                                <a href"<%= host %>">Changefindr</a> to
+                                                Your username is <%= @user.email %>.  <br/>
+                                                Please confirm your registration by clicking
+                                                <a href="<%= host %>sign_up/verifyregistration/<%= @user.verifysalt %>">HERE</a>
+                                                <br />
+                                                Once registration is confirmed, you may login at <a href="<%= host %>">Changefindr</a> to
                                                  
                                                 <br/>
                                                 <ul>
-                                                  <li> Check your gift card balance in real time </li>
+                                                  <li>Check your gift card balance in real time </li>
                                                   <li>Donate your unused gift card balance to your favorite cause</li>
                                                   <li>Start raising funds for your cause through the power of gift cards</li>
                                                 </ul>

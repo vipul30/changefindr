@@ -24,13 +24,12 @@ class SignUpController < ApplicationController
       @user.salt = SecureRandom.hex
       @user.password_hash = generate_hash(password,@user.salt)
 
+      @user.isVerified = false
+      @user.verifysalt = SecureRandom.hex
+
       if @user.save
-        session[:user_firstname] = @user.firstname
-        session[:username] = @user.email
-        session[:userid] = @user.userid
-        session[:roleid] = @user.roleid
         UserMailer.welcome_email(@user, request.host_with_port).deliver
-        flash[:notice] = "Thank you for registering.  You are now logged in."
+        flash[:notice] = "Thank you for registering.  Please confirm your registration by clicking on the link from your email."
         redirect_to session[:return_to]
       else
         # If save fails, redisplay the form so user can fix problems
@@ -38,16 +37,43 @@ class SignUpController < ApplicationController
       end
     #end
 
-    
+  
+
 
   end
 
-def user_params
-      # same as using "params[:subject]", except that it:
-      # - raises an error if :subject is not present
-      # - allows listed attributes to be mass-assigned
-      params.require(:user).permit(:firstname, :lastname, :email, :password)
-end
+  def verifyregistration
+
+    @user = User.where(verifysalt: params[:id]).first
+
+    if (@user)
+
+      @user.modified = Time.now
+      #@user.verifysalt = ''
+      @user.isVerified = true
+
+      if @user.update
+        session[:user_firstname] = @user.firstname
+        session[:username] = @user.email
+        session[:userid] = @user.userid
+        session[:roleid] = @user.roleid
+        flash[:notice] = "Thank you for registering.  Please confirm your registration by clicking on the link from your email."
+        redirect_to(:controller => "home", :action => "index")
+      end
+
+    end
+
+
+  end  
+
+
+
+  def user_params
+        # same as using "params[:subject]", except that it:
+        # - raises an error if :subject is not present
+        # - allows listed attributes to be mass-assigned
+        params.require(:user).permit(:firstname, :lastname, :email, :password)
+  end
 
   
 

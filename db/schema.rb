@@ -91,24 +91,27 @@ ActiveRecord::Schema.define(version: 20150107052121) do
   add_index "shortened_urls", ["url"], name: "index_shortened_urls_on_url", using: :btree
 
   create_table "user", primary_key: "userid", force: true do |t|
-    t.string   "gender",           limit: 50
+    t.string   "gender",            limit: 50
     t.datetime "created"
     t.datetime "modified"
-    t.string   "email",            limit: 50
-    t.string   "firstname",        limit: 50
-    t.string   "lastname",         limit: 50
-    t.string   "password_hash",    limit: 1000
-    t.string   "salt",             limit: 1000
-    t.string   "location",         limit: 250
-    t.string   "provider",         limit: 100
-    t.string   "imageurl",         limit: 500
+    t.string   "email",             limit: 50
+    t.string   "firstname",         limit: 50
+    t.string   "lastname",          limit: 50
+    t.string   "password_hash",     limit: 1000
+    t.string   "salt",              limit: 1000
+    t.string   "location",          limit: 250
+    t.string   "provider",          limit: 100
+    t.string   "imageurl",          limit: 500
     t.date     "birthday"
-    t.string   "providerurl",      limit: 250
-    t.string   "locale",           limit: 250
-    t.string   "providerusername", limit: 250
-    t.string   "timezone",         limit: 50
-    t.string   "provideruid",      limit: 100
+    t.string   "providerurl",       limit: 250
+    t.string   "locale",            limit: 250
+    t.string   "providerusername",  limit: 250
+    t.string   "timezone",          limit: 50
+    t.string   "provideruid",       limit: 100
     t.integer  "roleid"
+    t.integer  "isVerified",        limit: 2
+    t.string   "verifysalt",        limit: 1000
+    t.string   "passwordresetsalt", limit: 1000
   end
 
   create_table "widgets", force: true do |t|
