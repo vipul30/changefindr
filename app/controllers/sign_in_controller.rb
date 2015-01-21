@@ -23,7 +23,7 @@ class SignInController < ApplicationController
 
 	      if (!verfieduser)
 	      	# todo: resend verification link
-	      	flash[:notice] = "Please verify your registration by clicking on the link from the email sent."
+	      	flash[:notice] = "Please verify your registration by clicking on the link from the email sent. Click #{view_context.link_to('HERE', '/sign_up/resendverifylink')} to resend email.".html_safe
 	      	render('index')
 	      	return
 	      end

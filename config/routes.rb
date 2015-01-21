@@ -28,7 +28,10 @@ Rails.application.routes.draw do
   get 'cause/autocomplete_charity_charityname'
 
   get 'sign_up/verifyregistration'
-  
+
+  get 'sign_up/resendverifylink'  
+
+  post 'sign_up/resendverifylinksubmit'
 
   # for facebook
   get 'auth/:provider/callback', to: 'sign_in#login_facebook'

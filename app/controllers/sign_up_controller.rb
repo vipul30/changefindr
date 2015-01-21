@@ -27,6 +27,9 @@ class SignUpController < ApplicationController
       @user.isVerified = false
       @user.verifysalt = SecureRandom.hex
 
+      @user.firstname = @user.firstname.capitalize
+      @user.lastname = @user.lastname.capitalize
+
       if @user.save
         UserMailer.welcome_email(@user, request.host_with_port).deliver
         flash[:notice] = "Thank you for registering.  Please confirm your registration by clicking on the link from your email."
@@ -36,36 +39,68 @@ class SignUpController < ApplicationController
         render('index')
       end
     #end
-
   
-
-
   end
 
   def verifyregistration
 
     @user = User.where(verifysalt: params[:id]).first
 
+
     if (@user)
 
-      @user.modified = Time.now
-      #@user.verifysalt = ''
-      @user.isVerified = true
+        if (@user.isVerified == true)
+          flash[:notice] = "You have already confirmed your registration.  Please login to continue."
+          redirect_to(:controller => "home", :action => "index")
+          
+        end
 
-      if @user.update
-        session[:user_firstname] = @user.firstname
-        session[:username] = @user.email
-        session[:userid] = @user.userid
-        session[:roleid] = @user.roleid
-        flash[:notice] = "Thank you for registering.  Please confirm your registration by clicking on the link from your email."
-        redirect_to(:controller => "home", :action => "index")
-      end
+        @user.modified = Time.now
+        @user.verifysalt = ''
+        @user.isVerified = true
 
+        if @user.save
+          session[:user_firstname] = @user.firstname
+          session[:username] = @user.email
+          session[:userid] = @user.userid
+          session[:roleid] = @user.roleid
+          flash[:notice] = "Thank you for confirming your registration.  You are now logged in."
+          redirect_to(:controller => "home", :action => "index")
+          
+        end
+
+    else
+      flash[:notice] = "Invalid registration link.  Please try again or contact support for assistance."
+      redirect_to(:controller => "home", :action => "index")
+      
     end
-
 
   end  
 
+  def resendverifylink
+    flash[:notice] = nil
+  end
+
+  def resendverifylinksubmit
+
+
+    email = params[:email]
+    @user = User.where(email: email).first
+
+
+    if (@user)
+
+      UserMailer.welcome_email(@user, request.host_with_port).deliver
+      flash[:notice] = "Registration link has been resent."
+      redirect_to(:controller => "home", :action => "index")
+
+    else
+
+      flash[:notice] = "Email not found.  Please register in order to login."
+      redirect_to(:controller => "home", :action => "index")
+    end
+
+  end
 
 
   def user_params
