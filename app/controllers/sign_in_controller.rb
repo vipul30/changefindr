@@ -122,6 +122,86 @@ class SignInController < ApplicationController
 	    redirect_to(:controller => "home", :action => "index")
   end
 
+
+  def recoverpassword
+    flash[:notice] = nil
+  end
+
+  def recoverpasswordemail
+
+
+    email = params[:email]
+    @user = User.where(email: email).first
+
+
+    if (@user)
+
+      @user.passwordresetsalt = SecureRandom.hex
+
+      @user.save
+
+      UserMailer.resetpassword_email(@user, request.host_with_port).deliver
+      flash[:notice] = "Reset password link has been sent."
+      redirect_to(:controller => "home", :action => "index")
+
+    else
+
+      flash[:notice] = "Email not found.  Please register in order to login."
+      redirect_to(:controller => "home", :action => "index")
+    end
+
+  end
+
+
+  def resetpassword
+
+	@user = User.where(passwordresetsalt: params[:id]).first
+
+
+    if (@user)
+
+        return
+
+    else
+      flash[:notice] = "Invalid reset password link.  Please try again or contact support for assistance."
+      redirect_to(:controller => "home", :action => "index")
+      
+    end
+
+  end
+
+  def resetpasswordsubmit
+
+	  @user = User.where(email: params[:email]).first
+
+
+	  password = params[:password]
+
+	  @user.modified = Time.now
+      @user.salt = SecureRandom.hex
+      @user.password_hash = generate_hash(password,@user.salt)
+      @user.passwordresetsalt = nil
+
+      if (@user.save)
+
+		  session[:user_firstname] = @user.firstname
+          session[:username] = @user.email
+          session[:userid] = @user.userid
+          session[:roleid] = @user.roleid
+          flash[:notice] = "Password has been reset.  You are now logged in."
+          redirect_to(:controller => "home", :action => "index")
+
+      else
+      	  flash[:notice] = "There was an error resetting your password.  Please try again."
+          redirect_to(:controller => "home", :action => "index")
+
+      end
+
+
+
+  end
+
+
   end
 
 

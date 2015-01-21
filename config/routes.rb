@@ -25,6 +25,10 @@ Rails.application.routes.draw do
 
   get 'sign_in/index'
 
+  get 'sign_in/resetpassword'
+
+  post 'sign_in/resetpasswordsubmit'
+
   get 'cause/autocomplete_charity_charityname'
 
   get 'sign_up/verifyregistration'
@@ -32,6 +36,7 @@ Rails.application.routes.draw do
   get 'sign_up/resendverifylink'  
 
   post 'sign_up/resendverifylinksubmit'
+  post 'sign_in/recoverpasswordemail'
 
   # for facebook
   get 'auth/:provider/callback', to: 'sign_in#login_facebook'
@@ -43,6 +48,7 @@ Rails.application.routes.draw do
   post 'cause/create'
   post 'cause/update'
   post '/cause/causeautocomplete'
+
 
   root :to => "home#index"
   match ':controller(/:action(/:id))', :via => :get

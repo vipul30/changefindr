@@ -56,7 +56,7 @@ class SignUpController < ApplicationController
         end
 
         @user.modified = Time.now
-        @user.verifysalt = ''
+        @user.verifysalt = nil
         @user.isVerified = true
 
         if @user.save
