@@ -247,6 +247,77 @@
 </section>
 
 
+<!-- Merchants Slider -->
+<section class="slice relative bg-white bb animate-hover-slide">
+        <div class="wp-section">
+            <div class="container">
+                <div class="section-title-wr">
+                    <h3 class="section-title left"><span>Merchants</span></h3>
+                </div>
+                
+                <div id="carouselWork2" class="carousel carousel-3 slide animate-hover-slide">
+                   
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            <% 
+                                i = 0
+                                while i < @merchants.count
+                                 
+                                    if i == 0
+                                        classitem = 'item active'
+                                    else
+                                        classitem = 'item'
+                                    end
+
+                            %>
+                            <div class="<%=classitem%>">
+                                <div class="row">
+                                    <% (0..3).each do |k| %>
+                                        <% if @merchants[i+k] != nil %>
+                                            <div class="col-md-3">
+                                                <div class="wp-block inverse">
+                                                    <div class="figure" style="min-height:150px">
+                                                        <img alt="" src="<%=@merchants[i+k].logo.url%>" class="img-responsive"
+                                                        style="margin: auto auto; height: auto; width: auto; max-height:150px; max-width:200px;" >
+                                                        <div class="figcaption bg-base"></div>
+                                                        <div class="figcaption-btn">
+                                                            <a href="#" class="btn btn-xs btn-b-white theater"><i class="fa fa-credit-card"></i> Donate</a>
+                                                            <a href="<%= "http://" +  @userhost + "/merchant/checkbalance/" +  @merchants[i+k].merchantid.to_s %>" class="btn btn-xs btn-b-white"><i class="fa fa-check-square-o"></i> Check Balance</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-9">
+                                                            <h2 class="text-left"><%= @merchants[i+k].merchantname %></h2>
+                                                            
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% 
+                                            end
+                                        end 
+                                    
+                                        %>
+   
+                                </div>
+                            </div>
+                            <% 
+                                i += 4
+                                end 
+                            %>   
+
+                        </div>
+                </div>  <!-- end Carasoul -->
+            </div>
+            <br/><br/>
+            <div style="text-align:center">
+                <a href="/merchant/index" class="btn btn-base btn-lg">Browse All Gift Cards</a>
+            </div>
+            <br/><br/>
+        </div>
+</section>
+
 <!-- Tesitmonials -->
 <section class="slice base">
     <div class="wp-section">

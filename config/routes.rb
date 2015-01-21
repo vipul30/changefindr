@@ -1,4 +1,19 @@
 Rails.application.routes.draw do
+  
+  get 'merchant/index'
+
+  get 'merchant/create'
+
+  get 'merchant/edit'
+
+  post 'merchant/update'
+
+  get 'merchant/delete'
+
+  get 'merchant/show'
+
+  get 'merchant/new'
+
   get 'contact/index'
 
   get 'team/index'
@@ -48,6 +63,7 @@ Rails.application.routes.draw do
   post 'cause/create'
   post 'cause/update'
   post '/cause/causeautocomplete'
+  post '/merchant/merchantautocomplete'
 
 
   root :to => "home#index"

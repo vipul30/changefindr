@@ -5,6 +5,8 @@ class HomeController < ApplicationController
 
 	@causes = Charity.limit(20).order("RANDOM()").where(isapproved: true)
 
+  @merchants = Merchant.where.not(merchantid: 172).limit(20).order("RANDOM()")
+
 	@userhost = request.host_with_port
 
 	

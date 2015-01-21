@@ -1,0 +1,130 @@
+
+<div class="pg-opt">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Select your gift card to donate or check balance.</h2>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+
+<section class="slice bg-white animate-hover-slide">
+        <div class="wp-section work">
+            <div class="container">
+
+<div class="row">
+
+    <div class="col-md-4">
+        <br/>
+            <div class="input-group merged">
+                <span class="input-group-addon"><i class="icon-append fa fa-search"></i></span>
+                <input class="form-control" style="width:270px" type="text"
+                       placeholder="Search For Gift Card"
+                       name="searchmerchant"
+                       id="searchmerchant"
+                       value="">
+            </div>
+    </div>
+         
+
+
+	<div class="col-md-8">
+		<%= will_paginate @merchants , renderer: BootstrapPagination::Rails %>
+	</div>
+</div>	
+
+
+                <div class="row">       
+                    <div id="ulSorList">
+    
+                        <% @merchants.each do |merchant| %>
+
+                        <div class="mix category_1 col-lg-4 col-md-4 col-sm-6" data-cat="1">
+                            <div class="wp-block inverse">
+                                <div class="figure" style="min-height:150px">
+                                    <img alt="" src="<%=merchant.logo.url%>" class="img-responsive center-block"
+                                    style="margin: auto auto; height: auto; width: auto; max-height:150px; max-width:200px;" 
+                                    >
+                                    <div class="figcaption bg-base"></div>
+                                    <div class="figcaption-btn">
+                                        <a href="#" class="btn btn-lg btn-b-white theater"><i class="fa fa-credit-card"></i> Donate</a>
+                                        <a href="<%= "http://" +  @userhost + "/merchant/checkbalance/" +  merchant.merchantid.to_s %>" class="btn btn-lg btn-b-white"><i class="fa fa-check-square-o"></i> Check Balance</a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-9 center-block" style="text-align:center">
+                                        <h2><%= merchant.merchantname %></h2>
+                                        <% if session[:roleid] == 1 %>
+                                            <%= link_to "Edit", controller: "merchant", action: "edit", id: merchant.merchantid %>
+                                        <% end %>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+
+                        <% end %>      
+
+                        <div class="gap"></div>
+                    </div>                                   
+                </div>
+        	</div>    	
+        </div>
+    </section>
+
+
+
+<script>
+
+  $("#searchmerchant").autocomplete({
+
+
+        source: function (request, response) {
+            $.ajax({
+                url: '/merchant/merchantautocomplete', type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+
+                    console.log('success: ', data)
+
+                    // data is an array of objects and must be transformed for autocomplete to use
+                    var array = data.error ? [] : $.map(data, function (m) {
+                        return {
+                            id: m.merchantid,
+                            name: m.merchantname,
+                            logo: m.logo
+                            
+                        };
+                    });
+                    response(array);
+
+
+                },
+                failure: function (data) {
+                    console.log('autcomplete failed');
+                }
+            })
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            //console.log('comes in selected item');
+            event.preventDefault();
+            window.location.href = "/merchant/checkbalance/" + ui.item.id;
+ 
+        }
+    })
+    .data("ui-autocomplete")._renderItem = function (ul, item) {
+
+        //console.log("logo= ", item.logo);
+
+        return $('<li class="ui-menu-item-with-icon"></li>')
+            .data("item.ui-autocomplete", item.merchantname)
+            .append('<a><img src="' + item.logo + '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + item.name + '</a>')
+            .appendTo(ul);
+    };
+
+
+</script>

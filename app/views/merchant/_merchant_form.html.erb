@@ -1,0 +1,110 @@
+<% if @merchant.errors.any? %>
+                                      <div class="alert alert-danger fade in">
+                                        <p><b>Please correct the following <%= pluralize(@merchant.errors.count, "error") %>:</b></p>
+                                     
+                                        <ul>
+                                        <% @merchant.errors.messages.values.each do |msg| %>
+                                            <%msg.each do  |m| %>
+                                                <li><%= m %></li>
+                                            <%end %>
+                                        <% end %>
+                                        </ul>
+                                      </div>
+                                    <% end %>
+
+
+                                    <fieldset class="no-padding"> 
+
+                                     <section class="no-margin">
+                                            <div class="row">
+
+                                                <section class="col-xs-12">
+                                                   
+                                                	<label>Merchant Name:</label>
+                                                    <label class="input">
+
+                                                        <i class="icon-append fa fa-credit-card"></i>
+                                                        <%= f.text_field :merchantname, :placeholder=>"Merchant Name" %>                                               
+                                                    </label>
+                                                
+                                                    <br/>
+                                                    
+
+                                                    <label>What is the URL to check the balance?</label>
+                                                    <label class="input">
+
+                                                        <i class="icon-append fa fa-globe"></i>
+                                                        <%= f.text_field :checkbalanceurl, :placeholder=>"Check Balance URL" %>                                                       
+                                                    </label>
+
+                                                    <br/>                                             
+                                                    
+                                                    <label>What is the phone number to check balance?</label>
+                                                    <label class="input">
+                                                    	
+                                                        <i class="icon-append fa fa-phone"></i>
+                                                        <%= f.text_field :phonenumber, :placeholder=>"Phone Number" %>
+                                             
+                                                    </label>
+
+                                                    <br/>
+                                                    
+                                                    <label>Description</label>
+                                                    <label class="input">
+					                                    
+					                                    <%= f.text_area :description, :placeholder=>"Brief description of your cause.", :class=>"form-control"  %>
+					                                    
+					                                </label>
+                                           
+                                                    <br/>
+
+                                                    <div class="row">
+
+                                                        <div class="col-xs-8">
+                                                            <label>Please upload a logo for your cause.</label>
+                                                            <label class="input">
+                                                            	
+                                                                <i class="icon-append fa fa-upload"></i>
+                                                                <%= f.file_field :logo, :id => 'clearlogo' %>
+                                                                
+                                                            </label>
+                                                            <button id="clearbtn1" type="button">Clear</button>
+                                                        </div>
+
+
+                                                        <div class="col-xs-4">
+                                                            <% 
+                                                                if (!@merchant.logo.url.include? "missing_thumb.png")
+                                                            %>
+                                                                    <label>Current Logo</label><br/>
+                                                                    <%= image_tag @merchant.logo.url(:thumb) %>
+                                                            <% end %>
+                                                        </div>                                                          
+                                            
+                                                        
+                                                    </div>
+
+                                                    <br/>
+
+                                                    
+                                                      
+                                                </section>
+                                          
+                                            </div>
+
+
+                                        </section>
+
+                                       
+                                    </fieldset>  
+
+<script>
+
+$("#clearbtn1").on("click", function () {
+    $('#clearlogo').val("");
+});
+
+
+
+</script>
+                                   

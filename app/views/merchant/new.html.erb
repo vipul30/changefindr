@@ -1,0 +1,64 @@
+
+       
+    <!-- MAIN CONTENT -->
+    	
+
+    <section class="slice slice-lg bg-image" style="background-image:url(/images/backgrounds/full-bg-2.jpg)">
+        <div class="wp-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7 col-md-offset-1 col-sm-5 col-sm-offset-1">
+                    	<div class="row">
+                    		
+						 
+                    		<div class="col-md-12">
+
+							<div class="wp-block default user-form no-margin">
+	                            <div class="form-header">
+	                                <h2>Add a merchant</h2>
+	                            </div>
+
+						      <div class="form-body">
+                                <%= form_for(@merchant, :url => {:action => 'merchant'}, :html => {:class => 'sky-form', :id => "myform"}) do |f| %>
+
+                                    <%= render(:partial => "merchant_form", :locals => {:f => f}) %>
+
+
+                                    <fieldset>          
+                                      
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    
+                                                    <br/>
+                                                    <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button"
+                                                    onClick="this.form.submit(); this.disabled=true;"
+                                                    >
+                                                        <span>Add Merchant</span>
+                                                    </button>
+                                                </div>
+                                                
+                                        </section>
+                                    </fieldset>
+
+                                <!--/form-->
+                                <% end %>  
+                            </div>
+
+                            
+			            </div>
+			       		 </div>
+
+			       		
+			    </div>
+                    </div>
+                    <div class="col-md-4">
+                    	<!-- SIDEBAR - BLOG -->
+                    	<%= render partial: "layouts/sidebar1" %>                 
+    				</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
