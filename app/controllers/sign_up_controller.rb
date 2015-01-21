@@ -18,7 +18,7 @@ class SignUpController < ApplicationController
     #else
       @user.created = Time.now
       @user.modified = Time.now
-      @user.roleid = 2 # everyone starts off as a reguler user
+      @user.roleid = REGULAR_ROLE # everyone starts off as a reguler user
       password = params[:password]
 
       @user.salt = SecureRandom.hex

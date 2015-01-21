@@ -79,52 +79,5 @@
 
 <script>
 
-  $("#searchmerchant").autocomplete({
-
-
-        source: function (request, response) {
-            $.ajax({
-                url: '/merchant/merchantautocomplete', type: "POST", dataType: "json",
-                data: { searchText: request.term, maxResults: 10 },
-                success: function (data) {
-
-                    console.log('success: ', data)
-
-                    // data is an array of objects and must be transformed for autocomplete to use
-                    var array = data.error ? [] : $.map(data, function (m) {
-                        return {
-                            id: m.merchantid,
-                            name: m.merchantname,
-                            logo: m.logo
-                            
-                        };
-                    });
-                    response(array);
-
-
-                },
-                failure: function (data) {
-                    console.log('autcomplete failed');
-                }
-            })
-        },
-        minLength: 1,
-        select: function (event, ui) {
-            //console.log('comes in selected item');
-            event.preventDefault();
-            window.location.href = "/merchant/checkbalance/" + ui.item.id;
- 
-        }
-    })
-    .data("ui-autocomplete")._renderItem = function (ul, item) {
-
-        //console.log("logo= ", item.logo);
-
-        return $('<li class="ui-menu-item-with-icon"></li>')
-            .data("item.ui-autocomplete", item.merchantname)
-            .append('<a><img src="' + item.logo + '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + item.name + '</a>')
-            .appendTo(ul);
-    };
-
-
+  
 </script>
