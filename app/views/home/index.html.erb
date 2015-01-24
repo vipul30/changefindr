@@ -143,6 +143,14 @@
                                     end
 
                             %>
+                            <style>
+                                .animate-hover-slide .figure a {
+                                    position: relative;
+                                    top: 50%;
+                                    /* margin-top: -100px; */
+                                    }
+                            </style>
+
                             <div class="<%=classitem%>">
                                 <div class="row">
                                     <% (0..3).each do |k| %>
@@ -152,8 +160,8 @@
                                                     <div class="figure" style="min-height:150px">
                                                         <img alt="" src="<%= CLOUDFRONT_HOST %>/<%=@causes[i+k].logo.url%>" class="img-responsive"
                                                         style="margin: auto auto; height: auto; width: auto; max-height:150px; max-width:200px;" >
-                                                        <div class="figcaption bg-base">something</div>
-                                                        <div class="figcaption-btn" style="position:relative">
+                                                        <div class="figcaption bg-base"></div>
+                                                        <div class="figcaption-btn">
                                                             
                                                             <a href="#" class="btn btn-xs btn-b-white"><i class="fa fa-credit-card"></i> Donate</a>
                                                             <a href="<%= "http://" +  @userhost + "/cause/show/" +  @causes[i+k].charityid.to_s %>" class="btn btn-xs btn-b-white"><i class="fa fa-plus-circle"></i> View Details</a>
