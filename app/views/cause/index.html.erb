@@ -45,7 +45,7 @@
                         <div class="mix category_1 col-lg-4 col-md-4 col-sm-6" data-cat="1">
                             <div class="wp-block inverse">
                                 <div class="figure" style="min-height:150px">
-                                    <img alt="" src="<%=cause.logo.url%>" class="img-responsive center-block"
+                                    <img alt="" src="<%= CLOUDFRONT_HOST %>/<%=cause.logo.url%>" class="img-responsive center-block"
                                     style="margin: auto auto; height: auto; width: auto; max-height:150px; max-width:200px;" 
                                     >
                                     <div class="figcaption bg-base"></div>
@@ -122,7 +122,7 @@
 
         return $('<li class="ui-menu-item-with-icon"></li>')
             .data("item.ui-autocomplete", item.charityname)
-            .append('<a><img src="' + item.logo + '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + item.name + '</a>')
+            .append('<a><img src="<%= CLOUDFRONT_HOST %>/' + item.logo + '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + item.name + '</a>')
             .appendTo(ul);
     };
 
