@@ -8,10 +8,10 @@
 
         <!--  image_tag "full-bg-7.png", :html => { :class => 'ls-bg' } %> -->
 
-        <img src="/images/backgrounds/full-bg-9.jpg" class="ls-bg" alt="Slide background"/>
+        <img src="<%= CLOUDFRONT_HOST %>/images/backgrounds/full-bg-9.jpg" class="ls-bg" alt="Slide background"/>
         
         <!-- Right Image -->
-        <img src="/images/giftcards_main.jpg" class="ls-l" style="top:50%; left:70%;" alt="Image layer">
+        <img src="<%= CLOUDFRONT_HOST %>/images/giftcards_main.jpg" class="ls-l" style="top:50%; left:70%;" alt="Image layer">
 
         
         
@@ -150,7 +150,7 @@
                                             <div class="col-md-3">
                                                 <div class="wp-block inverse">
                                                     <div class="figure" style="min-height:150px">
-                                                        <img alt="" src="<%=@causes[i+k].logo.url%>" class="img-responsive"
+                                                        <img alt="" src="<%= CLOUDFRONT_HOST %>/<%=@causes[i+k].logo.url%>" class="img-responsive"
                                                         style="margin: auto auto; height: auto; width: auto; max-height:150px; max-width:200px;" >
                                                         <div class="figcaption bg-base"></div>
                                                         <div class="figcaption-btn">
@@ -210,7 +210,7 @@
                             <span class="clearfix"></span>
                             <br/><br/>
                             <div class="text-center">
-                                <a href="http://player.vimeo.com/video/22290612" class="btn btn-lg btn-b-white mt-20 ext-source">Check Your Gift Card Balance</a>
+                                <a href="#" class="btn btn-lg btn-b-white mt-20 ext-source">Check Your Gift Card Balance</a>
                             </div>
                         </div>
                     </div>
@@ -238,7 +238,7 @@
                                 
                             </div>
                             <div class="col-md-6">
-                                <img src="/images/photo_attachment/39/original/CoderCamp01.jpg" class="img-responsive" alt="">
+                                <img src="<%= CLOUDFRONT_HOST %>/images/photo_attachment/39/original/CoderCamp01.jpg" class="img-responsive" alt="">
                             </div>
                         </div>
                     </div>
@@ -279,7 +279,7 @@
                                             <div class="col-md-3">
                                                 <div class="wp-block inverse">
                                                     <div class="figure" style="min-height:150px">
-                                                        <img alt="" src="<%=@merchants[i+k].logo.url%>" class="img-responsive"
+                                                        <img alt="" src="<%= CLOUDFRONT_HOST %>/<%=@merchants[i+k].logo.url%>" class="img-responsive"
                                                         style="margin: auto auto; height: auto; width: auto; max-height:150px; max-width:200px;" >
                                                         <div class="figcaption bg-base"></div>
                                                         <div class="figcaption-btn">
@@ -387,7 +387,7 @@
                     <div class="col-md-3">
                         <div class="client">
                             <a href="http://www.faststartstudio.com/" target="_blank">
-                                <img src="/images/faststart_logo.png" class="img-responsive" alt="">
+                                <img src="<%= CLOUDFRONT_HOST %>/images/faststart_logo.png" class="img-responsive" alt="">
                             </a>
                         </div>
                     </div>
@@ -397,7 +397,7 @@
                      <div class="col-md-3">
                         <div class="client">
                             <a href="http://fi.co/" target="_blank">
-                                <img src="/images/FI_logo.png" class="img-responsive" alt="">
+                                <img src="<%= CLOUDFRONT_HOST %>/images/FI_logo.png" class="img-responsive" alt="">
                             </a>
                         </div>
                     </div>
