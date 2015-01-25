@@ -149,7 +149,7 @@
                                 <div class="row">
                                     <% (0..3).each do |k| %>
                                         <% if @causes[i+k] != nil %>
-                                            <div class="col-md-3">
+                                            <div class="col-md-3" style="border-right: #cdcdcd thin solid;min-height:260px">
                                                 <div class="wp-block inverse">
                                                     <div class="figure" style="min-height:150px">
                                                         <img alt="" src="<%= CLOUDFRONT_HOST %>/<%=@causes[i+k].logo.url%>" class="img-responsive"
@@ -163,8 +163,12 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-xs-9">
+                                                            <a href="<%= "http://" +  @userhost + "/cause/show/" +  @causes[i+k].charityid.to_s %>">
                                                             <h2 class="text-left"><%= @causes[i+k].charityname %></h2>
-                                                            
+                                                            </a>
+                                                            <a href="#">
+                                                                Donate
+                                                            </a>  
                                                         </div>
                                                         
                                                     </div>
@@ -279,7 +283,7 @@
                                 <div class="row">
                                     <% (0..3).each do |k| %>
                                         <% if @merchants[i+k] != nil %>
-                                            <div class="col-md-3">
+                                            <div class="col-md-3" style="border-right: #cdcdcd thin solid;min-height:200px">
                                                 <div class="wp-block inverse">
                                                     <div class="figure" style="min-height:150px">
                                                         <img alt="" src="<%= CLOUDFRONT_HOST %>/<%=@merchants[i+k].logo.url%>" class="img-responsive"
