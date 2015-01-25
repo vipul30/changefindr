@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
   
+  get 'giftcard/index'
+
+  get 'giftcard/delete'
+
+  get 'giftcard/edit'
+
+  get 'giftcard/new'
+
+  get 'giftcard/show'
+
   get 'merchant/index'
 
   get 'merchant/create'

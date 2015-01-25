@@ -62,6 +62,18 @@ ActiveRecord::Schema.define(version: 20150121192001) do
     t.datetime "image3_updated_at"
   end
 
+  create_table "giftcard", force: true do |t|
+    t.integer  "merchantid"
+    t.datetime "created"
+    t.datetime "modified"
+    t.string   "cardnumber_hash", limit: 1000
+    t.string   "salt",            limit: 1000
+    t.string   "pin",             limit: 100
+    t.date     "expdate"
+    t.string   "eventnumber",     limit: 100
+    t.float    "balance"
+  end
+
   create_table "merchant", primary_key: "merchantid", force: true do |t|
     t.string   "merchantname",      limit: 500,  null: false
     t.string   "logo",              limit: 50

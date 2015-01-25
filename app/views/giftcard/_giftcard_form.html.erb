@@ -1,0 +1,209 @@
+<% if @giftcard.errors.any? %>
+                                      <div class="alert alert-danger fade in">
+                                        <p><b>Please correct the following <%= pluralize(@giftcard.errors.count, "error") %>:</b></p>
+                                     
+                                        <ul>
+                                        <% @giftcard.errors.messages.values.each do |msg| %>
+                                            <%msg.each do  |m| %>
+                                                <li><%= m %></li>
+                                            <%end %>
+                                        <% end %>
+                                        </ul>
+                                      </div>
+                                    <% end %>
+
+
+                                    <fieldset class="no-padding"> 
+
+                                     <section class="no-margin">
+                                            <div class="row">
+
+                                                <section class="col-xs-12">
+                                                   
+                                                	<label>What is the name of your cause?</label>
+                                                    <label class="input">
+
+                                                        <i class="icon-append fa fa-user"></i>
+                                                        <%= f.text_field :charityname, :placeholder=>"Cause Name" %>                                               
+                                                    </label>
+                                                
+                                                    <br/>
+                                                    
+
+                                                    <label>What is the URL of your cause?</label>
+                                                    <label class="input">
+
+                                                        <i class="icon-append fa fa-globe"></i>
+                                                        <%= f.text_field :website, :placeholder=>"Website" %>                                                       
+                                                    </label>
+
+                                                    <br/>                                             
+                                                    
+                                                    <label>What is the URL of your facebook page? (Optional)</label>
+                                                    <label class="input">
+                                                    	
+                                                        <i class="icon-append fa fa-globe"></i>
+                                                        <%= f.text_field :facebookurl, :placeholder=>"http://www.facebook.com/mycause" %>
+                                             
+                                                    </label>
+
+                                                    <br/>
+                                                    
+                                                    <label>Description</label>
+                                                    <label class="input">
+					                                    
+					                                    <%= f.text_area :description, :placeholder=>"Brief description of your cause.", :class=>"form-control"  %>
+					                                    
+					                                </label>
+                                           
+                                                    <br/>
+
+                                                    <div class="row">
+
+                                                        <div class="col-xs-8">
+                                                            <label>Please upload a logo for your cause.</label>
+                                                            <label class="input">
+                                                            	
+                                                                <i class="icon-append fa fa-upload"></i>
+                                                                <%= f.file_field :logo, :id => 'clearlogo' %>
+                                                                
+                                                            </label>
+                                                            <button id="clearbtn1" type="button">Clear</button>
+                                                        </div>
+
+
+                                                        <div class="col-xs-4">
+                                                            <% 
+                                                                if (!@cause.logo.url.include? "missing_thumb.png")
+                                                            %>
+                                                                    <label>Current Logo</label><br/>
+                                                                    <%= image_tag @cause.logo.url(:thumb) %>
+                                                            <% end %>
+                                                        </div>                                                          
+                                            
+                                                        
+                                                    </div>
+
+                                                    <br/>
+
+                                                    <div class="row">
+
+                                                        <div class="col-xs-8">
+                                                            <label>Please upload an image for your cause.  This will be used as a banner for your page.  (Optional)</label>
+                                                            <label class="input">
+                                                            	
+                                                                <i class="icon-append fa fa-upload"></i>
+                                                                <%= f.file_field :image1, :id => 'clearfile1' %>	
+                                                                
+                                                            </label>
+                                                            <button id="clear1" type="button">Clear</button>
+                                                        </div>
+
+
+                                                        <div class="col-xs-4">
+                                                            <% 
+                                                                if (!@cause.image1.url.include? "missing_thumb.png")
+                                                            %>
+                                                                    <label>Current Banner Image 1</label><br/>
+                                                                    <%= image_tag @cause.image1.url(:thumb) %>
+                                                                    <br />
+                                                                    <input type="checkbox" name="chkboximg1" value="true">
+                                                                    Delete Image 1
+                                                                    </input>
+                                                            <% end %>
+                                                        </div>                                                          
+                                            
+                                                    </div>
+
+
+                                                    <br/>
+
+                                                    <div class="row">
+                                                    <div class="col-xs-8">
+                                                        <label>Please upload an image for your cause.  This will be used as a banner for your page.  (Optional)</label>
+                                                        <label class="input">
+                                                        	
+                                                            <i class="icon-append fa fa-upload"></i>
+                                                            <%= f.file_field :image2, :id => 'clearfile2' %>	
+                                                 
+                                                        </label>
+                                                        <button id="clear2" type="button">Clear</button>
+                                                     </div>
+
+
+                                                        <div class="col-xs-4">
+                                                            <% 
+                                                                if (!@cause.image2.url.include? "missing_thumb.png")
+                                                            %>
+                                                                    <label>Current Banner Image 2</label><br/>
+                                                                    <%= image_tag @cause.image2.url(:thumb) %>
+                                                                    <br />
+                                                                    <input type="checkbox" name="chkboximg2" value="true">
+                                                                    Delete Image 2
+                                                                    </input>
+                                                            <% end %>
+                                                        </div>                                                          
+                                            
+                                                    </div>
+
+                                                     <br/>
+
+                                                    <div class="row">
+                                                        <div class="col-xs-8">
+                                                        <label>Please upload an image for your cause.  This will be used as a banner for your page.  (Optional)</label>
+                                                        <label class="input">
+                                                        	
+                                                            <i class="icon-append fa fa-upload"></i>
+                                                            <%= f.file_field :image3, :id => 'clearfile3' %>	
+                                                 
+                                                        </label>
+                                                        <button id="clear3" type="button">Clear</button>
+                                                        </div>
+
+
+                                                        <div class="col-xs-4">
+                                                            <% 
+                                                                if (!@cause.image3.url.include? "missing_thumb.png")
+                                                            %>
+                                                                    <label>Current Banner Image 3</label><br/>
+                                                                    <%= image_tag @cause.image3.url(:thumb) %>
+                                                                    <br />
+                                                                    <input type="checkbox" name="chkboximg3" value="true">
+                                                                    Delete Image 3
+                                                                    </input>
+                                                            <% end %>
+                                                        </div>                                                          
+                                            
+                                                    </div>
+                                                      
+                                                </section>
+                                          
+                                            </div>
+
+
+                                        </section>
+
+                                       
+                                    </fieldset>  
+
+<script>
+
+$("#clearbtn1").on("click", function () {
+    $('#clearlogo').val("");
+});
+
+
+$("#clear1").on("click", function () {
+    $('#clearfile1').val("");
+});
+
+
+$("#clear2").on("click", function () {
+    $('#clearfile2').val("");
+});
+
+$("#clear3").on("click", function () {
+    $('#clearfile3').val("");
+});
+</script>
+                                   
