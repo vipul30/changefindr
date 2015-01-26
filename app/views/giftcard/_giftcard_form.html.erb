@@ -1,209 +1,197 @@
 <% if @giftcard.errors.any? %>
-                                      <div class="alert alert-danger fade in">
-                                        <p><b>Please correct the following <%= pluralize(@giftcard.errors.count, "error") %>:</b></p>
-                                     
-                                        <ul>
-                                        <% @giftcard.errors.messages.values.each do |msg| %>
-                                            <%msg.each do  |m| %>
-                                                <li><%= m %></li>
-                                            <%end %>
-                                        <% end %>
-                                        </ul>
-                                      </div>
-                                    <% end %>
+  <div class="alert alert-danger fade in">
+    <p><b>Please correct the following <%= pluralize(@giftcard.errors.count, "error") %>:</b></p>
+ 
+    <ul>
+    <% @giftcard.errors.messages.values.each do |msg| %>
+        <%msg.each do  |m| %>
+            <li><%= m %></li>
+        <%end %>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<fieldset class="no-padding"> 
+
+ <section class="no-margin">
+        <div class="row">
+
+            <section class="col-xs-12">
+               
+            	<label>Gift Card Store</label>
+                <br/>
+                <small>Start typing and select the retailer or brand name displayed on your gift card. If you don't see your retailer or brand name listed, type out the full name manually.</small>
+                <label class="input">
+                    <i class="icon-append fa fa-credit-card"></i>
+
+                    <input type="text" name="giftcard" 
+                    placeholder="Check Your Gift Card Balance"
+                    name="merchant"
+                    id="merchant"
+                    value="<%= @giftcard.merchant.merchantname %>">
+                                         
+                    <%= f.hidden_field :merchantid %>                                             
+                </label>
+            
+                <br/>
+                
+                <label>Gift Card Number</label>
+                <label class="input">
+
+                    <i class="icon-append fa fa-barcode"></i>
+                    <input type="text" name="cardnumber" id="cardnumber" placeholder="Please enter gift card number">
+                                                                           
+                </label>
+
+                <br/>                                             
+                
+                <label id="pinlabel">Pin</label>
+                <label class="input">
+                	
+                    <i class="icon-append fa fa-key"></i>
+                    <%= f.text_field :pin, :placeholder=>"This is kept confidential." %>
+         
+                </label>
+
+                <br/>
+                
+                <div id="expdatediv" style="display:none">
+                    <label>Expiration Date</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-calendar"></i>
+                        <%= f.text_field :expdate, :placeholder=>"Please enter expiration date", :class=>"form-control"  %>
+                        
+                    </label>
+                     <br/>
+                </div>
+       
+               
+                <div id="eventnumberdiv" style="display:none">
+                    <label>Event #</label>
+                    <label class="input">
+                        
+                        <%= f.text_field :eventnumber, :placeholder=>"Please enter the event number", :class=>"form-control"  %>
+                        
+                    </label>
+                    <br/>
+                </div>
+
+           
+                  
+            </section>
+      
+        </div>
 
 
-                                    <fieldset class="no-padding"> 
+    </section>
 
-                                     <section class="no-margin">
-                                            <div class="row">
-
-                                                <section class="col-xs-12">
-                                                   
-                                                	<label>What is the name of your cause?</label>
-                                                    <label class="input">
-
-                                                        <i class="icon-append fa fa-user"></i>
-                                                        <%= f.text_field :charityname, :placeholder=>"Cause Name" %>                                               
-                                                    </label>
-                                                
-                                                    <br/>
-                                                    
-
-                                                    <label>What is the URL of your cause?</label>
-                                                    <label class="input">
-
-                                                        <i class="icon-append fa fa-globe"></i>
-                                                        <%= f.text_field :website, :placeholder=>"Website" %>                                                       
-                                                    </label>
-
-                                                    <br/>                                             
-                                                    
-                                                    <label>What is the URL of your facebook page? (Optional)</label>
-                                                    <label class="input">
-                                                    	
-                                                        <i class="icon-append fa fa-globe"></i>
-                                                        <%= f.text_field :facebookurl, :placeholder=>"http://www.facebook.com/mycause" %>
-                                             
-                                                    </label>
-
-                                                    <br/>
-                                                    
-                                                    <label>Description</label>
-                                                    <label class="input">
-					                                    
-					                                    <%= f.text_area :description, :placeholder=>"Brief description of your cause.", :class=>"form-control"  %>
-					                                    
-					                                </label>
-                                           
-                                                    <br/>
-
-                                                    <div class="row">
-
-                                                        <div class="col-xs-8">
-                                                            <label>Please upload a logo for your cause.</label>
-                                                            <label class="input">
-                                                            	
-                                                                <i class="icon-append fa fa-upload"></i>
-                                                                <%= f.file_field :logo, :id => 'clearlogo' %>
-                                                                
-                                                            </label>
-                                                            <button id="clearbtn1" type="button">Clear</button>
-                                                        </div>
-
-
-                                                        <div class="col-xs-4">
-                                                            <% 
-                                                                if (!@cause.logo.url.include? "missing_thumb.png")
-                                                            %>
-                                                                    <label>Current Logo</label><br/>
-                                                                    <%= image_tag @cause.logo.url(:thumb) %>
-                                                            <% end %>
-                                                        </div>                                                          
-                                            
-                                                        
-                                                    </div>
-
-                                                    <br/>
-
-                                                    <div class="row">
-
-                                                        <div class="col-xs-8">
-                                                            <label>Please upload an image for your cause.  This will be used as a banner for your page.  (Optional)</label>
-                                                            <label class="input">
-                                                            	
-                                                                <i class="icon-append fa fa-upload"></i>
-                                                                <%= f.file_field :image1, :id => 'clearfile1' %>	
-                                                                
-                                                            </label>
-                                                            <button id="clear1" type="button">Clear</button>
-                                                        </div>
-
-
-                                                        <div class="col-xs-4">
-                                                            <% 
-                                                                if (!@cause.image1.url.include? "missing_thumb.png")
-                                                            %>
-                                                                    <label>Current Banner Image 1</label><br/>
-                                                                    <%= image_tag @cause.image1.url(:thumb) %>
-                                                                    <br />
-                                                                    <input type="checkbox" name="chkboximg1" value="true">
-                                                                    Delete Image 1
-                                                                    </input>
-                                                            <% end %>
-                                                        </div>                                                          
-                                            
-                                                    </div>
-
-
-                                                    <br/>
-
-                                                    <div class="row">
-                                                    <div class="col-xs-8">
-                                                        <label>Please upload an image for your cause.  This will be used as a banner for your page.  (Optional)</label>
-                                                        <label class="input">
-                                                        	
-                                                            <i class="icon-append fa fa-upload"></i>
-                                                            <%= f.file_field :image2, :id => 'clearfile2' %>	
-                                                 
-                                                        </label>
-                                                        <button id="clear2" type="button">Clear</button>
-                                                     </div>
-
-
-                                                        <div class="col-xs-4">
-                                                            <% 
-                                                                if (!@cause.image2.url.include? "missing_thumb.png")
-                                                            %>
-                                                                    <label>Current Banner Image 2</label><br/>
-                                                                    <%= image_tag @cause.image2.url(:thumb) %>
-                                                                    <br />
-                                                                    <input type="checkbox" name="chkboximg2" value="true">
-                                                                    Delete Image 2
-                                                                    </input>
-                                                            <% end %>
-                                                        </div>                                                          
-                                            
-                                                    </div>
-
-                                                     <br/>
-
-                                                    <div class="row">
-                                                        <div class="col-xs-8">
-                                                        <label>Please upload an image for your cause.  This will be used as a banner for your page.  (Optional)</label>
-                                                        <label class="input">
-                                                        	
-                                                            <i class="icon-append fa fa-upload"></i>
-                                                            <%= f.file_field :image3, :id => 'clearfile3' %>	
-                                                 
-                                                        </label>
-                                                        <button id="clear3" type="button">Clear</button>
-                                                        </div>
-
-
-                                                        <div class="col-xs-4">
-                                                            <% 
-                                                                if (!@cause.image3.url.include? "missing_thumb.png")
-                                                            %>
-                                                                    <label>Current Banner Image 3</label><br/>
-                                                                    <%= image_tag @cause.image3.url(:thumb) %>
-                                                                    <br />
-                                                                    <input type="checkbox" name="chkboximg3" value="true">
-                                                                    Delete Image 3
-                                                                    </input>
-                                                            <% end %>
-                                                        </div>                                                          
-                                            
-                                                    </div>
-                                                      
-                                                </section>
-                                          
-                                            </div>
-
-
-                                        </section>
-
-                                       
-                                    </fieldset>  
+   
+</fieldset>  
 
 <script>
 
-$("#clearbtn1").on("click", function () {
-    $('#clearlogo').val("");
+$(window).load(function () {
+
+    $("#giftcard_expdate").datepicker({
+                changeMonth: true,
+                changeYear: true
+    });
+
+    cardfieldschange(<%= @giftcard.merchant.merchantid %>);
+
 });
 
+function cardfieldschange(cardid) {
 
-$("#clear1").on("click", function () {
-    $('#clearfile1').val("");
-});
+        // change the PIN label if the user selects american express (29)
+        // visa (157), vanilla (156), or mastercard (118)
+        if (cardid == 29) // american express
+        {
+            $("#pinlabel").html("Enter 4 digit security code on back of AMEX card.<font color=\"red\">*</font>");
+            $("#expdatediv").show();
+            $("#eventnumberdiv").hide();
+
+        }
+        else if (cardid == 156 ||
+            cardid == 157 ||
+            cardid == 118)
+            /* visa, vanilla, and mastercard */
+        {
+            $("#pinlabel").html("Enter 3 digit security code on card.<font color=\"red\">*</font>");
+            $("#expdatediv").show();
+            $("#eventnumberdiv").hide();
+        }
+        else if (cardid == 148) // target
+        {
+            $("#AdditionalCode1Block").show();
+            $("#expdatediv").hide();
+            $("#pinlabel").html("Enter Access Number.<font color=\"red\">*</font>");
+            $("#eventnumberdiv").html("Enter Event Number.<font color=\"red\">*</font>");
+
+        }
+        else {
+            $("#pinlabel").html("Pin<font color=\"red\">*</font>");
+            $("#expdatediv").hide();
+            $("#eventnumberdiv").hide();
+        }
 
 
-$("#clear2").on("click", function () {
-    $('#clearfile2').val("");
-});
+}
 
-$("#clear3").on("click", function () {
-    $('#clearfile3').val("");
-});
+$("#merchant").autocomplete({
+
+
+            source: function (request, response) {
+                $.ajax({
+                    url: '/merchant/merchantautocomplete', type: "POST", dataType: "json",
+                    data: { searchText: request.term, maxResults: 10 },
+                    success: function (data) {
+
+                        console.log('success: ', data)
+
+                        // data is an array of objects and must be transformed for autocomplete to use
+                        var array = data.error ? [] : $.map(data, function (m) {
+                            return {
+                                id: m.merchantid,
+                                name: m.merchantname,
+                                logo: m.logo
+                                
+                            };
+                        });
+                        response(array);
+
+
+                    },
+                    failure: function (data) {
+                        console.log('autcomplete failed');
+                    }
+                })
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                //console.log('comes in selected item');
+
+
+                event.preventDefault();
+                $("#merchant").val(ui.item.name);
+                $("#giftcard_merchantid").val(ui.item.id);
+                $("#merchantname").html(ui.item.name);
+                $("#merchantlogo").attr("src", '<%= CLOUDFRONT_HOST %>/' + ui.item.logo);
+
+                cardfieldschange(ui.item.id);
+
+            }
+        })
+        .data("ui-autocomplete")._renderItem = function (ul, item) {
+
+            //console.log("logo= ", item.logo);
+
+            return $('<li class="ui-menu-item-with-icon"></li>')
+                .data("item.ui-autocomplete", item.merchantname)
+                .append('<a><img src="<%= CLOUDFRONT_HOST %>/' + item.logo + '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + item.name + '</a>')
+                .appendTo(ul);
+        };
+
 </script>
                                    

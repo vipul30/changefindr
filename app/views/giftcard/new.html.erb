@@ -15,13 +15,13 @@
 
 							<div class="wp-block default user-form no-margin">
 	                            <div class="form-header">
-	                                <h2>Tell us about your cause</h2>
+	                                <h2>Check Your Gift Card Balance</h2>
 	                            </div>
 
 						      <div class="form-body">
-                                <%= form_for(@cause, :url => {:action => 'create'}, :html => {:class => 'sky-form', :id => "myform"}) do |f| %>
+                                <%= form_for(@giftcard, :url => {:action => 'create'}, :html => {:class => 'sky-form', :id => "myform"}) do |f| %>
 
-                                    <%= render(:partial => "cause_form", :locals => {:f => f}) %>
+                                    <%= render(:partial => "giftcard_form", :locals => {:f => f}) %>
 
 
                                     <fieldset>          
@@ -34,7 +34,7 @@
                                                     <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button"
                                                     onClick="this.form.submit(); this.disabled=true;"
                                                     >
-                                                        <span>Submit Cause For Approval</span>
+                                                        <span>Check Balance</span>
                                                     </button>
                                                 </div>
                                                 
@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-md-4">
                     	<!-- SIDEBAR - BLOG -->
-                    	<%= render partial: "layouts/sidebar1" %>                 
+                    	<%= render partial: "layouts/sidebargiftcard" %>                 
     				</div>
                 </div>
             </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121192001) do
+ActiveRecord::Schema.define(version: 20150125230401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,16 +62,18 @@ ActiveRecord::Schema.define(version: 20150121192001) do
     t.datetime "image3_updated_at"
   end
 
-  create_table "giftcard", force: true do |t|
+  create_table "giftcard", primary_key: "giftcardid", force: true do |t|
     t.integer  "merchantid"
     t.datetime "created"
     t.datetime "modified"
-    t.string   "cardnumber_hash", limit: 1000
-    t.string   "salt",            limit: 1000
-    t.string   "pin",             limit: 100
+    t.string   "cardnumber_hash",  limit: 1000
+    t.string   "salt",             limit: 1000
+    t.string   "pin",              limit: 100
     t.date     "expdate"
-    t.string   "eventnumber",     limit: 100
+    t.string   "eventnumber",      limit: 100
     t.float    "balance"
+    t.integer  "userid"
+    t.datetime "balancecheckdate"
   end
 
   create_table "merchant", primary_key: "merchantid", force: true do |t|
