@@ -40,6 +40,7 @@ class SignInController < ApplicationController
 	      session[:username] = found_user.email
 	      session[:userid] = found_user.userid
 		  session[:roleid] = found_user.roleid
+		  initializelogin(found_user)
 	      flash[:notice] = "You are logged in."
 	      redirect_to session[:return_to]
 	      return
@@ -51,9 +52,6 @@ class SignInController < ApplicationController
 	end
 
 	def login_facebook
-
-
-
 
 		auth = env["omniauth.auth"]
 
@@ -93,6 +91,7 @@ class SignInController < ApplicationController
 			session[:username] = user.email
 			session[:userid] = user.userid
 			session[:roleid] = user.roleid
+			initializelogin(user)
 		    flash[:notice] = "Thank you for registering.  You are now logged in."
 		    UserMailer.welcome_email(user, request.host_with_port).deliver
 		    redirect_to session[:return_to]
@@ -120,6 +119,7 @@ class SignInController < ApplicationController
 		session[:username] = user.email
 		session[:userid] = user.userid
 		session[:roleid] = user.roleid
+		initializelogin(user)
 
 		redirect_to session[:return_to]
 		
@@ -133,9 +133,18 @@ class SignInController < ApplicationController
 	    session[:username] = nil
 	    session[:userid] = nil
 	    session[:roleid] = nil
+	    session[:usergiftcards] = nil
 	    flash[:notice] = "Logged out"
 	    redirect_to(:controller => "home", :action => "index")
-  end
+  	end
+
+  	def initializelogin(user)
+
+  		session[:usergiftcards] = Giftcard.where(:isdeleted => false).to_yaml
+
+  		
+
+  	end
 
 
   def recoverpassword

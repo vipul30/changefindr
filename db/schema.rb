@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20150125230401) do
     t.integer  "userid"
     t.datetime "balancecheckdate"
     t.string   "iv",               limit: 1000
+    t.integer  "isdeleted",        limit: 2
   end
 
   create_table "merchant", primary_key: "merchantid", force: true do |t|

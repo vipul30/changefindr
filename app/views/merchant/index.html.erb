@@ -42,7 +42,8 @@
     
                         <% @merchants.each do |merchant| %>
 
-                        <div class="mix category_1 col-lg-4 col-md-4 col-sm-6" data-cat="1">
+                        <div class="mix category_1 col-lg-4 col-md-4 col-sm-6" data-cat="1" style="border: #cdcdcd thin solid;min-height:200px">
+                            <br/>
                             <div class="wp-block inverse">
                                 <div class="figure" style="min-height:150px">
                                     <img alt="" src="<%=merchant.logo.url%>" class="img-responsive center-block"
@@ -50,13 +51,16 @@
                                     >
                                     <div class="figcaption bg-base"></div>
                                     <div class="figcaption-btn">
-                                        <a href="#" class="btn btn-lg btn-b-white theater"><i class="fa fa-credit-card"></i> Donate</a>
-                                        <a href="<%= "http://" +  @userhost + "/merchant/checkbalance/" +  merchant.merchantid.to_s %>" class="btn btn-lg btn-b-white"><i class="fa fa-check-square-o"></i> Check Balance</a>
+                                        <a href="#" class="btn btn-xs btn-b-white theater"><i class="fa fa-credit-card"></i> Donate</a>
+                                        <a href="<%= "http://" +  @userhost + "/giftcard/new/" +  merchant.merchantid.to_s %>" class="btn btn-xs btn-b-white"><i class="fa fa-check-square-o"></i> Check Balance</a>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-9 center-block" style="text-align:center">
+                                        <a href="<%= "http://" +  @userhost + "/giftcard/new/" +  merchant.merchantid.to_s %>" class="btn btn-lg"><i class="fa fa-check-square-o"></i> Check Balance</a>
+                                        <br/>
                                         <h2><%= merchant.merchantname %></h2>
+                                        <br/>
                                         <% if session[:roleid] == 1 %>
                                             <%= link_to "Edit", controller: "merchant", action: "edit", id: merchant.merchantid %>
                                         <% end %>

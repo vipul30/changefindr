@@ -24,6 +24,7 @@ class GiftcardController < ApplicationController
     @giftcard.modified = Time.now
     @giftcard.balancecheckdate = Time.now
     @giftcard.userid = session[:userid]
+    @giftcard.isdeleted = false
 
     cardnumber = params[:cardnumber]
 

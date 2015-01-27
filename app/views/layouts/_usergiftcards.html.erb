@@ -1,0 +1,48 @@
+<% if session[:usergiftcards] 
+    
+    usergiftcards = YAML.load(session[:usergiftcards])
+
+%>
+
+ <section class="slice bg-banner-2 animate-in-view">
+        <div class="wp-section">
+            <div class="container">
+<div class="row">
+
+
+    <% 
+        usergiftcards.each do |usergiftcard|
+    %>
+    <div class="col-md-3">
+        <div class="wp-block product">
+            <figure>
+                <img alt="" src="<%= usergiftcard.merchant.logo.url%>" class="img-responsive img-center">
+            </figure>
+            <h2 class="product-title"><a href=""><%= usergiftcard.merchant.merchantname %></a></h2>
+            <p>
+                <ul class="features">
+                            
+                            <li class="price">$79</li>
+                            <li>Some great feature</li>
+                            
+                        </ul>
+            </p>
+            <div class="wp-block-footer">
+                <span class="price pull-left">$233.33</span>
+                <a href="#" class="btn btn-sm btn-base btn-icon btn-cart pull-right">
+                    <span>Refresh Balance</span>
+                </a>
+            </div>
+        </div>
+      </div>
+    <%
+        
+        end 
+    %>
+
+</div>
+</div>
+</div>
+</section>
+
+<% end %>

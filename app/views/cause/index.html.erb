@@ -56,13 +56,15 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-9 center-block" style="text-align:left">
+                                        <a href="#" class="btn btn-md"><i class="fa fa-credit-card"></i> Donate</a>
+                                        <br/>  
+                                        
                                         <a href="<%= "http://" +  @userhost + "/cause/show/" +  cause.charityid.to_s %>">
                                             <h2 class="text-left"><%= cause.charityname %></h2>
                                         </a>
                                         <br/>
                                     
-                                        <a href="#" class="btn btn-md"><i class="fa fa-credit-card"></i> Donate</a>
-                                        <br/>               
+                                                     
                                         <% if session[:roleid] == ADMIN_ROLE || session[:userid] == :userid%>
                                             <%= link_to "Modify Cause", controller: "cause", action: "edit", id: cause.charityid %>
                                         <% end %>
