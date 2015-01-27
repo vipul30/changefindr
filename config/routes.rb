@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   get 'giftcard/show'
 
+  post 'giftcard/create'
+  
   get 'merchant/index'
 
   get 'merchant/create'

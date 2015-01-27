@@ -42,7 +42,7 @@
     
                         <% @causes.each do |cause| %>
 
-                        <div class="mix category_1 col-lg-4 col-md-4 col-sm-6" data-cat="1">
+                        <div class="mix category_1 col-lg-4 col-md-4 col-sm-6" data-cat="1" style="border: #cdcdcd thin solid;min-height:300px">
                             <div class="wp-block inverse">
                                 <div class="figure" style="min-height:150px">
                                     <img alt="" src="<%= CLOUDFRONT_HOST %>/<%=cause.logo.url%>" class="img-responsive center-block"
@@ -50,15 +50,21 @@
                                     >
                                     <div class="figcaption bg-base"></div>
                                     <div class="figcaption-btn">
-                                        <a href="<%=cause.logo.url%>" class="btn btn-lg btn-b-white theater"><i class="fa fa-credit-card"></i> Donate</a>
-                                        <a href="<%= "http://" +  @userhost + "/cause/show/" +  cause.charityid.to_s %>" class="btn btn-lg btn-b-white"><i class="fa fa-plus-circle"></i> View Details</a>
+                                        <a href="<%=cause.logo.url%>" class="btn btn-xs btn-b-white theater"><i class="fa fa-credit-card"></i> Donate</a>
+                                        <a href="<%= "http://" +  @userhost + "/cause/show/" +  cause.charityid.to_s %>" class="btn btn-xs btn-b-white"><i class="fa fa-plus-circle"></i> View Details</a>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-9 center-block" style="text-align:center">
-                                        <h2><%= cause.charityname %></h2>
+                                    <div class="col-xs-9 center-block" style="text-align:left">
+                                        <a href="<%= "http://" +  @userhost + "/cause/show/" +  cause.charityid.to_s %>">
+                                            <h2 class="text-left"><%= cause.charityname %></h2>
+                                        </a>
+                                        <br/>
+                                    
+                                        <a href="#" class="btn btn-md"><i class="fa fa-credit-card"></i> Donate</a>
+                                        <br/>               
                                         <% if session[:roleid] == ADMIN_ROLE || session[:userid] == :userid%>
-                                            <%= link_to "Edit", controller: "cause", action: "edit", id: cause.charityid %>
+                                            <%= link_to "Modify Cause", controller: "cause", action: "edit", id: cause.charityid %>
                                         <% end %>
                                     </div>
                                    

@@ -8,6 +8,23 @@
                             <div class="form-header">
                                 <h2>Sign in to your account</h2>
                             </div>
+
+                            <div style="padding-top:20px; border-bottom: 1px solid #ccc;">
+                                <br/>
+                                <br/>
+                                <a href="/auth/facebook" id="sign_in"><img alt="Facebook login button" border="0" src="<%= CLOUDFRONT_HOST %>/images/facebook-login-button.png" 
+                                class="img-responsive img-rounded fill center-block"
+                                ></a>
+                                <br/>
+                                <br/>
+                            </div>
+
+                            <div style="height: 1px; background-color: #ccc; text-align: center">
+                              <span style="background-color: white; position: relative; top: -0.5em;">
+                                OR
+                              </span>
+                            </div>
+
                             <div class="form-body">
                                 <form action="/sign_in/login" id="frmLogin" class="sky-form">                                    
                                     <fieldset>                  
@@ -46,16 +63,11 @@
                                 </form>  
                             </div>
 
-                            <div style="padding-top:20px; border-top: 1px solid #ccc;">
-                             <h5 style="text-align:center">Or</h5>
-                                <a href="/auth/facebook" id="sign_in"><img alt="Facebook login button" border="0" src="<%= CLOUDFRONT_HOST %>/images/facebook-login-button.png" 
-                                class="img-responsive img-rounded fill center-block"
-                                ></a>
-                                <br/>
-                            </div>
+
                                 
                             <div class="form-footer">
                                 <p>Lost your password? <a href="/sign_in/recoverpassword">Click here to recover.</a></p>
+                                <p>Don't have an account?  <a tabindex="-1" href="/sign_up">Register Here</a></p>
                             </div>
                         </div>
                     </div>

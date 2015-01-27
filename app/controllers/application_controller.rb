@@ -10,12 +10,31 @@ protect_from_forgery
   	digest.update(password)
   	digest.update(salt)
   	digest.to_s
+
   end	
 
   def verify_password(password, salt, password_hash)
   	password_hash == generate_hash(password, salt)
   end
 
+  def generate_hash(password, salt)
+    digest = OpenSSL::Digest::SHA256.new
+    digest.update(password)
+    digest.update(salt)
+    digest.to_s
+
+  end 
+
+  
+  def decryptdata(encrypted, key, iv)
+    decipher = OpenSSL::Cipher::AES.new(128, :CBC)
+    decipher.decrypt
+    decipher.key = key
+    decipher.iv = iv
+
+    plain = decipher.update(encrypted) + decipher.final
+
+  end
   
 
 end

@@ -25,7 +25,7 @@
                 <label class="input">
                     <i class="icon-append fa fa-credit-card"></i>
 
-                    <input type="text" name="giftcard" 
+                    <input type="text" name="giftcardname" 
                     placeholder="Check Your Gift Card Balance"
                     name="merchant"
                     id="merchant"
@@ -70,14 +70,13 @@
                 <div id="eventnumberdiv" style="display:none">
                     <label>Event #</label>
                     <label class="input">
-                        
+                        <i class="icon-append fa fa-barcode"></i>
                         <%= f.text_field :eventnumber, :placeholder=>"Please enter the event number", :class=>"form-control"  %>
                         
                     </label>
                     <br/>
                 </div>
 
-           
                   
             </section>
       
@@ -104,6 +103,8 @@ $(window).load(function () {
 
 function cardfieldschange(cardid) {
 
+        console.log('comes in cardfieldschange: ', cardid);
+
         // change the PIN label if the user selects american express (29)
         // visa (157), vanilla (156), or mastercard (118)
         if (cardid == 29) // american express
@@ -124,10 +125,10 @@ function cardfieldschange(cardid) {
         }
         else if (cardid == 148) // target
         {
-            $("#AdditionalCode1Block").show();
+            $("#eventnumberdiv").show();
             $("#expdatediv").hide();
             $("#pinlabel").html("Enter Access Number.<font color=\"red\">*</font>");
-            $("#eventnumberdiv").html("Enter Event Number.<font color=\"red\">*</font>");
+            
 
         }
         else {

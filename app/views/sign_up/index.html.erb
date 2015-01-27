@@ -27,10 +27,21 @@
 
                                     <fieldset class="no-padding"> 
 
-                                     <section class="no-margin">
+                                    <section class="no-margin">
                                             <div class="row">
 
-                                                <section class="col-xs-6" style="padding-right:20px; border-right: 1px solid #ccc;">
+                                                <section class="col-xs-6">
+                                                     <br/><br/><br/>
+                                                     
+                                                        <p>Create an account using your<br/>Facebook login.</p>
+                                                        <br/>
+                                                        <a href="/auth/facebook" id="sign_in" onclick="acceptedTerms();"><img alt="Facebook login button" border="0" src="<%= CLOUDFRONT_HOST %>/images/facebook-register.png" 
+                                                        class="img-responsive img-rounded fill center-block"
+                                                        ></a>
+
+                                                </section>
+
+                                                <section class="col-xs-6" style="text-align: center; border-left: 1px solid #ccc;">
                                                     <div class="alert alert-danger fade in" id="msg_firstname" style="display:none">
                                                         Please enter first name.
                                                     </div>
@@ -85,19 +96,16 @@
 
                                                     <div class="" id="passwordStrength"></div>   
 
+                                                    <br>
+                                                    <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button">
+                                                        <span>Register now</span>
+                                                    </button>
+
                                                 </section>
 
                                                
 
-                                                <section class="col-xs-6" style="text-align: center;">
-                                                     <br/><br/><br/>
-                                                     <h5>or</h5>
-                                                        
-                                                        <a href="/auth/facebook" id="sign_in" onclick="acceptedTerms();"><img alt="Facebook login button" border="0" src="<%= CLOUDFRONT_HOST %>/images/facebook-register.png" 
-                                                        class="img-responsive img-rounded fill center-block"
-                                                        ></a>
-
-                                                </section>
+                                                
                                                 
                                             </div>
 
@@ -116,27 +124,12 @@
 
                                             </div>
 
-                                        </section>
+                                    </section>
 
                                        
                                     </fieldset>  
 
-                                    <fieldset>
-                                        
-                                        
-                                      
-                                        <section>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    
-                                                    <br>
-                                                    <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button">
-                                                        <span>Register now</span>
-                                                    </button>
-                                                </div>
-                                                
-                                        </section>
-                                    </fieldset>
+                                    
                                 <!--/form-->
                                 <% end %>  
                             </div>

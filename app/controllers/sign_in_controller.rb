@@ -18,6 +18,13 @@ class SignInController < ApplicationController
 	    end
 	    if authorized_user
 
+	      	# check if there is a gift card id in the session.  if so, update the user id for this record
+			if session[:newgiftcardid]
+				@giftcard = Giftcard.where(:giftcardid => session[:newgiftcardid]).first
+				@giftcard.userid = found_user.userid
+				@giftcard.save
+			end
+
 	      # check if user has verified the email address by clicking on the registration verify link
 	      verfieduser = User.where(:isVerified => true).first
 
@@ -44,6 +51,8 @@ class SignInController < ApplicationController
 	end
 
 	def login_facebook
+
+
 
 
 		auth = env["omniauth.auth"]
@@ -99,6 +108,12 @@ class SignInController < ApplicationController
 		end
 	 
 		
+		# check if there is a gift card id in the session.  if so, update the user id for this record
+		if session[:newgiftcardid]
+			@giftcard = Giftcard.where(:giftcardid => session[:newgiftcardid]).first
+			@giftcard.userid = user.userid
+			@giftcard.save
+		end
 
 		
 	 	session[:user_firstname] = user.firstname

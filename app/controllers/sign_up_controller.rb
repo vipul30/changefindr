@@ -31,6 +31,14 @@ class SignUpController < ApplicationController
       @user.lastname = @user.lastname.capitalize
 
       if @user.save
+
+        # check if there is a gift card id in the session.  if so, update the user id for this record
+        if session[:newgiftcardid]
+          @giftcard = Giftcard.where(:giftcardid => session[:newgiftcardid]).first
+          @giftcard.userid = @user.userid
+          @giftcard.save
+        end
+
         UserMailer.welcome_email(@user, request.host_with_port).deliver
         flash[:notice] = "Thank you for registering.  Please confirm your registration by clicking on the link from your email."
         redirect_to session[:return_to]
