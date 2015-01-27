@@ -19,6 +19,15 @@
 
             <section class="col-xs-12">
                
+                <%
+                    if @giftcard.merchant
+                        selectedmerchantname = @giftcard.merchant.merchantname
+                    else
+                        selectedmerchantname = ''
+                    end
+
+                %>
+
             	<label>Gift Card Store</label>
                 <br/>
                 <small>Start typing and select the retailer or brand name displayed on your gift card. If you don't see your retailer or brand name listed, type out the full name manually.</small>
@@ -29,7 +38,7 @@
                     placeholder="Check Your Gift Card Balance"
                     name="merchant"
                     id="merchant"
-                    value="<%= @giftcard.merchant.merchantname %>">
+                    value="<%= selectedmerchantname %>">
                                          
                     <%= f.hidden_field :merchantid %>                                             
                 </label>
@@ -97,7 +106,9 @@ $(window).load(function () {
                 changeYear: true
     });
 
-    cardfieldschange(<%= @giftcard.merchant.merchantid %>);
+    <% if @giftcard.merchant %>
+        cardfieldschange(<%= @giftcard.merchant.merchantid %>);
+    <% end %>
 
 });
 

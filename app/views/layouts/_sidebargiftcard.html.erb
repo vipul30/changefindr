@@ -1,18 +1,31 @@
 <div class="sidebar">
 <div class="sidebar">
 	
+<% if @giftcard.merchant
 
-<div class="panel panel-default panel-sidebar-1 visible-lg visible-md" id="merchantinfo">
-    <div class="wp-block default">
-    <div class="figure">
-    	<img alt="" id="merchantlogo" src="<%= CLOUDFRONT_HOST %>/<%=@giftcard.merchant.logo.url%>" class="img-responsive">     
+        usermerchantlogo = @giftcard.merchant.logo.url
+        usermerchantname = @giftcard.merchant.merchantname
+
+    else
+        usermerchantlogo = "giftcard-3.jpg"
+        usermerchantname = "Gift Card"
+
+    end 
+%>
+
+    <div class="panel panel-default panel-sidebar-1 visible-lg visible-md" id="merchantinfo">
+        <div class="wp-block default">
+        <div class="figure">
+        	<img alt="" id="merchantlogo" src="<%= CLOUDFRONT_HOST %>/<%=usermerchantlogo%>" class="img-responsive">     
+        </div>
+        <div class="wp-block-body">
+            <h2 class="title" id="merchantname"><%= usermerchantname %></h2>
+            <p></p>
+        </div>
     </div>
-    <div class="wp-block-body">
-        <h2 class="title" id="merchantname"><%= @giftcard.merchant.merchantname%></h2>
-        <p></p>
     </div>
-</div>
-</div>
+
+
 
 
 <!-- NEWSLETTER WIDGET -->

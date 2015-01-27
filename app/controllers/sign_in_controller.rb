@@ -140,9 +140,16 @@ class SignInController < ApplicationController
 
   	def initializelogin(user)
 
-  		session[:usergiftcards] = Giftcard.where(:isdeleted => false).to_yaml
+  		session[:usergiftcards] = Giftcard.where(:isdeleted => false)
+  										.where(:userid => session[:userid])
+  										.order(modified: :desc)
+  										.limit(2).to_yaml
 
-  		
+  		session[:usergiftcardscount] = Giftcard.where(:isdeleted => false)
+  										.where(:userid => session[:userid])
+  										.count
+  										
+  										
 
   	end
 

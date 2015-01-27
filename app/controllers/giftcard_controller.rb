@@ -24,7 +24,7 @@ class GiftcardController < ApplicationController
     @giftcard.modified = Time.now
     @giftcard.balancecheckdate = Time.now
     @giftcard.userid = session[:userid]
-    @giftcard.isdeleted = false
+    @giftcard.isdeleted = 0
 
     cardnumber = params[:cardnumber]
 
@@ -55,6 +55,13 @@ class GiftcardController < ApplicationController
 
       # if user is logged display main page
       if session[:userid]
+
+        session[:usergiftcards] = nil
+
+        session[:usergiftcards] = Giftcard.where(:isdeleted => false)
+                      .where(:userid => session[:userid])
+                      .order(modified: :desc)
+                      .limit(2).to_yaml
 
         redirect_to(:controller => "home", :action => "index")
         return
