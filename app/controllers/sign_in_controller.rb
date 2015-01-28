@@ -133,22 +133,24 @@ class SignInController < ApplicationController
 	    session[:username] = nil
 	    session[:userid] = nil
 	    session[:roleid] = nil
-	    session[:usergiftcards] = nil
+	    #session[:usergiftcards] = nil
+	    session[:usergiftcardscount] = nil
 	    flash[:notice] = "Logged out"
 	    redirect_to(:controller => "home", :action => "index")
   	end
 
   	def initializelogin(user)
 
-  		session[:usergiftcards] = Giftcard.where(:isdeleted => false)
-  										.where(:userid => session[:userid])
-  										.order(modified: :desc)
-  										.limit(2).to_yaml
+  		
+  		#session[:usergiftcards] = Giftcard.where(:isdeleted => false)
+  		#								.where(:userid => session[:userid])
+  		#								.order(modified: :desc)
+  		#								.limit(2).to_yaml
 
   		session[:usergiftcardscount] = Giftcard.where(:isdeleted => false)
   										.where(:userid => session[:userid])
   										.count
-  										
+  									
   										
 
   	end

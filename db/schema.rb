@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150125230401) do
+ActiveRecord::Schema.define(version: 20150127233247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,10 @@ ActiveRecord::Schema.define(version: 20150125230401) do
     t.datetime "balancecheckdate"
     t.string   "iv",               limit: 1000
     t.integer  "isdeleted",        limit: 2
+  end
+
+  create_table "giftcardstat", primary_key: "statsid", force: true do |t|
+    t.string "description", limit: 5000
   end
 
   create_table "merchant", primary_key: "merchantid", force: true do |t|
