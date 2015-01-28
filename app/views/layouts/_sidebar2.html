@@ -1,5 +1,7 @@
 <div class="sidebar">
+
 	
+
 	<!-- NEWSLETTER WIDGET -->
     <div class="panel panel-default panel-sidebar-1">
         <div class="panel-heading"><h2>Sign up for our newsletter</h2></div>
@@ -22,6 +24,23 @@
                 <span>Sign Me Up</span>
             </button>
         </form>   
+    </div>
+
+    <!-- DID YOU KNOW WIDGET -->
+    <div class="panel panel-default panel-sidebar-1">
+        <div class="wp-block icon-square arrow-down">
+            <div class="img-icon-wrapper">
+                <div class="img-icon">
+                    <img src="<%= CLOUDFRONT_HOST %>/images/icons/svg/book.svg" class="img-responsive img-center">
+                </div>
+            </div>
+            <div class="wp-block-body">
+                <h1>Did you know?</h1>
+                <p class="text-center">
+                <%= @giftcardstats[0].description %> 
+                </p>
+            </div>
+        </div>
     </div>
 
 	<!-- TESTIMONIAL WIDGET --> 

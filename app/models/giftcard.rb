@@ -10,5 +10,10 @@ class Giftcard < ActiveRecord::Base
 
     validates :cardnumber_hash, :presence => { :message => "Please enter the gift card number" },
 	                        :length => { :maximum => 50 }
+
+	def self.search(search, page)
+	  paginate :per_page => 9, :page => page
+	           
+	end
 	                        
 end

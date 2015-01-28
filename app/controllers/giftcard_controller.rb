@@ -1,5 +1,22 @@
 class GiftcardController < ApplicationController
   def index
+
+    @usergiftcards = Giftcard.where(:isdeleted => false)
+                        .where(:userid => session[:userid])
+                        .order(modified: :desc)
+                        .limit(2)
+                        .page(params[:page]).per_page(9)
+
+    @usergiftcardscount = Giftcard.where(:isdeleted => false)
+                      .where(:userid => session[:userid])
+                      .count
+  
+    @giftcard = Giftcard.new
+
+    @giftcardstats = Giftcardstat.limit(3).order("RANDOM()")
+
+    @userhost = request.host_with_port
+
   end
 
   def delete

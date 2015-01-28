@@ -23,7 +23,6 @@ class HomeController < ApplicationController
 
 
     if @usergiftcards
-
   	   @giftcardstats = Giftcardstat.limit(3).order("RANDOM()")
     end
 
