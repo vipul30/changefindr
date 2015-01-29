@@ -65,6 +65,8 @@ Rails.application.routes.draw do
   post 'sign_up/resendverifylinksubmit'
   post 'sign_in/recoverpasswordemail'
 
+  post 'home/newslettersignup'
+
   # for facebook
   get 'auth/:provider/callback', to: 'sign_in#login_facebook'
   get 'auth/failure', to: redirect('/')

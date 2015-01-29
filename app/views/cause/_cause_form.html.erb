@@ -1,16 +1,16 @@
 <% if @cause.errors.any? %>
-                                      <div class="alert alert-danger fade in">
-                                        <p><b>Please correct the following <%= pluralize(@cause.errors.count, "error") %>:</b></p>
-                                     
-                                        <ul>
-                                        <% @cause.errors.messages.values.each do |msg| %>
-                                            <%msg.each do  |m| %>
-                                                <li><%= m %></li>
-                                            <%end %>
-                                        <% end %>
-                                        </ul>
-                                      </div>
-                                    <% end %>
+  <div class="alert alert-danger fade in">
+    <p><b>Please correct the following <%= pluralize(@cause.errors.count, "error") %>:</b></p>
+ 
+    <ul>
+    <% @cause.errors.messages.values.each do |msg| %>
+        <%msg.each do  |m| %>
+            <li><%= m %></li>
+        <%end %>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 
 
                                     <fieldset class="no-padding"> 

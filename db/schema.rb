@@ -94,6 +94,14 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.datetime "logo_updated_at"
   end
 
+  create_table "newsletter", primary_key: "newsletterid", force: true do |t|
+    t.string   "email",    limit: 100
+    t.datetime "created"
+    t.datetime "modified"
+    t.integer  "userid"
+    t.integer  "isactive", limit: 2
+  end
+
   create_table "role", primary_key: "roleid", force: true do |t|
     t.string   "name",     limit: 50
     t.datetime "created"

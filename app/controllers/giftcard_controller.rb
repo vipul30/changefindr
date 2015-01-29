@@ -13,7 +13,7 @@ class GiftcardController < ApplicationController
   
     @giftcard = Giftcard.new
 
-    @giftcardstats = Giftcardstat.limit(3).order("RANDOM()")
+   
 
     @userhost = request.host_with_port
 

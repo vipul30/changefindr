@@ -1,0 +1,22 @@
+ <!-- DID YOU KNOW WIDGET -->
+
+<%
+    @giftcardstats = Giftcardstat.limit(1).order("RANDOM()")
+%>
+
+
+    <div class="panel panel-default panel-sidebar-1">
+        <div class="wp-block icon-square arrow-down">
+            <div class="img-icon-wrapper">
+                <div class="img-icon">
+                    <img src="<%= CLOUDFRONT_HOST %>/images/icons/svg/book.svg" class="img-responsive img-center">
+                </div>
+            </div>
+            <div class="wp-block-body">
+                <h1>Did you know?</h1>
+                <p class="text-center">
+                <%= @giftcardstats[0].description %> 
+                </p>
+            </div>
+        </div>
+    </div>

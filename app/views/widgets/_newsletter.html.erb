@@ -1,0 +1,57 @@
+<!-- NEWSLETTER WIDGET -->
+    <div class="panel panel-default panel-sidebar-1">
+        <div class="panel-heading"><h2>Sign up for our newsletter</h2></div>
+        <form class="sky-form" role="form" action="/home/newslettersignup" method="post">
+            <div class="panel-body">
+
+                <p>
+                    Sign up if you would like to receive occasional treats from us.
+                </p>
+                <section>
+                    <div class="form-group">
+                        <div class="alert alert-info fade in" id='newslettermessage' style="display:none">
+                            <b id='infomessage'></b>
+                        </div>
+
+                        <label class="label sr-only">Password</label>
+                        <label class="input">
+                            <input type="email" id="email" name="email" placeholder="name@example.com">
+                        </label>
+                    </div>     
+                </section>
+                
+            </div>
+            <button type="button" id="newslettersubmit" class="btn btn-lg btn-block-bm btn-alt btn-icon btn-icon-right btn-envelope">
+                <span>Sign Me Up</span>
+            </button>
+        </form>   
+    </div>
+
+    <script>
+
+
+    $('#newslettersubmit').click(function () {
+
+        console.log('email click')
+
+        $.ajax({
+                    url: '/home/newslettersignup', type: "POST", dataType: "json",
+                    beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                    data: { email: $('#email').val() },
+                    success: function (data) {
+
+                        console.log('success: ', data)
+
+                        $("#newslettermessage").show();
+                        $("#infomessage").html(data);
+
+
+                    },
+                    failure: function (data) {
+                        console.log('autcomplete failed');
+                    }
+            })
+
+    });
+        
+    </script>
