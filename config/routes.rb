@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
   get 'termsconditions/index'
 
+  get 'termsconditions/index_no_layout'
+
   get 'aboutus/index'
 
   get 'faq/index'

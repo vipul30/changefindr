@@ -22,40 +22,11 @@ color: #fff;
                         <% 
                             @usergiftcards.each do |usergiftcard|
                         %>
-                        <div class="col-lg-6" style="text-align:center">
-                            <div class="wp-block product">
-                                <figure>
-                                    <img alt="" src="<%= CLOUDFRONT_HOST %>/<%= usergiftcard.merchant.logo.url%>" class="img-responsive img-center">
-                                </figure>
-                                <h2 class="product-title"><a href=""><%= usergiftcard.merchant.merchantname %></a></h2>
-                               
-                                <h4 style="color:black"><%= usergiftcard.cardnumber_hash[0...5] %>...</h4>
-                                <span class="primary-letter style-1 c-base">
-                                        &nbsp;&nbsp;$<%= usergiftcard.balance %>
-                                        </span>
-                                        <br/><br/>
+                        <div class="col-lg-6">
 
-                                <p style="text-align:center">
-                                    <div style="text-align: center;">
+                            <%= render(:partial => "giftcard/giftcard_product", :locals => {:usergiftcard => usergiftcard}) %>
 
-
-                                       
-                                    
-                                        <a href="#" class="btn btn-sm btn-base btn-icon fa-refresh">
-                                            <span>Refresh</span>
-                                        </a>
-                                    
-                                    
-                                        <br/><br/>
-                                        <a href="#" class="btn btn-sm btn-base btn-icon fa-credit-card">
-                                            <span>Donate</span>
-                                        </a>
-                                    </div>        
-                                            
-                                           
-                                </p>
-                              
-                            </div>
+                           
 
                           </div>
 

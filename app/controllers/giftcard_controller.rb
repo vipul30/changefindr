@@ -4,7 +4,6 @@ class GiftcardController < ApplicationController
     @usergiftcards = Giftcard.where(:isdeleted => false)
                         .where(:userid => session[:userid])
                         .order(modified: :desc)
-                        .limit(2)
                         .page(params[:page]).per_page(9)
 
     @usergiftcardscount = Giftcard.where(:isdeleted => false)
@@ -20,6 +19,19 @@ class GiftcardController < ApplicationController
   end
 
   def delete
+
+    @giftcard = Giftcard.where(:giftcardid => params[:id]).first()
+    @giftcard.isdeleted = 1
+
+    if @giftcard.save
+      flash[:notice] = "Your gift card has been deleted"
+      redirect_to(:controller => "giftcard", :action => "index")
+    else
+      flash[:notice] = "There was an error deleting the gift card.  Please try again or contact support."
+      redirect_to(:controller => "giftcard", :action => "index")
+    end
+
+
   end
 
   def edit
@@ -55,7 +67,7 @@ class GiftcardController < ApplicationController
       @giftcard.iv = cipher.random_iv
 
       @giftcard.cardnumber_hash = cipher.update(cardnumber) + cipher.final
-   end
+    end
     
    # getting UTF-8 error when saving to database.  google says there is a bugy in the pg gem.  update later.
    @giftcard.salt = nil
@@ -80,7 +92,8 @@ class GiftcardController < ApplicationController
                       .order(modified: :desc)
                       .limit(2).to_yaml
 
-        redirect_to(:controller => "home", :action => "index")
+        flash[:notice] = "Please see below for your gift card balance."
+        redirect_to(:controller => "giftcard", :action => "index")
         return
 
       # else redirect the user to the registration screen and store the gift card info in the session
