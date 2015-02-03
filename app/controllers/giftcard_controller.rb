@@ -35,6 +35,27 @@ class GiftcardController < ApplicationController
   end
 
   def edit
+    @giftcard = Giftcard.where(:giftcardid => params[:id]).first()
+  end
+
+  def update
+
+    # Find an existing object using form parameters
+    @giftcard = Giftcard.where(:giftcardid => params[:id]).first()
+    @giftcard.modified = Time.now
+    @giftcard.cardnumber_hash = params[:cardnumber]
+
+    # Update the object
+    if @giftcard.update_attributes(giftcard_params)
+      # If update succeeds, redirect to the index action
+      flash[:notice] = "Updated Gift Card"
+      redirect_to(:action => 'show', :id => @giftcard.giftcardid)
+    else
+      # If update fails, redisplay the form so user can fix problems
+      flash[:notice] = "There was an error updating gift card."
+      render('edit')
+    end
+
   end
 
   def new
@@ -115,6 +136,8 @@ class GiftcardController < ApplicationController
   end
 
   def show
+    @giftcard = Giftcard.where(:giftcardid => params[:id]).first()
+    
   end
 
   def giftcard_params

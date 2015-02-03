@@ -78,6 +78,7 @@ Rails.application.routes.draw do
 
   post 'cause/create'
   post 'cause/update'
+  post 'giftcard/update'
   post '/cause/causeautocomplete'
   post '/merchant/merchantautocomplete'
 

@@ -1,2 +1,108 @@
-<h1>Giftcard#show</h1>
-<p>Find me in app/views/giftcard/show.html.erb</p>
+<!-- MAIN CONTENT -->
+    <section class="slice slice-lg bg-image" style="background-image:url(/images/backgrounds/full-bg-2.jpg)">
+        <div class="wp-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7 col-md-offset-1 col-sm-5 col-sm-offset-1">
+                    	<div class="row">
+                    		
+							<div class="col-md-6">
+
+								<div class="wp-block default user-form no-margin">
+									 <div class="form-body">
+
+	                            			<a href="/giftcard/index" class="btn btn-base btn-icon btn-icon-right fa-caret-square-o-right">
+	                                			<span>View All My Gift Cards</span>
+	                            			</a>
+	                       
+					                        <br/><br/>
+					                        <a href="/giftcard/new" class="btn btn-base btn-icon btn-icon-right fa-gift">
+					                                <span>Check Balance For Another Card</span>
+					                        </a>
+	                        
+
+									 </div>
+								</div>
+
+							</div>						 	
+
+                    		<div class="col-md-6">
+
+								<div class="wp-block default user-form no-margin">
+		                            <div class="form-header">
+		                                <h2><%= @giftcard.merchant.merchantname %> Gift Card</h2>
+		                            </div>
+
+								      <div class="form-body" style="text-align:center">
+
+								      	<img alt="" src="<%= CLOUDFRONT_HOST %>/<%= @giftcard.merchant.logo.url%>" class="img-responsive img-center">
+
+								      	<br/>
+								      	
+		                              	<h4>Gift Card Number </h4><h6><%= @giftcard.cardnumber_hash %></h6>
+		                              	
+		                              	<h4>Pin: </h4> <h6><%= @giftcard.pin %></h6> 
+		                              
+		                              	<h4>Balance </h4>
+		                              	<span class="primary-letter style-1 c-base" style="float:center">$<%= @giftcard.balance %></span>
+		                              	<br/>
+		                              					<a href="#" class="btn btn-sm btn-base btn-icon fa-refresh">
+		                        							<span>Refresh</span>
+		                    							</a>
+		                              	
+
+		                              	<% if !@giftcard.expdate.nil? && !@giftcard.expdate.empty? %>
+											<h4>Expiration Date: </h4> <h6><%= @giftcard.expdate %></h6>
+		                              		<br/>
+		                              	<% end %>
+
+		                              	<% if !@giftcard.eventnumber.nil? && !@giftcard.eventnumber.empty? %>
+											<h4>Event Number </h4> <h6><%= @giftcard.eventnumber %></h6>
+		                              		<br/>
+		                              	<% end %>
+
+		                              	<br/><br/>
+					                    <a href="#" class="btn btn-sm btn-base btn-icon fa-credit-card">
+					                        <span>Donate</span>
+					                    </a>
+
+					                    <br/><br/>
+
+					                    <a href="/giftcard/delete/<%= @giftcard.giftcardid %>" class="cart-remove" title="Remove item" style="color:#e80e1d" data-confirm="Are you sure you want to delete this?"><i class="fa fa-times-circle"></i>Delete</a>
+
+										 <% if session[:roleid] == 1 %>
+							                <br/>
+							                <a href="/giftcard/edit/<%= @giftcard.giftcardid %>">Edit</a>
+
+							            <% end %>
+
+		                              </div>
+
+					            </div>
+
+			       		 </div>
+ 		 
+			    	</div>
+                    </div>
+                    <div class="col-md-4">
+                    	<!-- SIDEBAR - BLOG -->
+
+                        <!-- SIDEBAR - BLOG -->
+                        <div class="sidebar">
+
+               				<%= render partial: "widgets/testimonials.html.erb" %> 
+
+                            <%= render partial: "widgets/newsletter.html.erb" %>   
+
+                            <%= render partial: "widgets/didyouknow.html.erb" %> 
+    
+
+                        </div> 
+                    	               
+    				</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
