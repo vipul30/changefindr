@@ -104,6 +104,12 @@ Rails.application.routes.draw do
 
   resources :widgets
 
+  if Rails.env.production?
+   get '404', :to => 'home/error'
+   get '422', :to => 'home/error'
+   get '500', :to => 'home/error'
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -84,4 +84,9 @@ class HomeController < ApplicationController
   	render ('user_mailer/mailerlayout')
   end
 
+  def error
+    flash[:notice] = "There was an error processing your request.  An email has been sent to the administrator."
+    redirect_to(:controller => "home", :action => "index")
+  end
+
 end
