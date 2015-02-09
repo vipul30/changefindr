@@ -1,0 +1,137 @@
+<!-- MAIN CONTENT -->
+<section class="slice slice-lg bg-image" style="background-image:url(/images/backgrounds/full-bg-2.jpg)">
+    <div class="wp-section">
+        <div class="container">
+        <div class="row">
+            <div class="col-md-7 col-md-offset-1 col-sm-5 col-sm-offset-1">
+            	<div class="row">
+            		
+		<div class="col-md-12">
+
+		<div class="wp-block default user-form no-margin">
+            <div class="form-header">
+                <h2>Donate Your Unused Gift Card</h2>
+            </div>
+
+	      <div class="form-body">
+
+	      	
+
+            <%= form_for(@donation, :url => {:action => 'create'}, :html => {:class => 'sky-form', :id => "myform"}) do |f| %>
+
+                <%= f.fields_for :giftcard do |ff| %>
+                    <%= render(:partial => "/giftcard/giftcard_form", :locals => {:f => ff}) %>
+                <% end %>
+
+
+                <fieldset>          
+                  
+                    <section>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <% if session[:user_firstname] == nil %>
+
+
+                                    <label>First Name</label>
+                                    <label class="input">
+
+                                        <i class="icon-append fa fa-user"></i>
+                                        <%= f.text_field :firstname, :placeholder=>"First Name" %>
+                                                                                                
+                                    </label>
+                                    
+                                    <br/>
+
+                                    <label>Last Name</label>
+                                    <label class="input">
+
+                                        <i class="icon-append fa fa-user"></i>
+                                        <%= f.text_field :lastname, :placeholder=>"Last Name" %>
+                                                                                               
+                                    </label>
+
+                                    <br/>
+
+                                    <label>Email</label>
+                                    <label class="input">
+
+                                        <i class="icon-append fa fa-envelope-o"></i>
+                                        <%= email_field("donate", "email", :placeholder => "name@email.com") %>
+                                                                                               
+                                    </label>
+                                <% end %>
+
+
+                                <br>
+                                <label>Please let us know if you have any comments or special instructions for your donation.</label>
+                                <label class="input">
+
+                                    <i class="icon-append fa fa-comments"></i>
+                                    <%= text_area(:comment, :text, :style => "width:100%", :placeholder=> "Comments") %>
+                                                                                               
+                                </label>
+
+                                <br/>
+                                <label>I would like my name to appear on the donors wall&nbsp;&nbsp;&nbsp;</label>
+                    
+                                    <%= f.check_box :donationwall %>
+                                 
+                                <br/><br/>
+
+                                <label>By donating this card, I/we agree to all the <a id="TermsLink">terms and conditions</a></label>
+
+                                <br/><br/>
+                                <button id="donation_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button"
+                                onClick="this.form.submit(); this.disabled=true;"
+                                >
+                                    <span>Donate</span>
+                                </button>
+                            </div>
+                            
+                    </section>
+                </fieldset>
+
+            <!--/form-->
+            	<% end %>  
+        		</div>
+    </div>
+		 </div>
+
+	       		 
+	    </div>
+            </div>
+            <div class="col-md-4">
+            	
+
+                <!-- SIDEBAR -->
+                <div class="sidebar">
+
+                    <div class="panel panel-default panel-sidebar-1 visible-lg visible-md" id="merchantinfo">
+                        <div class="wp-block default">
+                        <div class="figure">
+                            <img alt="" src="<%= CLOUDFRONT_HOST %>/<%=@donation.charity.logo.url%>" class="img-responsive center-block"
+                                            style="margin: auto auto; height: auto; width: auto; max-height:150px; max-width:200px;" 
+                                            >     
+                        </div>
+                        <div class="wp-block-body">
+                            <h2 class="title" id=""><%= @donation.charity.charityname %></h2>
+                            <p></p>
+                        </div>
+                    </div>
+                    </div>
+        
+                    
+                    <%= render partial: "widgets/merchantselectedlogo.html.erb" %> 
+
+                
+
+                </div> 
+            	               
+			</div>
+        </div>
+    </div>
+</div>
+</section>
+
+

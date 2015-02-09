@@ -1,4 +1,6 @@
-<% if @giftcard.errors.any? %>
+<% 
+
+if @giftcard.errors.any? %>
   <div class="alert alert-danger fade in">
     <p><b>Please correct the following <%= pluralize(@giftcard.errors.count, "error") %>:</b></p>
  
@@ -20,6 +22,7 @@
             <section class="col-xs-12">
                
                 <%
+
                     if @giftcard.merchant
                         selectedmerchantname = @giftcard.merchant.merchantname
                     else
@@ -57,7 +60,6 @@
                 
                 <label id="pinlabel">Pin</label>
                 <label class="input">
-                	
                     <i class="icon-append fa fa-key"></i>
                     <%= f.text_field :pin, :placeholder=>"This is kept confidential." %>
          
@@ -101,16 +103,18 @@
 
 $(window).load(function () {
 
-    $("#giftcard_expdate").datepicker({
-                changeMonth: true,
-                changeYear: true
-    });
+    
 
     <% if @giftcard.merchant %>
         cardfieldschange(<%= @giftcard.merchant.merchantid %>);
     <% end %>
 
 });
+
+$("#giftcard_expdate,#donation_giftcard_attributes_expdate").datepicker({
+                changeMonth: true,
+                changeYear: true
+    });
 
 function cardfieldschange(cardid) {
 
@@ -120,7 +124,7 @@ function cardfieldschange(cardid) {
         // visa (157), vanilla (156), or mastercard (118)
         if (cardid == 29) // american express
         {
-            $("#pinlabel").html("Enter 4 digit security code on back of AMEX card.<font color=\"red\">*</font>");
+            $("#pinlabel").html("Enter 4 digit security code on back of AMEX card.");
             $("#expdatediv").show();
             $("#eventnumberdiv").hide();
 
@@ -130,7 +134,7 @@ function cardfieldschange(cardid) {
             cardid == 118)
             /* visa, vanilla, and mastercard */
         {
-            $("#pinlabel").html("Enter 3 digit security code on card.<font color=\"red\">*</font>");
+            $("#pinlabel").html("Enter 3 digit security code on card.");
             $("#expdatediv").show();
             $("#eventnumberdiv").hide();
         }
@@ -138,12 +142,12 @@ function cardfieldschange(cardid) {
         {
             $("#eventnumberdiv").show();
             $("#expdatediv").hide();
-            $("#pinlabel").html("Enter Access Number.<font color=\"red\">*</font>");
+            $("#pinlabel").html("Enter Access Number.");
             
 
         }
         else {
-            $("#pinlabel").html("Pin<font color=\"red\">*</font>");
+            $("#pinlabel").html("Pin");
             $("#expdatediv").hide();
             $("#eventnumberdiv").hide();
         }

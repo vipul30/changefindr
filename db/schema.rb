@@ -62,6 +62,18 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.datetime "image3_updated_at"
   end
 
+  create_table "donation", primary_key: "donationid", force: true do |t|
+    t.integer  "charityid"
+    t.integer  "giftcardid"
+    t.integer  "userid"
+    t.datetime "created"
+    t.datetime "modified"
+    t.integer  "donationwall", limit: 2
+    t.string   "firstname",    limit: 100
+    t.string   "lastname",     limit: nil
+    t.string   "comments",     limit: 1000
+  end
+
   create_table "giftcard", primary_key: "giftcardid", force: true do |t|
     t.integer  "merchantid"
     t.datetime "created"
@@ -76,6 +88,7 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.datetime "balancecheckdate"
     t.string   "iv",               limit: 1000
     t.integer  "isdeleted",        limit: 2
+    t.integer  "isdonated",        limit: 2
   end
 
   create_table "giftcardstat", primary_key: "statsid", force: true do |t|

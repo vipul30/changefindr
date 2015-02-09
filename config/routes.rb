@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
   
+  get 'donate/index'
+
+  get 'donate/new'
+
+  get 'donate/create'
+
+  get 'donate/edit'
+
+  get 'donate/update'
+
+  get 'donate/show'
+
+  get 'donate/delete'
+
   get 'giftcard/index'
 
   get 'giftcard/delete'

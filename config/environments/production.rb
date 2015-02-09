@@ -96,4 +96,13 @@ Rails.application.configure do
     authentication:       'plain',
     enable_starttls_auto: true  
   }
+
+  Changefindr::Application.config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "Error - Changefindr ",
+    :sender_address => %{"Changefindr Error" <info@changefindr.com>},
+    :exception_recipients => %w{vipul30@gmail.com}
+  }
+
+
 end

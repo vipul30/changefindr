@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Step 1: Select the cause you want to support</h2>
+                    <h2>Select the cause you want to support</h2>
                 </div>
                
             </div>
@@ -50,13 +50,13 @@
                                     >
                                     <div class="figcaption bg-base"></div>
                                     <div class="figcaption-btn">
-                                        <a href="<%=cause.logo.url%>" class="btn btn-xs btn-b-white theater"><i class="fa fa-credit-card"></i> Donate</a>
+                                        <a href="/donate/new/?charityid=<%= cause.charityid %>" class="btn btn-xs btn-b-white theater"><i class="fa fa-credit-card"></i> Donate</a>
                                         <a href="<%= "http://" +  @userhost + "/cause/show/" +  cause.charityid.to_s %>" class="btn btn-xs btn-b-white"><i class="fa fa-plus-circle"></i> View Details</a>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-9 center-block" style="text-align:left">
-                                        <a href="#" class="btn btn-md"><i class="fa fa-credit-card"></i> Donate</a>
+                                        <a href="/donate/new?charityid=<%= cause.charityid %>" class="btn btn-md"><i class="fa fa-credit-card"></i> Donate</a>
                                         <br/>  
                                         
                                         <a href="<%= "http://" +  @userhost + "/cause/show/" +  cause.charityid.to_s %>">

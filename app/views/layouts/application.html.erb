@@ -156,7 +156,41 @@ ul.ui-autocomplete {
         hoverPrevNext: true,
     });
 
+$('#TermsLink').click(function () {
+        //Load the Login action which will return 
+        // the partial view _Login
 
+        console.log('terms link clicked');
+
+        $dialog = $('<div></div>')
+                   .html('<iframe style="border: 1px solid;border-color: #e0eded;background:white;" src="/termsconditions/index_no_layout" width="100%" height="100%"></iframe>')
+                   .dialog({
+                       autoOpen: false,
+                       modal: true,
+                       height: $(window).height()/2,
+                       width: $(window).width()/2,
+                       title: "Changefindr - Donate Unused Gift Card Balance",
+                       position: { my: "center", at: '150', of: $(window) },
+
+
+                       buttons: {
+                           
+                           "Close": {
+                               text: 'Close',
+                               
+                               click: function () {
+
+                                   // close dialog and pop up a message to donate
+                                   $(this).dialog("destroy");
+                               }
+                           }
+
+                       }
+                   });
+
+        $dialog.dialog('open');
+        
+    });
 
 
   $("#searchcausemain").autocomplete({
@@ -206,9 +240,8 @@ ul.ui-autocomplete {
             .appendTo(ul);
     };
 
-
+try {
     $("#searchmerchant").autocomplete({
-
 
             source: function (request, response) {
                 $.ajax({
@@ -253,6 +286,9 @@ ul.ui-autocomplete {
                 .append('<a><img src="<%= CLOUDFRONT_HOST %>/' + item.logo + '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + item.name + '</a>')
                 .appendTo(ul);
         };
+} catch (Exception) {}
+
+
 
 
 

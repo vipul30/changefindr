@@ -65,6 +65,8 @@ gem 'rails3-jquery-autocomplete'
 
 gem 'zeroclipboard-rails', '~> 0.1.0'
 
+gem 'exception_notification', '~> 4.0.1'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
