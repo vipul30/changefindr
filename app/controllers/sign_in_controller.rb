@@ -1,6 +1,10 @@
 class SignInController < ApplicationController
   def index
-  	session[:return_to] = Rails.application.routes.recognize_path(request.referrer)
+  	begin
+  		session[:return_to] = Rails.application.routes.recognize_path(request.referrer)
+  	rescue
+  		session[:return_to] = '/home/index'
+  	end
 
   end
 

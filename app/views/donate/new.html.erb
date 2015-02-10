@@ -1,5 +1,5 @@
 <!-- MAIN CONTENT -->
-<section class="slice slice-lg bg-image" style="background-image:url(/images/backgrounds/full-bg-2.jpg)">
+<section class="slice slice-lg bg-image" style="background: url(/images/patterns/squairy-light.png) repeat fixed !important;">
     <div class="wp-section">
         <div class="container">
         <div class="row">
@@ -10,12 +10,25 @@
 
 		<div class="wp-block default user-form no-margin">
             <div class="form-header">
-                <h2>Donate Your Unused Gift Card</h2>
+                <h1>Donate Your Unused Gift Card</h2>
+
+                <% if session[:user_firstname] == nil %>
+                    <p style="text-align:center">
+                        <br/>
+                        Please login, so you can enjoy the benefits of being a member of Changefindr.com.  You will be able to check gift card balance instantly, view the history of your donations, print your tax receipt, and automatically be joined in our rewards program.  <a href="/sign_in/index">Login Here</a>
+                        
+                        <h4 style="text-align:center">OR</h4>
+                        
+                    </p>
+                        <p style="text-align:center">Continue as guest</p>
+                        
+                      
+                    
+                <% end %>
+
             </div>
 
 	      <div class="form-body">
-
-	      	
 
             <%= form_for(@donation, :url => {:action => 'create'}, :html => {:class => 'sky-form', :id => "myform"}) do |f| %>
 
@@ -116,6 +129,7 @@
                         </div>
                         <div class="wp-block-body">
                             <h2 class="title" id=""><%= @donation.charity.charityname %></h2>
+                            <a href="/cause/show/<%= @donation.charity.charityid %>">About Cause</a>
                             <p></p>
                         </div>
                     </div>
