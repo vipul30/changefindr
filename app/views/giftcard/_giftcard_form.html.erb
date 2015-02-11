@@ -1,6 +1,6 @@
 <% 
 begin
-if @giftcard.errors.any? %>
+if @giftcard.errors.any? && !@donation.errors? %>
   <div class="alert alert-danger fade in">
     <p><b>Please correct the following <%= pluralize(@giftcard.errors.count, "error") %>:</b></p>
  
@@ -103,6 +103,16 @@ end
    
 </fieldset>  
 
+<style>
+.ui-datepicker-calendar {
+    display: none;
+    }
+.ui-datepicker {
+
+    width: 250px;
+    }
+</style>
+
 <script>
 
 $(window).load(function () {
@@ -117,8 +127,19 @@ $(window).load(function () {
 
 $("#giftcard_expdate,#donation_giftcard_attributes_expdate").datepicker({
                 changeMonth: true,
-                changeYear: true
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'MM yy',
+                onClose: function(dateText, inst) { 
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                    console.log('close');
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    mydate = new Date(year, month, 1)
+                    $(this).val($.datepicker.formatDate('mm-dd-yy', mydate));
+                }
     });
+
+
 
 function cardfieldschange(cardid) {
 

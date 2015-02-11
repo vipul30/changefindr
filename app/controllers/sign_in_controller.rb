@@ -78,7 +78,7 @@ class SignInController < ApplicationController
 		  user.email = auth.info.email
 		  user.location = auth.info.location
 		  user.provideruid = auth.uid
-		  #user.image = auth.info.image
+		  user.image = auth.info.image
 		  user.gender = auth.extra.raw_info.gender
 		  user.birthday = Date.strptime(auth.extra.raw_info.birthday, "%m/%d/%Y")
 		  user.providerurl = auth.extra.raw_info.link

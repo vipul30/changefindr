@@ -34,8 +34,10 @@ class DonateController < ApplicationController
     @donation.giftcard.created = Time.now
     @donation.giftcard.modified = Time.now
     @donation.giftcard.balancecheckdate = Time.now
+    @giftcard = @donation.giftcard
 
     if session[:userid]
+      @donation.userid = session[:userid]
       @donation.giftcard.userid = session[:userid]
     end
     
@@ -47,6 +49,7 @@ class DonateController < ApplicationController
       redirect_to(:controller => "home", :action => "index")
       return
     else
+
       render('new')
     end
 
