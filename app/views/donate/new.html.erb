@@ -22,15 +22,32 @@
                     </p>
                         <p style="text-align:center">Continue as guest</p>
                         
-                      
-                    
+                       
                 <% end %>
 
             </div>
 
 	      <div class="form-body">
 
+
+<% 
+
+if @donation.errors.any? %>
+  <div class="alert alert-danger fade in">
+    <p><b>Please correct the following <%= pluralize(@donation.errors.count, "error") %>:</b></p>
+ 
+    <ul>
+    <% @donation.errors.messages.values.each do |msg| %>
+        <%msg.each do  |m| %>
+            <li><%= m %></li>
+        <%end %>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
             <%= form_for(@donation, :url => {:action => 'create'}, :html => {:class => 'sky-form', :id => "myform"}) do |f| %>
+
+                <%= f.hidden_field :charityid, :value => @donation.charityid %>
 
                 <%= f.fields_for :giftcard do |ff| %>
                     <%= render(:partial => "/giftcard/giftcard_form", :locals => {:f => ff}) %>
@@ -70,7 +87,8 @@
                                     <label class="input">
 
                                         <i class="icon-append fa fa-envelope-o"></i>
-                                        <%= email_field("donate", "email", :placeholder => "name@email.com") %>
+                                        <%= f.text_field :email, :placeholder=>"name@email.com" %>
+                                        
                                                                                                
                                     </label>
                                 <% end %>
@@ -81,7 +99,7 @@
                                 <label class="input">
 
                                     <i class="icon-append fa fa-comments"></i>
-                                    <%= text_area(:comment, :text, :style => "width:100%", :placeholder=> "Comments") %>
+                                    <%= f.text_area :comments, :placeholder=>"Comments", :style => "width:100%;" %>
                                                                                                
                                 </label>
 

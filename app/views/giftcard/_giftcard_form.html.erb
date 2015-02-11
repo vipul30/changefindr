@@ -1,5 +1,5 @@
 <% 
-
+begin
 if @giftcard.errors.any? %>
   <div class="alert alert-danger fade in">
     <p><b>Please correct the following <%= pluralize(@giftcard.errors.count, "error") %>:</b></p>
@@ -12,7 +12,10 @@ if @giftcard.errors.any? %>
     <% end %>
     </ul>
   </div>
-<% end %>
+<% end
+rescue
+end
+%>
 
 <fieldset class="no-padding"> 
 
@@ -192,7 +195,14 @@ $("#merchant").autocomplete({
 
                 event.preventDefault();
                 $("#merchant").val(ui.item.name);
-                $("#giftcard_merchantid").val(ui.item.id);
+
+                try {
+                    $("#giftcard_merchantid").val(ui.item.id);
+                } catch (Exception){}
+
+                try {
+                    $("#donation_giftcard_attributes_merchantid").val(ui.item.id);
+                } catch (Exception){}
                 $("#merchantname").html(ui.item.name);
                 $("#merchantlogo").attr("src", '<%= CLOUDFRONT_HOST %>/' + ui.item.logo);
 

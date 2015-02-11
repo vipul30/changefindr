@@ -3,7 +3,7 @@
     <!-- MAIN CONTENT -->
     	
 
-    <section class="slice slice-lg bg-image" style="background-image:url(/images/backgrounds/full-bg-2.jpg)">
+    <section class="slice slice-lg bg-image" style="background: url(/images/patterns/squairy-light.png) repeat fixed !important;">
         <div class="wp-section">
             <div class="container">
                 <div class="row">
@@ -11,18 +11,23 @@
                     	<div class="row">
                     		
 						 <% if session[:user_firstname] == nil %>
-						 <br/><br/><br/><br/><br/><br/>
-						 	<p>It's easy to create your own cause and start raising funds through unused gift card donations.  Simply
+						 <div class="wp-block default user-form no-margin">
+                            <br/><br/><br/>
+						 	<p style="text-align:center">It's easy to create your own cause and start raising funds through unused gift card donations.<br/><br/>Simply
 						 	<a href="/sign_up/index">register</a> 
-						 	 and complete a short form.  We will contact you once we have reviewed your information.
+						 	 and complete a short form.  <br/><br/>We will contact you once we have reviewed your information.
 						 	</p>
+                            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                        </div>
 						 <% else %>
                     		<div class="col-md-12">
 
 							<div class="wp-block default user-form no-margin">
+
 	                            <div class="form-header">
 	                                <h2>Tell us about your cause</h2>
 	                            </div>
+
 
 						      <div class="form-body">
                                 <%= form_for(@cause, :url => {:action => 'create'}, :html => {:class => 'sky-form', :id => "myform"}) do |f| %>
@@ -53,7 +58,7 @@
 
                             
 			            </div>
-			       		 </div>
+			       	</div>
 
 			       		 <% end %>
 			    </div>

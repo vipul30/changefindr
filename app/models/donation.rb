@@ -8,6 +8,8 @@ class Donation < ActiveRecord::Base
     belongs_to :giftcard, :class_name => 'Giftcard', :foreign_key => :giftcardid
 
     accepts_nested_attributes_for :giftcard
+
+    
         
 	                        
 end

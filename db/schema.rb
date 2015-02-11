@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.string   "firstname",    limit: 100
     t.string   "lastname",     limit: nil
     t.string   "comments",     limit: 1000
+    t.string   "email",        limit: 100
   end
 
   create_table "giftcard", primary_key: "giftcardid", force: true do |t|
