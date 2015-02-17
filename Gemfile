@@ -67,6 +67,13 @@ gem 'zeroclipboard-rails', '~> 0.1.0'
 
 gem 'exception_notification', '~> 4.0.1'
 
+# better way of displaying errors on dev
+gem 'better_errors', '~> 2.1.1'
+gem 'binding_of_caller', '~> 0.7.2'
+
+#custom error messages
+gem 'gaffe', '~> 1.0.2'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

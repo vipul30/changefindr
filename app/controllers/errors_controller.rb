@@ -1,10 +1,12 @@
 class ErrorsController < ApplicationController
-  def file_not_found
-  end
+  include Gaffe::Errors
 
-  def unprocessable
-  end
+   # Make sure anonymous users can see the page
+  skip_before_filter :authenticate_user!
 
-  def internal_server_error
+  # Override 'error' layout
+  layout 'application'
+
+  def show
   end
 end
