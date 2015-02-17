@@ -59,58 +59,53 @@ class SignInController < ApplicationController
 
 		auth = env["omniauth.auth"]
 
-		# check if this user already exists with a regular login
-		#found_user = User.where(:email => auth.info.email).first
-    
-    	#if found_user
-      	#	flash[:notice] = "Email already exists for this user.  Please either login with this email or use a different email."
-      	#	redirect_to  :controller => :sign_up, :action => :index
-    	#else
-
 		user = User.where(provideruid: auth.uid).first
 
+		newuser = false
 
 		if (!user)
-		  user = User.new	
-	      user.firstname = auth.info.first_name
-		  user.lastname = auth.info.last_name
-		  user.provider = auth.provider
-		  user.email = auth.info.email
-		  user.location = auth.info.location
-		  user.provideruid = auth.uid
-		  user.image = auth.info.image
-		  user.gender = auth.extra.raw_info.gender
-		  user.birthday = Date.strptime(auth.extra.raw_info.birthday, "%m/%d/%Y")
-		  user.providerurl = auth.extra.raw_info.link
-		  user.locale = auth.extra.raw_info.locale
-		  user.providerusername = auth.extra.raw_info.username
-		  user.timezone = auth.extra.raw_info.timezone
-		  user.created = Time.now
-     	  user.modified = Time.now
-     	  user.roleid = REGULAR_ROLE # everyone starts off as a reguler user
-     	  user.isVerified = true # by default user is verified as having a valid email from facebook
-      	  
-      	  if user.save
-      	  	session[:user_firstname] = user.firstname
-			session[:username] = user.email
-			session[:userid] = user.userid
-			session[:roleid] = user.roleid
-			initializelogin(user)
-		    flash[:notice] = "Thank you for registering.  You are now logged in."
-		    UserMailer.welcome_email(user, request.host_with_port).deliver
-		    redirect_to session[:return_to]
-		    return
-      	  else
-      	  	
-      	  	# If save fails, redisplay the form so user can fix problems
-      	  	flash[:notice] = "A user with the same Facebook email address already exists."
-        	redirect_to session[:return_to]
-        	return
-      	  end
-
+			newuser = true
+			user = User.new	
 		end
-	 
+
 		
+		user.firstname = auth.info.first_name
+		user.lastname = auth.info.last_name
+		user.provider = auth.provider
+		user.email = auth.info.email
+		user.location = auth.info.location
+		user.provideruid = auth.uid
+		user.imageurl = auth.info.image
+		user.gender = auth.extra.raw_info.gender
+		user.birthday = Date.strptime(auth.extra.raw_info.birthday, "%m/%d/%Y")
+		user.providerurl = auth.extra.raw_info.link
+		user.locale = auth.extra.raw_info.locale
+		user.providerusername = auth.extra.raw_info.username
+		user.timezone = auth.extra.raw_info.timezone
+		user.created = Time.now
+		user.modified = Time.now
+		user.roleid = REGULAR_ROLE # everyone starts off as a reguler user
+		user.isVerified = true # by default user is verified as having a valid email from facebook
+		
+	
+		if user.save
+
+			if newuser
+		    	flash[:notice] = "Thank you for registering.  You are now logged in."
+		    	UserMailer.welcome_email(user, request.host_with_port).deliver
+		    end
+		    	#redirect_to session[:return_to]
+	    		#return
+	    	
+		else
+		  	
+		  	# If save fails, redisplay the form so user can fix problems
+		  	flash[:notice] = "A user with the same Facebook email address already exists."
+			redirect_to session[:return_to]
+			return
+		end
+		
+
 		# check if there is a gift card id in the session.  if so, update the user id for this record
 		if session[:newgiftcardid]
 			@giftcard = Giftcard.where(:giftcardid => session[:newgiftcardid]).first
@@ -118,7 +113,6 @@ class SignInController < ApplicationController
 			@giftcard.save
 		end
 
-		
 	 	session[:user_firstname] = user.firstname
 		session[:username] = user.email
 		session[:userid] = user.userid

@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   
+  get 'errors/file_not_found'
+
+  get 'errors/unprocessable'
+
+  get 'errors/internal_server_error'
+
   get 'donate/index'
 
   get 'donate/new'
@@ -107,9 +113,9 @@ Rails.application.routes.draw do
   resources :widgets
 
   if Rails.env.production?
-   get '404', :to => 'home#error'
-   get '422', :to => 'home#error'
-   get '500', :to => 'home#error'
+   match '/404', to: 'errors#file_not_found', via: :all
+   match '/422', to: 'errors#unprocessable', via: :all
+   match '/500', to: 'errors#internal_server_error', via: :all
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
