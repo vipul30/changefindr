@@ -291,7 +291,7 @@
                                                         style="margin: auto auto; height: auto; width: auto; max-height:150px; max-width:200px;" >
                                                         <div class="figcaption bg-base"></div>
                                                         <div class="figcaption-btn">
-                                                            <a href="#" class="btn btn-xs btn-b-white theater"><i class="fa fa-credit-card"></i> Donate</a>
+                                                            <a href="/donate/new?merchantid=<%=  @merchants[i+k].merchantid.to_s %>" class="btn btn-xs btn-b-white theater"><i class="fa fa-credit-card"></i> Donate</a>
                                                             <a href="<%= "http://" +  @userhost + "/giftcard/new/" +  @merchants[i+k].merchantid.to_s %>" class="btn btn-xs btn-b-white"><i class="fa fa-check-square-o"></i> Check Balance</a>
                                                         </div>
                                                     </div>

@@ -74,6 +74,9 @@ gem 'binding_of_caller', '~> 0.7.2'
 #custom error messages
 gem 'gaffe', '~> 1.0.2'
 
+#gem 'debugger', '~> 1.6.8'
+
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

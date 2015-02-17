@@ -7,11 +7,33 @@ class DonateController < ApplicationController
     @donation = Donation.new
     @giftcard = Giftcard.new
 
-    if !params[:giftcardid].nil? && !params[:giftcardid].empty?
-      
-      @giftcard = Giftcard.where(:giftcardid => params[:id]).first()
+
+    
+
+    if !params[:merchantid].nil? && !params[:merchantid].empty?
+       
+      @giftcard.merchantid = params[:merchantid]
+      session[:merchantid] = params[:merchantid]
+
+    elsif session[:merchantid]
+
+      @giftcard.merchantid = session[:merchantid]
 
     end
+
+    if !params[:giftcardid].nil? && !params[:giftcardid].empty?
+      
+      @giftcard = Giftcard.where(:giftcardid => params[:giftcardid]).first()
+      session[:giftcardid] = @giftcard.giftcardid
+
+    elsif session[:giftcardid]
+
+      session[:merchantid] = nil
+      @giftcard = Giftcard.where(:giftcardid => session[:giftcardid]).first()
+
+    end
+
+
 
     if params[:charityid].nil? || params[:charityid].empty?
       redirect_to(:controller => "cause", :action => "index")

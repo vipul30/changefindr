@@ -10,7 +10,7 @@ class CauseController < ApplicationController
 
   def new
 
-    @cause = Charitys.new
+    @cause = Charity.new
 
 
   end
