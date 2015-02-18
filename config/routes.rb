@@ -1,5 +1,21 @@
 Rails.application.routes.draw do
   
+  get 'user/new'
+
+  get 'user/create'
+
+  get 'user/show'
+
+  get 'user/update'
+
+  get 'user/index'
+
+  get 'user/delete'
+
+  get 'user/edit'
+
+  resources :users
+
   get 'errors/show'
 
   get 'errors/file_not_found'
@@ -105,6 +121,7 @@ Rails.application.routes.draw do
   post 'giftcard/update'
   post '/cause/causeautocomplete'
   post '/merchant/merchantautocomplete'
+  post 'user/userautocomplete'
 
 
   root :to => "home#index"

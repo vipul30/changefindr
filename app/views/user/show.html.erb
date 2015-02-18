@@ -1,0 +1,86 @@
+ <div class="pg-opt">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>User account</h2>
+                </div>
+                <div class="col-md-6">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Pages</a></li>
+                        <li class="active">User account</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="slice bg-white">
+        <div class="wp-section user-account">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="user-profile-img">
+                            <img class="img-responsive" src="<%= @user.imageurl %>" alt="">
+                        </div>
+                        <ul class="categories mt-20">
+                            <li><a href="#">Personal Information</a></li>
+                            
+                        </ul>
+                    </div>
+                    <div class="col-md-9">                     
+                        <div class="tabs-framed">
+                            <ul class="tabs clearfix">
+                                <li class="active"><a href="#tab-1" data-toggle="tab">About me</a></li>
+                                
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="tab-1">
+                                    <div class="tab-body">
+                                        <dl class="dl-horizontal style-2">
+                                            <h3 class="title title-lg">Personal information</h3>
+                                            
+                                            
+                                            <dt>Your name</dt>
+                                            <dd>
+                                                <span class="pull-left"><%= @user.firstname %> <%= @user.lastname %></span>
+                                                <a href="#" class="btn btn-xs btn-base btn-icon fa-edit pull-right"><span>Edit</span></a>
+                                            </dd>
+                                            <hr>
+                                            <dt>Email</dt>
+                                            <dd>
+                                            <span class="pull-left"><%= @user.email %></span>
+                                                <a href="#" class="btn btn-xs btn-base btn-icon fa-edit pull-right"><span>Edit</span></a>
+                                            </dd>
+                                            <hr>
+                                            <dt>Phone</dt>
+                                            <dd>
+                                                <span class="pull-left">+40-722.123.456</span>
+                                                <a href="#" class="btn btn-xs btn-base btn-icon fa-edit pull-right"><span>Edit</span></a>
+                                            </dd>
+                                            <hr>
+                                            <dt>Address</dt>
+                                            <dd>
+                                                <span class="pull-left">Bucharest, Romania</span>
+                                                <a href="#" class="btn btn-xs btn-base btn-icon fa-edit pull-right"><span>Edit</span></a>
+                                            </dd>
+                                            <hr>
+                                            <dt>Company</dt>
+                                            <dd>
+                                                <span class="pull-left">Web Pixels</span>
+                                                <a href="#" class="btn btn-xs btn-base btn-icon fa-edit pull-right"><span>Edit</span></a>
+                                            </dd>
+                                            
+                                        </dl>
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

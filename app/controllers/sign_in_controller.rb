@@ -65,7 +65,8 @@ class SignInController < ApplicationController
 
 		if (!user)
 			newuser = true
-			user = User.new	
+			user = User.new
+			user.roleid = REGULAR_ROLE # everyone starts off as a reguler user
 		end
 
 		
@@ -84,7 +85,7 @@ class SignInController < ApplicationController
 		user.timezone = auth.extra.raw_info.timezone
 		user.created = Time.now
 		user.modified = Time.now
-		user.roleid = REGULAR_ROLE # everyone starts off as a reguler user
+		
 		user.isVerified = true # by default user is verified as having a valid email from facebook
 		
 	
