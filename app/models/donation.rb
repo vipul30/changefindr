@@ -8,7 +8,7 @@ class Donation < ActiveRecord::Base
     belongs_to :user, :class_name => 'User', :foreign_key => :userid
     belongs_to :giftcard, :class_name => 'Giftcard', :foreign_key => :giftcardid
 
-    accepts_nested_attributes_for :giftcard
+    accepts_nested_attributes_for :giftcard, update_only: true
 
     validates :firstname, :presence => {:message => "Please enter your first name."}, :unless => :userid?
     validates :lastname, :presence => {:message => "Please enter your last name."}, :unless => :userid?

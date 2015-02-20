@@ -19,6 +19,7 @@
 						      <div class="form-body">
                                 <%= form_for(@giftcard, :url => {:action => 'update', :id => @giftcard.giftcardid}, :method => :POST, :html => {:class => 'sky-form', :id => "myform"}) do |f| %>
 
+                                    
                                     <%= render(:partial => "giftcard_form", :locals => {:f => f}) %>
 
                                    

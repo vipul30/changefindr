@@ -3,10 +3,10 @@ class DonateController < ApplicationController
 
 
     if session[:roleid] == ADMIN_ROLE && params[:viewall]
-      @donations = Donation.order('created ASC').page(params[:page]).per_page(9)
+      @donations = Donation.order('created DESC').page(params[:page]).per_page(9)
 
     elsif session[:userid] == params[:userid] || session[:roleid] == ADMIN_ROLE
-      @donations = Donation.where(userid: params[:userid]).order('created ASC').page(params[:page]).per_page(9)
+      @donations = Donation.where(userid: params[:userid]).order('created DESC').page(params[:page]).per_page(9)
       
     else
       flash[:notice] = "You are not authorized to view this page."
@@ -65,7 +65,7 @@ class DonateController < ApplicationController
     @donation = Donation.new(donate_params)
     @donation.created = Time.now
     @donation.modified = Time.now
-    @donation.giftcard.cardnumber_hash = params[:cardnumber]
+    #@donation.giftcard.cardnumber_hash = params[:cardnumber]
     @donation.giftcard.created = Time.now
     @donation.giftcard.modified = Time.now
     @donation.giftcard.balancecheckdate = Time.now
@@ -108,7 +108,7 @@ class DonateController < ApplicationController
   def update
 
     @donation = Donation.where(donationid: params[:id]).first
-    @donation.update(donate_params)
+    
     @donation.modified = Time.now
     @donation.giftcard.cardnumber_hash = params[:cardnumber]
     @donation.giftcard.modified = Time.now
@@ -145,7 +145,7 @@ class DonateController < ApplicationController
   end
 
   def donate_params
-    params.require(:donation).permit({:giftcard_attributes =>  [:merchantid,:pin,:expdate,:eventnumber]},
+    params.require(:donation).permit({:giftcard_attributes =>  [:cardnumber_hash,:merchantid,:pin,:expdate,:eventnumber]},
                                      :firstname,:lastname,:email,:comments,:donationwall,:charityid)
   end
 
