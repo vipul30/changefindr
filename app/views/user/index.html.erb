@@ -36,34 +36,29 @@
 	</div>
 </div>	
 
-<br/><br/><br/>
-                <div class="row">       
-                    <div id="ulSorList">
-    
-                        <% @users.each do |user| %>
+                <br/><br/><br/>
 
-                        <div class="col-sm-2">
-                        	<%= user.userid %>
-                        </div>
+                
+                    <table class="table table-responsive table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th></th>
+                            </tr>
+                            <% @users.each do |user| %>
+                                <tr>
+                                    <td><%= user.userid %></td>
+                                    <td><a href="/user/show/<%= user.userid %>"><%= user.lastname %>, <%= user.firstname %></a></td>
+                                    <td><%= user.email %></td>
+                                    <td><a href="/user/edit/<%= user.userid %>">Edit</a></td>
+                                </tr>
+                            <% end %>
+                            
+                        </tbody>
+                    </table>               
 
-
-						<div class="col-sm-5">
-                        	<a href="/user/show/<%= user.userid %>"><%= user.lastname %>, <%= user.firstname %></a>
-                        </div>
-
-                        <div class="col-sm-3">
-                        	<%= user.email %>
-                        </div>
-
-                        <div class="col-sm-2">
-                        	<a href="#">Edit</a>
-                        </div>
-
-                        <% end %>      
-
-                        <div class="gap"></div>
-                    </div>                                   
-                </div>
         	</div>    	
         </div>
     </section>

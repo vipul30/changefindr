@@ -1,2 +1,171 @@
-<h1>Donate#show</h1>
-<p>Find me in app/views/donate/show.html.erb</p>
+ <div class="pg-opt">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Your Donation</h2>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+    <section class="slice bg-white">
+        <div class="wp-section user-account">
+            <div class="container">
+                <div class="row">
+                    
+
+                    <div class="col-md-9">
+                              
+                        <div class="tabs-framed">
+                            <ul class="tabs clearfix">
+                                <li class="active"><a href="#tab-1" data-toggle="tab">Donation</a></li>
+
+                                
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="tab-1">
+                                    <div class="tab-body">
+                                        <dl class="dl-horizontal style-2">
+                                            
+                                            
+                                            <dt>Donor</dt>
+                                            <dd>
+                                                <span class="pull-left">
+
+													<% if @donation.userid %>
+			                                    		<a href="/donate/index/?userid=<%= @donation.user.userid %>"><%= @donation.user.firstname %> <%= @donation.user.lastname %><br/><%= @donation.user.email %></a>
+			                                    	<% else %>
+			                                    		<%= @donation.firstname %> <%= @donation.lastname %><br/><%= @donation.email %>
+			                                    	<% end %>
+
+                                                </span>
+                                                
+                                            </dd>
+
+                                            <hr>
+                                            <dt>Cause</dt>
+                                            <dd>
+                                            <span class="pull-left">
+                                            	<img alt="" src="<%= CLOUDFRONT_HOST %>/<%=@donation.charity.logo.url%>" class="img-responsive center-block"
+                                            style="margin: auto auto; height: auto; width: auto; max-height:50px; max-width:100px;">  <br/>  
+                                            	<%= @donation.charity.charityname %>
+                                            </span>
+                                                
+                                            </dd>
+
+                                            <hr>
+                                            <dt>Merchant</dt>
+                                            <dd>
+                                            <span class="pull-left">
+                                            	<img alt="" src="<%= CLOUDFRONT_HOST %>/<%=@donation.giftcard.merchant.logo.url%>" class="img-responsive center-block"
+                                            style="margin: auto auto; height: auto; width: auto; max-height:50px; max-width:100px;">  <br/>  
+                                            	<%= @donation.giftcard.merchant.merchantname %>
+                                            </span>                                                
+                                            </dd>
+
+                                            <hr>
+                                            <dt>Card #</dt>
+                                            <dd>
+                                            	<%= @donation.giftcard.cardnumber_hash %>
+                                            </span>                                                
+                                            </dd>
+
+											<hr>
+                                            <dt>Pin #</dt>
+                                            <dd>
+                                            	<%= @donation.giftcard.pin %>
+                                            </span>                                                
+                                            </dd>
+
+											<hr>
+                                            <dt>Balance</dt>
+                                            <dd>
+                                            	$<%= @donation.giftcard.balance %>
+                                            </span>                                                
+                                            </dd>
+
+                                            <hr>
+                                            <dt>Date Donated</dt>
+                                            <dd>
+                                            	<%= @donation.created.to_formatted_s(:db) %>
+                                            </span>                                                
+                                            </dd>
+
+                                            <hr>
+                                            <dt>Expiration Date</dt>
+                                            <dd>
+                                            	<% if !@donation.giftcard.expdate.nil? %>
+													<%= @donation.giftcard.expdate %>	               
+		                              			<% end %>
+                                            </span>                                                
+                                            </dd>
+
+
+											<hr>
+                                            <dt>Event Number</dt>
+                                            <dd>
+                                            	<% if !@donation.giftcard.eventnumber.nil? && !@donation.giftcard.eventnumber.empty? %>
+													<%= @donation.giftcard.eventnumber %>	               
+		                              			<% end %>
+                                            </span>                                                
+                                            </dd>
+
+                                            <hr>
+                                            <dt>Name on Donation Wall</dt>
+                                            <dd>
+                                            	<% if @donation.donationwall == true %>
+													Yes
+												<% else %>
+													No	               
+		                              			<% end %>
+                                            </span>                                                
+                                            </dd>
+
+                                            <hr>
+                                            <dt>Comments</dt>
+                                            <dd>
+                                            	<%= @donation.comments %>
+                                            </span>                                                
+                                            </dd>
+
+                                            <hr>
+                                            <dt>Status</dt>
+                                            <dd>
+                                            	status...
+                                            </span>                                                
+                                            </dd>
+
+                                            <hr>
+                                            <dt>Notes</dt>
+                                            <dd>
+                                            	notes...
+                                            </span>                                                
+                                            </dd>
+
+                                            
+                                        </dl>
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+
+                        </div>
+
+                        
+                        
+
+                        <% if session[:roleid] == ADMIN_ROLE %>
+                             
+                             <br/><br/>
+                             <a href="/donate/edit/<%= @donation.donationid %>" class="btn btn-xs btn-base btn-icon fa-edit"><span>Edit</span></a>
+                             <br/><br/>
+                        <% end %>          
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

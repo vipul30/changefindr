@@ -18,6 +18,9 @@ class SignInController < ApplicationController
 	      found_user = User.where(:email => params[:email]).first
 	      if found_user
 	        authorized_user = verify_password(params[:password], found_user.salt, found_user.password_hash)
+
+	        found_user.lastlogin = Time.now
+	        found_user.save
 	      end
 	    end
 	    if authorized_user
@@ -76,7 +79,7 @@ class SignInController < ApplicationController
 		user.email = auth.info.email
 		user.location = auth.info.location
 		user.provideruid = auth.uid
-		user.imageurl = auth.info.image
+		user.imageurl = auth.info.image + '?type=large'
 		user.gender = auth.extra.raw_info.gender
 		user.birthday = Date.strptime(auth.extra.raw_info.birthday, "%m/%d/%Y")
 		user.providerurl = auth.extra.raw_info.link
@@ -85,6 +88,7 @@ class SignInController < ApplicationController
 		user.timezone = auth.extra.raw_info.timezone
 		user.created = Time.now
 		user.modified = Time.now
+		user.lastlogin = Time.now
 		
 		user.isVerified = true # by default user is verified as having a valid email from facebook
 		
@@ -147,10 +151,18 @@ class SignInController < ApplicationController
   		#								.limit(2).to_yaml
 
   		session[:usergiftcardscount] = Giftcard.where(:isdeleted => false)
-  										.where(:userid => session[:userid])
+  										.where(:userid => user.userid)
   										.count
+  		
+  		if user.roleid == ADMIN_ROLE
+	  		session[:donationscount] = Donation.all.count
+	  	else
+
+			session[:donationscount] = Donation.where(:userid => user.userid)
+	  										.count
+
+	  	end
   									
-  										
 
   	end
 

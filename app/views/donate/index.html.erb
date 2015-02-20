@@ -1,2 +1,159 @@
-<h1>Donate#index</h1>
-<p>Find me in app/views/donate/index.html.erb</p>
+
+<div class="pg-opt">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Donations</h2>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+<br/><br/>
+<section class="slice bg-white animate-hover-slide">
+        <div class="wp-section work">
+            <div class="container">
+
+<div class="row">
+
+    <div class="col-md-6">
+        <br/>
+            <div class="input-group merged">
+                <span class="input-group-addon"><i class="icon-append fa fa-search"></i></span>
+                <input class="form-control" style="width:270px" type="text"
+                       placeholder="Search Donation(s) By User"
+                       name="searchuser"
+                       id="searchuser"
+                       value="">
+            </div>
+    </div>
+         
+
+
+	<div class="col-md-6">
+		<%= will_paginate @donations , renderer: BootstrapPagination::Rails %>
+	</div>
+</div>	
+
+                <br/><br/><br/>
+
+                <% 
+                	if @donations.count > 0 
+                	
+
+                %>
+                    <table class="table table-responsive table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <th>Donor</th>
+                                <th>Cause</th>
+                                <th>Merchant</th>
+                                <th>Card #</th>
+                                <th>Balance</th>
+                                <th>Date Donated</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                            <% 
+                            	@donations.each do |donation| 
+
+                            	userid = nil
+
+			                	if donation.userid
+			                		userid = donation.userid
+			                	end
+
+                            %>
+                                <tr>
+                                    <td>
+                                    	<% if donation.userid %>
+                                    		<a href="/donate/index/?userid=<%= donation.user.userid %>"><%= donation.user.firstname %> <%= donation.user.lastname %><br/><%= donation.user.email %></a>
+                                    	<% else %>
+                                    		<%= donation.firstname %> <%= donation.lastname %><br/><%= donation.email %>
+                                    	<% end %>
+
+                                    </td>
+                                    <td><%= donation.charity.charityname %></td>
+                                    <td><%= donation.giftcard.merchant.merchantname %></td>
+                                    <td><%= donation.giftcard.cardnumber_hash %></td>
+                                    <td>$<%= donation.giftcard.balance %></td>
+                                    <td><%= donation.created.to_formatted_s(:db) %></td>
+                                    <td>status...</td>
+                                    <td><a href="/donate/show?donationid=<%= donation.donationid %>&userid=<%=userid%>">Details</a></td>
+                                </tr>
+                            <% end %>
+                            
+                        </tbody>
+                    </table>   
+
+                    <% else %>
+
+                    	<h4>No donations found.</h4>
+
+                    <% end %>
+                    
+                    <% if session[:roleid] == ADMIN_ROLE %>
+                             
+                         <br/><br/>
+                         <a href="/donate/index/?userid=<%= session[:userid]%>&viewall=true" class="btn btn-xs btn-base btn-icon fa-users"><span>View All Donations</span></a>
+                         <br/><br/>
+                    <% end %>                
+
+        	</div>    	
+        </div>
+    </section>
+
+
+
+<script>
+
+  $("#searchuser").autocomplete({
+
+
+        source: function (request, response) {
+            $.ajax({
+                url: '/user/userautocomplete', type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+
+                    console.log('success: ', data)
+
+                    // data is an array of objects and must be transformed for autocomplete to use
+                    var array = data.error ? [] : $.map(data, function (m) {
+                        return {
+                            id: m.userid,
+                            lastname: m.lastname,
+                            firstname: m.firstname
+                            
+                        };
+                    });
+                    response(array);
+
+
+                },
+                failure: function (data) {
+                    console.log('autcomplete failed');
+                }
+            })
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            //console.log('comes in selected item');
+            event.preventDefault();
+            window.location.href = "/donate/index/?userid=" + ui.item.id;
+ 
+        }
+    })
+    .data("ui-autocomplete")._renderItem = function (ul, item) {
+
+        //console.log("logo= ", item.logo);
+
+        return $('<li class="ui-menu-item-with-icon"></li>')
+            .data("item.ui-autocomplete", item.lastname)
+            .append('<a>' + item.lastname + ',' + item.firstname + '</a>')
+            .appendTo(ul);
+    };
+
+
+</script>

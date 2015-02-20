@@ -104,20 +104,29 @@
                             <li><a tabindex="-1" href="/sign_up">Register</a></li>
                                                   
                         </ul>
-                    </li>     
+                        </li>     
 
                     <% else %>
-                    <li class="dropdown">
-                        <a href="/#" class="dropdown-toggle" data-toggle="dropdown">Hi <%= session[:user_firstname] %></a>
-                        <ul class="dropdown-menu">
-                            <li><a tabindex="-1" href="/sign_in/logout">Sign out</a></li>
-                            
-                                                  
-                        </ul>
-                    </li>
-                                        
+                        <li class="dropdown">
+                            <a href="/#" class="dropdown-toggle" data-toggle="dropdown">Hi <%= session[:user_firstname] %></a>
+                            <ul class="dropdown-menu">
+                                <li><a tabindex="-1" href="/user/show/<%= session[:userid] %>">My Account</a></li>
 
-                                    <% end %>
+                                <% if session[:donationscount] && session[:roleid] == ADMIN_ROLE %>
+                                    <li><a tabindex="-1" href="/donate/index/?userid=<%= session[:userid]%>&viewall=true">View All Donations</a></li>
+                                <% end %>
+
+                                <% if session[:donationscount] %>
+                                    <li><a tabindex="-1" href="/donate/index/?userid=<%= session[:userid] %>">My Donations</a></li>
+                                <% end %>
+
+                                <li><a tabindex="-1" href="/sign_in/logout">Sign out</a></li>
+                                
+                                                      
+                            </ul>
+                        </li>                                        
+
+                    <% end %>
                     
                     <li class="dropdown dropdown-aux animate-click" data-animate-in="animated bounceInUp" data-animate-out="animated fadeOutDown" style="z-index:500;">
                         <a href="/#" class="dropdown-form-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>

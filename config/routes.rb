@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get 'user/show'
 
-  get 'user/update'
+  post 'user/update'
 
   get 'user/index'
 
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   get 'donate/edit'
 
-  get 'donate/update'
+  post 'donate/update'
 
   get 'donate/show'
 

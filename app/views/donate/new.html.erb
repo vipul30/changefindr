@@ -30,99 +30,17 @@
 	      <div class="form-body">
 
 
-<% 
 
-if @donation.errors.any? %>
-  <div class="alert alert-danger fade in">
-    <p><b>Please correct the following <%= pluralize(@donation.errors.count, "error") %>:</b></p>
- 
-    <ul>
-    <% @donation.errors.messages.values.each do |msg| %>
-        <%msg.each do  |m| %>
-            <li><%= m %></li>
-        <%end %>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
             <%= form_for(@donation, :url => {:action => 'create'}, :html => {:class => 'sky-form', :id => "myform"}) do |f| %>
 
-                <%= f.hidden_field :charityid, :value => @donation.charityid %>
+               <%= render(:partial => "donation_form", :locals => {:f => f}) %>
 
-                <%= f.fields_for :giftcard do |ff| %>
-                    <%= render(:partial => "/giftcard/giftcard_form", :locals => {:f => ff}) %>
-                <% end %>
-
-
-                <fieldset>          
-                  
-                    <section>
-                        <div class="row">
-                            <div class="col-md-12">
-
-                                <% if session[:user_firstname] == nil %>
-
-
-                                    <label>First Name</label>
-                                    <label class="input">
-
-                                        <i class="icon-append fa fa-user"></i>
-                                        <%= f.text_field :firstname, :placeholder=>"First Name" %>
-                                                                                                
-                                    </label>
-                                    
-                                    <br/>
-
-                                    <label>Last Name</label>
-                                    <label class="input">
-
-                                        <i class="icon-append fa fa-user"></i>
-                                        <%= f.text_field :lastname, :placeholder=>"Last Name" %>
-                                                                                               
-                                    </label>
-
-                                    <br/>
-
-                                    <label>Email</label>
-                                    <label class="input">
-
-                                        <i class="icon-append fa fa-envelope-o"></i>
-                                        <%= f.text_field :email, :placeholder=>"name@email.com" %>
-                                        
-                                                                                               
-                                    </label>
-                                <% end %>
-
-
-                                <br>
-                                <label>Please let us know if you have any comments or special instructions for your donation.</label>
-                                <label class="input">
-
-                                    <i class="icon-append fa fa-comments"></i>
-                                    <%= f.text_area :comments, :placeholder=>"Comments", :style => "width:100%;" %>
-                                                                                               
-                                </label>
-
-                                <br/>
-                                <label>I would like my name to appear on the donors wall&nbsp;&nbsp;&nbsp;</label>
-                    
-                                    <%= f.check_box :donationwall %>
-                                 
-                                <br/><br/>
-
-                                <label>By donating this card, I/we agree to all the <a id="TermsLink">terms and conditions</a></label>
-
-                                <br/><br/>
+                <br/><br/>
                                 <button id="donation_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button"
                                 onClick="this.form.submit(); this.disabled=true;"
                                 >
                                     <span>Donate</span>
                                 </button>
-                            </div>
-                            
-                    </section>
-                </fieldset>
-
             <!--/form-->
             	<% end %>  
         		</div>

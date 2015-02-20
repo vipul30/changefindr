@@ -1,2 +1,173 @@
-<h1>User#edit</h1>
-<p>Find me in app/views/user/edit.html.erb</p>
+ <div class="pg-opt">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>User account</h2>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+    <section class="slice bg-white">
+        <div class="wp-section user-account">
+            <div class="container">
+                <div class="row">
+                    <% if @user.imageurl? %>
+                        <div class="col-md-3">
+                            <div class="user-profile-img">
+                                <img class="img-responsive" src="<%= @user.imageurl %>" alt="">
+                            </div>
+                            <ul class="categories mt-20">
+                                <li><%= @user.firstname %> <%= @user.lastname %></li>
+                               
+                            </ul>
+                              
+                        </div>
+                    <% end %>
+
+                    <div class="col-md-9">
+                              
+                        <div class="tabs-framed">
+                            <ul class="tabs clearfix">
+                                <li class="active"><a href="#tab-1" data-toggle="tab">About</a></li>
+
+                                
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="tab-1">
+                                    <div class="tab-body">
+                                        <dl class="dl-horizontal style-2">
+                                            <h3 class="title title-lg">Personal information</h3>
+                                            
+                                            <% if @user.errors.any? %>
+											  <div class="alert alert-danger fade in">
+											    <p><b>Please correct the following <%= pluralize(@user.errors.count, "error") %>:</b></p>
+											 
+											    <ul>
+											    <% @user.errors.messages.values.each do |msg| %>
+											        <%msg.each do  |m| %>
+											            <li><%= m %></li>
+											        <%end %>
+											    <% end %>
+											    </ul>
+											  </div>
+											<% end %>
+
+                                            <%= form_for(@user, :url => {:action => 'update', :id => @user.userid}, :method => :POST) do |f| %>
+
+                                            	<% if @user.provider != 'facebook' %>
+		                                            <dt>First Name</dt>
+		                                            <dd>
+		                                                <span class="pull-left"><%= f.text_field :firstname, :placeholder=>"First Name" %></span>
+		                                                
+		                                            </dd>
+		                                            <hr>
+		                                            <dt>Last Name</dt>
+		                                            <dd>
+		                                                <span class="pull-left"><%= f.text_field :lastname, :placeholder=>"Last Name" %></span>
+		                                                
+		                                            </dd>
+		                                            <hr>
+		                                            <dt>Email</dt>
+		                                            <dd>
+		                                            <span class="pull-left"><%= f.text_field :email, :placeholder=>"Email" %></span>
+		                                                
+		                                            </dd>
+
+		                                        <% else %>
+
+													<dt>Your name</dt>
+		                                            <dd>
+		                                                <span class="pull-left"><%= @user.firstname %> <%= @user.lastname %></span>
+		                                                
+		                                            </dd>
+		                                            <hr>
+		                                            <dt>Email</dt>
+		                                            <dd>
+		                                            <span class="pull-left"><%= @user.email %></span>
+		                                                
+		                                            </dd>
+		                                        <% end %>
+
+                                            <% if session[:roleid] == ADMIN_ROLE %>
+                                                <hr>
+                                                <dt>Role</dt>
+                                                <dd>
+                                                    <span class="pull-left"><%= f.collection_select :roleid, Role.order(:name),:roleid,:name %></span>
+                                                    
+                                                </dd>
+                                            <% end %> 
+
+                                            <% if @user.provider == 'facebook' && session[:roleid] == ADMIN_ROLE %>
+                                                
+                                                <hr>
+                                                <dt>Last Login</dt>
+                                                <dd>
+                                                    <span class="pull-left"><%= @user.lastlogin %></span>
+                                                    
+                                                </dd>
+                                                <hr>
+                                                <dt>Gender</dt>
+                                                <dd>
+                                                    <span class="pull-left"><%= @user.gender %></span>
+                                                    
+                                                </dd>
+                                                <hr>
+                                                <dt>Location</dt>
+                                                <dd>
+                                                    <span class="pull-left"><%= @user.location %></span>
+                                                    
+                                                </dd>
+                                                <hr>
+                                                <dt>Birthdate</dt>
+                                                <dd>
+                                                    <span class="pull-left"><%= @user.birthday %></span>
+                                                    
+                                                </dd>
+
+                                                <hr>
+                                                <dt>Facebook URL</dt>
+                                                <dd>
+                                                    <span class="pull-left"><%= @user.providerurl %></span>
+                                                    
+                                                </dd>
+
+                                                <hr>
+                                                <dt>Facebook UID</dt>
+                                                <dd>
+                                                    <span class="pull-left"><%= @user.provideruid %></span>
+                                                    
+                                                </dd>
+
+                                            <% end %>
+
+                                            <br>
+                                                    <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button"
+                                                    onClick="this.form.submit(); this.disabled=true;">
+                                                        <span>Update</span>
+                                                    </button>
+
+                                            <!--/form-->
+                                			<% end %>  
+                                            
+                                        </dl>
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+                        </div>
+
+                        <% if session[:roleid] == ADMIN_ROLE %>
+                             <br/>
+                             <a href="/user/index" class="btn btn-xs btn-base btn-icon fa-users"><span>View All Users</span></a>
+                             <br/><br/>
+                        <% end %>          
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

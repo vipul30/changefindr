@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.integer  "isVerified",        limit: 2
     t.string   "verifysalt",        limit: 1000
     t.string   "passwordresetsalt", limit: 1000
+    t.datetime "lastlogin"
   end
 
   create_table "widgets", force: true do |t|

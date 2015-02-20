@@ -4,13 +4,7 @@
                 <div class="col-md-6">
                     <h2>User account</h2>
                 </div>
-                <div class="col-md-6">
-                    <ol class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Pages</a></li>
-                        <li class="active">User account</li>
-                    </ol>
-                </div>
+               
             </div>
         </div>
     </div>
@@ -19,19 +13,25 @@
         <div class="wp-section user-account">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="user-profile-img">
-                            <img class="img-responsive" src="<%= @user.imageurl %>" alt="">
+                    <% if @user.imageurl? %>
+                        <div class="col-md-3">
+                            <div class="user-profile-img">
+                                <img class="img-responsive" src="<%= @user.imageurl %>" alt="">
+                            </div>
+                            <ul class="categories mt-20">
+                                <li><%= @user.firstname %> <%= @user.lastname %></li>
+                               
+                            </ul>
+                              
                         </div>
-                        <ul class="categories mt-20">
-                            <li><a href="#">Personal Information</a></li>
-                            
-                        </ul>
-                    </div>
-                    <div class="col-md-9">                     
+                    <% end %>
+
+                    <div class="col-md-9">
+                              
                         <div class="tabs-framed">
                             <ul class="tabs clearfix">
-                                <li class="active"><a href="#tab-1" data-toggle="tab">About me</a></li>
+                                <li class="active"><a href="#tab-1" data-toggle="tab">About</a></li>
+
                                 
                             </ul>
 
@@ -45,32 +45,68 @@
                                             <dt>Your name</dt>
                                             <dd>
                                                 <span class="pull-left"><%= @user.firstname %> <%= @user.lastname %></span>
-                                                <a href="#" class="btn btn-xs btn-base btn-icon fa-edit pull-right"><span>Edit</span></a>
+                                                
                                             </dd>
                                             <hr>
                                             <dt>Email</dt>
                                             <dd>
                                             <span class="pull-left"><%= @user.email %></span>
-                                                <a href="#" class="btn btn-xs btn-base btn-icon fa-edit pull-right"><span>Edit</span></a>
+                                                
                                             </dd>
-                                            <hr>
-                                            <dt>Phone</dt>
-                                            <dd>
-                                                <span class="pull-left">+40-722.123.456</span>
-                                                <a href="#" class="btn btn-xs btn-base btn-icon fa-edit pull-right"><span>Edit</span></a>
-                                            </dd>
-                                            <hr>
-                                            <dt>Address</dt>
-                                            <dd>
-                                                <span class="pull-left">Bucharest, Romania</span>
-                                                <a href="#" class="btn btn-xs btn-base btn-icon fa-edit pull-right"><span>Edit</span></a>
-                                            </dd>
-                                            <hr>
-                                            <dt>Company</dt>
-                                            <dd>
-                                                <span class="pull-left">Web Pixels</span>
-                                                <a href="#" class="btn btn-xs btn-base btn-icon fa-edit pull-right"><span>Edit</span></a>
-                                            </dd>
+
+                                            <% if session[:roleid] == ADMIN_ROLE %>
+                                                <hr>
+                                                <dt>Role</dt>
+                                                <dd>
+                                                    <span class="pull-left"><%= @user.role.name %></span>
+                                                    
+                                                </dd>
+                                                <hr>
+                                                <dt>Last Login</dt>
+                                                <dd>
+                                                    <span class="pull-left"><%= @user.lastlogin %></span>
+                                                    
+                                                </dd>
+                                            <% end %> 
+                                            
+
+                                            <% if @user.provider == 'facebook' && session[:roleid] == ADMIN_ROLE %>
+                                                
+                                                
+                                                <hr>
+                                                <dt>Gender</dt>
+                                                <dd>
+                                                    <span class="pull-left"><%= @user.gender %></span>
+                                                    
+                                                </dd>
+                                                <hr>
+                                                <dt>Location</dt>
+                                                <dd>
+                                                    <span class="pull-left"><%= @user.location %></span>
+                                                    
+                                                </dd>
+                                                <hr>
+                                                <dt>Birthdate</dt>
+                                                <dd>
+                                                    <span class="pull-left"><%= @user.birthday %></span>
+                                                    
+                                                </dd>
+
+                                                <hr>
+                                                <dt>Facebook URL</dt>
+                                                <dd>
+                                                    <span class="pull-left"><%= @user.providerurl %></span>
+                                                    
+                                                </dd>
+
+                                                <hr>
+                                                <dt>Facebook UID</dt>
+                                                <dd>
+                                                    <span class="pull-left"><%= @user.provideruid %></span>
+                                                    
+                                                </dd>
+
+                                            <% end %>
                                             
                                         </dl>
                                     </div>
@@ -78,7 +114,19 @@
 
                                 
                             </div>
+
                         </div>
+
+                        <br/>
+                        <a href="/user/edit/<%= @user.userid %>" class="btn btn-xs btn-base btn-icon fa-edit"><span>Edit</span></a>
+
+                        <% if session[:roleid] == ADMIN_ROLE %>
+                             
+                             <br/><br/>
+                             <a href="/user/index" class="btn btn-xs btn-base btn-icon fa-users"><span>View All Users</span></a>
+                             <br/><br/>
+                        <% end %>          
+
                     </div>
                 </div>
             </div>

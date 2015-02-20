@@ -1,5 +1,20 @@
 class DonateController < ApplicationController
   def index
+
+
+    if session[:roleid] == ADMIN_ROLE && params[:viewall]
+      @donations = Donation.order('created ASC').page(params[:page]).per_page(9)
+
+    elsif session[:userid] == params[:userid] || session[:roleid] == ADMIN_ROLE
+      @donations = Donation.where(userid: params[:userid]).order('created ASC').page(params[:page]).per_page(9)
+      
+    else
+      flash[:notice] = "You are not authorized to view this page."
+      redirect_to(:controller => "home", :action => "index")
+      return
+    end
+
+
   end
 
   def new
@@ -7,8 +22,6 @@ class DonateController < ApplicationController
     @donation = Donation.new
     @giftcard = Giftcard.new
 
-
-    
 
     if !params[:merchantid].nil? && !params[:merchantid].empty?
        
@@ -80,12 +93,53 @@ class DonateController < ApplicationController
   end
 
   def edit
+
+    if session[:roleid] == ADMIN_ROLE
+      @donation = Donation.where(donationid: params[:id]).first
+      @giftcard = @donation.giftcard
+    else
+      flash[:notice] = "You are not authorized to view this page."
+      redirect_to(:controller => "home", :action => "index")
+      return
+    end
+
   end
 
   def update
+    @donation = Donation.new(donate_params)
+    @donation.modified = Time.now
+    @donation.giftcard.cardnumber_hash = params[:cardnumber]
+    @donation.giftcard.created = Time.now
+    @donation.giftcard.modified = Time.now
+    @donation.giftcard.balancecheckdate = Time.now
+    @giftcard = @donation.giftcard
+
+    
+    @donation.giftcard.isdeleted = 0
+    @donation.giftcard.balance = (rand * (45-5) + 5).round(2)
+    
+    if @donation.save
+      flash[:notice] = "Donation information has been updated"
+      redirect_to(:controller => "donate", :action => "show", :donationid => @donation.donationid)
+      return
+    else
+
+      render('new')
+    end
+
   end
 
   def show
+
+    if session[:roleid] == ADMIN_ROLE || session[:userid] == params[:userid]
+      @donation = Donation.where(donationid: params[:donationid]).first
+    else
+      flash[:notice] = "You are not authorized to view this page."
+      redirect_to(:controller => "home", :action => "index")
+      return
+    end
+
+
   end
 
   def delete
