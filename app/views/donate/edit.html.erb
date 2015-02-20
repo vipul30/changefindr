@@ -31,16 +31,18 @@
 
 
 
-            <%= form_for(@donation, :url => {:action => 'update'}, :html => {:class => 'sky-form', :id => "myform"}, :method => :POST) do |f| %>
+            <%= form_for(@donation, :url => {:action => 'update', :id => @donation.donationid}, :html => {:class => 'sky-form', :id => "myform"}, :method => :POST) do |f| %>
 
-               <%= render(:partial => "donation_form", :locals => {:f => f}) %>
+                    <%= render(:partial => "donation_form", :locals => {:f => f}) %>
 
-<br/><br/>
-                                <button id="donation_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button"
-                                onClick="this.form.submit(); this.disabled=true;"
-                                >
-                                    <span>Update Donation</span>
-                                </button>
+
+
+                    <br/><br/>
+                    <button id="donation_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button"
+                    onClick="this.form.submit(); this.disabled=true;"
+                    >
+                        <span>Update Donation</span>
+                    </button>
 
             <!--/form-->
             	<% end %>  

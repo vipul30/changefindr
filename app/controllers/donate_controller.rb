@@ -106,25 +106,24 @@ class DonateController < ApplicationController
   end
 
   def update
-    @donation = Donation.new(donate_params)
+
+    @donation = Donation.where(donationid: params[:id]).first
+    @donation.update(donate_params)
     @donation.modified = Time.now
     @donation.giftcard.cardnumber_hash = params[:cardnumber]
-    @donation.giftcard.created = Time.now
     @donation.giftcard.modified = Time.now
-    @donation.giftcard.balancecheckdate = Time.now
     @giftcard = @donation.giftcard
 
+
     
-    @donation.giftcard.isdeleted = 0
-    @donation.giftcard.balance = (rand * (45-5) + 5).round(2)
-    
-    if @donation.save
+    # Update the object
+    if @donation.update_attributes(donate_params)
       flash[:notice] = "Donation information has been updated"
       redirect_to(:controller => "donate", :action => "show", :donationid => @donation.donationid)
       return
     else
 
-      render('new')
+      render('edit')
     end
 
   end

@@ -28,7 +28,7 @@ if @donation.errors.any? %>
                         <div class="row">
                             <div class="col-md-12">
 
-                                <% if session[:user_firstname] == nil %>
+                                <% if session[:user_firstname] == nil || !@donation.firstname.nil? %>
 
 
                                     <label>First Name</label>
