@@ -1,6 +1,9 @@
 class Giftcard < ActiveRecord::Base
 	self.table_name = 'giftcard'
     self.primary_key = :giftcardid
+
+    attr_encrypted :cardnumber, :key => 'dkghiu39857dhgkjh'
+    attr_encrypted :pin, :key => 'sdkjghoi8907dfkjhk'
     
 
     belongs_to :merchant, :class_name => 'Merchant', :foreign_key => :merchantid
@@ -8,7 +11,7 @@ class Giftcard < ActiveRecord::Base
 
     validates :merchantid, :presence => { :message => "Please enter your gift card." }
 
-    validates :cardnumber_hash, :presence => { :message => "Please enter the gift card number" },
+    validates :cardnumber, :presence => { :message => "Please enter the gift card number" },
 	                        :length => { :maximum => 50 }
 
 	def self.search(search, page)

@@ -39,6 +39,9 @@ class SignUpController < ApplicationController
           @giftcard.save
         end
 
+        # check if there are any donations with a matching email and assign it to this user
+        # TODO
+
         UserMailer.welcome_email(@user, request.host_with_port).deliver
         flash[:notice] = "Thank you for registering.  Please confirm your registration by clicking on the link from your email."
         redirect_to session[:return_to]

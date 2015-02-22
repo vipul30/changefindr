@@ -79,17 +79,15 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.integer  "merchantid"
     t.datetime "created"
     t.datetime "modified"
-    t.string   "cardnumber_hash",  limit: 1000
-    t.string   "salt",             limit: 1000
-    t.string   "pin",              limit: 100
+    t.string   "encrypted_cardnumber", limit: 1000
     t.date     "expdate"
-    t.string   "eventnumber",      limit: 100
+    t.string   "eventnumber",          limit: 100
     t.float    "balance"
     t.integer  "userid"
     t.datetime "balancecheckdate"
-    t.string   "iv",               limit: 1000
-    t.integer  "isdeleted",        limit: 2
-    t.integer  "isdonated",        limit: 2
+    t.integer  "isdeleted",            limit: 2
+    t.integer  "isdonated",            limit: 2
+    t.string   "encrypted_pin",        limit: 500
   end
 
   create_table "giftcardstat", primary_key: "statsid", force: true do |t|

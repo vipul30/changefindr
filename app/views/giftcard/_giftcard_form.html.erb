@@ -19,7 +19,7 @@ end
 
 <fieldset class="no-padding"> 
 
-<%= f.hidden_field :giftcardid, :value => @giftcard.giftcardid %>
+<%= f.hidden_field :giftcardid %>
 
  <section class="no-margin">
         <div class="row">
@@ -58,8 +58,8 @@ end
                 <label class="input">
 
                     <i class="icon-append fa fa-barcode"></i>
-                    <%= f.text_field :cardnumber_hash, :placeholder=>"Please enter gift card number" %>
-                    <!-- <input type="text" name="cardnumber" id="cardnumber" value="<%= @giftcard.cardnumber_hash %>" placeholder="Please enter gift card number">
+                    <%= f.text_field :cardnumber, :placeholder=>"Please enter gift card number" %>
+                    <!-- <input type="text" name="cardnumber" id="cardnumber" value="<%= @giftcard.cardnumber %>" placeholder="Please enter gift card number">
                     -->
                                                                            
                 </label>

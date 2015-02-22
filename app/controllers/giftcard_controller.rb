@@ -43,8 +43,7 @@ class GiftcardController < ApplicationController
     # Find an existing object using form parameters
     @giftcard = Giftcard.where(:giftcardid => params[:id]).first()
     @giftcard.modified = Time.now
-    @giftcard.cardnumber_hash = params[:cardnumber]
-
+    
     # Update the object
     if @giftcard.update_attributes(giftcard_params)
       # If update succeeds, redirect to the index action
@@ -76,30 +75,10 @@ class GiftcardController < ApplicationController
     @giftcard.userid = session[:userid]
     @giftcard.isdeleted = 0
 
-    cardnumber = params[:cardnumber]
-
-
-    if cardnumber != nil && cardnumber != ''
-      @giftcard.salt = SecureRandom.hex
-
-      cipher = OpenSSL::Cipher::AES.new(128, :CBC)
-      cipher.encrypt
-      @giftcard.salt = cipher.random_key
-      @giftcard.iv = cipher.random_iv
-
-      @giftcard.cardnumber_hash = cipher.update(cardnumber) + cipher.final
-    end
     
-   # getting UTF-8 error when saving to database.  google says there is a bugy in the pg gem.  update later.
-   @giftcard.salt = nil
-   @giftcard.iv = nil
-
-   @giftcard.cardnumber_hash = cardnumber
-
-    #decryptedcard = decryptdata(@giftcard.cardnumber_hash, @giftcard.salt, @giftcard.iv)
-
     @giftcard.balance = (rand * (45-5) + 5).round(2)
     
+    byebug
 
     if @giftcard.save
 
@@ -141,7 +120,7 @@ class GiftcardController < ApplicationController
   end
 
   def giftcard_params
-    params.require(:giftcard).permit(:merchantid,:pin,:expdate,:eventnumber)
+    params.require(:giftcard).permit(:merchantid,:pin,:expdate,:eventnumber,:cardnumber)
   end
 
 end

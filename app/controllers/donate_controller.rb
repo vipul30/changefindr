@@ -65,10 +65,24 @@ class DonateController < ApplicationController
     @donation = Donation.new(donate_params)
     @donation.created = Time.now
     @donation.modified = Time.now
-    #@donation.giftcard.cardnumber_hash = params[:cardnumber]
-    @donation.giftcard.created = Time.now
-    @donation.giftcard.modified = Time.now
-    @donation.giftcard.balancecheckdate = Time.now
+
+
+    if params[:donation][:giftcard_attributes][:giftcardid]
+      @donation.giftcard.giftcardid = params[:donation][:giftcard_attributes][:giftcardid]
+      @donation.giftcardid = params[:donation][:giftcard_attributes][:giftcardid]
+      
+    else
+      @donation.giftcard.created = Time.now
+      @donation.giftcard.modified = Time.now
+      @donation.giftcard.balancecheckdate = Time.now
+    end
+    
+    if @donation.giftcard.created == nil
+      @donation.giftcard.created = Time.now
+      @donation.giftcard.modified = Time.now
+      @donation.giftcard.balancecheckdate = Time.now
+    end
+   
     @giftcard = @donation.giftcard
 
     if session[:userid]
@@ -79,6 +93,8 @@ class DonateController < ApplicationController
     @donation.giftcard.isdeleted = 0
     @donation.giftcard.balance = (rand * (45-5) + 5).round(2)
     
+    
+
     if @donation.save
       flash[:notice] = "Thank you for your donation.  Please hold onto your gift card until you get an email from us informing you we have processed it."
       redirect_to(:controller => "home", :action => "index")
@@ -88,7 +104,10 @@ class DonateController < ApplicationController
       render('new')
     end
 
-    
+    if session[:userid]
+      user = User.where(:userid => session[:userid]).first
+      initializelogin(user)
+    end
 
   end
 
@@ -110,7 +129,6 @@ class DonateController < ApplicationController
     @donation = Donation.where(donationid: params[:id]).first
     
     @donation.modified = Time.now
-    @donation.giftcard.cardnumber_hash = params[:cardnumber]
     @donation.giftcard.modified = Time.now
     @giftcard = @donation.giftcard
 
@@ -145,7 +163,7 @@ class DonateController < ApplicationController
   end
 
   def donate_params
-    params.require(:donation).permit({:giftcard_attributes =>  [:cardnumber_hash,:merchantid,:pin,:expdate,:eventnumber]},
+    params.require(:donation).permit({:giftcard_attributes =>  [:cardnumber,:merchantid,:pin,:expdate,:eventnumber]},
                                      :firstname,:lastname,:email,:comments,:donationwall,:charityid)
   end
 

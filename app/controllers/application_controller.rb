@@ -35,6 +35,26 @@ protect_from_forgery
     plain = decipher.update(encrypted) + decipher.final
 
   end
+
+  def initializelogin(user)
+
+      
+    
+      session[:usergiftcardscount] = Giftcard.where(:isdeleted => false)
+                      .where(:userid => user.userid)
+                      .count
+      
+      if user.roleid == ADMIN_ROLE
+        session[:donationscount] = Donation.all.count
+      else
+
+      session[:donationscount] = Donation.where(:userid => user.userid)
+                        .count
+
+      end
+
+
+    end
   
 
 end

@@ -74,6 +74,15 @@ gem 'binding_of_caller', '~> 0.7.2'
 #custom error messages
 gem 'gaffe', '~> 1.0.2'
 
+gem 'attr_encrypted', '~> 1.3.3'
+
+# for debugger
+gem 'minitest', '~> 5.5.1'
+gem 'mocha', '~> 1.1.0'
+gem 'rake', '~> 10.4.2'
+gem 'rake-compiler', '~> 0.9.5'
+
+
 #gem 'debugger', '~> 1.6.8'
 
 

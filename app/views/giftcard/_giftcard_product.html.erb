@@ -5,7 +5,7 @@
             </figure>
             <h2 class="product-title"><a href="/giftcard/show/<%= usergiftcard.giftcardid %>"><%= usergiftcard.merchant.merchantname %></a></h2>
            
-            <h4 style="color:black"><%= usergiftcard.cardnumber_hash[0...5] %>...</h4>
+            <h4 style="color:black"><%= usergiftcard.cardnumber[0...9] %>...</h4>
             <span class="primary-letter style-1 c-base" style="float:center">
                     &nbsp;&nbsp;$<%= usergiftcard.balance %>
                     </span>

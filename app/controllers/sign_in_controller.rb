@@ -131,40 +131,14 @@ class SignInController < ApplicationController
 	end
 
 	def logout
-	    # mark user as logged out
-	    session[:user_firstname] = nil
-	    session[:username] = nil
-	    session[:userid] = nil
-	    session[:roleid] = nil
-	    #session[:usergiftcards] = nil
-	    session[:usergiftcardscount] = nil
+	    
+	    reset_session
+
 	    flash[:notice] = "Logged out"
 	    redirect_to(:controller => "home", :action => "index")
   	end
 
-  	def initializelogin(user)
-
-  		
-  		#session[:usergiftcards] = Giftcard.where(:isdeleted => false)
-  		#								.where(:userid => session[:userid])
-  		#								.order(modified: :desc)
-  		#								.limit(2).to_yaml
-
-  		session[:usergiftcardscount] = Giftcard.where(:isdeleted => false)
-  										.where(:userid => user.userid)
-  										.count
-  		
-  		if user.roleid == ADMIN_ROLE
-	  		session[:donationscount] = Donation.all.count
-	  	else
-
-			session[:donationscount] = Donation.where(:userid => user.userid)
-	  										.count
-
-	  	end
-  									
-
-  	end
+  	
 
 
   def recoverpassword
