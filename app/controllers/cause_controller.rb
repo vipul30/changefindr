@@ -2,9 +2,11 @@ class CauseController < ApplicationController
   def index
     #@causes = Charity.where(isapproved: true).order('modified DESC').page(params[:page]).per_page(9)
     if session[:roleid] == ADMIN_ROLE && params[:viewall]
-      @causes = Charity.where(isapproved: true).order('charityname ASC').page(params[:page]).per_page(9)
-    else
       @causes = Charity.order('charityname ASC').page(params[:page]).per_page(9)
+      
+    else
+
+      @causes = Charity.where(isapproved: true).order('charityname ASC').page(params[:page]).per_page(9)
     end
 
 
@@ -107,10 +109,12 @@ class CauseController < ApplicationController
     if session[:roleid] == ADMIN_ROLE
       # this will do a like search ignoring case
       @searchcauseresults = Charity.where("charityname ILIKE ?", "%" + searchtext + "%")
-                                   .where(isapproved: true)
+      
     else
+      
       # this will do a like search ignoring case
       @searchcauseresults = Charity.where("charityname ILIKE ?", "%" + searchtext + "%")
+                                   .where(isapproved: true)
                                    
     end
     
