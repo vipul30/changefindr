@@ -1,1 +1,162 @@
-@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic);@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,700);.range-slider{margin:50px 0 25px}.jslider{display:block;width:100%;position:relative}.jslider table{width:100%;border-collapse:collapse;border:0}.jslider td,.jslider th{padding:0;vertical-align:top;text-align:left;border:0}.jslider table .jslider table tr,.jslider table tr td{width:100%;vertical-align:top;padding:0;margin:0}.jslider-bg{height:4px;border-radius:2px;background:#21649c}.jslider-bg .l,.jslider-bg .r{display:none}.jslider-bg .v{display:block;height:100%;background:#2c2c2c;margin:0;border-radius:2px}.jslider-pointer{width:4px;height:10px;position:absolute;top:-3px;z-index:2 !important;margin-left:-2px;cursor:pointer;background:#f1c40f}.jslider-value{font-size:12px;color:#fff;white-space:nowrap;text-align:center;padding:5px 8px;position:absolute;top:-36px;left:0;z-index:1;background:#f1c40f;border-radius:2px}.jslider-value-to{left:80%}.jslider-value:before{content:'';width:0;height:0;position:absolute;bottom:-4px;left:50%;margin-left:-4px;border-left:4px solid transparent;border-right:4px solid transparent;border-top:4px solid #f1c40f}.jslider-label,.jslider-scale{display:none}.range-slider.single .jslider-value,.range-slider.single .jslider-pointer{display:none}.range-slider.single .jslider-value-to,.range-slider.single .jslider-pointer-to{display:block}.range-slider.styled{margin-top:25px}.range-slider.styled .jslider-bg .v{background:#2c2c2c}.range-slider.styled .jslider-pointer{width:10px;margin-left:-5px;background:#f1c40f;border-radius:50%}.range-slider.styled .jslider-value{display:none}.range-slider.styled .jslider-label{display:block;font-size:11px;color:#adadad;text-shadow:none;white-space:nowrap;position:absolute;top:-24px;left:0}.range-slider.styled .jslider-label-to{left:auto;right:0}
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic);
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,700);
+/* Most used for large content such paragraphs etc */
+/* Most used for headings, titles etc */
+/* Main font - for general content */
+/* Font used for headings, navbar text ... */
+/* Navbar wrapper background */
+/* Navbar list element background */
+/* Navbar list element background on mouse hover */
+/* Optional border color on top of nav element on hover */
+/* Navbar list element text color */
+/* Navbar list element text color on navbar item hover */
+/* Main nav open button for small resolutions */
+/* Navbar dropdown wrapper background */
+/* Navbar dropdown wrapper background */
+/* Top nav background color for white version */
+/* Top nav background color for dark (second) version */
+/* Top nav link color */
+/* Top nav link color on hover*/
+/* Top nav link color */
+/* Top nav link color on hover*/
+/* Form control background form the base form (has class: .form-base) */
+/* Form control border color */
+/* Form control color */
+/* Navbar wrapper background for header-alpha */
+/* Dropdown background for header-alpha */
+/* Main nav background color on hover */
+/* Main nav text color */
+/* Dropdown menu text color */
+/* Dropdown menu text color on hover */
+/* Top nav background color */
+/* Top nav text color */
+/* Top nav text color on hover */
+.range-slider {
+  margin: 50px 0 25px;
+}
+.jslider {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+.jslider table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 0;
+}
+.jslider td,
+.jslider th {
+  padding: 0;
+  vertical-align: top;
+  text-align: left;
+  border: 0;
+}
+.jslider table .jslider table tr,
+.jslider table tr td {
+  width: 100%;
+  vertical-align: top;
+  padding: 0;
+  margin: 0;
+}
+.jslider-bg {
+  height: 4px;
+  border-radius: 2px;
+  background: #21649c;
+}
+.jslider-bg .l,
+.jslider-bg .r {
+  display: none;
+}
+.jslider-bg .v {
+  display: block;
+  height: 100%;
+  background: #9cd70e;
+  margin: 0;
+  border-radius: 2px;
+}
+.jslider-pointer {
+  width: 4px;
+  height: 10px;
+  position: absolute;
+  top: -3px;
+  z-index: 2 !important;
+  margin-left: -2px;
+  cursor: pointer;
+  background: #3498db;
+}
+.jslider-value {
+  font-size: 12px;
+  color: #fff;
+  white-space: nowrap;
+  text-align: center;
+  padding: 5px 8px;
+  position: absolute;
+  top: -36px;
+  left: 0;
+  z-index: 1;
+  background: #3498db;
+  border-radius: 2px;
+}
+.jslider-value-to {
+  left: 80%;
+}
+.jslider-value:before {
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  margin-left: -4px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #3498db;
+}
+/* Min, Max Values */
+.jslider-label,
+.jslider-scale {
+  display: none;
+}
+/* Range Slider with Single Value */
+/*-------------------------------------------*/
+.range-slider.single .jslider-value,
+.range-slider.single .jslider-pointer {
+  display: none;
+}
+.range-slider.single .jslider-value-to,
+.range-slider.single .jslider-pointer-to {
+  display: block;
+}
+.range-slider.styled {
+  margin-top: 25px;
+}
+/* Slider */
+.range-slider.styled .jslider-bg .v {
+  background: #9cd70e;
+}
+/* Pointer */
+.range-slider.styled .jslider-pointer {
+  width: 10px;
+  margin-left: -5px;
+  background: #3498db;
+  border-radius: 50%;
+}
+/* Tooltip */
+.range-slider.styled .jslider-value {
+  display: none;
+}
+/* Min, Max Values */
+.range-slider.styled .jslider-label {
+  display: block;
+  font-size: 11px;
+  color: #adadad;
+  text-shadow: none;
+  white-space: nowrap;
+  position: absolute;
+  top: -24px;
+  left: 0;
+}
+.range-slider.styled .jslider-label-to {
+  left: auto;
+  right: 0;
+}

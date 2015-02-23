@@ -116,6 +116,11 @@
                                     <li><a tabindex="-1" href="/donate/index/?userid=<%= session[:userid]%>&viewall=true">View All Donations</a></li>
                                 <% end %>
 
+                                <% if session[:roleid] == ADMIN_ROLE %>
+                                    <li><a tabindex="-1" href="/giftcard/index/?viewall=true">View All Gift Cards</a></li>
+                                    <li><a tabindex="-1" href="/cause/index/?viewall=true">View All Causes</a></li>
+                                <% end %>
+
                                 <% if session[:donationscount] != nil && session[:donationscount] > 0 %>
                                     <li><a tabindex="-1" href="/donate/index/?userid=<%= session[:userid] %>">My Donations</a></li>
                                 <% end %>

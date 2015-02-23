@@ -77,6 +77,11 @@
                                                         <span>Donate Unused Gift Card</span>
                                     </button>
                                     <br/>
+
+                                    <% if session[:roleid] == ADMIN_ROLE || session[:userid] == :userid%>
+                                        <%= link_to "Modify Cause", controller: "cause", action: "edit", id: @cause.charityid %>
+                                        <br/>
+                                    <% end %>
                                     <hr>
                                     <br/>
                                     <p>

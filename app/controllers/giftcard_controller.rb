@@ -1,10 +1,17 @@
 class GiftcardController < ApplicationController
   def index
 
-    @usergiftcards = Giftcard.where(:isdeleted => false)
-                        .where(:userid => session[:userid])
-                        .order(modified: :desc)
-                        .page(params[:page]).per_page(9)
+    if session[:roleid] == ADMIN_ROLE && params[:viewall]
+
+        @usergiftcards = Giftcard.order(modified: :desc)
+                            .page(params[:page]).per_page(9)
+    else
+      @usergiftcards = Giftcard.where(:isdeleted => false)
+                            .where(:userid => session[:userid])
+                            .order(modified: :desc)
+                            .page(params[:page]).per_page(9)
+    end
+
 
     @usergiftcardscount = Giftcard.where(:isdeleted => false)
                       .where(:userid => session[:userid])
@@ -13,7 +20,6 @@ class GiftcardController < ApplicationController
     @giftcard = Giftcard.new
 
    
-
     @userhost = request.host_with_port
 
   end

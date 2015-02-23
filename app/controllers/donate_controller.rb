@@ -97,6 +97,7 @@ class DonateController < ApplicationController
 
     if @donation.save
       flash[:notice] = "Thank you for your donation.  Please hold onto your gift card until you get an email from us informing you we have processed it."
+      DonateMailer.donate_email(@donation, request.host_with_port).deliver
       redirect_to(:controller => "home", :action => "index")
       return
     else

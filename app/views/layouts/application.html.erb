@@ -72,13 +72,17 @@ ul.ui-autocomplete {
 
 <!-- MAIN WRAPPER -->
 <div class="body-wrap">
+
+
      <% 
-     if !flash[:notice].blank? 
+        if !flash[:notice].blank? 
         
-        %>
+    %>
+
         <div class="alert alert-info fade in" style="text-align:center">
           <%= flash[:notice] %>
         </div>
+
       <% end %>
     <%= yield %>
      
@@ -90,17 +94,7 @@ ul.ui-autocomplete {
 
 <!-- Essentials -->
 
-<!--
-<%= javascript_include_tag "modernizr.custom.js" %>
-<%= javascript_include_tag "bootstrap.min.js" %>
-<%= javascript_include_tag "jquery.mousewheel-3.0.6.pack.js" %>
-<%= javascript_include_tag "jquery.easing.js" %>
-<%= javascript_include_tag "jquery.metadata.js" %>
-<%= javascript_include_tag "jquery.hoverup.js" %>
-<%= javascript_include_tag "jquery.hoverdir.js" %>
-<%= javascript_include_tag "jquery.stellar.js" %>
 
--->
 
 <script src="<%= CLOUDFRONT_HOST %>/js/modernizr.custom.js"></script>
 <script src="<%= CLOUDFRONT_HOST %>/assets/bootstrap/js/bootstrap.min.js"></script>
@@ -122,7 +116,7 @@ ul.ui-autocomplete {
 <script src="<%= CLOUDFRONT_HOST %>/assets/sky-forms/js/jquery.form.min.js"></script>
 <script src="<%= CLOUDFRONT_HOST %>/assets/sky-forms/js/jquery.validate.min.js"></script>
 <script src="<%= CLOUDFRONT_HOST %>/assets/sky-forms/js/jquery.maskedinput.min.js"></script>
-<script src="<%= CLOUDFRONT_HOST %>/assets/sky-forms/js/jquery.modal.js"></script>
+<!-- <script src="<%= CLOUDFRONT_HOST %>/assets/sky-forms/js/jquery.modal.js"></script> -->
 
 <!-- Assets -->
 <script src="<%= CLOUDFRONT_HOST %>/assets/hover-dropdown/bootstrap-hover-dropdown.min.js"></script>

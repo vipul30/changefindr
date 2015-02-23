@@ -1,8 +1,13 @@
 class CauseController < ApplicationController
   def index
     #@causes = Charity.where(isapproved: true).order('modified DESC').page(params[:page]).per_page(9)
-    @causes = Charity.where(isapproved: true).order('charityname ASC').page(params[:page]).per_page(9)
-  
+    if session[:roleid] == ADMIN_ROLE && params[:viewall]
+      @causes = Charity.where(isapproved: true).order('charityname ASC').page(params[:page]).per_page(9)
+    else
+      @causes = Charity.order('charityname ASC').page(params[:page]).per_page(9)
+    end
+
+
     @cause = Charity.new
 
     @userhost = request.host_with_port
@@ -35,6 +40,7 @@ class CauseController < ApplicationController
 
     if @cause.save
         flash[:notice] = "Thank you for submission.  We will contact you once your cause is approved."
+        CauseMailer.cause_email(@cause, request.host_with_port).deliver
         redirect_to(:controller => "home", :action => "index")
         return
     else
@@ -98,9 +104,15 @@ class CauseController < ApplicationController
   def causeautocomplete
     searchtext = params['searchText']
 
-    # this will do a like search ignoring case
-    @searchcauseresults = Charity.where("charityname ILIKE ?", "%" + searchtext + "%")
-                                 .where(isapproved: true)
+    if session[:roleid] == ADMIN_ROLE
+      # this will do a like search ignoring case
+      @searchcauseresults = Charity.where("charityname ILIKE ?", "%" + searchtext + "%")
+                                   .where(isapproved: true)
+    else
+      # this will do a like search ignoring case
+      @searchcauseresults = Charity.where("charityname ILIKE ?", "%" + searchtext + "%")
+                                   
+    end
     
     render :json => @searchcauseresults
 

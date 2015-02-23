@@ -15,7 +15,7 @@
                 <div class="row">
                     
 
-                    <div class="col-md-9">
+                    <div class="col-md-6 col-md-offset-3">
                               
                         <div class="tabs-framed">
                             <ul class="tabs clearfix">
@@ -49,7 +49,7 @@
                                             <dd>
                                             <span class="pull-left">
                                             	<img alt="" src="<%= CLOUDFRONT_HOST %>/<%=@donation.charity.logo.url%>" class="img-responsive center-block"
-                                            style="margin: auto auto; height: auto; width: auto; max-height:50px; max-width:100px;">  <br/>  
+                                            style="margin: auto auto; height: auto; width: auto; max-height:100px; max-width:150px;">  <br/>  
                                             	<%= @donation.charity.charityname %>
                                             </span>
                                                 
@@ -60,7 +60,7 @@
                                             <dd>
                                             <span class="pull-left">
                                             	<img alt="" src="<%= CLOUDFRONT_HOST %>/<%=@donation.giftcard.merchant.logo.url%>" class="img-responsive center-block"
-                                            style="margin: auto auto; height: auto; width: auto; max-height:50px; max-width:100px;">  <br/>  
+                                            style="margin: auto auto; height: auto; width: auto; max-height:100px; max-width:150px;">  <br/>  
                                             	<%= @donation.giftcard.merchant.merchantname %>
                                             </span>                                                
                                             </dd>
@@ -68,7 +68,7 @@
                                             <hr>
                                             <dt>Card #</dt>
                                             <dd>
-                                            	<%= @donation.giftcard.cardnumber_hash %>
+                                            	<%= @donation.giftcard.cardnumber %>
                                             </span>                                                
                                             </dd>
 
@@ -160,7 +160,7 @@
                         <% if session[:roleid] == ADMIN_ROLE %>
                              
                              <br/><br/>
-                             <a href="/donate/edit/<%= @donation.donationid %>" class="btn btn-xs btn-base btn-icon fa-edit"><span>Edit</span></a>
+                             <a href="/donate/edit/<%= @donation.donationid %>" class="btn btn-md btn-base btn-icon fa-edit"><span>Edit</span></a>
                              <br/><br/>
                         <% end %>          
 
