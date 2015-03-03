@@ -67,7 +67,8 @@ class UserController < ApplicationController
 
   def show
 
-    if session[:roleid] == ADMIN_ROLE || session[:userid] == params[:id]
+
+    if session[:roleid] == ADMIN_ROLE || session[:userid] == params[:id].to_i
       @user = User.where(userid: params[:id]).first
     else
       flash[:notice] = "You are not authorized to view this page."

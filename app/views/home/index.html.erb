@@ -1,333 +1,172 @@
 
+<style>
+
+.main-caption {
+        z-index: auto !important;
+        color: #fff;
+        opacity: 0.9;
+        background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+        background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+        /*background: #000;*/
+        /*
+        margin-bottom: 30px;
+        background: -webkit-gradient(linear, left bottom, left top, color-stop(20%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1)));
+        text-align: center;
+        z-index: auto !important;
+            */
+    }
+
+</style>
+
 <!-- Main Image -->        
-<section id="slider-wrapper" class="layer-slider-wrapper layer-slider-dynamic">
-<div id="layerslider" style="width:100%;height:520px;"> 
-    <!-- Slide 1 -->
-    <div class="ls-slide">
-        <!-- slide background -->
-
-        <!--  image_tag "full-bg-7.png", :html => { :class => 'ls-bg' } %> -->
-
-        <img src="<%= CLOUDFRONT_HOST %>/images/backgrounds/full-bg-9.jpg" class="ls-bg" alt="Slide background"/>
-        
-        <!-- Right Image -->
-        <img src="<%= CLOUDFRONT_HOST %>/images/giftcards_main.jpg" class="ls-l" style="top:50%; left:70%;" alt="Image layer">
-
-        
-        
-        <!-- Left Text -->
-        <h3 class="ls-l title title-sm strong" style="width:550px; top:15%; left:80px;">Donate Your Unused Gift Cards</h3>
-        <h3 class="ls-l subtitle strong-400" style="width:500px;top:35%; left:80px;">Never let your gift cards go to waste!<br/>Donate your unused gift cards to your favorite cause and feel good about it.</h3>
-        
-        <a href="/cause/index" class="btn btn-base btn-lg ls-l" style="top:55%; left:80px;">Donate</a>
-
-        <a href="#" class="btn btn-base btn-lg ls-l visible-sm visible-xs" style="top:70%; left:80px;">Check Gift Card Balance</a>
-        
-        <div class="ls-l input-group add-on visible-lg visible-md" style="width:400px; top:70%; left:80px;">
-
-            <div class="form-body">
-                            <form action="" id="frmLogin" class="sky-form">                                    
-                                <fieldset>                  
-                                    <section>
-                                        <div class="form-group">
+<section class="slice no-padding bb">
+        <div class="wp-section">
+            <div class="container-fluid no-padding">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- JumboTron -->
+                        <div class="jumbotron">
+                            <div class="jumbotron-left">
+                                <div id="homepageCarousel" class="carousel carousel-1 carousel-fixed-height slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                        
+                                        <div class="item item-light active" style="background-image:url(images/prv/estate/item-3.jpg);">
                                             
-                                            <label class="input">
-                                                <i class="icon-append fa fa-credit-card"></i>
-                                                <input type="text" name="giftcard" 
-                                                placeholder="Check Your Gift Card Balance"
-                                                name="searchmerchant"
-                                                id="searchmerchant"
-                                                style="font-size:x-large">
-                                            </label>
-                                        </div>     
-                                    </section>
-                                   
-                                </fieldset>  
-                            </form>    
-                        </div>
-        </div>
-
-
-           
-        <p class="ls-l visible-lg visible-md" style="width:500px;top:75%; left:80px;font-size:medium;color:white">
-            Start typing and select the retailer on your gift card.</p>
-        
-        <h3 class="ls-l subtitle strong-400" style="width:500px;top:80%; left:80px;">Check your gift card balance instantly.</h3>
-        
-       
-
-    </div>
-
-</div>
-</section>
-
-<%= render partial: "layouts/usergiftcards" %>
- 
-<!-- Steps 1, 2, 3 -->
-<section class="slice base">
-        <div class="wp-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12" style="text-align: center;">
-                        <h3>Changefindr turns your unused gift cards into cash to go towards your favorite cause.</h3>
-                        <br/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 col-sm-6 ">
-                        <div class="icon-block icon-block-1">
-                            <div class="icon-block-item">
-                                <i class="fa fa-globe"></i>
-                            </div>
-                            <div class="icon-block-body">
-                                <h4 class="c-white">Step 1: CHOOSE</h4>
-                                <p>Select the cause you want to support.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 ">
-                        <div class="icon-block icon-block-1">
-                            <div class="icon-block-item">
-                                <i class="fa fa-gift"></i>
-                            </div>
-                            <div class="icon-block-body">
-                                <h4 class="c-white">Step 2: GIVE</h4>
-                                <p>Select the store and enter the gift card number.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 ">
-                        <div class="icon-block icon-block-1">
-                            <div class="icon-block-item">
-                                <i class="fa fa-envelope-o "></i>
-                            </div>
-                            <div class="icon-block-body">
-                                <h4 class="c-white">Step 3: RECEIVE</h4>
-                                <p>Enter your Card and Pin #. Then receive your donation receipt. Simple as that.</p>
-                            </div>
-                        </div>
-                    </div>                    
-                </div>
-                <div class="row">
-                    <div class="col-md-12" style="text-align: center;">
-                        <a href="/howitworks/index" class="btn btn-base btn-lg">Find Out How It Works</a>
-                        <br/>
-                    </div>
-                </div>
-            </div>  
-        </div>
-</section>
-
-<!-- Causes Slider -->
-<section class="slice relative bg-white bb animate-hover-slide">
-        <div class="wp-section">
-            <div class="container">
-                <div class="section-title-wr">
-                    <h3 class="section-title left"><span>Causes</span></h3>
-                </div>
-                
-                <div id="carouselWork" class="carousel carousel-3 slide animate-hover-slide">
-                    <div class="carousel-nav">
-                        <a data-slide="prev" class="left" href="#carouselWork"><i class="fa fa-angle-left"></i></a>
-                        <a data-slide="next" class="right" href="#carouselWork"><i class="fa fa-angle-right"></i></a>
-                    </div>
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                            <% 
-                                i = 0
-                                while i < @causes.count
-                                 
-                                    if i == 0
-                                        classitem = 'item active'
-                                    else
-                                        classitem = 'item'
-                                    end
-
-                            %>
-                           
-
-                            <div class="<%=classitem%>">
-                                <div class="row">
-                                    <% (0..3).each do |k| %>
-                                        <% if @causes[i+k] != nil %>
-                                            <div class="col-md-3" style="border-right: #cdcdcd thin solid;border-bottom: #cdcdcd thin solid;min-height:300px">
-                                                <div class="wp-block inverse">
-                                                    <div class="figure" style="min-height:150px">
-                                                        <img alt="" src="<%= CLOUDFRONT_HOST %>/<%=@causes[i+k].logo.url%>" class="img-responsive"
-                                                        style="margin: auto auto; height: auto; width: auto; max-height:150px; max-width:200px;" >
-                                                        <div class="figcaption bg-base"></div>
-                                                        <div class="figcaption-btn">
-                                                            
-                                                            <a href="/donate/new/?charityid=<%= @causes[i+k].charityid %>" class="btn btn-xs btn-b-white"><i class="fa fa-credit-card"></i> Donate</a>
-                                                            <a href="<%= "http://" +  @userhost + "/cause/show/" +  @causes[i+k].charityid.to_s %>" class="btn btn-xs btn-b-white"><i class="fa fa-plus-circle"></i> View Details</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-9">
-                                                            <a href="/donate/new/?charityid=<%= @causes[i+k].charityid %>" class="btn btn-md"><i class="fa fa-credit-card"></i> Donate</a>
+                                            
+                                                    <div class="container">
+                                                        <!-- rgb(42, 142, 209) blue -->
+                                                        <div class="description-left main-caption" style="background-color: rgb(33, 125, 187);border-radius: 25px;margin-left: 10%;height:55%;margin-top: 5%;">
                                                             <br/>
-                                                            <a href="<%= "http://" +  @userhost + "/cause/show/" +  @causes[i+k].charityid.to_s %>">
-                                                            <h2 class="text-left"><%= @causes[i+k].charityname %></h2>
-                                                            </a>
-                                                           
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <% 
-                                            end
-                                        end 
-                                    
-                                        %>
-   
-                                </div>
-                            </div>
-                            <% 
-                                i += 4
-                                end 
-                            %>   
-
-                        </div>
-                </div>  <!-- end Carasoul -->
-            </div>
-            <br/><br/>
-            <div style="text-align:center">
-                <a href="/cause/index" class="btn btn-base btn-lg">Browse All Causes</a>
-            </div>
-            <br/><br/>
-        </div>
-</section>
-
-
-
-<!-- Check gift card balance -->
-<section class="prlx-bg inset-shadow-1" data-stellar-ratio="2" style="padding: 50px 0; background-image: url('/assets/sections/section-bg-2.jpg'); background-position: 0 -400px;">
-        <div class="mask mask-2"></div>
-        <div class="wp-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">  
-                        <div class="text-center">
-                            
-                            <h1 class="c-white">Check Your Gift Card Balance Instantly</h1>
-                                <br/>
-                            
-                            <span class="clearfix"></span>
-                            <br/><br/>
-                            <div class="text-center">
-                                <a href="#" class="btn btn-lg btn-b-white mt-20 ext-source">Check Your Gift Card Balance</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-</section>
-   
-<!-- Congratulations Coderdojo -->   
-<section id="companyCarousel" class="carousel carousel-2 slide bg-white bb" data-ride="carousel">
-        <div class="container relative">
-            
-            <div class="carousel-inner">
-                <div class="owl-carousel owl-carousel-single no-padding">
-                    <div class="item active">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h2 class="title" style="text-align:center">Congratulations to 
-                                    <a href="/cause/show/39">CoderDojo</a>
-                                     on their fundraiser.<br/> They were able to buy their first Lego Robotic Kit from unused gift card donations.</h2>
-
-                                <br/>
-                                <p>CoderDojo is a movement orientated around running free not-for-profit coding clubs and regular sessions for young people. At a CoderDojo, young people learn how to code, develop websites, apps, programs, games and more. Dojos are set up, run by and taught at by volunteers. Dojos organize tours of technology companies, bring in guest speakers to talk about their career and what they do, and organise events. In addition to learning to code, members meet like minded people, show off what they've been working on and so on. CoderDojo makes development and learning to code a fun, sociable, kick ass experience. CoderDojo also puts a strong emphasis on open source and free software, and has a strong network of members and volunteers globally.
-                                </p>
-                                
-                            </div>
-                            <div class="col-md-6">
-                                <img src="<%= CLOUDFRONT_HOST %>/images/photo_attachment/39/original/CoderCamp01.jpg" class="img-responsive" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-</section>
-
-
-<!-- Merchants Slider -->
-<section class="slice relative bg-white bb animate-hover-slide">
-        <div class="wp-section">
-            <div class="container">
-                <div class="section-title-wr">
-                    <h3 class="section-title left"><span>Gift Cards</span></h3>
-                </div>
-                
-                <div id="carouselWork2" class="carousel carousel-3 slide animate-hover-slide">
-                   
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-                            <% 
-                                i = 0
-                                while i < @merchants.count
-                                 
-                                    if i == 0
-                                        classitem = 'item active'
-                                    else
-                                        classitem = 'item'
-                                    end
-
-                            %>
-                            <div class="<%=classitem%>">
-                                <div class="row">
-                                    <% (0..3).each do |k| %>
-                                        <% if @merchants[i+k] != nil %>
-                                            <div class="col-md-3" style="border-right: #cdcdcd thin solid;border-bottom: #cdcdcd thin solid;min-height:250px">
-                                                <div class="wp-block inverse">
-                                                    <div class="figure" style="min-height:150px">
-                                                        <img alt="" src="<%= CLOUDFRONT_HOST %>/<%=@merchants[i+k].logo.url%>" class="img-responsive"
-                                                        style="margin: auto auto; height: auto; width: auto; max-height:150px; max-width:200px;" >
-                                                        <div class="figcaption bg-base"></div>
-                                                        <div class="figcaption-btn">
-                                                            <a href="/donate/new?merchantid=<%=  @merchants[i+k].merchantid.to_s %>" class="btn btn-xs btn-b-white theater"><i class="fa fa-credit-card"></i> Donate</a>
-                                                            <a href="<%= "http://" +  @userhost + "/giftcard/new/" +  @merchants[i+k].merchantid.to_s %>" class="btn btn-xs btn-b-white"><i class="fa fa-check-square-o"></i> Check Balance</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-9">
-                                                            <h2 class="text-left"><%= @merchants[i+k].merchantname %></h2>
-                                                            <br>
-
-                                                             <a href="<%= "http://" +  @userhost + "/giftcard/new/" +  @merchants[i+k].merchantid.to_s %>" class="btn btn-md"><i class="fa fa-credit-card"></i>Check Balance</a>
+                                                            <span class="title c-white text-uppercase strong-700" style="margin-left: 10%;text-transform: inherit !important;">HotelZoo.com</span>
+                                                            
+                                                            <br/><br/>
+                                                            <ul class="list-carousel mb-20" style="margin-left: 10%;">
+                                                                <li><i class="fa fa-check-square"></i> Negotiate rates directly with the hotels</li>
+                                                                <li><i class="fa fa-check-square"></i> Rooms at your price</li>
+                                                                <li><i class="fa fa-check-square"></i> You are in charge of getting the best possible deal</li>
+                                                                <li><i class="fa fa-check-square"></i> Last minute deals</li>
+                                                               
+                                                            </ul>
                                                             
                                                         </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <% 
-                                            end
-                                        end 
+                                                        </div>
+                                                    
+                                        </div> 
+                                        
+                                       
+                                    </div>
                                     
-                                        %>
-   
+                                   
                                 </div>
                             </div>
-                            <% 
-                                i += 4
-                                end 
-                            %>   
+                            <div class="jumbotron-right">
+                                <!-- FIND property list WIDGET -->
+                                <div class="panel panel-base no-margin">
+                                    <div class="panel-heading panel-heading-lg">Hotel Search</div>
+                                    <form class="form-base" role="form">
+                                        <div class="panel-body" style="padding:25px;">
+                                        
+                                            <div class="form-group">
+                                                <input type="text" class="form-control input-lg" placeholder="Destination, hotel, landmark or address">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label class="">Check In</label>
+                                                    
+                                                    <input type="text" id="from" name="from" class="form-control input-lg">
+                                                    </div>
 
+                                                    
+                                                    <label id="nightsdisplay" name="nightsdisplay" class="">Nights:</label>
+                                                    <input type="text" id="nights" name="nights" style="display: none;">
+                                                    <br/>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <label class="">Check Out</label>
+                                                    <input type="text" id="to" name="to" class="form-control input-lg">
+                                                    </div>
+                                                    
+
+                                                </div>
+                                            </div>
+
+                                                <div class="row">
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group form-group-sm field_select">
+                                                        <label class="">Rooms</label>
+                                                        <select class="form-control select_styled base no-padding">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                               
+
+                                           
+                                           
+                                                <div class="col-md-4">
+                                                    <div class="form-group form-group-lg field_select">
+                                                        <label class="">Adults</label>
+                                                        <select class="form-control select_styled base no-padding">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+
+                                                        </select>
+                                                        <label class="">(Age 18+)</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group form-group-lg field_select">
+                                                        <label class="">Children</label>
+                                                        <select class="form-control select_styled base no-padding">
+                                                            <option value="0">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                           
+                                                        </select>
+                                                        <label class="">(Age 0-17)</label>
+                                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                        <button type="submit" class="btn btn-xl btn-block-bm btn-alt btn-icon btn-icon-right btn-icon-go btn-square">
+                                            <span>Search</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                </div>  <!-- end Carasoul -->
+                    </div>
+                </div>
             </div>
-            <br/><br/>
-            <div style="text-align:center">
-                <a href="/merchant/index" class="btn btn-base btn-lg">Browse All Gift Cards</a>
-            </div>
-            <br/><br/>
         </div>
-</section>
+    </section>
+
+
+
 
 <!-- Tesitmonials -->
 <section class="slice base">
@@ -350,7 +189,7 @@
                                 <div class="text-center">
                                     <h4><i class="fa fa-quote-left fa-3x"></i></h4>
                                     <p class="testimonial-text">
-                                    Changefindr made it very easy to collect funds through unused gift cards
+                                    HotelZoo made it very easy to collect funds through unused gift cards
                                     </p>
                                     <p>
                                         Ounie Phakousonh | CoderDojo
@@ -362,7 +201,7 @@
                                 <div class="text-center">
                                     <h4><i class="fa fa-quote-left fa-3x"></i></h4>
                                     <p class="testimonial-text">
-                                    Changefindr gives me the opportunity to contribute to my favourite cause even in difficult times
+                                    HotelZoo gives me the opportunity to contribute to my favourite cause even in difficult times
                                     </p>
                                     <p>
                                         Seema Makker | Donor
@@ -419,5 +258,58 @@
             </div>
         </div>
 </section>
+
+<style>
+
+.ui-datepicker {
+
+    margin-top: 20%;
+}
+
+</style>
+
+
+<script>
+$(function() {
+    function datepicked() {
+        var fromDate = $('#from').datepicker('getDate');
+        var toDate = $('#to').datepicker('getDate');
+        if (fromDate && toDate) {
+            var difference_msec = toDate.getTime() - fromDate.getTime();
+            var difference_days = difference_msec / 86400000;
+            $("#nights").val(Math.ceil(difference_days));
+            $("#nightsdisplay").html('Nights: ' + Math.ceil(difference_days));
+        }
+    }
+    $('#from').datepicker({
+        numberOfMonths: 2,
+        firstDay: 1,
+        dateFormat: 'mm-dd-yy',
+        minDate: '0',
+        maxDate: '+2Y',
+        onSelect: function(dateStr) {
+            var d1 = $(this).datepicker("getDate");
+            d1.setDate(d1.getDate() + 0); // change to + 1 if necessary
+            var d2 = $(this).datepicker("getDate");
+            d2.setDate(d2.getDate() + 60); // change to + 29 if necessary
+            $("#to").datepicker("setDate", null);
+            $("#to").datepicker("option", "minDate", d1);
+            $("#to").datepicker("option", "maxDate", d2);
+            datepicked();
+        }
+    });
+    $('#to').datepicker({
+        numberOfMonths: 2,
+        firstDay: 1,
+        dateFormat: 'mm-dd-yy',
+        minDate: '0',
+        maxDate: '+2Y',
+        onSelect: function(dateStr) {
+            datepicked();
+        }
+    });
+});
+
+</script>
 
 <br/><br/>

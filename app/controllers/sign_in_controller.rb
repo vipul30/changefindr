@@ -1,7 +1,9 @@
 class SignInController < ApplicationController
   def index
   	begin
+  		
   		session[:return_to] = Rails.application.routes.recognize_path(request.referrer)
+  		
   	rescue
   		session[:return_to] = '/home/index'
   	end
@@ -81,7 +83,13 @@ class SignInController < ApplicationController
 		user.provideruid = auth.uid
 		user.imageurl = auth.info.image + '?type=large'
 		user.gender = auth.extra.raw_info.gender
-		user.birthday = Date.strptime(auth.extra.raw_info.birthday, "%m/%d/%Y")
+
+		begin
+			user.birthday = Date.strptime(auth.extra.raw_info.birthday, "%m/%d/%Y")
+		rescue
+			user.birthday = nil
+		end
+
 		user.providerurl = auth.extra.raw_info.link
 		user.locale = auth.extra.raw_info.locale
 		user.providerusername = auth.extra.raw_info.username

@@ -92,7 +92,7 @@ Rails.application.configure do
     port:                 80,
     domain:               'changefindr.heroku.com',
     user_name:            'no-reply@changefindr.com',
-    password:             'Changefindr#1',
+    password:             'Hotelzoo#1',
     authentication:       'plain',
     enable_starttls_auto: true  
   }
@@ -101,10 +101,10 @@ Rails.application.configure do
 config.action_mailer.perform_deliveries = true
 config.action_mailer.raise_delivery_errors = true
 
-  Changefindr::Application.config.middleware.use ExceptionNotification::Rack,
+  Hotelzoo::Application.config.middleware.use ExceptionNotification::Rack,
   :email => {
-    :email_prefix => "Error - Changefindr ",
-    :sender_address => %{"Changefindr Error" <no-reply@changefindr.com>},
+    :email_prefix => "Error - Hotelzoo ",
+    :sender_address => %{"Hotelzoo Error" <no-reply@changefindr.com>},
     :exception_recipients => %w{vipul30@gmail.com}
   }
 
