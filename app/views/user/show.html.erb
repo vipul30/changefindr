@@ -118,13 +118,7 @@
                         </div>
 
                         <br/>
-
-                        <% if @user.provider != 'facebook' %>
-
-                            <a href="/user/edit/<%= @user.userid %>" class="btn btn-xs btn-base btn-icon fa-edit"><span>Edit</span></a>
-
-                        <% end %>
-
+                        <a href="/user/edit/<%= @user.userid %>" class="btn btn-xs btn-base btn-icon fa-edit"><span>Edit</span></a>
 
                         <% if session[:roleid] == ADMIN_ROLE %>
                              

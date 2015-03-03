@@ -55,7 +55,7 @@ Rails.application.configure do
     port:                 80,
     domain:               'changefindr.heroku.com',
     user_name:            'no-reply@changefindr.com',
-    password:             'Hotelzoo#1',
+    password:             'Changefindr#1',
     authentication:       'plain',
     enable_starttls_auto: true  
   }

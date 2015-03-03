@@ -40,7 +40,18 @@ protect_from_forgery
 
       
     
+      session[:usergiftcardscount] = Giftcard.where(:isdeleted => false)
+                      .where(:userid => user.userid)
+                      .count
       
+      if user.roleid == ADMIN_ROLE
+        session[:donationscount] = Donation.all.count
+      else
+
+      session[:donationscount] = Donation.where(:userid => user.userid)
+                        .count
+
+      end
 
 
     end
