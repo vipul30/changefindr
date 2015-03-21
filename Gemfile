@@ -85,6 +85,7 @@ gem 'rake-compiler', '~> 0.9.5'
 # this was needed for BHN certification
 gem 'httpi-ntlm', '~> 0.9.6'
 gem 'inifile', '~> 3.0.0'
+gem 'rubyntlm', '~> 0.5.0'
 
 gem 'rest-client', '~> 1.7.3'
 
