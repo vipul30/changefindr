@@ -5,7 +5,10 @@ class HomeController < ApplicationController
 
   	@causes = Charity.limit(20).order("RANDOM()").where(isapproved: true)
 
-    @merchants = Merchant.where.not(merchantid: 172).limit(20).order("RANDOM()")
+    #@merchants = Merchant.where.not(merchantid: 172).limit(20).order("RANDOM()")
+
+    @merchants = Merchant.where(:productLineStatus => 'ACTIVATED')
+                         #.where(:accountType => 'GIFT_CARD')
 
   	@userhost = request.host_with_port
 
@@ -32,8 +35,7 @@ class HomeController < ApplicationController
 
   def getbhnproducts
 
-   url = 'https://sandbox.blackhawknetwork.com/productManagement/v1/productLines?first=0&maximum=10&ascending=true&exactMatch=false&caseSensitive=false'
-
+      
       request = HTTPI::Request.new('https://sandbox.blackhawknetwork.com/productManagement/v1/productLines?first=0&maximum=500&ascending=true&exactMatch=false&caseSensitive=false')
 
       request.auth.ssl.cert_key_file = "key.pem"

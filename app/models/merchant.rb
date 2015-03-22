@@ -19,4 +19,63 @@ class Merchant < ActiveRecord::Base
 	validates_attachment_content_type :logo, :content_type => /\Aimage\/.*\Z/,  :message => "Invalid image type for logo." 
 =end
 
+	def updateproducts
+
+		url = 'https://sandbox.blackhawknetwork.com/productManagement/v1/productLines?first=0&maximum=10&ascending=true&exactMatch=false&caseSensitive=false'
+
+      request = HTTPI::Request.new('https://sandbox.blackhawknetwork.com/productManagement/v1/productLines?first=0&maximum=500&ascending=true&exactMatch=false&caseSensitive=false')
+
+      request.auth.ssl.cert_key_file = "key.pem"
+      request.auth.ssl.cert_file = "key.pem"
+      request.headers["requestorId"] = "YGSZRJHZC9KA1VNV62C9ARGSF4"
+      request.headers["Content-Type"] =  "application/json; charset=UTF-8"
+      request.headers["Accept"] = "application/json; charset=UTF-8"
+      request.open_timeout = 31
+      request.read_timeout = 31
+
+      response = HTTPI.get request
+    
+      resultcode = response.code
+
+      results = JSON.parse response.raw_body
+      giftcards = results['results']  # this is the json result to get the gift cards
+
+
+
+      #response.headers['date']
+
+      for giftcard in giftcards
+
+
+        entityId = giftcard['entityId'].split(/productLine */)[1]
+        # remove / from the first characater since it's part of the URL
+        entityId[0] = ''
+
+        merchant = Merchant.where(:entityId => entityId).first
+
+        if merchant == nil
+          merchant = Merchant.new
+        end
+
+        merchant.entityId = entityId
+        merchant.entityIdUrl = giftcard['entityId']
+        merchant.productLineName = giftcard['productLineName']
+        merchant.brandId = giftcard['brandId']
+        merchant.merchantname = giftcard['brandName']
+        merchant.brandCode = giftcard['brandCode']
+        merchant.brandLogoImage = giftcard['brandLogoImage']
+        merchant.productLineStatus = giftcard['productLineStatus']
+        merchant.accountType = giftcard['accountType']
+        merchant.startDate = giftcard['startDate']
+        merchant.endDate = giftcard['endDate']
+        merchant.locale = giftcard['locale']
+        merchant.merchantid_bak = 9999
+        merchant.modified = Time.now
+        merchant.save
+
+      end
+
+
+	end
+
 end

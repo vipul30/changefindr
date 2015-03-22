@@ -90,7 +90,7 @@ gem 'rubyntlm', '~> 0.5.0'
 gem 'rest-client', '~> 1.7.3'
 
 # schedule cron jobs
-gem 'whenever', '~> 0.9.4'
+gem 'whenever', '~> 0.9.4', :require => false
 
 
 #gem 'debugger', '~> 1.6.8'
