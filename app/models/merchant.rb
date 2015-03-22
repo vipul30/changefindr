@@ -2,6 +2,7 @@ class Merchant < ActiveRecord::Base
     self.table_name = 'merchant'
     self.primary_key = :merchantid
 
+=begin
 	validates :merchantname, :presence => { :message => "Please enter the merchant name." },
 	                        :length => { :maximum => 50 }
 
@@ -16,5 +17,6 @@ class Merchant < ActiveRecord::Base
 	validates :logo, :presence=> { :message => "Please upload an image of your logo." }
 	validates_attachment_size :logo, :less_than => 2.megabytes, :message => "Please ensure size of the logo image is less than 2MB." 
 	validates_attachment_content_type :logo, :content_type => /\Aimage\/.*\Z/,  :message => "Invalid image type for logo." 
+=end
 
 end

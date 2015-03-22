@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20150127233247) do
   end
 
   create_table "merchant", primary_key: "merchantid", force: true do |t|
+    t.integer  "merchantid_bak",                 null: false
     t.string   "merchantname",      limit: 500,  null: false
     t.string   "logo",              limit: 50
     t.string   "checkbalanceurl",   limit: 1000
@@ -104,6 +105,18 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.string   "entityId",          limit: 1000
+    t.string   "productLineName",   limit: 500
+    t.string   "brandId",           limit: 500
+    t.string   "brandCode",         limit: 500
+    t.string   "brandLogoImage",    limit: 1000
+    t.string   "productLineStatus", limit: 500
+    t.string   "accountType",       limit: 500
+    t.datetime "startDate"
+    t.datetime "endDate"
+    t.string   "locale",            limit: 100
+    t.string   "entityIdUrl",       limit: 1000
+    t.datetime "modified"
   end
 
   create_table "newsletter", primary_key: "newsletterid", force: true do |t|

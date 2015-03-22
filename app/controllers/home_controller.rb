@@ -26,7 +26,13 @@ class HomeController < ApplicationController
   	   @giftcardstats = Giftcardstat.limit(3).order("RANDOM()")
     end
 
-      url = 'https://sandbox.blackhawknetwork.com/productManagement/v1/productLines?first=0&maximum=10&ascending=true&exactMatch=false&caseSensitive=false'
+     
+
+  end
+
+  def getbhnproducts
+
+   url = 'https://sandbox.blackhawknetwork.com/productManagement/v1/productLines?first=0&maximum=10&ascending=true&exactMatch=false&caseSensitive=false'
 
       request = HTTPI::Request.new('https://sandbox.blackhawknetwork.com/productManagement/v1/productLines?first=0&maximum=500&ascending=true&exactMatch=false&caseSensitive=false')
 
@@ -35,30 +41,50 @@ class HomeController < ApplicationController
       request.headers["requestorId"] = "YGSZRJHZC9KA1VNV62C9ARGSF4"
       request.headers["Content-Type"] =  "application/json; charset=UTF-8"
       request.headers["Accept"] = "application/json; charset=UTF-8"
-      request.open_timeout = 29
-      request.read_timeout = 29
+      request.open_timeout = 31
+      request.read_timeout = 31
 
       response = HTTPI.get request
     
       resultcode = response.code
 
-      results = JSON.parse response.raw_data
+      results = JSON.parse response.raw_body
       giftcards = results['results']  # this is the json result to get the gift cards
 
-=begin
-  (byebug) results['results'][0]
-{"entityId"=>"https://sandbox.blackhawknetwork.com/productManagement/v1/productLine/1N8ZBLNAW6SJPNBBL2SMJSC4GH", "productLineName"=>"Sephora", "brandId"=>"KNVD2RCXPDW8M2JAYSRHR2A9R4", "brandName"=>"Sephora", "brandCode"=>"LVMH", "brandLogoImage"=>"https://content.giftcardmall.com/gcmimages/manufacturer/icon/GOWALLET_METADATA/186V2565.0.PNG", "productLineStatus"=>"ACTIVATED", "accountType"=>"GIFT_CARD", "startDate"=>"2013-06-21T22:53:14.000+0000", "endDate"=>"2020-02-01T13:22:54.000+0000", "locale"=>"en_US"}
-(byebug) results['results'][0]['entityId']
-"https://sandbox.blackhawknetwork.com/productManagement/v1/productLine/1N8ZBLNAW6SJPNBBL2SMJSC4GH"
-(byebug) 
-
-=end
-  
-end
 
 
-byebug
+      #response.headers['date']
 
+      for giftcard in giftcards
+
+
+        entityId = giftcard['entityId'].split(/productLine */)[1]
+        # remove / from the first characater since it's part of the URL
+        entityId[0] = ''
+
+        merchant = Merchant.where(:entityId => entityId).first
+
+        if merchant == nil
+          merchant = Merchant.new
+        end
+
+        merchant.entityId = entityId
+        merchant.entityIdUrl = giftcard['entityId']
+        merchant.productLineName = giftcard['productLineName']
+        merchant.brandId = giftcard['brandId']
+        merchant.merchantname = giftcard['brandName']
+        merchant.brandCode = giftcard['brandCode']
+        merchant.brandLogoImage = giftcard['brandLogoImage']
+        merchant.productLineStatus = giftcard['productLineStatus']
+        merchant.accountType = giftcard['accountType']
+        merchant.startDate = giftcard['startDate']
+        merchant.endDate = giftcard['endDate']
+        merchant.locale = giftcard['locale']
+        merchant.merchantid_bak = 9999
+        merchant.modified = Time.now
+        merchant.save
+
+      end
 
 
   end
