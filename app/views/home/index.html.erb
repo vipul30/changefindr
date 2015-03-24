@@ -83,7 +83,11 @@
                                 
                             </div>
                             <div class="col-md-6">
-                                <img src="<%= CLOUDFRONT_HOST %>/images/photo_attachment/172/original/r4hc-logo1.png" class="img-responsive" alt="">
+                                <%
+                                    thomascause = Charity.where(:charityid => 172)
+                                %>
+
+                                <img src="/images/photo_attachment/172/original/r4hc-logo1.png" class="img-responsive" alt="">
                             </div>
                         </div>
                     </div>
