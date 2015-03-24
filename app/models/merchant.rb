@@ -2,6 +2,20 @@ class Merchant < ActiveRecord::Base
     self.table_name = 'merchant'
     self.primary_key = :merchantid
 
+    has_attached_file :logo, {  styles: {thumb: "75x75#"},
+                :path => "#{Rails.root}/public/images/photo_attachment/:merchantid_bak/:style/:basename.:extension",
+                :url => "/images/photo_attachment/:path/:style/:basename.:extension",
+                :default_url => "/images/photo_attachment/missing_thumb.png" }
+
+
+Paperclip.interpolates :path do |attachment, style|
+ 
+
+   
+    return attachment.instance.merchantid_bak
+  
+end
+
 =begin
 	validates :merchantname, :presence => { :message => "Please enter the merchant name." },
 	                        :length => { :maximum => 50 }
@@ -21,7 +35,7 @@ class Merchant < ActiveRecord::Base
 
 	def updateproducts
 
-		  url = 'https://sandbox.blackhawknetwork.com/productManagement/v1/productLines?first=0&maximum=10&ascending=true&exactMatch=false&caseSensitive=false'
+		  #url = 'https://sandbox.blackhawknetwork.com/productManagement/v1/productLines?first=0&maximum=10&ascending=true&exactMatch=false&caseSensitive=false'
 
       request = HTTPI::Request.new('https://sandbox.blackhawknetwork.com/productManagement/v1/productLines?first=0&maximum=500&ascending=true&exactMatch=false&caseSensitive=false')
 

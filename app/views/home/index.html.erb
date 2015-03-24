@@ -61,6 +61,38 @@
 </div>
 </section>
 
+<!-- Featured Cause Thomas House Run -->   
+<section id="companyCarousel" class="carousel carousel-2 slide bg-white bb" data-ride="carousel">
+        <div class="container relative">
+            
+            <div class="carousel-inner">
+                <div class="owl-carousel owl-carousel-single no-padding">
+                    <div class="item active">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2 class="title" style="text-align:center">Featured Cause<br/>
+                                    <a href="/cause/show/172">Thomas House Family Shelter - Run 4 Homeless Children</a>
+                                     <br/> </h2>
+
+                                <br/>
+                                <p>Run 4 Homeless Children The mission of Thomas House is to provide a safe, supportive environment and the resources necessary for homeless families with children to remain together while empowering them to become independent and self-sufficient. Walk, run or ride in a stroller across a gorgeous track. There are six physical bridges runners must cross and one tunnel to run through to reach the finish line. These represent the six hurdles that homeless families must cross to reach self-sufficiency, and passing through the tunnel represents Thomas House being the light at the end of the tunnel. This event is Saturday, March 28, 2015 at Mile Square Regional Park.
+                                </p>
+                                <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button" onclick="location.href='/donate/new/?charityid=172'">
+                                                        <span>Donate Unused Gift Card</span>
+                                    </button>
+                                
+                            </div>
+                            <div class="col-md-6">
+                                <img src="<%= CLOUDFRONT_HOST %>/images/photo_attachment/172/original/r4hc-logo1.png" class="img-responsive" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+</section>
+
 <%= render partial: "layouts/usergiftcards" %>
  
 <!-- Steps 1, 2, 3 -->
@@ -285,7 +317,7 @@
                                             <div class="col-md-3" style="border-right: #cdcdcd thin solid;border-bottom: #cdcdcd thin solid;min-height:250px">
                                                 <div class="wp-block inverse">
                                                     <div class="figure" style="min-height:150px">
-                                                        <img alt="" src="<%=@merchants[i+k].brandLogoImage%>" class="img-responsive"
+                                                        <img alt="" src="<%=CLOUDFRONT_HOST %><%=@merchants[i+k].logo.url%>" class="img-responsive"
                                                         style="margin: auto auto; height: auto; width: auto; max-height:150px; max-width:200px;" >
                                                         <div class="figcaption bg-base"></div>
                                                         <div class="figcaption-btn">

@@ -5,9 +5,11 @@ class HomeController < ApplicationController
 
   	@causes = Charity.limit(20).order("RANDOM()").where(isapproved: true)
 
-    #@merchants = Merchant.where.not(merchantid: 172).limit(20).order("RANDOM()")
+    @merchants = Merchant.where.not(merchantid_bak: 172)
+                         .where.not(merchantid_bak: 9999)
+                         .limit(20).order("RANDOM()")
 
-    @merchants = Merchant.where(:productLineStatus => 'ACTIVATED')
+    #@merchants = Merchant.where(:productLineStatus => 'ACTIVATED')
                          #.where(:accountType => 'GIFT_CARD')
 
   	@userhost = request.host_with_port
@@ -29,12 +31,79 @@ class HomeController < ApplicationController
   	   @giftcardstats = Giftcardstat.limit(3).order("RANDOM()")
     end
 
-     
+
+
+  end
+
+  def testbhnwebservice
+
+      response = RestClient::Resource.new(
+      'https://sandbox.blackhawknetwork.com/v2/exchange/quote',
+      :ssl_ca_file      =>  "key.pem",
+      :verify_ssl       =>  OpenSSL::SSL::VERIFY_PEER,
+      :open_timeout     => 31,
+      :read_timeout     => 31,
+      :body        => {
+
+            "card" => {
+              
+                   "cardNumber" => "123456789" ,
+                   "pinNumber" => "1513" ,
+                   "productLineId"  =>  "16"
+              
+                  },
+                  "contractId" => "12345678912",
+                  "previousAttempts" => "0",
+                  "requestorId" => "YGSZRJHZC9KA1VNV62C9ARGSF4"
+            }
+      
+     ).get
+
+     byebug
+
+    
+    request = HTTPI::Request.new('https://sandbox.blackhawknetwork.com/v2/exchange/quote')
+    request.auth.ssl.cert_key_file = "key.pem"
+    request.auth.ssl.cert_file = "key.pem"
+    #request.headers["contractId"] = "12345678912"
+    request.headers["requestorId"] = "YGSZRJHZC9KA1VNV62C9ARGSF4"
+    #request.headers["previousAttempts"] =  "0"
+    request.headers["Accept"] = "application/json; charset=UTF-8"
+    request.open_timeout = 31
+    request.read_timeout = 31
+    card = {
+        
+             "cardNumber" => "123456789" ,
+             "pinNumber" => "1513" ,
+             "productLineId"  =>  "16"
+        
+    }.to_json
+
+    #request.headers["card"] = card
+
+    request.body = {
+      "card" => card,
+      "contractId" => "12345678912",
+      "previousAttempts" => "0",
+      "requestorId" => "YGSZRJHZC9KA1VNV62C9ARGSF4"
+
+
+    }.to_json
+
+    response = HTTPI.post request
+
+    byebug
+  
+    resultcode = response.code
+
+    results = JSON.parse response.raw_body
+
 
   end
 
   def getbhnproducts
 
+      # replaced by Merchant.updateproducts rake schedule command
       
       request = HTTPI::Request.new('https://sandbox.blackhawknetwork.com/productManagement/v1/productLines?first=0&maximum=500&ascending=true&exactMatch=false&caseSensitive=false')
 
