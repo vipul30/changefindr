@@ -49,6 +49,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Easy upload management for ActiveRecord.  For image upload
 gem 'paperclip', '~> 4.2.1'
+gem 'aws-sdk' # needed to work with amazon S3
+gem 'aws-s3', '~> 0.6.3'
 
 # Use unicorn as the app server
 gem 'unicorn'
@@ -88,6 +90,9 @@ gem 'inifile', '~> 3.0.0'
 gem 'rubyntlm', '~> 0.5.0'
 
 gem 'rest-client', '~> 1.7.3'
+
+# curl rest api query for get and post
+gem 'curb', '~> 0.8.7'
 
 # schedule cron jobs
 gem 'whenever', '~> 0.9.4', :require => false

@@ -60,5 +60,14 @@ Rails.application.configure do
     enable_starttls_auto: true  
   }
 
+  config.paperclip_defaults = {
+  :storage => :s3,
+  :s3_credentials => {
+    :bucket => 'changefindr.com', #ENV['S3_BUCKET_NAME'],
+    :access_key_id => 'AKIAJVJW7W6PKV3X2DXA', #ENV['AWS_ACCESS_KEY_ID'],
+    :secret_access_key => '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'#ENV['AWS_SECRET_ACCESS_KEY']
+  }
+}
+
 
 end

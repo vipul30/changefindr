@@ -1,6 +1,10 @@
 class HomeController < ApplicationController
   def index
 
+    #Merchant.new.updatebhnproducts
+
+    #testbhnwebservice4
+
   	offset = rand(Charity.count)
 
   	@causes = Charity.limit(20).order("RANDOM()").where(isapproved: true)
@@ -32,42 +36,79 @@ class HomeController < ApplicationController
     end
 
 
+    
 
   end
 
   def testbhnwebservice
 
-      response = RestClient::Resource.new(
-      'https://sandbox.blackhawknetwork.com/v2/exchange/quote',
-      :ssl_ca_file      =>  "key.pem",
-      :verify_ssl       =>  OpenSSL::SSL::VERIFY_PEER,
-      :open_timeout     => 31,
-      :read_timeout     => 31,
-      :body        => {
-
-            "card" => {
+    response = RestClient.post 'https://api.sandbox.blackhawknetwork.com/v2/exchange/quote', 
+              :card => { :cardNumber => '123456789', :pinNumber => "1513", :productLineId  =>  "16" },
+              :contractId => '12345678912',
+              :previousAttempts => '0',
+              :requestorId => 'YGSZRJHZC9KA1VNV62C9ARGSF4',
               
-                   "cardNumber" => "123456789" ,
-                   "pinNumber" => "1513" ,
-                   "productLineId"  =>  "16"
-              
-                  },
-                  "contractId" => "12345678912",
-                  "previousAttempts" => "0",
-                  "requestorId" => "YGSZRJHZC9KA1VNV62C9ARGSF4"
-            }
-      
-     ).get
+              :ssl_client_key => "key.pem",
+              :verify_ssl       =>  OpenSSL::SSL::VERIFY_PEER,
+              :open_timeout     => 31,
+              :read_timeout     => 31,
+              :content_type =>'application/json; charset=UTF-8',
+              :accept => 'application/json; charset=UTF-8',
+              :headers => {
+                :content_type =>'application/json',               
+                :accept => 'application/json',
+                :requestorId => 'YGSZRJHZC9KA1VNV62C9ARGSF4',
+                :contractId =>  '1234567891011'
+                }  
 
-     byebug
+   
 
-    
+    byebug
+
+  end
+
+  
+
+  def testbhnwebservice2
+
+
+    uri = URI.parse("https://api.sandbox.blackhawknetwork.com/v2/exchange/quote")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    raw = File.read "key.pem" # DER- or PEM-encoded
+    certificate = OpenSSL::X509::Certificate.new raw
+    http.cert = certificate
+    http.read_timeout = 10
+    http.open_timeout = 10
+    request = Net::HTTP::Post.new(uri)
+    request.add_field('Content-Type', 'application/json')
+    request.add_field('Accept',' application/json; charset=UTF-8')
+    request.add_field('requestorId','YGSZRJHZC9KA1VNV62C9ARGSF4')
+    request.body = {"card"=> {
+                      "cardNumber" => "123456789" ,
+                       "pinNumber" => "1513" ,
+                       "productLineId"  =>  "16"
+                     },                                        
+                     "contractId"=>"1234567891011","requestorId"=>"YGSZRJHZC9KA1VNV62C9ARGSF4","previousAttempts"=>"0"
+                   }
+
+byebug
+    response = http.request(request)
+
+    byebug
+
+  end
+
+  def testbhnwebservice3
+
     request = HTTPI::Request.new('https://sandbox.blackhawknetwork.com/v2/exchange/quote')
-    request.auth.ssl.cert_key_file = "key.pem"
-    request.auth.ssl.cert_file = "key.pem"
-    #request.headers["contractId"] = "12345678912"
+    #request.auth.ssl.cert_key_file = "key.pem"
+    request.auth.ssl.cert_key_file = 'cert.p12'
+    request.auth.ssl.cert_key_password = '3J3XMFN2'
+    request.headers["contractId"] = "60300003916"
     request.headers["requestorId"] = "YGSZRJHZC9KA1VNV62C9ARGSF4"
-    #request.headers["previousAttempts"] =  "0"
+    request.headers["previousAttempts"] =  "0"
     request.headers["Accept"] = "application/json; charset=UTF-8"
     request.open_timeout = 31
     request.read_timeout = 31
@@ -79,27 +120,166 @@ class HomeController < ApplicationController
         
     }.to_json
 
-    #request.headers["card"] = card
+    request.headers["card"] = card
+    
+    begin
+      response = HTTPI.post request
+      resultcode = response.code
 
-    request.body = {
-      "card" => card,
-      "contractId" => "12345678912",
-      "previousAttempts" => "0",
-      "requestorId" => "YGSZRJHZC9KA1VNV62C9ARGSF4"
+      results = JSON.parse response.raw_body
+    rescue => error
 
+      byebug
+    end
 
-    }.to_json
+    
+   
 
-    response = HTTPI.post request
+byebug
 
+  end
+
+  def testbhnwebservice4
+
+    r = Random.new
+    
+
+    params = { 
+
+      
+      :contractId => '60300003916',
+      :requestId => r.rand(10...5000).to_s + 'YGSZRJHZC9KA1VNV62C9ARGSF4',
+      :previousAttempts => 0,
+      :requestorId => 'YGSZRJHZC9KA1VNV62C9ARGSF4',
+      
+      :card => {:cardNumber => "1234567", :pinNumber => "153", :productLineId => "16"} 
+      
+
+    }
+
+    curl = Curl::Easy.new("https://api.sandbox.blackhawknetwork.com/v2/exchange/quote")
+    
+    
+    curl.headers['Accept'] = 'application/json'
+    curl.headers['Content-Type'] = 'application/json'
+    curl.headers["requestorId"] = 'YGSZRJHZC9KA1VNV62C9ARGSF4'
+    curl.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
+    curl.headers['previousAttempts'] = '0'
+    curl.headers['contractId'] = '60300003916'
+
+    curl.cert = 'cert.p12'
+    curl.cert_key = 'cert.pw'
+    curl.certpassword = '3J3XMFN2'
+    curl.ssl_verify_peer = false
+    
+    curl.follow_location = true
+    curl.ssl_verify_host = false
+    curl.ssl_verify_peer = true
+    curl.verbose = true
+    
+
+    
+
+    begin
+      result = curl.http_post(params.to_json) {
+        [http]
+          response_bhn = http.headers
+          
+      }
+      
+    rescue => error
+      byebug
+    end
+
+    bhnresonse = curl.body_str
     byebug
-  
-    resultcode = response.code
-
-    results = JSON.parse response.raw_body
 
 
   end
+
+  def testbhnwebservice5
+
+    request = HTTPI::Request.new('https://sandbox.blackhawknetwork.com/v2/exchange/quote')
+    #request.auth.ssl.cert_key_file = "key.pem"
+    request.auth.ssl.cert_file = "key.pem"
+    
+
+    request.body = 
+    {
+      'Content-Type' => 'application/json',
+      'contractId' => '60300003916',
+      'requestId' => 'YGSZRJHZC9KA1VNV62C9ARGSF4',
+      'previousAttempts' => '0',
+      
+           'card'  => {
+               'cardNumber' => '123456789',
+               'pinNumber' => '1513',
+               'productLineId'  =>  '16'
+           }
+      
+    }.to_json
+
+    
+    
+    begin
+      response = HTTPI.post request
+      resultcode = response.code
+
+      results = JSON.parse response.raw_body
+    rescue => error
+
+      byebug
+    end
+
+    
+   
+
+byebug
+
+  end
+
+
+   def bhnacquire1
+
+    request = HTTPI::Request.new('https://sandbox.blackhawknetwork.com/v2/exchange/acquire')
+    #request.auth.ssl.cert_key_file = "key.pem"
+    request.auth.ssl.cert_file = "key.pem"
+    request.headers["contractId"] = "60300003916"
+    request.headers["requestorId"] = "YGSZRJHZC9KA1VNV62C9ARGSF4"
+    request.headers["Content-Type"] =  "application/json"
+    
+
+
+    request.headers["Accept"] = "application/json; charset=UTF-8"
+    request.open_timeout = 31
+    request.read_timeout = 31
+    card = {
+        
+             "cardNumber" => "123456789" ,
+             "pinNumber" => "1513" ,
+             "productLineId"  =>  "16"
+        
+    }.to_json
+
+    request.headers["card"] = card
+    
+    begin
+      response = HTTPI.post request
+      resultcode = response.code
+
+      results = JSON.parse response.raw_body
+    rescue => error
+
+      byebug
+    end
+
+    
+   
+
+byebug
+
+  end
+
 
   def getbhnproducts
 
