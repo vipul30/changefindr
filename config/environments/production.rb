@@ -77,23 +77,23 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              'smtp.mandrillapp.com',
-    port:                 587,
-    domain:               'changefindr.heroku.com',
-    user_name:            'app32878214@heroku.com',
-    password:             'N9y_H4yuRGCZ7gYx49UPUA',
-    authentication:       'plain',
-    enable_starttls_auto: true  
-  }
+  #config.action_mailer.smtp_settings = {
+  #  address:              'smtp.mandrillapp.com',
+  #  port:                 587,
+  #  domain:               'changefindr.heroku.com',
+  #  user_name:            'app32878214@heroku.com',
+  #  password:             'N9y_H4yuRGCZ7gYx49UPUA_NO',
+  #  authentication:       'plain',
+  #  enable_starttls_auto: true  
+  #}
 
   config.action_mailer.smtp_settings = {
-    address:              'smtpout.secureserver.net',
-    port:                 80,
-    domain:               'changefindr.heroku.com',
-    user_name:            'no-reply@changefindr.com',
-    password:             'Changefindr#1',
-    authentication:       'plain',
+    address:              ENV['smtp_settings_address'],
+    port:                 ENV['smtp_settings_port'],
+    domain:               ENV['smtp_settings_domain'],
+    user_name:            ENV['smtp_settings_user_name'],
+    password:             ENV['smtp_settings_password'],
+    authentication:       ENV['smtp_settings_authentication'],
     enable_starttls_auto: true  
   }
 
@@ -112,9 +112,9 @@ config.action_mailer.raise_delivery_errors = true
   config.paperclip_defaults = {
   :storage => :s3,
   :s3_credentials => {
-    :bucket => 'changefindr.com', #ENV['S3_BUCKET_NAME'],
-    :access_key_id => 'AKIAJVJW7W6PKV3X2DXA', #ENV['AWS_ACCESS_KEY_ID'],
-    :secret_access_key => '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'#ENV['AWS_SECRET_ACCESS_KEY']
+    :bucket => ENV['S3_BUCKET_NAME'],
+    :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+    :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
   }
 }
 

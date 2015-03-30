@@ -97,6 +97,11 @@ gem 'curb', '~> 0.8.7'
 # schedule cron jobs
 gem 'whenever', '~> 0.9.4', :require => false
 
+# ability to put all your secret passwords in config/application.yml
+# bundle exec figaro install
+#http://www.rubydoc.info/gems/figaro/1.1.0
+gem 'figaro', '~> 1.1.0'
+
 
 #gem 'debugger', '~> 1.6.8'
 
