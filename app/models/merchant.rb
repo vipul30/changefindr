@@ -36,21 +36,20 @@ end
 
   def updatebhnproducts
 
-    curl = Curl::Easy.new("https://api.sandbox.blackhawknetwork.com/productManagement/v1/productLines?first=0&maximum=500&ascending=true&exactMatch=false&caseSensitive=false")
+    curl = Curl::Easy.new(ENV['bhn_url_product_line_preprod'])
     
-
-     r = Random.new
+    r = Random.new
     
     curl.headers['Accept'] = 'application/json'
     curl.headers['Content-Type'] = 'application/json'
-    curl.headers["requestorId"] = 'YGSZRJHZC9KA1VNV62C9ARGSF4'
+    curl.headers["requestorId"] = ENV['bhn_requestorId_preprod'] 
     curl.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
     curl.headers['previousAttempts'] = '0'
-    curl.headers['contractId'] = '60300003916'
+    curl.headers['contractId'] = ENV['bhn_contractId_preprod']
 
-    curl.cert = 'cert.p12'
-    curl.cert_key = 'cert.pw'
-    curl.certpassword = '3J3XMFN2'
+    curl.cert = ENV['bhn_cert_preprod']
+    curl.cert_key = ENV['bhn_cert_preprod']
+    curl.certpassword = ENV['bhn_cert_password_preprod']
     curl.ssl_verify_peer = false
     
     curl.follow_location = true

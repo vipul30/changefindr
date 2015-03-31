@@ -3,6 +3,7 @@ class HomeController < ApplicationController
 
     #Merchant.new.updatebhnproducts
 
+    getcardbalance('123456789', '1234', '16')
     #testbhnwebservice4
 
   	offset = rand(Charity.count)
@@ -147,37 +148,35 @@ byebug
     params = { 
 
       
-      :contractId => '60300003916',
-      :requestId => r.rand(10...5000).to_s + 'YGSZRJHZC9KA1VNV62C9ARGSF4',
+      :contractId => ENV['bhn_contractId_preprod'],
+      :requestId => r.rand(10...5000).to_s + ENV['bhn_requestorId_preprod'],
       :previousAttempts => 0,
-      :requestorId => 'YGSZRJHZC9KA1VNV62C9ARGSF4',
+      :requestorId => ENV['bhn_requestorId_preprod'],
       
       :card => {:cardNumber => "1234567", :pinNumber => "153", :productLineId => "16"} 
       
 
     }
 
-    curl = Curl::Easy.new("https://api.sandbox.blackhawknetwork.com/v2/exchange/quote")
+    curl = Curl::Easy.new(ENV['bhn_url_quote_preprod'])
     
     
     curl.headers['Accept'] = 'application/json'
     curl.headers['Content-Type'] = 'application/json'
-    curl.headers["requestorId"] = 'YGSZRJHZC9KA1VNV62C9ARGSF4'
+    curl.headers["requestorId"] = ENV['bhn_requestorId_preprod']
     curl.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
     curl.headers['previousAttempts'] = '0'
-    curl.headers['contractId'] = '60300003916'
+    curl.headers['contractId'] = ENV['']
 
-    curl.cert = 'cert.p12'
-    curl.cert_key = 'cert.pw'
-    curl.certpassword = '3J3XMFN2'
+    curl.cert = ENV['bhn_cert_preprod']
+    curl.cert_key = ENV['bhn_cert_pass_file_preprod']
+    curl.certpassword = ENV['bhn_cert_password_preprod']
     curl.ssl_verify_peer = false
     
     curl.follow_location = true
     curl.ssl_verify_host = false
     curl.ssl_verify_peer = true
     curl.verbose = true
-    
-
     
 
     begin

@@ -54,7 +54,64 @@ protect_from_forgery
       end
 
 
+  end
+
+  def getcardbalance(cardnumber, pinnumber, productlineid)
+
+    r = Random.new
+    
+
+    params = { 
+
+      
+      :contractId => ENV['bhn_contractId_preprod'],
+      :requestId => r.rand(10...5000).to_s + ENV['bhn_requestorId_preprod'],
+      :previousAttempts => 0,
+      :requestorId => ENV['bhn_requestorId_preprod'],
+      
+      :card => {:cardNumber => cardnumber, :pinNumber => pinnumber, :productLineId => productlineid} 
+      
+
+    }
+
+    curl = Curl::Easy.new(ENV['bhn_url_quote_preprod'])
+    
+    
+    curl.headers['Accept'] = 'application/json'
+    curl.headers['Content-Type'] = 'application/json'
+    curl.headers["requestorId"] = ENV['bhn_requestorId_preprod']
+    curl.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
+    curl.headers['previousAttempts'] = '0'
+    curl.headers['contractId'] = ENV['bhn_contractId_preprod']
+
+    curl.cert = ENV['bhn_cert_preprod']
+    curl.cert_key = ENV['bhn_cert_pass_file_preprod']
+    curl.certpassword = ENV['bhn_cert_password_preprod']
+    curl.ssl_verify_peer = false
+    
+    curl.follow_location = true
+    curl.ssl_verify_host = false
+    curl.ssl_verify_peer = true
+    curl.verbose = true
+    
+
+    begin
+      result = curl.http_post(params.to_json) {
+        [http]
+          response_bhn = http.headers
+          
+      }
+      
+    rescue => error
+      byebug
     end
+
+    bhnresponse = JSON.parse curl.body_str
+    #byebug
+
+
+  end
+
   
 
 end
