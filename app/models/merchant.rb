@@ -60,37 +60,35 @@ end
     curl.perform
 
     results = JSON.parse curl.body_str
-    giftcards = results['results']  # this is the json result to get the gift cards
-
     
+
+    #results['currentResults'][0]
+#{"productLineId"=>1, "minAcceptedValue"=>20.0, "maxAcceptedValue"=>1000.0, "discount"=>0.58, "name"=>"Abercrombie & Fitch"}
+
+    giftcards = results['currentResults']  # this is the json result to get the gift cards
 
     #response.headers['date']
 
     for giftcard in giftcards
 
 
-      entityId = giftcard['entityId'].split(/productLine */)[1]
-      # remove / from the first characater since it's part of the URL
-      entityId[0] = ''
+      productLineId = giftcard['productLineId'].to_i
+     
 
-      merchant = Merchant.where(:entityId => entityId).first
+      merchant = Merchant.where(:productLineId => productLineId).first
 
       if merchant == nil
         merchant = Merchant.new
       end
 
-      merchant.entityId = entityId
-      merchant.entityIdUrl = giftcard['entityId']
-      merchant.productLineName = giftcard['productLineName']
-      merchant.brandId = giftcard['brandId']
-      merchant.merchantname = giftcard['brandName']
-      merchant.brandCode = giftcard['brandCode']
-      merchant.brandLogoImage = giftcard['brandLogoImage']
-      merchant.productLineStatus = giftcard['productLineStatus']
-      merchant.accountType = giftcard['accountType']
-      merchant.startDate = giftcard['startDate']
-      merchant.endDate = giftcard['endDate']
-      merchant.locale = giftcard['locale']
+
+      merchant.productLineId = productLineId
+      merchant.minAcceptedValue = giftcard['minAcceptedValue'].to_f
+      merchant.maxAcceptedValue = giftcard['maxAcceptedValue'].to_f
+      merchant.discount = giftcard['discount'].to_f
+      merchant.merchantname = giftcard['name']
+
+     
       merchant.merchantid_bak = 9999
       merchant.modified = Time.now
       merchant.save

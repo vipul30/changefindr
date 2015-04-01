@@ -16,6 +16,18 @@ ActiveRecord::Schema.define(version: 20150127233247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "bhnquote", primary_key: "bhnquoteid", force: true do |t|
+    t.integer  "giftcardid"
+    t.datetime "responseTimestamp"
+    t.datetime "created"
+    t.float    "actualCardValue"
+    t.float    "exchangeCardValue"
+    t.string   "transactionId",     limit: 500
+    t.string   "responsecode",      limit: 50
+    t.string   "errorCode",         limit: 1000
+    t.string   "errorMessage",      limit: 1000
+  end
+
   create_table "campaign", primary_key: "campaignid", force: true do |t|
     t.integer  "charityid",                                           null: false
     t.string   "title",         limit: 500
@@ -117,6 +129,10 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.string   "locale",            limit: 100
     t.string   "entityIdUrl",       limit: 1000
     t.datetime "modified"
+    t.float    "minAcceptedValue"
+    t.float    "maxAcceptedValue"
+    t.float    "discount"
+    t.integer  "productLineId"
   end
 
   create_table "newsletter", primary_key: "newsletterid", force: true do |t|

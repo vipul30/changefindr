@@ -49,6 +49,8 @@ Rails.application.routes.draw do
   get 'giftcard/show'
 
   post 'giftcard/create'
+
+  get 'giftcard/refreshbalance'
   
   get 'merchant/index'
 

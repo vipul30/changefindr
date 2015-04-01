@@ -46,7 +46,24 @@
                             <br/>
                             <div class="wp-block inverse">
                                 <div class="figure" style="min-height:150px">
-                                    <img alt="" src="<%=merchant.logo.url%>" class="img-responsive center-block"
+                                    <%
+                                        logourl = merchant.brandLogoImage
+
+                                        if logourl == nil || logourl == ''
+
+                                            logourl = CLOUDFRONT_HOST + '/images/giftcard-3.jpg'
+                                        else
+                                            #url = URI.parse(logourl)
+                                            #req = Net::HTTP.new(url.host, url.port)
+                                            #res = req.request_head(url.path)
+                                            #byebug
+
+                                        end
+
+                                    %>
+
+
+                                    <img alt="" src="<%=logourl%>" class="img-responsive center-block"
                                     style="margin: auto auto; height: auto; width: auto; max-height:150px; max-width:200px;" 
                                     >
                                     <div class="figcaption bg-base"></div>

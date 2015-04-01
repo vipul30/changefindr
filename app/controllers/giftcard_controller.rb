@@ -81,12 +81,32 @@ class GiftcardController < ApplicationController
     @giftcard.userid = session[:userid]
     @giftcard.isdeleted = 0
 
+
+    # call the method getcardbalance(cardnumber, pinnumber, productlineid)
+    # returns a Bhnquote model object
+    merchant = Merchant.where(:merchantid => @giftcard.merchantid).first
+
+    bhnquote = Bhnquote.new
+    bhnquote = getcardbalance(@giftcard.cardnumber, @giftcard.pin, merchant.productLineId)
+
+
+    if bhnquote.responsecode == '200' || bhnquote.responsecode == '201'
+
+      @giftcard.balance = bhnquote.actualCardValue
+
+    else
+      # error
+      flash[:notice] = bhnquote.errorMessage
+      render('new') 
+      return
+    end
     
-    @giftcard.balance = (rand * (45-5) + 5).round(2)
     
-    byebug
 
     if @giftcard.save
+
+      bhnquote.giftcardid = @giftcard.giftcardid
+      bhnquote.save
 
       # if user is logged display main page
       if session[:userid]
@@ -117,6 +137,70 @@ class GiftcardController < ApplicationController
         render('new')
         return
     end
+
+  end
+
+  def refreshbalance
+
+
+    # if user is logged display main page
+    if session[:userid]
+
+      @giftcard = Giftcard.where(:giftcardid => params[:giftcardid]).first()
+
+      # call the method getcardbalance(cardnumber, pinnumber, productlineid)
+      # returns a Bhnquote model object
+      merchant = Merchant.where(:merchantid => @giftcard.merchantid).first
+
+      bhnquote = Bhnquote.new
+      bhnquote = getcardbalance(@giftcard.cardnumber, @giftcard.pin, merchant.productLineId)
+
+
+      if bhnquote.responsecode == '200' || bhnquote.responsecode == '201'
+
+        @giftcard.balance = bhnquote.actualCardValue
+
+      else
+        # error
+        flash[:notice] = bhnquote.errorMessage
+        render('new') 
+        return
+      end
+       
+
+      if @giftcard.save
+
+        bhnquote.giftcardid = @giftcard.giftcardid
+        bhnquote.save
+
+        session[:usergiftcards] = nil
+
+        session[:usergiftcards] = Giftcard.where(:isdeleted => false)
+                      .where(:userid => session[:userid])
+                      .order(modified: :desc)
+                      .limit(2).to_yaml
+
+        flash[:notice] = "Please see below for your gift card balance."
+        redirect_to(:controller => "giftcard", :action => "index")
+        return
+      else
+        flash[:notice] = "There was an error refreshing the balance.  Please try again later."
+        # If save fails, redisplay the form so user can fix problems
+        render('index')
+        return
+    
+      end
+
+      # else redirect the user to the registration screen and store the gift card info in the session
+      else
+        
+        session[:newgiftcardid] = @giftcard.giftcardid
+        flash[:notice] = "Please sign in or register in order to see balance."
+        redirect_to(:controller => "sign_in", :action => "index")
+        return
+
+      end
+
 
   end
 

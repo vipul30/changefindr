@@ -201,7 +201,7 @@ $("#merchant").autocomplete({
                             return {
                                 id: m.merchantid,
                                 name: m.merchantname,
-                                logo: m.logo
+                                logo: m.brandLogoImage
                                 
                             };
                         });
@@ -230,7 +230,15 @@ $("#merchant").autocomplete({
                     $("#donation_giftcard_attributes_merchantid").val(ui.item.id);
                 } catch (Exception){}
                 $("#merchantname").html(ui.item.name);
-                $("#merchantlogo").attr("src", '<%= CLOUDFRONT_HOST %>/' + ui.item.logo);
+
+                logourl = ui.item.logo
+
+                if (logourl == null || logourl == '')
+                {
+                    logourl = '<%= CLOUDFRONT_HOST %>/images/giftcard-3.jpg'
+                }
+
+                $("#merchantlogo").attr("src", logourl);
 
                 cardfieldschange(ui.item.id);
 
@@ -240,9 +248,16 @@ $("#merchant").autocomplete({
 
             //console.log("logo= ", item.logo);
 
+            logourl = item.logo
+
+            if (logourl == null || logourl == '')
+            {
+                logourl = '<%= CLOUDFRONT_HOST %>/images/giftcard-3.jpg'
+            }
+
             return $('<li class="ui-menu-item-with-icon"></li>')
                 .data("item.ui-autocomplete", item.merchantname)
-                .append('<a><img src="<%= CLOUDFRONT_HOST %>/' + item.logo + '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + item.name + '</a>')
+                .append('<a><img src="'  + logourl +  '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + item.name + '</a>')
                 .appendTo(ul);
         };
 

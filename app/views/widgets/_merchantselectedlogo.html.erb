@@ -1,10 +1,12 @@
 <% if @giftcard.merchant
 
-        usermerchantlogo = @giftcard.merchant.logo.url
+
+
+        usermerchantlogo = @giftcard.merchant.brandLogoImage
         usermerchantname = @giftcard.merchant.merchantname
 
     else
-        usermerchantlogo = "/images/giftcard-3.jpg"
+        usermerchantlogo = CLOUDFRONT_HOST + "/images/giftcard-3.jpg"
         usermerchantname = "Gift Card"
 
     end 
@@ -13,7 +15,7 @@
     <div class="panel panel-default panel-sidebar-1 visible-lg visible-md" id="merchantinfo">
         <div class="wp-block default">
         <div class="figure">
-        	<img alt="" id="merchantlogo" src="<%= CLOUDFRONT_HOST %><%=usermerchantlogo%>" class="img-responsive">     
+        	<img alt="" id="merchantlogo" src="<%=usermerchantlogo%>" class="img-responsive" style="max-height:150px; max-width:200px;">     
         </div>
         <div class="wp-block-body">
             <h2 class="title" id="merchantname"><%= usermerchantname %></h2>

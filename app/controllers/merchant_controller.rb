@@ -80,8 +80,8 @@ class MerchantController < ApplicationController
 
     # this will do a like search ignoring case
     @searchmerchantresults = Merchant.where("merchantname ILIKE ?", "%" + searchtext + "%")
-                                     .where.not(merchantid_bak: 9999)
-                                     #.where(:productLineStatus => 'ACTIVATED')                         
+                                     .where(merchantid_bak: 9999)
+                                                       
     
     render :json => @searchmerchantresults
 

@@ -7,7 +7,7 @@
            
             <h4 style="color:black"><%= usergiftcard.cardnumber[0...9] %>...</h4>
             <span class="primary-letter style-1 c-base" style="float:center">
-                    &nbsp;&nbsp;$<%= usergiftcard.balance %>
+                    &nbsp;&nbsp;<%= number_to_currency(usergiftcard.balance) %>
                     </span>
                     <br/><br/>
 
@@ -15,7 +15,7 @@
                 <div style="text-align: center;">
 
                 
-                    <a href="#" class="btn btn-sm btn-base btn-icon fa-refresh">
+                    <a href="/giftcard/refreshbalance?giftcardid=<%= usergiftcard.giftcardid %>" class="btn btn-sm btn-base btn-icon fa-refresh">
                         <span>Refresh</span>
                     </a>
                 

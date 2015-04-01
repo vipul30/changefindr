@@ -3,19 +3,23 @@ class HomeController < ApplicationController
 
     #Merchant.new.updatebhnproducts
 
-    getcardbalance('123456789', '1234', '16')
+    #bhnquote = Bhnquote.new
+    #bhnquote = getcardbalance('123456789', '1234', '16')
+    #byebug
     #testbhnwebservice4
 
   	offset = rand(Charity.count)
 
   	@causes = Charity.limit(20).order("RANDOM()").where(isapproved: true)
 
-    @merchants = Merchant.where.not(merchantid_bak: 172)
-                         .where.not(merchantid_bak: 9999)
+    #@merchants = Merchant.where.not(merchantid_bak: 172)
+    #                     .where.not(merchantid_bak: 9999)
+    #                     .limit(20).order("RANDOM()")
+
+    @merchants = Merchant.where(merchantid_bak: 9999)
                          .limit(20).order("RANDOM()")
 
-    #@merchants = Merchant.where(:productLineStatus => 'ACTIVATED')
-                         #.where(:accountType => 'GIFT_CARD')
+                         
 
   	@userhost = request.host_with_port
 

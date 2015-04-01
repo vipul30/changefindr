@@ -204,7 +204,7 @@ $('#TermsLink').click(function () {
                         return {
                             id: m.charityid,
                             name: m.charityname,
-                            logo: m.logo
+                            logo: m.brandLogoImage
                             
                         };
                     });
@@ -251,7 +251,7 @@ try {
                             return {
                                 id: m.merchantid,
                                 name: m.merchantname,
-                                logo: m.logo
+                                logo: m.brandLogoImage
                                 
                             };
                         });
@@ -274,11 +274,20 @@ try {
         })
         .data("ui-autocomplete")._renderItem = function (ul, item) {
 
+
+                logourl = item.logo
+
+                if (logourl == null || logourl == '')
+                {
+                    logourl = '<%= CLOUDFRONT_HOST %>/images/giftcard-3.jpg'
+                }
+
+
             //console.log("logo= ", item.logo);
 
             return $('<li class="ui-menu-item-with-icon"></li>')
                 .data("item.ui-autocomplete", item.merchantname)
-                .append('<a><img src="<%= CLOUDFRONT_HOST %>/' + item.logo + '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + item.name + '</a>')
+                .append('<a><img src="' + logourl + '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + item.name + '</a>')
                 .appendTo(ul);
         };
 } catch (Exception) {}

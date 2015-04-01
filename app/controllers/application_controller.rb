@@ -101,13 +101,39 @@ protect_from_forgery
           response_bhn = http.headers
           
       }
+
+      
       
     rescue => error
-      byebug
+      
     end
 
     bhnresponse = JSON.parse curl.body_str
-    #byebug
+
+
+    bhnquote = Bhnquote.new
+    bhnquote.created = Time.now
+    bhnquote.responsecode = curl.response_code.to_s
+
+    if curl.response_code == 200 || curl.response_code == 201
+
+        # store all information in database and return object
+        bhnquote.responseTimestamp = Time.parse bhnresponse['responseTimestamp']
+        bhnquote.actualCardValue = bhnresponse['actualCardValue'].to_f
+        bhnquote.exchangeCardValue = bhnresponse['exchangeCardValue'].to_f
+        bhnquote.transactionId = bhnresponse['transactionId']
+
+    else
+
+        bhnquote.errorCode = bhnresponse['errors'][0]['errorCode']
+        bhnquote.errorMessage = bhnresponse['errors'][0]['message']
+
+    end
+
+    
+    
+
+    return bhnquote
 
 
   end
