@@ -16,6 +16,20 @@ ActiveRecord::Schema.define(version: 20150127233247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "bhnacquire", primary_key: "bhnacquireid", force: true do |t|
+    t.integer  "donationid"
+    t.datetime "created"
+    t.datetime "responseTimestamp"
+    t.float    "actualCardValue"
+    t.float    "exchangeCardValue"
+    t.string   "transactionId",     limit: 500
+    t.string   "errorCode",         limit: 100
+    t.string   "errorMessage",      limit: 1000
+    t.string   "customerId",        limit: 500
+    t.string   "responsecode",      limit: 100
+    t.string   "isCompleted",       limit: 100
+  end
+
   create_table "bhnquote", primary_key: "bhnquoteid", force: true do |t|
     t.integer  "giftcardid"
     t.datetime "responseTimestamp"

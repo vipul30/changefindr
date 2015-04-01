@@ -5,7 +5,9 @@ class Merchant < ActiveRecord::Base
     has_attached_file :logo, {  styles: {thumb: "75x75#"},
                 :path => "#{Rails.root}/public/images/photo_attachment/:merchantid_bak/:style/:basename.:extension",
                 :url => "/images/photo_attachment/:path/:style/:basename.:extension",
-                :default_url => "/images/photo_attachment/missing_thumb.png" }
+                :default_url => "/images/photo_attachment/missing_thumb.png",
+                :size => { :in => 0..500.kilobytes }
+              }
 
 
 Paperclip.interpolates :path do |attachment, style|

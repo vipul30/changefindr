@@ -77,7 +77,7 @@
                                     <td><%= donation.charity.charityname %></td>
                                     <td><%= donation.giftcard.merchant.merchantname %></td>
                                     <td><%= donation.giftcard.cardnumber %></td>
-                                    <td>$<%= donation.giftcard.balance %></td>
+                                    <td><%= number_to_currency(donation.giftcard.balance) %></td>
                                     <td><%= donation.created.to_formatted_s(:db) %></td>
                                     <td>status...</td>
                                     <td><a href="/donate/show?donationid=<%= donation.donationid %>&userid=<%=userid%>">Details</a></td>

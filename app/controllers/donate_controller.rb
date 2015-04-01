@@ -91,12 +91,46 @@ class DonateController < ApplicationController
     end
     
     @donation.giftcard.isdeleted = 0
-    @donation.giftcard.balance = (rand * (45-5) + 5).round(2)
-    
-    
+
+
+    # call the method getcardbalance(cardnumber, pinnumber, productlineid)
+    # returns a Bhnquote model object
+    merchant = Merchant.where(:merchantid => @donation.giftcard.merchantid).first
+
+    bhnquote = Bhnquote.new
+    bhnquote = getcardbalance(@donation.giftcard.cardnumber, @donation.giftcard.pin, merchant.productLineId)
+
+
+
+    if bhnquote.responsecode == '200' || bhnquote.responsecode == '201'
+
+     @donation.giftcard.balance = bhnquote.actualCardValue
+
+    else
+      # error
+      flash[:notice] = bhnquote.errorMessage
+      render('new') 
+      return
+    end
+
 
     if @donation.save
-      flash[:notice] = "Thank you for your donation.  Please hold onto your gift card until you get an email from us informing you we have processed it."
+
+
+      # check if the product line is accepted by bhn 
+
+      # save the bhn quote
+      bhnquote.giftcardid = @donation.giftcard.giftcardid
+      bhnquote.save
+
+      # call the method to have bhn acquire the donation
+      bhnacquire = Bhnacquire.new
+      bhnacquire = bhnacquirecard(@donation)
+      
+      bhnacquire.save
+
+
+      flash[:notice] = 'Thank you for your donation in the amount of ' + number_to_currency(@donation.giftcard.balance).to_s + ' to ' + @donation.charity.charityname + '.  Please hold onto your gift card until you get an email from us informing you we have processed it.'
       DonateMailer.donate_email(@donation, request.host_with_port).deliver
       redirect_to(:controller => "home", :action => "index")
       return
