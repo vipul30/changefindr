@@ -116,7 +116,7 @@ config.action_mailer.raise_delivery_errors = true
     :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
     :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
   },
-    :url =>':s3_domain_url',
+    :url =>'changefindr.com.s3.amazonaws.com',
     :path => '/:class/:attachment/:id_partition/:style/:filename'
 }
 
