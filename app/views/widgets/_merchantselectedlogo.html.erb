@@ -2,7 +2,7 @@
 
 
 
-        usermerchantlogo = @giftcard.merchant.brandLogoImage
+        usermerchantlogo = @giftcard.merchant.logo.url
         usermerchantname = @giftcard.merchant.merchantname
 
     else
@@ -15,7 +15,7 @@
     <div class="panel panel-default panel-sidebar-1 visible-lg visible-md" id="merchantinfo">
         <div class="wp-block default">
         <div class="figure">
-        	<img alt="" id="merchantlogo" src="<%=usermerchantlogo%>" class="img-responsive" style="max-height:150px; max-width:200px;">     
+        	<img alt="" id="merchantlogo" src="<%=usermerchantlogo%>" class="img-responsive">     
         </div>
         <div class="wp-block-body">
             <h2 class="title" id="merchantname"><%= usermerchantname %></h2>

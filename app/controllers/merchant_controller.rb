@@ -2,7 +2,9 @@ class MerchantController < ApplicationController
   
   def index
 
-    @merchants = Merchant.where.not(merchantid: 172).order('merchantname ASC').page(params[:page]).per_page(9)
+    #@merchants = Merchant.where.not(merchantid: 172).order('merchantname ASC').page(params[:page]).per_page(9)
+
+    @merchants = Merchant.where(merchantid_bak: 9999).order('merchantname ASC').page(params[:page]).per_page(9)
   
     @userhost = request.host_with_port
 
