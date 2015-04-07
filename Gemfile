@@ -102,6 +102,7 @@ gem 'whenever', '~> 0.9.4', :require => false
 #http://www.rubydoc.info/gems/figaro/1.1.0
 gem 'figaro', '~> 1.1.0'
 
+gem 'asset_sync', '~> 1.1.0'
 
 #gem 'debugger', '~> 1.6.8'
 
