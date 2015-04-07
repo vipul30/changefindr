@@ -116,8 +116,7 @@ config.action_mailer.raise_delivery_errors = true
     :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
     :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
   },
-    :url =>ENV['AWS_S3_HOST_NAME'],
-    :path => '/:class/:attachment/:id_partition/:style/:filename'
+    :url =>ENV['AWS_URL']
 }
 
 
