@@ -104,8 +104,8 @@ config.action_mailer.raise_delivery_errors = true
   Changefindr::Application.config.middleware.use ExceptionNotification::Rack,
   :email => {
     :email_prefix => "Error - Changefindr ",
-    :sender_address => %{"Changefindr Error" <no-reply@changefindr.com>}
-    #:exception_recipients => %w{vipul30@gmail.com}
+    :sender_address => %{"Changefindr Error" <no-reply@changefindr.com>},
+    :exception_recipients => %w{vipul30@gmail.com}
   }
 
 
@@ -116,7 +116,6 @@ config.action_mailer.raise_delivery_errors = true
     :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
     :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
   }
-  
 }
 
 
