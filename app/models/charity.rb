@@ -2,8 +2,8 @@ class Charity < ActiveRecord::Base
     self.table_name = 'charity'
     self.primary_key = :charityid
 	has_attached_file :logo, {	styles: {thumb: "75x75#"},
-								:path => "#{Rails.root}/public/images/photo_attachment/:id/:style/:basename.:extension",
-								:url => "/images/photo_attachment/:id/:style/:basename.:extension",
+								#:path => "#{Rails.root}/public/images/photo_attachment/:id/:style/:basename.:extension",
+								#:url => "/images/photo_attachment/:id/:style/:basename.:extension",
 								:default_url => "/images/photo_attachment/missing_thumb.png",
 								:size => { :in => 0..500.kilobytes } }
 
