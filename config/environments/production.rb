@@ -104,7 +104,7 @@ config.action_mailer.raise_delivery_errors = true
   Changefindr::Application.config.middleware.use ExceptionNotification::Rack,
   :email => {
     :email_prefix => "Error - Changefindr ",
-    :sender_address => %{"Changefindr Error" <no-reply@changefindr.com>},
+    :sender_address => %{"Changefindr Error" <vipul@changefindr.com>},
     :exception_recipients => %w{vipul30@gmail.com}
   }
 
