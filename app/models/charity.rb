@@ -11,8 +11,8 @@ class Charity < ActiveRecord::Base
     :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
     :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']},
     :storage => :s3,
-            :s3_host_name => ENV['AWS_S3_HOST_NAME'], #'s3-us-west-1.amazonaws.com',
-            :bucket => ENV['S3_BUCKET_NAME'],
+            :s3_host_name => 's3-us-west-1.amazonaws.com',
+            :bucket => 'changefindr.com',
 								:size => { :in => 0..500.kilobytes } }
 
 	has_attached_file :image1 , {	styles: {thumb: "60x60#"},
