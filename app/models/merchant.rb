@@ -28,7 +28,7 @@ end
     has_attached_file :logo, {	styles: {thumb: "75x75#"},
 								:path => "Users/vipul/Sites/changefindr/public/images/photo_attachment/:id/:style/:basename.:extension",
 								:url => "/images/photo_attachment/:id/:style/:basename.:extension",
-								:default_url => "/images/photo_attachment/missing_thumb.png",
+								:default_url => "/images/giftcard-3.jpg",
                 :storage => :s3,
                   :s3_credentials => {
                     :bucket => 'changefindr.com',
