@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def index
 
+    
     #Merchant.new.updatebhnproducts
 
     #bhnquote = Bhnquote.new

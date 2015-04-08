@@ -6,7 +6,13 @@ class Charity < ActiveRecord::Base
 								:url => "/images/photo_attachment/:id/:style/:basename.:extension",
 								:default_url => "/images/photo_attachment/missing_thumb.png",
 								:storage => :s3,
-  								:s3_credentials => S3_CREDENTIALS,
+  								:s3_credentials => {
+								    :bucket => 'changefindr.com',
+								    :access_key_id => ACCESS_KEY_ID,
+								    :secret_access_key => SECRET_ACCESS_KEY
+								  },
+								:access_key_id => ACCESS_KEY_ID,
+								:secret_access_key => SECRET_ACCESS_KEY,
             					:s3_host_name => 's3-us-west-1.amazonaws.com',
             					:bucket => 'changefindr.com',
 								:size => { :in => 0..500.kilobytes } }
