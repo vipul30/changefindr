@@ -26,9 +26,19 @@ end
 						:url => { :message => "Please enter a valid website.  i.e. http://www.changefindr.com" }
 =end
     has_attached_file :logo, {	styles: {thumb: "75x75#"},
-								:path => "#{Rails.root}/public/images/photo_attachment/:id/:style/:basename.:extension",
+								:path => "Users/vipul/Sites/changefindr/public/images/photo_attachment/:id/:style/:basename.:extension",
 								:url => "/images/photo_attachment/:id/:style/:basename.:extension",
-								:default_url => "/images/photo_attachment/missing_thumb.png" }
+								:default_url => "/images/photo_attachment/missing_thumb.png",
+                :storage => :s3,
+                  :s3_credentials => {
+                    :bucket => 'changefindr.com',
+                    :access_key_id => ACCESS_KEY_ID,
+                    :secret_access_key => SECRET_ACCESS_KEY
+                  },
+                :access_key_id => ACCESS_KEY_ID,
+                :secret_access_key => SECRET_ACCESS_KEY,
+                :s3_host_name => 's3-us-west-1.amazonaws.com',
+                :bucket => 'changefindr.com' }
 
 	validates :logo, :presence=> { :message => "Please upload an image of your logo." }
 	validates_attachment_size :logo, :less_than => 2.megabytes, :message => "Please ensure size of the logo image is less than 2MB." 
