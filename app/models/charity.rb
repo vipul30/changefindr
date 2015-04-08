@@ -5,6 +5,11 @@ class Charity < ActiveRecord::Base
 								:path => "#{Rails.root}/public/images/photo_attachment/:id/:style/:basename.:extension",
 								:url => "/images/photo_attachment/:id/:style/:basename.:extension",
 								:default_url => "/images/photo_attachment/missing_thumb.png",
+								:storage => :s3,
+  :s3_credentials => {
+    :bucket => ENV['S3_BUCKET_NAME'],
+    :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+    :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']},
 								:size => { :in => 0..500.kilobytes } }
 
 	has_attached_file :image1 , {	styles: {thumb: "60x60#"},
