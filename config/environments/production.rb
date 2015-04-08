@@ -87,15 +87,25 @@ Rails.application.configure do
   #  enable_starttls_auto: true  
   #}
 
-  config.action_mailer.smtp_settings = {
-    address:              ENV['smtp_settings_address'],
-    port:                 ENV['smtp_settings_port'],
-    domain:               ENV['smtp_settings_domain'],
-    user_name:            ENV['smtp_settings_user_name'],
-    password:             ENV['smtp_settings_password'],
-    authentication:       ENV['smtp_settings_authentication'],
+config.action_mailer.smtp_settings = {
+    address:              'smtpout.secureserver.net',
+    port:                 80,
+    domain:               'changefindr.heroku.com',
+    user_name:            'no-reply@changefindr.com',
+    password:             'Changefindr#1',
+    authentication:       'plain',
     enable_starttls_auto: true  
   }
+
+  #config.action_mailer.smtp_settings = {
+  #  address:              ENV['smtp_settings_address'],
+  #  port:                 ENV['smtp_settings_port'],
+  #  domain:               ENV['smtp_settings_domain'],
+  #  user_name:            ENV['smtp_settings_user_name'],
+  #  password:             ENV['smtp_settings_password'],
+  #  authentication:       ENV['smtp_settings_authentication'],
+  #  enable_starttls_auto: true  
+  #}
 
 
 config.action_mailer.perform_deliveries = true
