@@ -107,13 +107,11 @@ include ActionView::Helpers::NumberHelper
               
           }
 
-          
-          
         rescue => error
           
         end
 
-        bhnresponse = JSON.parse curl.body_str
+        bhnresponse = JSON.parse (curl.body_str || '{"errors":"error"}')
 
         bhnquote = Bhnquote.new
         bhnquote.created = Time.now
