@@ -111,7 +111,16 @@ include ActionView::Helpers::NumberHelper
           
         end
 
-        bhnresponse = JSON.parse (curl.body_str || '{"errors":"error"}')
+        # testing
+        bhnquote = Bhnquote.new
+        bhnquote.created = Time.now
+        bhnquote.errorMessage = curl.body_str
+        bhnquote.giftcardid = nil
+        bhnquote.save
+        # testing
+
+
+        bhnresponse = JSON.parse curl.body_str
 
         bhnquote = Bhnquote.new
         bhnquote.created = Time.now
