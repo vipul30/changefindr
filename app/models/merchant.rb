@@ -40,7 +40,7 @@ end
                 :s3_host_name => 's3-us-west-1.amazonaws.com',
                 :bucket => 'changefindr.com' }
 
-	validates :logo, :presence=> { :message => "Please upload an image of your logo." }
+	#validates :logo, :presence=> { :message => "Please upload an image of your logo." }
 	validates_attachment_size :logo, :less_than => 2.megabytes, :message => "Please ensure size of the logo image is less than 2MB." 
 	validates_attachment_content_type :logo, :content_type => /\Aimage\/.*\Z/,  :message => "Invalid image type for logo." 
 
@@ -125,6 +125,8 @@ end
           merchant.merchantid_bak = 9999
           merchant.modified = Time.now
           merchant.save
+
+
 
         end # end for loop
       end # end if giftcards != nil
