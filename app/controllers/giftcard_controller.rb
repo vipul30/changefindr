@@ -96,6 +96,8 @@ class GiftcardController < ApplicationController
 
     else
       # error
+      bhnquote.giftcardid = nil
+      bhnquote.save
       flash[:notice] = bhnquote.errorMessage
       render('new') 
       return

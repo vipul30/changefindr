@@ -49,63 +49,87 @@ end
   def updatebhnproducts
 
     curl = Curl::Easy.new(ENV['bhn_url_product_line_preprod'])
-    
-    r = Random.new
-    
-    curl.headers['Accept'] = 'application/json'
-    curl.headers['Content-Type'] = 'application/json'
-    curl.headers["requestorId"] = ENV['bhn_requestorId_preprod'] 
-    curl.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
-    curl.headers['previousAttempts'] = '0'
-    curl.headers['contractId'] = ENV['bhn_contractId_preprod']
 
-    curl.cert = ENV['bhn_cert_preprod']
-    curl.cert_key = ENV['bhn_cert_preprod']
-    curl.certpassword = ENV['bhn_cert_password_preprod']
-    curl.ssl_verify_peer = false
-    
-    curl.follow_location = true
-    curl.ssl_verify_host = false
-    curl.ssl_verify_peer = true
-    curl.verbose = true
+    i = 0
+    while (i <= 2)
 
-    curl.perform
+      r = Random.new
+      
+      curl.headers['Accept'] = 'application/json'
+      curl.headers['Content-Type'] = 'application/json'
+      curl.headers["requestorId"] = ENV['bhn_requestorId_preprod'] 
+      curl.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
+      curl.headers['previousAttempts'] = '0'
+      curl.headers['contractId'] = ENV['bhn_contractId_preprod']
 
-    results = JSON.parse curl.body_str
-    
+      curl.cert = ENV['bhn_cert_preprod']
+      curl.cert_key = ENV['bhn_cert_preprod']
+      curl.certpassword = ENV['bhn_cert_password_preprod']
+      curl.ssl_verify_peer = false
+      
+      curl.follow_location = true
+      curl.ssl_verify_host = false
+      curl.ssl_verify_peer = true
+      curl.verbose = true
 
-    #results['currentResults'][0]
-#{"productLineId"=>1, "minAcceptedValue"=>20.0, "maxAcceptedValue"=>1000.0, "discount"=>0.58, "name"=>"Abercrombie & Fitch"}
+      curl.perform
 
-    giftcards = results['currentResults']  # this is the json result to get the gift cards
+      results = JSON.parse curl.body_str
+      
+      if curl.response_code == 200 || curl.response_code == 201
+        i = 3
+      else
 
-    #response.headers['date']
+        # timeout error.  retry sending the information for a total of three times
+        if curl.response_code == 502 || curl.response_code == 504
 
-    for giftcard in giftcards
+          i = i + 1
 
-
-      productLineId = giftcard['productLineId'].to_i
-     
-
-      merchant = Merchant.where(:productLineId => productLineId).first
-
-      if merchant == nil
-        merchant = Merchant.new
+        else
+          # do not make any more calls
+          i = 3
+        end
       end
 
+      
 
-      merchant.productLineId = productLineId
-      merchant.minAcceptedValue = giftcard['minAcceptedValue'].to_f
-      merchant.maxAcceptedValue = giftcard['maxAcceptedValue'].to_f
-      merchant.discount = giftcard['discount'].to_f
-      merchant.merchantname = giftcard['name']
+      #results['currentResults'][0]
+      #{"productLineId"=>1, "minAcceptedValue"=>20.0, "maxAcceptedValue"=>1000.0, "discount"=>0.58, "name"=>"Abercrombie & Fitch"}
 
-     
-      merchant.merchantid_bak = 9999
-      merchant.modified = Time.now
-      merchant.save
+      giftcards = results['currentResults']  # this is the json result to get the gift cards
 
-    end
+      #response.headers['date']
+
+      if giftcards != nil
+
+        for giftcard in giftcards
+
+
+          productLineId = giftcard['productLineId'].to_i
+         
+
+          merchant = Merchant.where(:productLineId => productLineId).first
+
+          if merchant == nil
+            merchant = Merchant.new
+          end
+
+
+          merchant.productLineId = productLineId
+          merchant.minAcceptedValue = giftcard['minAcceptedValue'].to_f
+          merchant.maxAcceptedValue = giftcard['maxAcceptedValue'].to_f
+          merchant.discount = giftcard['discount'].to_f
+          merchant.merchantname = giftcard['name']
+
+         
+          merchant.merchantid_bak = 9999
+          merchant.modified = Time.now
+          merchant.save
+
+        end # end for loop
+      end # end if giftcards != nil
+    end # end while loop
+
     
 
   end

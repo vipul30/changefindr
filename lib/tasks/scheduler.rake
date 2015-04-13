@@ -4,7 +4,7 @@ task :update_bhn_products => :environment do
 
 
   merchant = Merchant.new
-  merchant.updateproducts
+  merchant.updatebhnproducts
 
 
   puts "done."

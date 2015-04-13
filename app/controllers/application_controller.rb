@@ -58,82 +58,102 @@ include ActionView::Helpers::NumberHelper
 
   def getcardbalance(cardnumber, pinnumber, productlineid)
 
-    r = Random.new
-    
 
-    params = { 
+      i = 0
+      bhnquote = Bhnquote.new
 
-      
-      :contractId => ENV['bhn_contractId_preprod'],
-      :requestId => r.rand(10...5000).to_s + ENV['bhn_requestorId_preprod'],
-      :previousAttempts => 0,
-      :requestorId => ENV['bhn_requestorId_preprod'],
-      
-      :card => {:cardNumber => cardnumber, :pinNumber => pinnumber, :productLineId => productlineid} 
-      
+      while (i <= 2)
 
-    }
+        r = Random.new
 
-    curl = Curl::Easy.new(ENV['bhn_url_quote_preprod'])
-    
-    
-    curl.headers['Accept'] = 'application/json'
-    curl.headers['Content-Type'] = 'application/json'
-    curl.headers["requestorId"] = ENV['bhn_requestorId_preprod']
-    curl.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
-    curl.headers['previousAttempts'] = '0'
-    curl.headers['contractId'] = ENV['bhn_contractId_preprod']
+        params = { 
 
-    curl.cert = ENV['bhn_cert_preprod']
-    curl.cert_key = ENV['bhn_cert_pass_file_preprod']
-    curl.certpassword = ENV['bhn_cert_password_preprod']
-    curl.ssl_verify_peer = false
-    
-    curl.follow_location = true
-    curl.ssl_verify_host = false
-    curl.ssl_verify_peer = true
-    curl.verbose = true
-    
-
-    begin
-      result = curl.http_post(params.to_json) {
-        [http]
-          response_bhn = http.headers
           
-      }
+          :contractId => ENV['bhn_contractId_preprod'],
+          :requestId => r.rand(10...5000).to_s + ENV['bhn_requestorId_preprod'],
+          :previousAttempts => i,
+          :requestorId => ENV['bhn_requestorId_preprod'],
+          
+          :card => {:cardNumber => cardnumber, :pinNumber => pinnumber, :productLineId => productlineid} 
+          
 
-      
-      
-    rescue => error
-      
-    end
+        }
 
-    bhnresponse = JSON.parse curl.body_str
+        curl = Curl::Easy.new(ENV['bhn_url_quote_preprod'])
+        
+        
+        curl.headers['Accept'] = 'application/json'
+        curl.headers['Content-Type'] = 'application/json'
+        curl.headers["requestorId"] = ENV['bhn_requestorId_preprod']
+        curl.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
+        curl.headers['previousAttempts'] = '0'
+        curl.headers['contractId'] = ENV['bhn_contractId_preprod']
+
+        curl.cert = ENV['bhn_cert_preprod']
+        curl.cert_key = ENV['bhn_cert_pass_file_preprod']
+        curl.certpassword = ENV['bhn_cert_password_preprod']
+        curl.ssl_verify_peer = false
+        
+        curl.follow_location = true
+        curl.ssl_verify_host = false
+        curl.ssl_verify_peer = true
+        curl.verbose = true
+        
+
+        begin
+          result = curl.http_post(params.to_json) {
+            [http]
+              response_bhn = http.headers
+              
+          }
+
+          
+          
+        rescue => error
+          
+        end
+
+        bhnresponse = JSON.parse curl.body_str
+
+        bhnquote = Bhnquote.new
+        bhnquote.created = Time.now
+        bhnquote.responsecode = curl.response_code.to_s
+
+        if curl.response_code == 200 || curl.response_code == 201
+
+            # store all information in database and return object
+            bhnquote.responseTimestamp = Time.parse bhnresponse['responseTimestamp']
+            bhnquote.actualCardValue = bhnresponse['actualCardValue'].to_f
+            bhnquote.exchangeCardValue = bhnresponse['exchangeCardValue'].to_f
+            bhnquote.transactionId = bhnresponse['transactionId']
+            i = 3
+
+        else
+
+            bhnquote.errorCode = bhnresponse['errors'][0]['errorCode']
+            bhnquote.errorMessage = bhnresponse['errors'][0]['message']
+
+            emailmessage = bhnquote.errorCode + ' ' + bhnquote.errorMessage + ' ' + curl.body_str + ' ' + curl.header_str + ' ' + curl.post_body.to_s
+
+            BhnMailer.bhn_error_email(emailmessage)  
+
+            # timeout error.  retry sending the information for a total of three times
+            if curl.response_code == 502 || curl.response_code == 504
+
+              i = i + 1
+
+            else
+              # do not make any more calls
+              i = 3
+
+            end
 
 
-    bhnquote = Bhnquote.new
-    bhnquote.created = Time.now
-    bhnquote.responsecode = curl.response_code.to_s
+        end
 
-    if curl.response_code == 200 || curl.response_code == 201
-
-        # store all information in database and return object
-        bhnquote.responseTimestamp = Time.parse bhnresponse['responseTimestamp']
-        bhnquote.actualCardValue = bhnresponse['actualCardValue'].to_f
-        bhnquote.exchangeCardValue = bhnresponse['exchangeCardValue'].to_f
-        bhnquote.transactionId = bhnresponse['transactionId']
-
-    else
-
-        bhnquote.errorCode = bhnresponse['errors'][0]['errorCode']
-        bhnquote.errorMessage = bhnresponse['errors'][0]['message']
-
-    end
-
-    
-    
-
-    return bhnquote
+      end # end while loop
+        
+      return bhnquote
 
 
   end
@@ -221,6 +241,8 @@ include ActionView::Helpers::NumberHelper
     bhnacquire.donationid = donation.donationid
     bhnacquire.customerId = customerId
 
+
+
     if curl.response_code == 200 || curl.response_code == 201
 
         # store all information in database and return object
@@ -234,6 +256,11 @@ include ActionView::Helpers::NumberHelper
 
         bhnacquire.errorCode = bhnresponse['errors'][0]['errorCode']
         bhnacquire.errorMessage = bhnresponse['errors'][0]['message']
+
+        emailmessage = bhnacquire.errorCode + ' ' + bhnacquire.errorMessage + ' ' + curl.body_str + ' ' + curl.header_str + ' ' + curl.post_body.to_s
+
+
+        BhnMailer.bhn_error_email(emailmessage)
 
     end
 
