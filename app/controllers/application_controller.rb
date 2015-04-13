@@ -89,8 +89,8 @@ include ActionView::Helpers::NumberHelper
         curl.headers['previousAttempts'] = '0'
         curl.headers['contractId'] = ENV['bhn_contractId_preprod']
 
-        curl.cert = ENV['bhn_cert_preprod']
-        curl.cert_key = ENV['bhn_cert_pass_file_preprod']
+        curl.cert = 'certs/cert_preprod.p12' #ENV['bhn_cert_preprod']
+        curl.cert_key = 'certs/cert_preprod.pw' #ENV['bhn_cert_pass_file_preprod']
         curl.certpassword = ENV['bhn_cert_password_preprod']
         curl.ssl_verify_peer = false
         
