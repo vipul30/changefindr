@@ -100,23 +100,25 @@ include ActionView::Helpers::NumberHelper
         curl.verbose = true
         
 
-        begin
+        #begin
           result = curl.http_post(params.to_json) {
             [http]
               response_bhn = http.headers
               
           }
 
-        rescue => error
+        #rescue => error
+
+
           
-        end
+        #end
 
         # testing
-        bhnquote = Bhnquote.new
-        bhnquote.created = Time.now
-        bhnquote.errorMessage = curl.body_str
-        bhnquote.giftcardid = nil
-        bhnquote.save
+        #bhnquote = Bhnquote.new
+        #bhnquote.created = Time.now
+        #bhnquote.errorMessage = curl.body_str
+        #bhnquote.giftcardid = nil
+        #bhnquote.save
         # testing
 
 
