@@ -90,7 +90,7 @@ require 'aws-sdk'
         curl.headers['contractId'] = ENV['bhn_contractId_preprod']
 
         #s3 = Aws::S3::Client.new
-        curl.cert = ENV['CERTIFICATE'] #'http://dpaqzkfinvd5q.cloudfront.net/certs/cert_preprod.p12' #Rails.root.join('cert/cert_sandbox.p12').to_s #ENV['bhn_cert_preprod']
+        curl.cert = 'testing' #'http://dpaqzkfinvd5q.cloudfront.net/certs/cert_preprod.p12' #Rails.root.join('cert/cert_sandbox.p12').to_s #ENV['bhn_cert_preprod']
         #s3.get_object({ bucket:ENV['S3_BUCKET_NAME'], key:ENV['AWS_ACCESS_KEY_ID'] }, target: '/certs/cert_preprod.p12') #'certs/cert_preprod.p12' #ENV['bhn_cert_preprod']
         
         errmessage = Bhnquote.new
@@ -123,7 +123,7 @@ require 'aws-sdk'
 
         rescue => error
 
-          
+          byebug
 
           raise  
         end

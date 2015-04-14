@@ -62,8 +62,8 @@ end
       curl.headers['previousAttempts'] = '0'
       curl.headers['contractId'] = ENV['bhn_contractId_preprod']
 
-      curl.cert = ENV['bhn_cert_preprod']
-      curl.cert_key = ENV['bhn_cert_preprod']
+      curl.cert = Rails.root.join(ENV['bhn_cert_preprod']).to_s
+      curl.cert_key = Rails.root.join(ENV['bhn_cert_preprod']).to_s
       curl.certpassword = ENV['bhn_cert_password_preprod']
       curl.ssl_verify_peer = false
       
