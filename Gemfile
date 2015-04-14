@@ -49,7 +49,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Easy upload management for ActiveRecord.  For image upload
 gem 'paperclip', '~> 4.2.1'
-gem 'aws-sdk', '< 2.0'
+
+gem 'aws-sdk-core', '~> 2.0.38'
+gem 'aws-sdk'
 #gem 'aws-sdk' # needed to work with amazon S3
 gem 'aws-s3', '~> 0.6.3'
 

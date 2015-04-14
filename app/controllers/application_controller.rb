@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   #protect_from_forgery with: :exception
 protect_from_forgery
 include ActionView::Helpers::NumberHelper
+require 'aws-sdk'
 
   def generate_hash(password, salt)
   	digest = OpenSSL::Digest::SHA256.new
@@ -81,7 +82,6 @@ include ActionView::Helpers::NumberHelper
 
         curl = Curl::Easy.new(ENV['bhn_url_quote_preprod'])
         
-        
         curl.headers['Accept'] = 'application/json'
         curl.headers['Content-Type'] = 'application/json'
         curl.headers["requestorId"] = ENV['bhn_requestorId_preprod']
@@ -89,10 +89,14 @@ include ActionView::Helpers::NumberHelper
         curl.headers['previousAttempts'] = '0'
         curl.headers['contractId'] = ENV['bhn_contractId_preprod']
 
-        curl.cert = 'certs/cert_preprod.p12' #ENV['bhn_cert_preprod']
-        curl.cert_key = 'certs/cert_preprod.pw' #ENV['bhn_cert_pass_file_preprod']
+        s3 = Aws::S3::Client.new
+        curl.cert = 'public/certs/cert_preprod.p12'
+        #s3.get_object({ bucket:ENV['S3_BUCKET_NAME'], key:ENV['AWS_ACCESS_KEY_ID'] }, target: '/certs/cert_preprod.p12') #'certs/cert_preprod.p12' #ENV['bhn_cert_preprod']
+        
+
+
+        curl.cert_key = 'public/certs/cert_preprod.pw' #ENV['bhn_cert_pass_file_preprod']
         curl.certpassword = ENV['bhn_cert_password_preprod']
-        curl.ssl_verify_peer = false
         
         curl.follow_location = true
         curl.ssl_verify_host = false
