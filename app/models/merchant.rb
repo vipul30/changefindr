@@ -73,9 +73,15 @@ end
       curl.verbose = true
 
       print curl.post_body
+      print '\n'
       print curl.headers
+      print '\n'
       print curl.header_str
+      print '\n'
       print curl.body_str
+      print '\n'
+      print 'does cert file exist= ' + curl.cert + ' ' + File.exist?(curl.cert).to_s + '\n'
+      print 'does cert pass file exist= ' + curl.cert_key + ' ' + File.exist?(curl.cert_key).to_s + '\n'
 
 
       begin
