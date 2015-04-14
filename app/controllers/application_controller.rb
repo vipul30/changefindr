@@ -90,13 +90,16 @@ require 'aws-sdk'
         curl.headers['contractId'] = ENV['bhn_contractId_preprod']
 
         #s3 = Aws::S3::Client.new
-        curl.cert = Rails.root.join('certs/cert_preprod.p12').to_s #ENV['bhn_cert_preprod']
+        curl.cert = Rails.root.join(ENV['bhn_cert_preprod']).to_s #ENV['bhn_cert_preprod']
         #s3.get_object({ bucket:ENV['S3_BUCKET_NAME'], key:ENV['AWS_ACCESS_KEY_ID'] }, target: '/certs/cert_preprod.p12') #'certs/cert_preprod.p12' #ENV['bhn_cert_preprod']
         
+        errmessage = Bhnquote.new
+        errmessage.created = Time.now
+        errmessage.errorMessage = curl.cert
+        errmessage.save
         
 
-
-        curl.cert_key = Rails.root.join('certs/cert_preprod.pw').to_s #ENV['bhn_cert_pass_file_preprod']
+        curl.cert_key = Rails.root.join(ENV['bhn_cert_pass_file_preprod']).to_s #ENV['bhn_cert_pass_file_preprod']
 
         errmessage = Bhnquote.new
         errmessage.created = Time.now
