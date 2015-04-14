@@ -64,7 +64,7 @@ end
 
       curl.cert = Rails.root.join(ENV['bhn_cert_preprod']).to_s
       curl.cert_key = Rails.root.join(ENV['bhn_cert_pass_file_preprod']).to_s
-      curl.certpassword = ENV['bhn_cert_password_preprod']
+      #curl.certpassword = ENV['bhn_cert_password_preprod']
       curl.ssl_verify_peer = false
       
       curl.follow_location = true
@@ -73,15 +73,17 @@ end
       curl.verbose = true
 
       print curl.post_body
-      print '\n'
+      print "\n"
       print curl.headers
-      print '\n'
+      print "\n"
       print curl.header_str
-      print '\n'
+      print "\n"
       print curl.body_str
-      print '\n'
-      print 'does cert file exist= ' + curl.cert + ' ' + File.exist?(curl.cert).to_s + '\n'
-      print 'does cert pass file exist= ' + curl.cert_key + ' ' + File.exist?(curl.cert_key).to_s + '\n'
+      print "\n"
+      print 'does cert file exist= ' + curl.cert + ' ' + File.exist?(curl.cert).to_s + "\n"
+      print 'does cert pass file exist= ' + curl.cert_key + ' ' + File.exist?(curl.cert_key).to_s + "\n"
+      print 'curl.certpassword= ' + ENV['bhn_cert_password_preprod'] 
+      print "\n"
 
 
       begin
