@@ -97,6 +97,12 @@ require 'aws-sdk'
 
 
         curl.cert_key = Rails.root.join('certs/cert_preprod.pw').to_s #ENV['bhn_cert_pass_file_preprod']
+
+        errmessage = Bhnquote.new
+        errmessage.created = Time.now
+        errmessage.errorMessage = curl.cert_key
+        errmessage.save
+
         curl.certpassword = ENV['bhn_cert_password_preprod']
         
         curl.follow_location = true
@@ -105,18 +111,19 @@ require 'aws-sdk'
         curl.verbose = true
         
 
-        #begin
+        begin
           result = curl.http_post(params.to_json) {
             [http]
               response_bhn = http.headers
               
           }
 
-        #rescue => error
-
+        rescue => error
 
           
-        #end
+
+          raise  
+        end
 
         # testing
         #bhnquote = Bhnquote.new
