@@ -72,13 +72,25 @@ end
       curl.ssl_verify_peer = true
       curl.verbose = true
 
-
-      curl.perform
-
       print curl.post_body
       print curl.headers
       print curl.header_str
       print curl.body_str
+
+
+      begin
+        curl.perform
+
+      rescue => error
+
+          errmessage = Bhnquote.new
+          errmessage.created = Time.now
+          errmessage.errorMessage = curl.cert_key + ' ' + curl.post_body + ' ' + curl.headers + ' ' + curl.body_str + ' ' + curl.header_str
+          errmessage.save
+
+          raise  
+      end
+
 
       results = JSON.parse curl.body_str
       
