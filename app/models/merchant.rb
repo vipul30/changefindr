@@ -69,7 +69,7 @@ end
       
       curl.follow_location = true
       curl.ssl_verify_host = false
-      curl.ssl_verify_peer = true
+      curl.ssl_verify_peer = false
       curl.verbose = true
 
       print curl.post_body
