@@ -63,7 +63,7 @@ end
       curl.headers['contractId'] = ENV['bhn_contractId_preprod']
 
       curl.cert = Rails.root.join(ENV['bhn_cert_preprod']).to_s
-      curl.cert_key = Rails.root.join(ENV['bhn_cert_preprod']).to_s
+      curl.cert_key = Rails.root.join(ENV['bhn_cert_pass_file_preprod']).to_s
       curl.certpassword = ENV['bhn_cert_password_preprod']
       curl.ssl_verify_peer = false
       

@@ -84,7 +84,7 @@ gem 'attr_encrypted', '~> 1.3.3'
 # for debugger
 gem 'minitest', '~> 5.5.1'
 gem 'mocha', '~> 1.1.0'
-gem 'rake', '~> 10.4.2'
+gem 'rake' #, '~> 10.4.2'
 gem 'rake-compiler', '~> 0.9.5'
 
 # this was needed for BHN certification
