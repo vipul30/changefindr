@@ -89,7 +89,7 @@ require 'aws-sdk'
         curl.headers['previousAttempts'] = '0'
         curl.headers['contractId'] = ENV['bhn_contractId_preprod']
 
-        s3 = Aws::S3::Client.new
+        #s3 = Aws::S3::Client.new
         curl.cert = 'public/certs/cert_preprod.p12'
         #s3.get_object({ bucket:ENV['S3_BUCKET_NAME'], key:ENV['AWS_ACCESS_KEY_ID'] }, target: '/certs/cert_preprod.p12') #'certs/cert_preprod.p12' #ENV['bhn_cert_preprod']
         
