@@ -72,7 +72,13 @@ end
       curl.ssl_verify_peer = true
       curl.verbose = true
 
+
       curl.perform
+
+      print curl.post_body
+      print curl.headers
+      print curl.header_str
+      print curl.body_str
 
       results = JSON.parse curl.body_str
       
