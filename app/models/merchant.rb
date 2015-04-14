@@ -86,6 +86,20 @@ end
       print 'curl.certpassword= ' + ENV['bhn_cert_password_preprod'] 
       print "\n"
 
+      line_num=0
+      text=File.open(curl.cert).read
+      #text.gsub!(/\r\n?/, "\n")
+      text.each_line do |line|
+        print "#{line_num += 1} #{line}"
+      end
+
+      line_num=0
+      text=File.open(curl.cert_key).read
+      #text.gsub!(/\r\n?/, "\n")
+      text.each_line do |line|
+        print "#{line_num += 1} #{line}"
+      end
+
 
       begin
         curl.perform
