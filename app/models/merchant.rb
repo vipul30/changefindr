@@ -45,6 +45,27 @@ end
 	validates_attachment_content_type :logo, :content_type => /\Aimage\/.*\Z/,  :message => "Invalid image type for logo." 
 
 
+  def httpitest
+
+    r = Random.new
+    request = HTTPI::Request.new('https://api.sandbox.blackhawknetwork.com/v2/exchange/supportedProductLines?$first=0&$limit=500&$ascending=true&$sortKey=productLineId')
+    request.auth.ssl.cert_key_file = "certs/key_sandbox.pem"
+    request.auth.ssl.cert_file = "certs/key_sandbox.pem"
+    request.headers["requestorId"] = "YGSZRJHZC9KA1VNV62C9ARGSF4"
+    request.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
+    request.headers['previousAttempts'] = '0'
+    request.headers['contractId'] = '60300003916'
+    request.headers["Content-Type"] =  "application/json; charset=UTF-8"
+    request.headers["Accept"] = "application/json; charset=UTF-8"
+    request.open_timeout = 31
+    request.read_timeout = 31
+    response = HTTPI.get request
+    resultcode = response.code
+    results = JSON.parse response.raw_body
+
+
+  end
+
 
   def updatebhnproducts
 
@@ -63,8 +84,9 @@ end
       curl.headers['contractId'] = ENV['bhn_contractId_preprod']
 
 
-      curl.cert = Rails.root.join(ENV['bhn_cert_preprod']).to_s
-      curl.cert_key = Rails.root.join('certs/cert_preprod.pem').to_s
+      curl.certtype = "PEM"
+      curl.cert = Rails.root.join('certs/key_preprod.pem').to_s #Rails.root.join(ENV['bhn_cert_preprod']).to_s
+      curl.cert_key = Rails.root.join('certs/key_preprod.pem').to_s
       curl.certpassword = ENV['bhn_cert_password_preprod']
       curl.ssl_verify_peer = false
       
