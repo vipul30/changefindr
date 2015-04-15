@@ -71,6 +71,8 @@ end
 
     curl = Curl::Easy.new(ENV['bhn_url_product_line_preprod'])
 
+    
+
     i = 0
     while (i <= 2)
 
@@ -83,10 +85,17 @@ end
       curl.headers['previousAttempts'] = '0'
       curl.headers['contractId'] = ENV['bhn_contractId_preprod']
 
+      if Rails.env == "development"
 
-      curl.certtype = "PEM"
-      curl.cert = Rails.root.join('certs/key_preprod.pem').to_s #Rails.root.join(ENV['bhn_cert_preprod']).to_s
-      curl.cert_key = Rails.root.join('certs/key_preprod.pem').to_s
+        curl.cert = Rails.root.join(ENV['bhn_cert_preprod']).to_s
+        curl.cert_key = Rails.root.join(ENV['bhn_cert_preprod']).to_s
+
+      else
+        curl.certtype = "PEM"
+        curl.cert = Rails.root.join('certs/key_preprod.pem').to_s #Rails.root.join(ENV['bhn_cert_preprod']).to_s
+        curl.cert_key = Rails.root.join('certs/key_preprod.pem').to_s
+      end
+
       curl.certpassword = ENV['bhn_cert_password_preprod']
       curl.ssl_verify_peer = false
       
@@ -95,6 +104,8 @@ end
       curl.ssl_verify_peer = false
       curl.verbose = true
 
+      print "Rails.env= " + Rails.env
+      print "\n"
       print curl.post_body
       print "\n"
       print curl.headers
@@ -128,15 +139,10 @@ end
 
       rescue => error
 
-          errmessage = Bhnquote.new
-          errmessage.created = Time.now
-          errmessage.errorMessage = curl.cert_key + ' ' + curl.post_body + ' ' + curl.headers + ' ' + curl.body_str + ' ' + curl.header_str
-          errmessage.save
-
           raise  
       end
 
-
+      
       results = JSON.parse curl.body_str
       
       if curl.response_code == 200 || curl.response_code == 201
@@ -167,6 +173,7 @@ end
 
         for giftcard in giftcards
 
+          byebug
 
           productLineId = giftcard['productLineId'].to_i
          
