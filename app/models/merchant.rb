@@ -92,8 +92,8 @@ end
 
       else
         curl.certtype = "PEM"
-        curl.cert = Rails.root.join('certs/key_preprod.pem').to_s #Rails.root.join(ENV['bhn_cert_preprod']).to_s
-        curl.cert_key = Rails.root.join('certs/key_preprod.pem').to_s
+        curl.cert = Rails.root.join(ENV['bhn_cert_pem_file_preprod']).to_s #Rails.root.join(ENV['bhn_cert_preprod']).to_s
+        curl.cert_key = Rails.root.join(ENV['bhn_cert_pem_file_preprod']).to_s
       end
 
       curl.certpassword = ENV['bhn_cert_password_preprod']
@@ -104,6 +104,7 @@ end
       curl.ssl_verify_peer = false
       curl.verbose = true
 
+=begin
       print "Rails.env= " + Rails.env
       print "\n"
       print curl.post_body
@@ -119,6 +120,7 @@ end
       print 'curl.certpassword= ' + ENV['bhn_cert_password_preprod'] 
       print "\n"
 
+
       line_num=0
       text=File.open(curl.cert).read
       #text.gsub!(/\r\n?/, "\n")
@@ -132,7 +134,7 @@ end
       text.each_line do |line|
         print "#{line_num += 1} #{line}"
       end
-
+=end
 
       begin
         curl.perform
@@ -173,7 +175,7 @@ end
 
         for giftcard in giftcards
 
-          byebug
+          
 
           productLineId = giftcard['productLineId'].to_i
          
