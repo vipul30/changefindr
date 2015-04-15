@@ -180,125 +180,206 @@ require 'aws-sdk'
 
   def bhnacquirecard(donation)
 
-    r = Random.new
-    
 
-    if donation.userid == nil
-      name = donation.firstname + ' ' + donation.lastname
-      email = donation.email
-    else
-      user = User.where(:userid => donation.userid).first
+    i = 0
+    bhnacquire = Bhnacquire.new
 
-      name = user.firstname + ' ' + user.lastname
-      email = user.email
+    while (i <= 2)
 
-    end
+        r = Random.new
+        
 
-    salt = SecureRandom.hex
-    customerId = generate_hash(email,salt)
+        if donation.userid == nil
+          name = donation.firstname + ' ' + donation.lastname
+          email = donation.email
+        else
+          user = User.where(:userid => donation.userid).first
 
-     merchant = Merchant.where(:merchantid => donation.giftcard.merchantid).first
+          name = user.firstname + ' ' + user.lastname
+          email = user.email
 
-    params = { 
+        end
 
-      
-      :contractId => ENV['bhn_contractId_preprod'],
-      :requestId => r.rand(10...5000).to_s + ENV['bhn_requestorId_preprod'],
-      :previousAttempts => 0,
-      :requestorId => ENV['bhn_requestorId_preprod'],
+        salt = SecureRandom.hex
+        customerId = generate_hash(email,salt)
 
-      :card => {:cardNumber => donation.giftcard.cardnumber, :pinNumber => donation.giftcard.pin, :productLineId => merchant.productLineId}, 
+         merchant = Merchant.where(:merchantid => donation.giftcard.merchantid).first
 
-      :cardHolder => {
-           :name =>  name,
-           :emailAddress =>  email ,
-           :phoneNumber =>  "714-809-0811" ,
-           :customerId  =>  customerId
+        params = { 
+
+          
+          :contractId => ENV['bhn_contractId_preprod'],
+          :requestId => r.rand(10...5000).to_s + ENV['bhn_requestorId_preprod'],
+          :previousAttempts => 0,
+          :requestorId => ENV['bhn_requestorId_preprod'],
+
+          :card => {:cardNumber => donation.giftcard.cardnumber, :pinNumber => donation.giftcard.pin, :productLineId => merchant.productLineId}, 
+
+          :cardHolder => {
+               :name =>  name,
+               :emailAddress =>  email ,
+               :phoneNumber =>  "714-809-0811" ,
+               :customerId  =>  customerId
+
+            }
 
         }
 
-    }
+        curl = Curl::Easy.new(ENV['bhn_url_acquire_preprod'])
+        
+        curl.headers['Accept'] = 'application/json'
+        curl.headers['Content-Type'] = 'application/json'
+        curl.headers["requestorId"] = ENV['bhn_requestorId_preprod']
+        originalRequestId = r.rand(10...5000).to_s + Time.now.to_s
+        curl.headers["requestId"] = originalRequestId
+        curl.headers['previousAttempts'] = i.to_s
+        curl.headers['contractId'] = ENV['bhn_contractId_preprod']
 
-    curl = Curl::Easy.new(ENV['bhn_url_acquire_preprod'])
-    
-    curl.headers['Accept'] = 'application/json'
-    curl.headers['Content-Type'] = 'application/json'
-    curl.headers["requestorId"] = ENV['bhn_requestorId_preprod']
-    curl.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
-    curl.headers['previousAttempts'] = '0'
-    curl.headers['contractId'] = ENV['bhn_contractId_preprod']
+        if Rails.env == "development"
 
-    if Rails.env == "development"
+            curl.cert = Rails.root.join(ENV['bhn_cert_preprod']).to_s
+            curl.cert_key = Rails.root.join(ENV['bhn_cert_preprod']).to_s
 
-        curl.cert = Rails.root.join(ENV['bhn_cert_preprod']).to_s
-        curl.cert_key = Rails.root.join(ENV['bhn_cert_preprod']).to_s
+        else
+            curl.certtype = "PEM"
+            curl.cert = Rails.root.join(ENV['bhn_cert_pem_file_preprod']).to_s #Rails.root.join(ENV['bhn_cert_preprod']).to_s
+            curl.cert_key = Rails.root.join(ENV['bhn_cert_pem_file_preprod']).to_s
+        end
 
-    else
-        curl.certtype = "PEM"
-        curl.cert = Rails.root.join(ENV['bhn_cert_pem_file_preprod']).to_s #Rails.root.join(ENV['bhn_cert_preprod']).to_s
-        curl.cert_key = Rails.root.join(ENV['bhn_cert_pem_file_preprod']).to_s
-    end
+        #curl.cert = ENV['bhn_cert_preprod']
+        #curl.cert_key = ENV['bhn_cert_pass_file_preprod']
+        curl.certpassword = ENV['bhn_cert_password_preprod']
+        curl.ssl_verify_peer = false
+        
+        curl.follow_location = true
+        curl.ssl_verify_host = false
+        curl.ssl_verify_peer = true
+        curl.verbose = true
+        
 
-    #curl.cert = ENV['bhn_cert_preprod']
-    #curl.cert_key = ENV['bhn_cert_pass_file_preprod']
-    curl.certpassword = ENV['bhn_cert_password_preprod']
-    curl.ssl_verify_peer = false
-    
-    curl.follow_location = true
-    curl.ssl_verify_host = false
-    curl.ssl_verify_peer = true
-    curl.verbose = true
-    
+        begin
+          result = curl.http_post(params.to_json) {
+            [http]
+              response_bhn = http.headers
+              
+          }
 
-    begin
-      result = curl.http_post(params.to_json) {
-        [http]
-          response_bhn = http.headers
+        rescue => error
           
-      }
+        end
 
-    rescue => error
-      
-    end
+        bhnresponse = JSON.parse curl.body_str
 
-    bhnresponse = JSON.parse curl.body_str
+        
 
-    
-
-    bhnacquire = Bhnacquire.new
-    bhnacquire.donationid = 
-    bhnacquire.created = Time.now
-    bhnacquire.responsecode = curl.response_code.to_s
-    bhnacquire.donationid = donation.donationid
-    bhnacquire.customerId = customerId
+        bhnacquire = Bhnacquire.new
+        bhnacquire.donationid = 
+        bhnacquire.created = Time.now
+        bhnacquire.responsecode = curl.response_code.to_s
+        bhnacquire.donationid = donation.donationid
+        bhnacquire.customerId = customerId
 
 
+        
 
-    if curl.response_code == 200 || curl.response_code == 201
+        if curl.response_code == 200 || curl.response_code == 201
 
-        # store all information in database and return object
-        bhnacquire.responseTimestamp = Time.parse bhnresponse['responseTimestamp']
-        bhnacquire.actualCardValue = bhnresponse['actualCardValue'].to_f
-        bhnacquire.exchangeCardValue = bhnresponse['exchangeCardValue'].to_f
-        bhnacquire.transactionId = bhnresponse['transactionId']
-        bhnacquire.isCompleted = bhnresponse['isCompleted']
-
-    else
-
-        bhnacquire.errorCode = bhnresponse['errors'][0]['errorCode']
-        bhnacquire.errorMessage = bhnresponse['errors'][0]['message']
-
-        emailmessage = bhnacquire.errorCode + ' ' + bhnacquire.errorMessage + ' ' + curl.body_str + ' ' + curl.header_str + ' ' + curl.post_body.to_s
+            # store all information in database and return object
+            bhnacquire.responseTimestamp = Time.parse bhnresponse['responseTimestamp']
+            bhnacquire.actualCardValue = bhnresponse['actualCardValue'].to_f
+            bhnacquire.exchangeCardValue = bhnresponse['exchangeCardValue'].to_f
+            bhnacquire.transactionId = bhnresponse['transactionId']
+            bhnacquire.isCompleted = bhnresponse['isCompleted']
+            i = 3
 
 
-        BhnMailer.bhn_error_email(emailmessage)
+        else
 
-    end
+            bhnacquire.errorCode = bhnresponse['errors'][0]['errorCode']
+            bhnacquire.errorMessage = bhnresponse['errors'][0]['message']
+
+            emailmessage = bhnacquire.errorCode + ' ' + bhnacquire.errorMessage + ' ' + curl.body_str + ' ' + curl.header_str + ' ' + curl.post_body.to_s
+
+
+            BhnMailer.bhn_error_email(emailmessage)
+
+            # timeout error.  retry sending the information for a total of three times
+            if curl.response_code == 502 || curl.response_code == 504
+
+              # send info to acquire card reversal
+              bhnacquirereversal(originalRequestId)
+
+              i = i + 1
+
+            else
+              # do not make any more calls
+              i = 3
+
+            end
+
+        end # end if curl response code is not 200 or 201
+
+    end # end while loop
 
 
     return bhnacquire
 
 
+  end
+
+  def bhnacquirereversal(originalRequestId)
+
+        r = Random.new
+
+        curl = Curl::Easy.new(ENV['bhn_url_acquire_reversal_preprod'])
+        
+        params = { 
+ 
+          :originalRequestId => originalRequestId
+
+        }
+
+        curl.headers['Accept'] = 'application/json'
+        curl.headers['Content-Type'] = 'application/json'
+        curl.headers["requestorId"] = ENV['bhn_requestorId_preprod']
+        curl.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
+        curl.headers["originalRequestId"] = originalRequestId
+        curl.headers['previousAttempts'] = '0'
+        curl.headers['contractId'] = ENV['bhn_contractId_preprod']
+
+        if Rails.env == "development"
+
+            curl.cert = Rails.root.join(ENV['bhn_cert_preprod']).to_s
+            curl.cert_key = Rails.root.join(ENV['bhn_cert_preprod']).to_s
+
+        else
+            curl.certtype = "PEM"
+            curl.cert = Rails.root.join(ENV['bhn_cert_pem_file_preprod']).to_s #Rails.root.join(ENV['bhn_cert_preprod']).to_s
+            curl.cert_key = Rails.root.join(ENV['bhn_cert_pem_file_preprod']).to_s
+        end
+
+        
+        curl.certpassword = ENV['bhn_cert_password_preprod']
+        curl.ssl_verify_peer = false
+        
+        curl.follow_location = true
+        curl.ssl_verify_host = false
+        curl.ssl_verify_peer = true
+        curl.verbose = true
+        
+
+        begin
+          result = curl.http_post(params.to_json) {
+            [http]
+              response_bhn = http.headers
+              
+          }
+
+        rescue => error
+      
+        end
+
+        
   end
 
   
