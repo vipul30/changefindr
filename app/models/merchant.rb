@@ -48,7 +48,7 @@ end
 
   def updatebhnproducts
 
-    curl = Curl::Easy.new(ENV['bhn_url_product_line_sandbox'])
+    curl = Curl::Easy.new(ENV['bhn_url_product_line_preprod'])
 
     i = 0
     while (i <= 2)
@@ -57,15 +57,15 @@ end
       
       curl.headers['Accept'] = 'application/json'
       curl.headers['Content-Type'] = 'application/json'
-      curl.headers["requestorId"] = ENV['bhn_requestorId_sandbox'] 
+      curl.headers["requestorId"] = ENV['bhn_requestorId_preprod'] 
       curl.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
       curl.headers['previousAttempts'] = '0'
-      curl.headers['contractId'] = ENV['bhn_contractId_sandbox']
+      curl.headers['contractId'] = ENV['bhn_contractId_preprod']
 
 
-      curl.cert = Rails.root.join(ENV['bhn_cert_sandbox']).to_s
-      curl.cert_key = Rails.root.join(ENV['bhn_cert_pass_file_sandbox']).to_s
-      curl.certpassword = ENV['bhn_cert_password_sandbox']
+      curl.cert = Rails.root.join(ENV['bhn_cert_preprod']).to_s
+      curl.cert_key = Rails.root.join('certs/cert_preprod.pem').to_s
+      curl.certpassword = ENV['bhn_cert_password_preprod']
       curl.ssl_verify_peer = false
       
       curl.follow_location = true
@@ -83,7 +83,7 @@ end
       print "\n"
       print 'does cert file exist= ' + curl.cert + ' ' + File.exist?(curl.cert).to_s + "\n"
       print 'does cert pass file exist= ' + curl.cert_key + ' ' + File.exist?(curl.cert_key).to_s + "\n"
-      print 'curl.certpassword= ' + ENV['bhn_cert_password_sandbox'] 
+      print 'curl.certpassword= ' + ENV['bhn_cert_password_preprod'] 
       print "\n"
 
       line_num=0
