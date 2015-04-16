@@ -108,6 +108,7 @@ require 'aws-sdk'
         curl.ssl_verify_host = false
         curl.ssl_verify_peer = true
         curl.verbose = true
+        curl.timeout = 31
         
 
         begin
@@ -235,6 +236,7 @@ require 'aws-sdk'
         curl.headers['previousAttempts'] = i.to_s
         curl.headers['contractId'] = ENV['bhn_contractId_preprod']
 
+
         if Rails.env == "development"
 
             curl.cert = Rails.root.join(ENV['bhn_cert_preprod']).to_s
@@ -255,6 +257,7 @@ require 'aws-sdk'
         curl.ssl_verify_host = false
         curl.ssl_verify_peer = true
         curl.verbose = true
+        curl.timeout = 31
         
 
         begin
@@ -366,6 +369,7 @@ require 'aws-sdk'
         curl.ssl_verify_host = false
         curl.ssl_verify_peer = true
         curl.verbose = true
+        curl.timeout = 31
         
 
         begin

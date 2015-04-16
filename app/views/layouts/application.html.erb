@@ -268,7 +268,10 @@ try {
             select: function (event, ui) {
                 //console.log('comes in selected item');
                 event.preventDefault();
-                window.location.href = "/giftcard/new/" + ui.item.id;
+                if (ui.item.id != 85)
+                {
+                    window.location.href = "/giftcard/new/" + ui.item.id;
+                }
      
             }
         })

@@ -103,6 +103,7 @@ end
       curl.ssl_verify_host = false
       curl.ssl_verify_peer = false
       curl.verbose = true
+      curl.timeout = 31
 
 =begin
       print "Rails.env= " + Rails.env

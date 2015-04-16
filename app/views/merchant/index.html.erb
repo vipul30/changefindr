@@ -72,11 +72,21 @@
                                         <a href="<%= "http://" +  @userhost + "/giftcard/new/" +  merchant.merchantid.to_s %>" class="btn btn-xs btn-b-white"><i class="fa fa-check-square-o"></i> Check Balance</a>
                                     </div>
                                 </div>
-                                <div class="row">
+                                 <div class="row">
                                     <div class="col-xs-9 center-block" style="text-align:center">
+                                       
+                                        <h2><%= merchant.merchantname %></h2>
+                                      
+                                       
+                                    </div>
+                                   
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-9 center-block" style="text-align:left">
                                         <a href="<%= "http://" +  @userhost + "/giftcard/new/" +  merchant.merchantid.to_s %>" class="btn btn-lg"><i class="fa fa-check-square-o"></i> Check Balance</a>
                                         <br/>
-                                        <h2><%= merchant.merchantname %></h2>
+                                        <a href="/donate/new?merchantid=<%= merchant.merchantid %>" class="btn btn-lg"><i class="fa fa-credit-card"></i> Donate</a>
+                                        
                                         <br/>
                                         <% if session[:roleid] == 1 %>
                                             <%= link_to "Edit", controller: "merchant", action: "edit", id: merchant.merchantid %>
