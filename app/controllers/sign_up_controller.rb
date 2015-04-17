@@ -13,7 +13,8 @@ class SignUpController < ApplicationController
     #if found_user
     #  flash[:notice] = "Email already exists for this user.  Please either login with this email or use a different email."
     #  render :action => :index
-      
+  
+  byebug
 
     #else
       @user.created = Time.now
