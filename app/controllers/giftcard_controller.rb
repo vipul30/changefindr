@@ -86,7 +86,9 @@ class GiftcardController < ApplicationController
     # returns a Bhnquote model object
     merchant = Merchant.where(:merchantid => @giftcard.merchantid).first
 
-    if merchant != nil || merchant.merchantid != 85
+
+
+    if merchant != nil && merchant.merchantid != 85
 
       bhnquote = Bhnquote.new
       bhnquote = getcardbalance(@giftcard.cardnumber, @giftcard.pin, merchant.productLineId)
@@ -98,11 +100,16 @@ class GiftcardController < ApplicationController
 
       else
         # error
-        bhnquote.giftcardid = nil
-        bhnquote.save
-        flash[:notice] = bhnquote.errorMessage
-        render('new') 
-        return
+        # only display error message if invalid number of balance is 0, otherwise we will process on the backend
+        if bhnquote.errorCode == 'exchange.invalid.card' ||
+          bhnquote.errorCode == 'exchange.pinNumber.is.blank' ||
+          bhnquote.errorCode == 'exchange.cardNumber.is.blank'
+          bhnquote.giftcardid = nil
+          bhnquote.save
+          flash[:notice] = bhnquote.errorMessage
+          render('new') 
+          return
+        end
       end
     else
       flash[:notice] = 'Please select a valid gift card from the list.'
@@ -169,12 +176,18 @@ class GiftcardController < ApplicationController
       if bhnquote.responsecode == '200' || bhnquote.responsecode == '201'
 
         @giftcard.balance = bhnquote.actualCardValue
+        @giftcard.modified = Time.now
 
       else
         # error
-        flash[:notice] = bhnquote.errorMessage
-        render('new') 
-        return
+        # only display error message if invalid number of balance is 0, otherwise we will process on the backend
+        if bhnquote.errorCode == 'exchange.invalid.card' ||
+          bhnquote.errorCode == 'exchange.pinNumber.is.blank' ||
+          bhnquote.errorCode == 'exchange.cardNumber.is.blank'
+          flash[:notice] = bhnquote.errorMessage
+          render('index') 
+          return
+        end
       end
        
 

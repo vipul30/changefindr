@@ -112,14 +112,19 @@ class DonateController < ApplicationController
       bhnquote = getcardbalance(@donation.giftcard.cardnumber, @donation.giftcard.pin, merchant.productLineId)
 
 
+
       if bhnquote.responsecode == '200' || bhnquote.responsecode == '201'
 
        @donation.giftcard.balance = bhnquote.actualCardValue
 
       else
+
+
         # error
         # only display error message if invalid number of balance is 0, otherwise we will process on the backend
-        if bhnquote.errorMessage == 'The card number is invalid or there is no value on the card.'
+        if bhnquote.errorCode == 'exchange.invalid.card' ||
+          bhnquote.errorCode == 'exchange.pinNumber.is.blank' ||
+          bhnquote.errorCode == 'exchange.cardNumber.is.blank'
           flash[:notice] = bhnquote.errorMessage
           render('new') 
           return

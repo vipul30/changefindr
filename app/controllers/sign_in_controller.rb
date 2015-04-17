@@ -48,7 +48,17 @@ class SignInController < ApplicationController
 	      session[:userid] = found_user.userid
 		  session[:roleid] = found_user.roleid
 		  initializelogin(found_user)
-	      flash[:notice] = "You are logged in."
+
+		  if (Giftcard.where(:userid == found_user.userid).count > 0)
+
+	      	flash[:notice] = "You are logged in.  Click #{view_context.link_to('HERE', '/giftcard/index')} to view your gift card balance(s).".html_safe
+	      
+	      else
+
+	      	flash[:notice] = "You are logged in."
+
+	      end
+
 	      redirect_to session[:return_to]
 	      return
 	    else
@@ -123,6 +133,16 @@ class SignInController < ApplicationController
 		session[:userid] = user.userid
 		session[:roleid] = user.roleid
 		initializelogin(user)
+
+		if (Giftcard.where(:userid == user.userid).count > 0)
+
+	      	flash[:notice] = "You are logged in.  Click #{view_context.link_to('HERE', '/giftcard/index')} to view your gift card balance(s).".html_safe
+	      
+	    else
+
+	      	flash[:notice] = "You are logged in."
+
+	    end
 
 		redirect_to session[:return_to]
 		
