@@ -17,6 +17,11 @@ if @donation.errors.any? %>
 
  <%= f.hidden_field :charityid, :value => @donation.charityid %>
 
+                <label id="GiftCardNotFoundDiv" style="display:none;color:red" >
+                    Please enter your gift card store name in the comments section below.<br/>
+                    We will do our best to process the donation.
+                </label>
+
                 <%= f.fields_for :giftcard do |ff| %>
                     <%= render(:partial => "/giftcard/giftcard_form", :locals => {:f => ff}) %>
                 <% end %>
@@ -28,6 +33,7 @@ if @donation.errors.any? %>
                         <div class="row">
                             <div class="col-md-12">
 
+                                
                                 <% if session[:user_firstname] == nil || !@donation.firstname.nil? %>
 
 

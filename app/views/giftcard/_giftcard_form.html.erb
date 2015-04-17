@@ -39,7 +39,7 @@ end
 
             	<label>Gift Card Store</label>
                 <br/>
-                <small>Start typing and select the retailer or brand name displayed on your gift card. If you don't see your retailer or brand name listed, type out the full name manually.</small>
+                <small>Start typing and select the retailer or brand name displayed on your gift card. If you don't see your retailer or brand name listed, select "Gift Card Not Found" and enter the card name in the comments field.  We will do our best to process your donation.</small>
                 <label class="input">
                     <i class="icon-append fa fa-credit-card"></i>
 
@@ -126,7 +126,12 @@ $(window).load(function () {
 
     <% if @giftcard.merchant %>
         cardfieldschange(<%= @giftcard.merchant.merchantid %>);
+
+        
+
     <% end %>
+
+
 
 });
 
@@ -149,6 +154,18 @@ $("#giftcard_expdate,#donation_giftcard_attributes_expdate").datepicker({
 function cardfieldschange(cardid) {
 
         console.log('comes in cardfieldschange: ', cardid);
+
+
+        try {
+
+                $("#GiftCardNotFoundDiv").hide();
+                
+
+        } catch (Exception)
+        {
+             console.log(Exception)
+
+        }
 
         // change the PIN label if the user selects american express (29)
         // visa (157), vanilla (156), or mastercard (118)
@@ -174,6 +191,25 @@ function cardfieldschange(cardid) {
             $("#expdatediv").hide();
             $("#pinlabel").html("Enter Access Number.");
             
+
+        }
+        else if (cardid == 85) // giftcard not found
+        {
+            try {
+
+                $("#GiftCardNotFoundDiv").show();
+                
+
+            } catch (Exception)
+            {
+
+                console.log(Exception)
+            }
+
+            $("#eventnumberdiv").hide();
+            $("#expdatediv").hide();
+            $("#pinlabel").html("Pin");
+          
 
         }
         else {
@@ -221,6 +257,20 @@ $("#merchant").autocomplete({
 
                 event.preventDefault();
                 $("#merchant").val(ui.item.name);
+
+                try {
+                    // card not found
+                    if (ui.item.id == 85)
+                    {
+                        // display message
+                        
+                    } else
+                    {
+
+
+                    }
+                } catch (Exception) {}
+
 
                 try {
                     $("#giftcard_merchantid").val(ui.item.id);
