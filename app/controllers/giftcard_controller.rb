@@ -86,21 +86,29 @@ class GiftcardController < ApplicationController
     # returns a Bhnquote model object
     merchant = Merchant.where(:merchantid => @giftcard.merchantid).first
 
-    bhnquote = Bhnquote.new
-    bhnquote = getcardbalance(@giftcard.cardnumber, @giftcard.pin, merchant.productLineId)
+    if merchant != nil || merchant.merchantid != 85
+
+      bhnquote = Bhnquote.new
+      bhnquote = getcardbalance(@giftcard.cardnumber, @giftcard.pin, merchant.productLineId)
 
 
-    if bhnquote.responsecode == '200' || bhnquote.responsecode == '201'
+      if bhnquote.responsecode == '200' || bhnquote.responsecode == '201'
 
-      @giftcard.balance = bhnquote.actualCardValue
+        @giftcard.balance = bhnquote.actualCardValue
 
+      else
+        # error
+        bhnquote.giftcardid = nil
+        bhnquote.save
+        flash[:notice] = bhnquote.errorMessage
+        render('new') 
+        return
+      end
     else
-      # error
-      bhnquote.giftcardid = nil
-      bhnquote.save
-      flash[:notice] = bhnquote.errorMessage
+      flash[:notice] = 'Please select a valid gift card from the list.'
       render('new') 
       return
+
     end
     
     

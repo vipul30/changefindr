@@ -68,9 +68,10 @@ class DonateController < ApplicationController
 
     
     
-    if !params[:donation][:giftcard_attributes][:giftcardid].empty?
+    if !params[:donation][:giftcard_attributes][:merchantid].empty?
       @donation.giftcard.giftcardid = params[:donation][:giftcard_attributes][:giftcardid]
       @donation.giftcardid = params[:donation][:giftcard_attributes][:giftcardid]
+      @donation.giftcard.merchantid = params[:donation][:giftcard_attributes][:merchantid]
       
     else
       if @donation.giftcard == nil
@@ -104,6 +105,7 @@ class DonateController < ApplicationController
     # call the method getcardbalance(cardnumber, pinnumber, productlineid)
     # returns a Bhnquote model object
     merchant = Merchant.where(:merchantid => @donation.giftcard.merchantid).first
+
 
     if merchant.merchantid != 85
       bhnquote = Bhnquote.new
