@@ -147,15 +147,20 @@ class DonateController < ApplicationController
           
           bhnacquire.save
 
-        flash[:notice] = 'Thank you for your donation in the amount of ' + number_to_currency(@donation.giftcard.balance).to_s + ' to ' + @donation.charity.charityname + '.  Please hold onto your gift card until you get an email from us informing you we have processed it.'
+        @message = 'Thank you for your donation in the amount of ' + number_to_currency(@donation.giftcard.balance).to_s + ' to ' + @donation.charity.charityname + '.  Please hold onto your gift card until you get an email from us informing you we have processed it.'
       
       else
-          flash[:notice] = 'Thank you for your donation to ' + @donation.charity.charityname + '.  Please hold onto your gift card until you get an email from us informing you we have processed it.'
+          @message = 'Thank you for your donation to ' + @donation.charity.charityname + '.  Please hold onto your gift card until you get an email from us informing you we have processed it.'
       
       end
 
       DonateMailer.donate_email(@donation, request.host_with_port).deliver
-      redirect_to(:controller => "home", :action => "index")
+
+      # reset everything for a new donation
+      session[:giftcardid] = nil
+      session[:merchantid] = nil
+      session[:donationscount] = 1 # so the option to view donations displays in the menu dropdown for the user
+      redirect_to(:controller => "donate", :action => "thankyou", :message => @message)
       return
 
     else
@@ -169,6 +174,12 @@ class DonateController < ApplicationController
     end
 
   end
+
+  def thankyou
+    @message = params[:message]
+    
+  end
+
 
   def edit
 

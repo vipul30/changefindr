@@ -37,20 +37,20 @@ end
 
                 %>
 
-            	<label>Gift Card Store</label>
+            	<label>Gift Card Merchant</label>
                 <br/>
                 <small>Start typing and select the retailer or brand name displayed on your gift card. If you don't see your retailer or brand name listed, select "Gift Card Not Found" and enter the card name in the comments field.  We will do our best to process your donation.</small>
                 <label class="input">
                     <i class="icon-append fa fa-credit-card"></i>
 
                     <input type="text" name="giftcardname" 
-                    placeholder="Enter name of gift card store"
+                    placeholder="Enter name of gift card merchant"
                     name="merchant"
                     id="merchant"
                     value="<%= selectedmerchantname %>">
                     
                     <input type="hidden" id="merchantnametypes" name="merchantnametypes"/>
-                                         
+
                     <%= f.hidden_field :merchantid %>                                             
                 </label>
             

@@ -38,6 +38,8 @@ Rails.application.routes.draw do
 
   get 'donate/delete'
 
+  get 'donate/thankyou'
+
   get 'giftcard/index'
 
   get 'giftcard/delete'
