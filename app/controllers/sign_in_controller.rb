@@ -86,7 +86,7 @@ class SignInController < ApplicationController
 		user.facebookresponse = auth.to_s
 		rescue
 		end
-		
+
 		user.firstname = auth.info.first_name
 		user.lastname = auth.info.last_name
 		user.provider = auth.provider
@@ -150,6 +150,8 @@ class SignInController < ApplicationController
 		session[:roleid] = user.roleid
 		initializelogin(user)
 
+		returnto = session[:return_to]
+
 		if (Giftcard.where(:userid == user.userid).count > 0)
 
 	      	flash[:notice] = "You are logged in.  Click #{view_context.link_to('HERE', '/giftcard/index')} to view your gift card balance(s).".html_safe
@@ -160,7 +162,16 @@ class SignInController < ApplicationController
 
 	    end
 
-		redirect_to session[:return_to]
+	    
+
+	    if returnto["controller"] == 'giftcard' || returnto["controller"] == 'sign_up' || returnto["controller"] == 'sign_in'
+
+	    	redirect_to(:controller => "home", :action => "index")
+
+	    else
+
+			redirect_to returnto
+		end
 		
 		return
 

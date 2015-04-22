@@ -14,7 +14,7 @@ class SignUpController < ApplicationController
     #  flash[:notice] = "Email already exists for this user.  Please either login with this email or use a different email."
     #  render :action => :index
   
-  byebug
+  
 
     #else
       @user.created = Time.now
@@ -45,7 +45,7 @@ class SignUpController < ApplicationController
 
         UserMailer.welcome_email(@user, request.host_with_port).deliver
         flash[:notice] = "Thank you for registering.  Please confirm your registration by clicking on the link from your email."
-        redirect_to session[:return_to]
+        redirect_to(:controller => "home", :action => "index")
       else
         # If save fails, redisplay the form so user can fix problems
         render('index')
@@ -78,6 +78,17 @@ class SignUpController < ApplicationController
           session[:userid] = @user.userid
           session[:roleid] = @user.roleid
           flash[:notice] = "Thank you for confirming your registration.  You are now logged in."
+
+          if (Giftcard.where(:userid == @user.userid).count > 0)
+
+            flash[:notice] = "You are logged in.  Click #{view_context.link_to('HERE', '/giftcard/index')} to view your gift card balance(s).".html_safe
+        
+          else
+
+            flash[:notice] = "You are logged in."
+
+          end
+
           redirect_to(:controller => "home", :action => "index")
           
         end
