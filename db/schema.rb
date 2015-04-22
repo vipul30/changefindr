@@ -200,6 +200,7 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.string   "verifysalt",        limit: 1000
     t.string   "passwordresetsalt", limit: 1000
     t.datetime "lastlogin"
+    t.string   "facebookresponse",  limit: 50000
   end
 
   create_table "widgets", force: true do |t|

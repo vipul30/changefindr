@@ -35,6 +35,9 @@
                                                      
                                                         <p>Create an account using your<br/>Facebook login.</p>
                                                         <br/>
+                                                        <input type="checkbox" id="termscheckbox1" name="subscription" id="subscription"></input>
+                                                        <i></i> I accept the <a id="TermsLink">terms and conditions</a> of this website.
+                                                        <br/>
                                                         <a href="/auth/facebook" id="sign_in" onclick="acceptedTerms();"><img alt="Facebook login button" border="0" src="<%= CLOUDFRONT_HOST %>/images/facebook-register.png" 
                                                         class="img-responsive img-rounded fill center-block"
                                                         ></a>
@@ -97,6 +100,9 @@
                                                     <div class="" id="passwordStrength"></div>   
 
                                                     <br>
+                                                    <input type="checkbox" id="termscheckbox2" name="subscription" id="subscription"></input>
+                                                        <i></i> I accept the <a id="TermsLink">terms and conditions</a> of this website.
+                                                    <br/>
                                                     <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button">
                                                         <span>Register now</span>
                                                     </button>
@@ -111,21 +117,21 @@
                                                 
                                             </div>
 
-                                            <div class="row" style="text-align:center">
+                                             <div class="row" style="text-align:center">
                                                 
                                                 <div class"col-xs-12">
                                                     <div class="alert alert-danger fade in" id="msg_terms" style="display:none">
                                                             Please read and accept the terms and conditions.
                                                         </div>
-                                                        <label>
-                                                        <input type="checkbox" id="termscheckbox" name="subscription" id="subscription"></input>
-                                                        <i></i> I accept the <a id="TermsLink">terms and conditions</a> of this website.
+                                                       
+                                                       
                                                     </label>
                                                 </div>
                                             
 
                                             </div>
 
+                                           
                                     </section>
 
                                        
@@ -153,7 +159,7 @@
     var isValidPassword = false;
 
     function acceptedTerms() {
-        if ($('#termscheckbox').is(':checked')) {
+        if ($('#termscheckbox1').is(':checked')) {
             $('#msg_terms').hide;
             return true;
         } else {
@@ -199,13 +205,14 @@
     }
 
     // disable the register button until terms and conditions is checked
-    $("#termscheckbox").change(function () {
+    $("#termscheckbox2").change(function () {
+        
         if (this.checked) {
             $('#register_button').attr("disabled", false);
             $('#msg_terms').hide;
             
         } else {
-            $$('#register_button').attr("disabled", true);
+            $('#register_button').attr("disabled", true);
             $('#msg_terms').show;
         }
     });

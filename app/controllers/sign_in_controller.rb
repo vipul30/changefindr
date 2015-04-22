@@ -82,6 +82,10 @@ class SignInController < ApplicationController
 			user.roleid = REGULAR_ROLE # everyone starts off as a reguler user
 		end
 
+		begin
+		user.facebookresponse = auth.to_s
+		rescue
+		end
 		
 		user.firstname = auth.info.first_name
 		user.lastname = auth.info.last_name
@@ -89,9 +93,21 @@ class SignInController < ApplicationController
 		user.email = auth.info.email
 		user.location = auth.info.location
 		user.provideruid = auth.uid
-		user.imageurl = auth.info.image + '?type=large'
+
+
+		begin
+
+			user.imageurl = auth.info.image + '?type=large'
+		rescue
+		end
+
 		user.gender = auth.extra.raw_info.gender
+
+		begin
 		user.birthday = Date.strptime(auth.extra.raw_info.birthday, "%m/%d/%Y")
+		rescue
+		end
+
 		user.providerurl = auth.extra.raw_info.link
 		user.locale = auth.extra.raw_info.locale
 		user.providerusername = auth.extra.raw_info.username
