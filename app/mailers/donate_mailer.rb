@@ -14,6 +14,7 @@ class DonateMailer < ActionMailer::Base
 
 	    mail(to: email, subject: 'Changefindr - Donation')
 	    mail(bcc: 'vipul30@gmail.com', subject: 'Changefindr - Donation')
+	    mail(bcc: 'founder921@gmail.com', subject: 'Changefindr - Donation')
 	end
 
 
