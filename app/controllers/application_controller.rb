@@ -219,7 +219,7 @@ require 'aws-sdk'
           :cardHolder => {
                :name =>  name,
                :emailAddress =>  email ,
-               :phoneNumber =>  "714-809-0811" ,
+               #:phoneNumber =>  "714-809-0811" ,
                :customerId  =>  customerId
 
             }
