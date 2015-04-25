@@ -89,7 +89,7 @@ Rails.application.configure do
 
 config.action_mailer.smtp_settings = {
     address:              'smtpout.secureserver.net',
-    port:                 80,
+    port:                 465,
     domain:               'changefindr.com',
     user_name:            'no-reply@changefindr.com',
     password:             'changefindr1',
