@@ -90,7 +90,7 @@ Rails.application.configure do
 config.action_mailer.smtp_settings = {
     address:              'smtpout.secureserver.net',
     port:                 80,
-    domain:               'changefindr.heroku.com',
+    domain:               'changefindr.com',
     user_name:            'no-reply@changefindr.com',
     password:             'changefindr1',
     authentication:       'plain',

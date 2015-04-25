@@ -7,7 +7,7 @@ class CauseMailer < ActionMailer::Base
 	    @currenthost = currenthost
 
 	    mail(to: @cause.email, subject: 'Changefindr - New Cause')
-	    mail(to: 'vipul30@gmail.com', subject: 'Changefindr - New Cause')
+	    mail(bcc: 'vipul30@gmail.com', subject: 'Changefindr - New Cause')
 	end
 
 
