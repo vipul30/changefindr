@@ -115,14 +115,7 @@ config.action_mailer.raise_delivery_errors = true
   :email => {
     :email_prefix => "Error - Changefindr ",
     :sender_address => %{"Changefindr Error" <no-reply@changefindr.com>},
-    :exception_recipients => %w{vipul30@gmail.com},
-    :smtp_settings => {
-      :domain  =>   'changefindr.com',
-      :user_name => 'no-reply@changefindr.com',
-      :password => 'changefindr1',
-      :address =>  'smtpout.secureserver.net',
-      :port =>    80
-    }
+    :exception_recipients => %w{vipul30@gmail.com}
   }
 
 
