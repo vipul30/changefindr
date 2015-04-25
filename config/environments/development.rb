@@ -62,6 +62,23 @@ Rails.application.configure do
 
   #config.consider_all_requests_local = false
 
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
+  Changefindr::Application.config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "Error - Changefindr ",
+    :sender_address => %{"Changefindr Error" <no-reply@changefindr.com>},
+    :exception_recipients => %w{vipul30@gmail.com},
+    :smtp_settings => {
+      :domain  =>   'www.changefindr.com',
+      :user_name => 'no-reply@changefindr.com',
+      :password => 'changefindr1',
+      :address =>  'smtpout.secureserver.net',
+      :port =>    25
+    }
+  }
+
   config.paperclip_defaults = {
   :storage => :s3,
   :s3_credentials => {
