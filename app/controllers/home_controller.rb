@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def index
 
+    throw Exception.new
     
     #Merchant.new.updatebhnproducts
 
