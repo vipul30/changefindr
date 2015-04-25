@@ -92,7 +92,7 @@ config.action_mailer.smtp_settings = {
     port:                 80,
     domain:               'changefindr.heroku.com',
     user_name:            'no-reply@changefindr.com',
-    password:             'Changefindr#1',
+    password:             'changefindr1',
     authentication:       'plain',
     enable_starttls_auto: true  
   }
