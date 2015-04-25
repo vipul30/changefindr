@@ -60,7 +60,8 @@ Rails.application.configure do
     enable_starttls_auto: true   
   }
 
-  #config.consider_all_requests_local = false
+  # displays gaffe error pretty page in development
+  config.consider_all_requests_local = false
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
@@ -75,7 +76,7 @@ Rails.application.configure do
       :user_name => 'no-reply@changefindr.com',
       :password => 'changefindr1',
       :address =>  'smtpout.secureserver.net',
-      :port =>    25
+      :port =>    80
     }
   }
 

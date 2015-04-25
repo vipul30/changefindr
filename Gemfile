@@ -70,7 +70,7 @@ gem 'rails3-jquery-autocomplete'
 
 gem 'zeroclipboard-rails', '~> 0.1.0'
 
-gem 'exception_notification' #, '~> 4.0.1'
+gem 'exception_notification', '~> 4.0.1'
 
 # better way of displaying errors on dev
 gem 'better_errors', '~> 2.1.1'
