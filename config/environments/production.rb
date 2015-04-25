@@ -89,7 +89,7 @@ Rails.application.configure do
 
 config.action_mailer.smtp_settings = {
     address:              'smtpout.secureserver.net',
-    port:                 80,
+    port:                 25,
     domain:               'www.changefindr.com',
     user_name:            'no-reply@changefindr.com',
     password:             'changefindr1',
@@ -117,10 +117,11 @@ config.action_mailer.raise_delivery_errors = true
     :sender_address => %{"Changefindr Error" <no-reply@changefindr.com>},
     :exception_recipients => %w{vipul30@gmail.com},
     :smtp_settings => {
+      :domain  =>   'www.changefindr.com',
       :user_name => 'no-reply@changefindr.com',
       :password => 'changefindr1',
       :address =>  'smtpout.secureserver.net',
-      :port =>         80
+      :port =>    25
     }
   }
 
