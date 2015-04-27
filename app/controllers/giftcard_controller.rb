@@ -1,6 +1,7 @@
 class GiftcardController < ApplicationController
   def index
 
+if (session[:userid] != nil)
     if session[:roleid] == ADMIN_ROLE && params[:viewall]
 
         @usergiftcards = Giftcard.order(modified: :desc)
@@ -21,6 +22,10 @@ class GiftcardController < ApplicationController
 
    
     @userhost = request.host_with_port
+  else
+    flash[:notice] = "Please login or register in order to view your gift cards."
+    redirect_to(:controller => "home", :action => "index")
+  end
 
   end
 

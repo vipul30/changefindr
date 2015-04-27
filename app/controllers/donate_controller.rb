@@ -9,7 +9,7 @@ class DonateController < ApplicationController
       @donations = Donation.where(userid: params[:userid]).order('created DESC').page(params[:page]).per_page(9)
       
     else
-      flash[:notice] = "You are not authorized to view this page."
+      flash[:notice] = "Please login or register in order to view your gift cards."
       redirect_to(:controller => "home", :action => "index")
       return
     end
