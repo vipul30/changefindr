@@ -140,7 +140,9 @@ require 'aws-sdk'
         bhnquote.created = Time.now
         bhnquote.responsecode = curl.response_code.to_s
 
-        if curl.response_code == 200 || curl.response_code == 201
+        
+
+        if curl.response_code == 200 || curl.response_code == 201 || bhnresponse['errors'][0]['errorCode'] == 'exchange.card.value.out.of.range'
 
             # store all information in database and return object
             bhnquote.responseTimestamp = Time.parse bhnresponse['responseTimestamp']
@@ -201,7 +203,7 @@ require 'aws-sdk'
 
         end
 
-        salt = SecureRandom.hex
+        salt = BHN_SALT # change salt to static SecureRandom.hex
         customerId = generate_hash(email,salt)
 
          merchant = Merchant.where(:merchantid => donation.giftcard.merchantid).first

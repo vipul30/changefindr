@@ -9,7 +9,7 @@ class DonateController < ApplicationController
       @donations = Donation.where(userid: params[:userid]).order('created DESC').page(params[:page]).per_page(9)
       
     else
-      flash[:notice] = "Please login or register in order to view your gift cards."
+      flash[:notice] = "Please login or register in order to view your donations."
       redirect_to(:controller => "home", :action => "index")
       return
     end
@@ -155,6 +155,8 @@ class DonateController < ApplicationController
       
       end
 
+      flash[:notice] = nil
+      
       DonateMailer.donate_email(@donation, request.host_with_port).deliver
 
       # reset everything for a new donation
