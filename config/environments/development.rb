@@ -61,7 +61,7 @@ Rails.application.configure do
   }
 
   # displays gaffe error pretty page in development.  comment out to display detailed message
-  config.consider_all_requests_local = false
+  #config.consider_all_requests_local = false
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true

@@ -116,6 +116,7 @@ class DonateController < ApplicationController
       if bhnquote.responsecode == '200' || bhnquote.responsecode == '201'
 
        @donation.giftcard.balance = bhnquote.actualCardValue
+       @donation.giftcard.isdonated = 1
 
       else
 
