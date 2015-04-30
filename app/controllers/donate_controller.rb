@@ -183,7 +183,7 @@ class DonateController < ApplicationController
       
       if session[:partnersite] == true
 
-        url = session[:returnurl] + '/changefindr?donor=' + donorname + '&donoremail=' + donoremail 
+        url = session[:returnurl] + '?donor=' + donorname + '&donoremail=' + donoremail 
 
         encoded_url = URI.encode(url)
 
