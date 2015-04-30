@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>  
 <head>
+
+
 	<%= render partial: "layouts/header" %>
+
 	
 <!-- Essentials -->
 
@@ -155,11 +158,14 @@ ul.ui-autocomplete {
 -->
       <% end %>
     <%= yield %>
-     
+   
+<% if session[:partnersite] != true %>  
     <!-- FOOTER -->
     <footer class="footer">
         <%= render partial: "layouts/footer" %>
     </footer>
+<% end %>
+
 </div>
 
 

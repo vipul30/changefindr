@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/assets/fancybox/jquery.fancybox.css?v=2.1.5" media="screen"> 
      
     <!-- Boomerang styles -->
-        <link id="wpStylesheet" type="text/css" href="/css/global-style.css" rel="stylesheet" media="screen">
+    <link id="wpStylesheet" type="text/css" href="/css/global-style.css" rel="stylesheet" media="screen">
         
 
     <!-- Favicon -->
@@ -39,6 +39,10 @@
                 <!-- HEADER -->
     <div id="divHeaderWrapper">
             <header class="header-standard-2">     
+   
+<% 
+
+if session[:partnersite] != true %>
     <!-- MAIN NAV -->
     <div class="navbar navbar-wp navbar-arrow mega-nav" role="navigation">
         <div class="container">
@@ -166,6 +170,8 @@
             </div><!--/.nav-collapse -->
         </div>
     </div>
+<% end %>
+
 </header>        
 </div>
 

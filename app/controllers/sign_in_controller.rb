@@ -59,8 +59,18 @@ class SignInController < ApplicationController
 
 	      end
 
-	      redirect_to session[:return_to]
-	      return
+
+		    if session[:partnersite] == true
+
+	      		redirect_to(:controller => 'donate', :action => 'new', 
+	      					:charityid => session[:partnercharityid], :returnurl => session[:returnurl],
+	      					:partnersite => 'true')
+	      		return
+
+	      	else
+		      redirect_to session[:return_to]
+		      return
+	  		end
 	    else
 	      flash[:notice] = "Invalid username/password combination."
 	      render('index')
@@ -162,9 +172,13 @@ class SignInController < ApplicationController
 
 	    end
 
-	    
+	    if session[:partnersite] == true
 
-	    if returnto["controller"] == 'giftcard' || returnto["controller"] == 'sign_up' || returnto["controller"] == 'sign_in'
+      		redirect_to(:controller => 'donate', :action => 'new', 
+      					:charityid => session[:partnercharityid], :returnurl => session[:returnurl],
+      					:partnersite => 'true')
+
+	    elsif returnto["controller"] == 'giftcard' || returnto["controller"] == 'sign_up' || returnto["controller"] == 'sign_in'
 
 	    	redirect_to(:controller => "home", :action => "index")
 

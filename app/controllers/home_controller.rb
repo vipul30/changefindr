@@ -10,6 +10,9 @@ class HomeController < ApplicationController
     #byebug
     #testbhnwebservice4
 
+    # clear the partnersite session
+    session[:partnersite] = nil
+
   	offset = rand(Charity.count)
 
   	@causes = Charity.limit(20).order("RANDOM()").where(isapproved: true)

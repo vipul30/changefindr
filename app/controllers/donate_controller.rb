@@ -19,6 +19,15 @@ class DonateController < ApplicationController
 
   def new
 
+    if params[:partnersite] != nil && params[:partnersite] == 'true'
+
+      # comes from a partnersite and do not show header and footer
+      session[:partnersite] = true
+      session[:returnurl] = params[:returnurl]
+      session[:partnercharityid] = params[:charityid]
+
+    end
+
     @donation = Donation.new
     @giftcard = Giftcard.new
 
@@ -67,7 +76,6 @@ class DonateController < ApplicationController
     @donation.modified = Time.now
 
     
-    
     if !params[:donation][:giftcard_attributes][:merchantid].empty?
       @donation.giftcard.giftcardid = params[:donation][:giftcard_attributes][:giftcardid]
       @donation.giftcardid = params[:donation][:giftcard_attributes][:giftcardid]
@@ -94,9 +102,18 @@ class DonateController < ApplicationController
     @giftcard = @donation.giftcard
 
 
+    donorname = ''
+    donoremail = ''
+
     if session[:userid]
       @donation.userid = session[:userid]
       @donation.giftcard.userid = session[:userid]
+
+      donorname = @donation.user.firstname + ' ' + @donation.user.lastname
+      donoremail = @donation.user.email
+    else
+      donorname = @donation.firstname + ' ' + @donation.lastname
+      donoremail = @donation.email
     end
     
     @donation.giftcard.isdeleted = 0
@@ -163,8 +180,21 @@ class DonateController < ApplicationController
       session[:giftcardid] = nil
       session[:merchantid] = nil
       session[:donationscount] = 1 # so the option to view donations displays in the menu dropdown for the user
-      redirect_to(:controller => "donate", :action => "thankyou", :message => @message)
-      return
+      
+      if session[:partnersite] == true
+
+        url = session[:returnurl] + '/changefindr?donor=' + donorname + '&donoremail=' + donoremail 
+
+        encoded_url = URI.encode(url)
+
+        redirect_to encoded_url
+        return
+      else
+        redirect_to(:controller => "donate", :action => "thankyou", :message => @message)
+        return
+      end
+
+      
 
     else
 

@@ -142,7 +142,7 @@ require 'aws-sdk'
 
         
 
-        if curl.response_code == 200 || curl.response_code == 201 || bhnresponse['errors'][0]['errorCode'] == 'exchange.card.value.out.of.range'
+        if curl.response_code == 200 || curl.response_code == 201 # || bhnresponse['errors'][0]['errorCode'] == 'exchange.card.value.out.of.range'
 
             # store all information in database and return object
             bhnquote.responseTimestamp = Time.parse bhnresponse['responseTimestamp']
