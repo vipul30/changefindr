@@ -151,6 +151,12 @@ require 'aws-sdk'
             bhnquote.transactionId = bhnresponse['transactionId']
             i = 3
 
+        elsif bhnresponse['errors'][0]['errorCode'] == 'exchange.card.value.out.of.range'
+
+           bhnquote = bhnbalancecheck(cardnumber, pinnumber, productlineid)
+
+           i = 3
+          
         else
 
             bhnquote.errorCode = bhnresponse['errors'][0]['errorCode']
@@ -180,6 +186,113 @@ require 'aws-sdk'
 
 
   end
+
+
+  def bhnbalancecheck(cardnumber, pinnumber, productlineid)
+
+    # cross reference bhn table to get the product line id
+    bhnproduct = Bhnmerchantcrossref.where(:CardPoolMerchantID => productlineid.to_s).first
+
+
+
+    if bhnproduct == nil 
+      return nil
+    end
+
+
+    # https://developer.blackhawknetwork.com/documentation/apiReference/Service+-+Account_Processing/Operation+-+Verify_Account
+
+    # testing
+    cardnumber = '9877890000006666'
+    bhnproduct.ProductLineID = 'MWY16JB102NGRL7DZKCJKCT9AC'
+    pinnumber = '1234'
+
+    url = 'https://apipp.blackhawknetwork.com/accountProcessing/v1/verifyAccount?accountNumber=' + cardnumber.to_s + '&productLineId=' + bhnproduct.ProductLineID.to_s + '&pin=' + pinnumber.to_s + '&accountType=GIFT_CARD'
+
+    #url = URI(url)
+
+    curl = Curl::Easy.new(url)
+
+    r = Random.new
+    
+    curl.headers['Accept'] = 'application/json'
+    curl.headers['Content-Type'] = 'application/json'
+    curl.headers["requestorId"] = ENV['bhn_requestorId_preprod'] 
+    curl.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
+    curl.headers['previousAttempts'] = '0'
+    curl.headers['contractId'] = ENV['bhn_contractId_preprod']
+
+    if Rails.env == "development"
+
+      curl.cert = Rails.root.join(ENV['bhn_cert_preprod']).to_s
+      curl.cert_key = Rails.root.join(ENV['bhn_cert_preprod']).to_s
+
+    else
+      curl.certtype = "PEM"
+      curl.cert = Rails.root.join(ENV['bhn_cert_pem_file_preprod']).to_s #Rails.root.join(ENV['bhn_cert_preprod']).to_s
+      curl.cert_key = Rails.root.join(ENV['bhn_cert_pem_file_preprod']).to_s
+    end
+
+    curl.certpassword = ENV['bhn_cert_password_preprod']
+    curl.ssl_verify_peer = false
+    
+    curl.follow_location = true
+    curl.ssl_verify_host = false
+    curl.ssl_verify_peer = false
+    curl.verbose = true
+    curl.timeout = 31
+
+    begin
+      curl.perform
+
+    rescue => error
+
+      
+      bhnquote = Bhnquote.new
+      bhnquote.created = Time.now
+      bhnquote.responsecode = curl.response_code.to_s
+      bhnquote.errorCode = '502'
+      bhnquote.errorMessage = 'com.bhn.general.service.error'
+      return bhnquote
+
+    end
+
+    
+
+    bhnresponse = JSON.parse curl.body_str
+
+    bhnquote = Bhnquote.new
+    bhnquote.created = Time.now
+    bhnquote.responsecode = curl.response_code.to_s
+
+    
+
+    if curl.response_code == 200 || curl.response_code == 201
+
+        # store all information in database and return object
+        bhnquote.responseTimestamp = Time.parse bhnresponse['updatedTimestamp']
+        bhnquote.actualCardValue = bhnresponse['balance'].to_f
+        bhnquote.exchangeCardValue = 0.0
+        bhnquote.transactionId = bhnresponse['entityId']
+        
+      
+    else
+
+        bhnquote.errorCode = bhnresponse['errorCode']
+        bhnquote.errorMessage = bhnresponse['message']
+
+        emailmessage = bhnquote.errorCode + ' ' + bhnquote.errorMessage + ' ' + curl.body_str + ' ' + curl.header_str + ' ' + curl.post_body.to_s
+
+        BhnMailer.bhn_error_email(emailmessage)  
+
+    end
+
+
+
+    return bhnquote
+      
+  end
+
 
   def bhnacquirecard(donation)
 

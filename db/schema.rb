@@ -30,6 +30,12 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.string   "isCompleted",       limit: 100
   end
 
+  create_table "bhnmerchantcrossref", primary_key: "crossrefid", force: true do |t|
+    t.string "ProductLine",        limit: 500
+    t.string "ProductLineID",      limit: 500
+    t.string "CardPoolMerchantID", limit: 500
+  end
+
   create_table "bhnquote", primary_key: "bhnquoteid", force: true do |t|
     t.integer  "giftcardid"
     t.datetime "responseTimestamp"

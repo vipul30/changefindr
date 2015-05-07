@@ -130,7 +130,22 @@ class DonateController < ApplicationController
 
 
 
-      if bhnquote.responsecode == '200' || bhnquote.responsecode == '201'
+      if bhnquote.responsecode == '200' || bhnquote.responsecode == '201' ||
+        bhnquote.errorCode == 'transaction.cannot.process' ||
+        bhnquote.errorCode == 'invalid.transaction' ||
+        bhnquote.errorCode == 'provider.transaction.timeout' ||
+        bhnquote.errorCode == 'invalid.merchant' ||
+        bhnquote.errorCode == 'general.decline' ||
+        bhnquote.errorCode == '502'
+
+        if (bhnquote.errorCode == nil || bhnquote.errorCode == '') && bhnquote.actualCardValue == 0.0
+          flash[:notice] = 'The card balance is zero.' 
+          render('new') 
+          return 
+        
+
+        end
+
 
        @donation.giftcard.balance = bhnquote.actualCardValue
        @donation.giftcard.isdonated = 1
@@ -144,16 +159,51 @@ class DonateController < ApplicationController
           bhnquote.errorCode == 'exchange.pinNumber.is.blank' ||
           bhnquote.errorCode == 'exchange.cardNumber.is.blank'
           flash[:notice] = bhnquote.errorMessage
+
+          elsif bhnquote.errorCode == 'already.redeemed'
+            flash[:notice] = 'This card has already been redeemed.'          
+
+          
+          #elsif bhnquote.errorCode == 'transaction.cannot.process' ||
+          #      bhnquote.errorCode == 'invalid.transaction' ||
+          #      bhnquote.errorCode == 'provider.transaction.timeout'
+          # flash[:notice] = 'There was an error processing your request.  Please try again later or contact support@changefindr.com for assistance.'          
+        
+
+          elsif bhnquote.errorCode == 'card.not.found'
+            flash[:notice] = 'The card was not found.'    
+
+          
+          #elsif bhnquote.errorCode == 'invalid.merchant'
+          #  flash[:notice] = 'The merchant is not valid.'          
+          #end
+
+          elsif bhnquote.errorCode == 'invalid.pin'
+            flash[:notice] = 'The pin entered is not valid.' 
+
+          elsif bhnquote.errorCode == 'card.expired'
+            flash[:notice] = 'The gift card is expired.' 
+
+          
+          #elsif bhnquote.errorCode == 'general.decline' ||
+          #       bhnquote.errorCode == '502'
+          #  flash[:notice] = 'There was a problem with your gift card.  Please contact support@changefindr.com for assistance.'  
+          
+
+        end
+          
           render('new') 
           return
-        end
+
+        
       end
     end
 
 
     if @donation.save
 
-      if merchant.merchantid != 85
+
+      if merchant.merchantid != 85 && (@donation.giftcard.balance != 0.0 && @donation.giftcard.balance != nil)
           # check if the product line is accepted by bhn 
           # save the bhn quote
           bhnquote.giftcardid = @donation.giftcard.giftcardid

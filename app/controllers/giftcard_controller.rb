@@ -99,6 +99,7 @@ if (session[:userid] != nil)
       bhnquote = getcardbalance(@giftcard.cardnumber, @giftcard.pin, merchant.productLineId)
 
 
+
       if bhnquote.responsecode == '200' || bhnquote.responsecode == '201'
 
         @giftcard.balance = bhnquote.actualCardValue
@@ -112,9 +113,37 @@ if (session[:userid] != nil)
           bhnquote.giftcardid = nil
           bhnquote.save
           flash[:notice] = bhnquote.errorMessage
+          
+        elsif bhnquote.errorCode == 'already.redeemed'
+          flash[:notice] = 'This card has already been redeemed.'          
+
+        elsif bhnquote.errorCode == 'transaction.cannot.process' ||
+              bhnquote.errorCode == 'invalid.transaction' ||
+              bhnquote.errorCode == 'provider.transaction.timeout'
+
+          flash[:notice] = 'There was an error processing your request.  Please try again later or contact support@changefindr.com for assistance.'          
+
+        elsif bhnquote.errorCode == 'card.not.found'
+          flash[:notice] = 'The card was not found.'    
+
+        elsif bhnquote.errorCode == 'invalid.merchant'
+          flash[:notice] = 'The merchant is not valid.'          
+
+        elsif bhnquote.errorCode == 'invalid.pin'
+          flash[:notice] = 'The pin entered is not valid.' 
+
+        elsif bhnquote.errorCode == 'card.expired'
+          flash[:notice] = 'The gift card is expired.' 
+
+         elsif bhnquote.errorCode == 'general.decline' ||
+               bhnquote.errorCode == '502'
+          flash[:notice] = 'There was a problem with your gift card.  Please contact support@changefindr.com for assistance.'  
+
+        end
+
           render('new') 
           return
-        end
+
       end
     else
       flash[:notice] = 'Please select a valid gift card from the list.'
