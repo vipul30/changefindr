@@ -140,11 +140,11 @@ end
       begin
         curl.perform
 
-        byebug
+        
 
       rescue => error
 
-        byebug
+        
           raise  
       end
 

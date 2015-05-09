@@ -203,7 +203,7 @@ require 'aws-sdk'
     # https://developer.blackhawknetwork.com/documentation/apiReference/Service+-+Account_Processing/Operation+-+Verify_Account
 
     # testing
-    cardnumber = '9877890000000020'
+    cardnumber = '9877890000006666'
     bhnproduct.ProductLineID = 'MWY16JB102NGRL7DZKCJKCT9AC'
     pinnumber = '1234'
 
