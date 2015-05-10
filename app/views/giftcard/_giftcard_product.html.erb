@@ -1,3 +1,5 @@
+    
+  
 
    <div class="wp-block product" style="min-height: 472px;">
             <figure>
@@ -46,7 +48,7 @@
                 </p>
             <% end %>
 
-             <% if usergiftcard.isdonated == 0 %>
+             <% if usergiftcard.isdonated == 0 || usergiftcard.isdonated == nil %>
                 <a href="/giftcard/delete/<%= usergiftcard.giftcardid %>" class="cart-remove" title="Remove item" style="color:#e80e1d" data-confirm="Are you sure you want to delete this?"><i class="fa fa-times-circle"></i>Delete</a>
 
                 <% if session[:roleid] == 1 %>

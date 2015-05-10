@@ -21,6 +21,12 @@
         <a href="/giftcard/new" class="btn btn-base btn-icon btn-icon-right fa-gift">
             <span>Check Gift Card Balance</span>
         </a> 
+
+        <% if @usergiftcards == nil || @usergiftcards.count == 0 %>
+            <br/><br/>
+            <h5>You can instantly check your gift card balance.</h5>
+        <% end %>
+
     </div>
 
 
