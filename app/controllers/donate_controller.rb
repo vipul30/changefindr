@@ -128,7 +128,7 @@ class DonateController < ApplicationController
       bhnquote = Bhnquote.new
       bhnquote = getcardbalance(@donation.giftcard.cardnumber, @donation.giftcard.pin, merchant.productLineId)
 
-
+      
 
       if bhnquote.responsecode == '200' || bhnquote.responsecode == '201' ||
         bhnquote.errorCode == 'transaction.cannot.process' ||
@@ -136,7 +136,8 @@ class DonateController < ApplicationController
         bhnquote.errorCode == 'provider.transaction.timeout' ||
         bhnquote.errorCode == 'invalid.merchant' ||
         bhnquote.errorCode == 'general.decline' ||
-        bhnquote.errorCode == '502'
+        bhnquote.errorCode == '502' ||
+        bhnquote.errorCode == 'exchange.card.value.out.of.range'
 
         if (bhnquote.errorCode == nil || bhnquote.errorCode == '') && bhnquote.actualCardValue == 0.0
           flash[:notice] = 'The card balance is zero.' 
@@ -146,7 +147,7 @@ class DonateController < ApplicationController
 
         end
 
-
+        
        @donation.giftcard.balance = bhnquote.actualCardValue
        @donation.giftcard.isdonated = 1
 
@@ -155,10 +156,11 @@ class DonateController < ApplicationController
 
         # error
         # only display error message if invalid number of balance is 0, otherwise we will process on the backend
-        if bhnquote.errorCode == 'exchange.invalid.card' ||
-          bhnquote.errorCode == 'exchange.pinNumber.is.blank' ||
-          bhnquote.errorCode == 'exchange.cardNumber.is.blank'
-          flash[:notice] = bhnquote.errorMessage
+          if  bhnquote.errorCode == 'exchange.invalid.card' ||
+              bhnquote.errorCode == 'exchange.pinNumber.is.blank' ||
+              bhnquote.errorCode == 'exchange.cardNumber.is.blank'
+
+              flash[:notice] = bhnquote.errorMessage
 
           elsif bhnquote.errorCode == 'already.redeemed'
             flash[:notice] = 'This card has already been redeemed.'          
@@ -189,11 +191,10 @@ class DonateController < ApplicationController
           #       bhnquote.errorCode == '502'
           #  flash[:notice] = 'There was a problem with your gift card.  Please contact support@changefindr.com for assistance.'  
           
-
         end
           
-          render('new') 
-          return
+        render('new') 
+        return
 
         
       end
@@ -202,6 +203,7 @@ class DonateController < ApplicationController
 
     if @donation.save
 
+      byebug
 
       if merchant.merchantid != 85 && (@donation.giftcard.balance != 0.0 && @donation.giftcard.balance != nil)
           # check if the product line is accepted by bhn 

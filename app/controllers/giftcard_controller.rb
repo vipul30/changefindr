@@ -139,6 +139,9 @@ if (session[:userid] != nil)
                bhnquote.errorCode == '502'
           flash[:notice] = 'There was a problem with your gift card.  Please contact support@changefindr.com for assistance.'  
 
+        elsif bhnquote.errorCode == 'exchange.card.value.out.of.range' 
+          flash[:notice] = 'Unable to get card balance.  Please contact info@changefindr.com to get balance.'  
+
         end
 
           render('new') 
