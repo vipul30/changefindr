@@ -122,15 +122,24 @@ end
 
 <script>
 
-$(window).load(function () {
-
-    
+$(function(){
+   console.log('giftcard form load 1');
 
     <% if @giftcard.merchant %>
         cardfieldschange(<%= @giftcard.merchant.merchantid %>);
 
         
+    <% end %>
+});
 
+$(window).load(function () {
+
+    console.log('giftcard form load 2');
+
+    <% if @giftcard.merchant %>
+        cardfieldschange(<%= @giftcard.merchant.merchantid %>);
+
+        
     <% end %>
 
 
@@ -199,7 +208,19 @@ function cardfieldschange(cardid) {
         {
             try {
 
+
+
                 $("#GiftCardNotFoundDiv").show();
+
+                if (location.pathname.split("/")[1] == 'donate')
+                {
+                    $("#merchant").val('Please enter the gift card name in the comments section below.');
+                } else if (location.pathname.split("/")[1] == 'giftcard')
+                {
+                    $("#merchant").val('');
+                    //window.location.href = "/donate/new?merchantid=" + ui.item.id;   
+                }
+               
                 
 
             } catch (Exception)
@@ -258,30 +279,35 @@ $("#merchant").autocomplete({
 
 
                 event.preventDefault();
-                $("#merchant").val(ui.item.name);
-
-                try {
-                    // card not found
-                    if (ui.item.id == 85)
-                    {
-                        // display message
-                        
-                    } else
-                    {
-
-
-                    }
-                } catch (Exception) {}
-
+               
 
                 try {
                     $("#giftcard_merchantid").val(ui.item.id);
+                    $("#merchantname").html(ui.item.name);
                 } catch (Exception){}
 
                 try {
                     $("#donation_giftcard_attributes_merchantid").val(ui.item.id);
                 } catch (Exception){}
-                $("#merchantname").html(ui.item.name);
+
+                if (ui.item.id != 85)
+                {
+                    
+                    $("#merchant").val(ui.item.name);
+                } else
+                {
+                    console.log(location.pathname.split("/")[1]);
+                    if (location.pathname.split("/")[1] == 'donate')
+                    {
+                        $("#merchant").val('Please enter the gift card name in the comments section below.');
+                    } else if (location.pathname.split("/")[1] == 'giftcard')
+                    {
+                        $("#merchant").val('');
+                        window.location.href = "/donate/new?merchantid=" + ui.item.id;   
+                    }
+
+                }
+                
 
                 logourl = ui.item.logo
 
@@ -300,6 +326,17 @@ $("#merchant").autocomplete({
 
             //console.log("logo= ", item.logo);
 
+            if (item.id != 85)
+            {
+                
+                merchantdisplayname = item.name
+                listheight = ''
+            } else
+            {
+                merchantdisplayname = 'Gift card not found, but you can still donate your card.  Click here.'
+                listheight = 'style="height:100px;width:300px;word-wrap: break-word;"'
+            }
+
             logourl = item.logo
 
             if (logourl == null || logourl == '')
@@ -307,9 +344,9 @@ $("#merchant").autocomplete({
                 logourl = '<%= CLOUDFRONT_HOST %>/images/giftcard-3.jpg'
             }
 
-            return $('<li class="ui-menu-item-with-icon"></li>')
+            return $('<li ' + listheight + ' class="ui-menu-item-with-icon"></li>')
                 .data("item.ui-autocomplete", item.merchantname)
-                .append('<a><img src="'  + logourl +  '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + item.name + '</a>')
+                .append('<a><img src="'  + logourl +  '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + merchantdisplayname + '</a>')
                 .appendTo(ul);
         };
 

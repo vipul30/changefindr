@@ -110,8 +110,13 @@ gem 'social-share-button', '~> 0.1.8'
 
 #gem 'asset_sync', '~> 1.1.0'
 
-#gem 'debugger', '~> 1.6.8'
 
+gem 'columnize', '~> 0.9.0'
+gem 'debugger-linecache', '~> 1.2.0'
+gem 'debugger-ruby_core_source', '~> 1.3.8'
+
+#gem 'debugger', '~> 1.6.8'
+gem 'pry-byebug'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

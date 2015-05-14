@@ -74,6 +74,7 @@ GEM
     curb (0.8.8)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.3.8)
     encryptor (1.3.0)
     erubis (2.7.0)
     exception_notification (4.0.1)
@@ -109,6 +110,7 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     metaclass (0.0.4)
+    method_source (0.8.2)
     mime-types (2.5)
     mini_portile (0.6.2)
     minitest (5.5.1)
@@ -140,6 +142,13 @@ GEM
       cocaine (~> 0.5.3)
       mime-types
     pg (0.18.1)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-byebug (3.0.1)
+      byebug (~> 3.4)
+      pry (~> 0.10)
     pyu-ntlm-http (0.1.3.1)
     rack (1.5.2)
     rack-test (0.6.3)
@@ -243,7 +252,10 @@ DEPENDENCIES
   byebug (~> 3.5.1)
   clipboard (~> 1.0.5)
   coffee-rails (~> 4.0.0)
+  columnize (~> 0.9.0)
   curb (~> 0.8.7)
+  debugger-linecache (~> 1.2.0)
+  debugger-ruby_core_source (~> 1.3.8)
   exception_notification (~> 4.0.1)
   figaro (~> 1.1.0)
   gaffe (~> 1.0.2)
@@ -257,6 +269,7 @@ DEPENDENCIES
   omniauth-facebook (~> 2.0.0)
   paperclip (~> 4.2.1)
   pg (~> 0.18.1)
+  pry-byebug
   rails (= 4.1.8)
   rails3-jquery-autocomplete
   rails_12factor

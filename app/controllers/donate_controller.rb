@@ -14,6 +14,7 @@ class DonateController < ApplicationController
       return
     end
 
+    
 
   end
 
@@ -203,7 +204,7 @@ class DonateController < ApplicationController
 
     if @donation.save
 
-      byebug
+      
 
       if merchant.merchantid != 85 && (@donation.giftcard.balance != 0.0 && @donation.giftcard.balance != nil)
           # check if the product line is accepted by bhn 
@@ -216,6 +217,12 @@ class DonateController < ApplicationController
           bhnacquire = bhnacquirecard(@donation)
           
           bhnacquire.save
+
+          if  bhnacquire.errorCode == 'exchange.card.already.acquired'
+            flash[:notice] = 'The gift card has already been donated.'
+            render('new') 
+            return
+          end
 
         @message = 'Thank you for your donation in the amount of ' + number_to_currency(@donation.giftcard.balance).to_s + ' to ' + @donation.charity.charityname + '.  Please hold onto your gift card until you get an email from us informing you we have processed it.'
       
