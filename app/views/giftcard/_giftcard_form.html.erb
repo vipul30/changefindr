@@ -53,6 +53,12 @@ end
 
                     <%= f.hidden_field :merchantid %>                                             
                 </label>
+
+                <h5 id="GiftCardNotFoundDiv" style="display:none;color:red" >
+                    Enter your gift card store name in the comments section below.<br/>
+                    We will do our best to process the donation.
+                </h5>
+
             
                 <br/>
                 
@@ -66,6 +72,7 @@ end
                                                                            
                 </label>
 
+                 
                 <br/>                                             
                 
                 <label id="pinlabel">Pin</label>
@@ -169,7 +176,8 @@ function cardfieldschange(cardid) {
 
         try {
 
-                $("#GiftCardNotFoundDiv").hide();
+            $("#GiftCardNotFoundDiv").hide();
+            $("#GiftCardNotFoundDiv2").hide();
                 
 
         } catch (Exception)
@@ -210,16 +218,19 @@ function cardfieldschange(cardid) {
 
 
 
-                $("#GiftCardNotFoundDiv").show();
+
 
                 if (location.pathname.split("/")[1] == 'donate')
                 {
-                    $("#merchant").val('Please enter the gift card name in the comments section below.');
+                    $("#merchant").val('Card not found.  Enter in Comments below.');
                 } else if (location.pathname.split("/")[1] == 'giftcard')
                 {
                     $("#merchant").val('');
                     //window.location.href = "/donate/new?merchantid=" + ui.item.id;   
                 }
+
+                $("#GiftCardNotFoundDiv").show();
+                $("#GiftCardNotFoundDiv2").show();
                
                 
 
@@ -299,7 +310,7 @@ $("#merchant").autocomplete({
                     console.log(location.pathname.split("/")[1]);
                     if (location.pathname.split("/")[1] == 'donate')
                     {
-                        $("#merchant").val('Please enter the gift card name in the comments section below.');
+                        $("#merchant").val('Card not found.  Enter in Comments below.');
                     } else if (location.pathname.split("/")[1] == 'giftcard')
                     {
                         $("#merchant").val('');

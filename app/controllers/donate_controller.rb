@@ -77,7 +77,9 @@ class DonateController < ApplicationController
     @donation.modified = Time.now
 
     
-    if !params[:donation][:giftcard_attributes][:merchantid].empty?
+    
+
+    if !params[:donation][:giftcard_attributes][:merchantid].empty? && params[:donation][:giftcard_attributes][:merchantid] != "85"
       @donation.giftcard.giftcardid = params[:donation][:giftcard_attributes][:giftcardid]
       @donation.giftcardid = params[:donation][:giftcard_attributes][:giftcardid]
       @donation.giftcard.merchantid = params[:donation][:giftcard_attributes][:merchantid]
@@ -93,6 +95,13 @@ class DonateController < ApplicationController
       
       @donation.giftcard.merchantid = 85 # gift card not found
     end
+
+    if @donation.giftcard.merchantid == 85
+      @donation.comments = params[:giftcardname] + ' ' + params[:donation][:comments]
+    else
+      @donation.comments = params[:donation][:comments]
+    end
+
     
     if @donation.giftcard.created == nil
       @donation.giftcard.created = Time.now
