@@ -39,7 +39,7 @@ end
 
             	<label>Gift Card Merchant</label>
                 <br/>
-                <small>Start typing and select the retailer or brand name displayed on your gift card. If you don't see your retailer or brand name listed, select "Gift Card Not Found" and enter the card name in the comments field.  We will do our best to process your donation.</small>
+                <small>Start typing and select the retailer or brand name displayed on your gift card.<br/>If you don't see your retailer or brand name listed simply type in the name of the retailer.</small>
                 <label class="input">
                     <i class="icon-append fa fa-credit-card"></i>
 
@@ -222,15 +222,15 @@ function cardfieldschange(cardid) {
 
                 if (location.pathname.split("/")[1] == 'donate')
                 {
-                    $("#merchant").val('Card not found.  Enter in Comments below.');
+                    $("#merchant").val('');
                 } else if (location.pathname.split("/")[1] == 'giftcard')
                 {
                     $("#merchant").val('');
                     //window.location.href = "/donate/new?merchantid=" + ui.item.id;   
                 }
 
-                $("#GiftCardNotFoundDiv").show();
-                $("#GiftCardNotFoundDiv2").show();
+                $("#GiftCardNotFoundDiv").hide();
+                $("#GiftCardNotFoundDiv2").hide();
                
                 
 
@@ -264,7 +264,12 @@ $("#merchant").autocomplete({
                     data: { searchText: request.term, maxResults: 10 },
                     success: function (data) {
 
-                        console.log('success: ', data)
+                        console.log('success: ', data);
+
+                        controllername = location.pathname.split("/")[1];
+
+                        
+
 
                         // data is an array of objects and must be transformed for autocomplete to use
                         var array = data.error ? [] : $.map(data, function (m) {
@@ -275,7 +280,20 @@ $("#merchant").autocomplete({
                                 
                             };
                         });
-                        response(array);
+
+                        console.log('array: ', array);
+
+                        if (controllername == 'donate' && array[0].id != '85')
+                        {
+                            
+                            response(array);
+                            
+                        } else if (controllername == 'giftcard')
+                        {
+                            response(array);
+                        }
+
+                        
 
 
                     },
@@ -310,7 +328,7 @@ $("#merchant").autocomplete({
                     console.log(location.pathname.split("/")[1]);
                     if (location.pathname.split("/")[1] == 'donate')
                     {
-                        $("#merchant").val('Card not found.  Enter in Comments below.');
+                        $("#merchant").val('');
                     } else if (location.pathname.split("/")[1] == 'giftcard')
                     {
                         $("#merchant").val('');

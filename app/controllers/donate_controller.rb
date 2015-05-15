@@ -76,13 +76,29 @@ class DonateController < ApplicationController
     @donation.created = Time.now
     @donation.modified = Time.now
 
-    
-    
+  
 
     if !params[:donation][:giftcard_attributes][:merchantid].empty? && params[:donation][:giftcard_attributes][:merchantid] != "85"
-      @donation.giftcard.giftcardid = params[:donation][:giftcard_attributes][:giftcardid]
-      @donation.giftcardid = params[:donation][:giftcard_attributes][:giftcardid]
-      @donation.giftcard.merchantid = params[:donation][:giftcard_attributes][:merchantid]
+      
+      # this is the instance when the user types a gift card name after selecting one from the list
+      selected_merchant = Merchant.where(merchantid: params[:donation][:giftcard_attributes][:merchantid]).first
+      if selected_merchant.merchantname != params[:giftcardname]
+        if @donation.giftcard == nil
+          @donation.giftcard = Giftcard.new
+        end
+
+        @donation.giftcard.created = Time.now
+        @donation.giftcard.modified = Time.now
+        @donation.giftcard.balancecheckdate = Time.now
+      
+        @donation.giftcard.merchantid = 85 # gift card not found
+      
+      else
+
+        @donation.giftcard.giftcardid = params[:donation][:giftcard_attributes][:giftcardid]
+        @donation.giftcardid = params[:donation][:giftcard_attributes][:giftcardid]
+        @donation.giftcard.merchantid = params[:donation][:giftcard_attributes][:merchantid]
+      end
       
     else
       if @donation.giftcard == nil
