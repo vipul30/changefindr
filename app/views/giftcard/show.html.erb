@@ -39,14 +39,14 @@
 
 								      	<br/>
 								      	
-		                              	<h4>Gift Card Number </h4><h6><%= @giftcard.cardnumber_hash %></h6>
+		                              	<h4>Gift Card Number </h4><h6><%= @giftcard.cardnumber %></h6>
 		                              	
 		                              	<h4>Pin: </h4> <h6><%= @giftcard.pin %></h6> 
 		                              
 		                              	<h4>Balance </h4>
 		                              	<span class="primary-letter style-1 c-base" style="float:center">$<%= @giftcard.balance %></span>
 		                              	<br/>
-		                              					<a href="#" class="btn btn-sm btn-base btn-icon fa-refresh">
+		                              					<a href="/giftcard/refreshbalance?giftcardid=<%= @giftcard.giftcardid %>" class="btn btn-sm btn-base btn-icon fa-refresh">
 		                        							<span>Refresh</span>
 		                    							</a>
 		                              	
@@ -62,7 +62,7 @@
 		                              	<% end %>
 
 		                              	<br/><br/>
-					                    <a href="#" class="btn btn-sm btn-base btn-icon fa-credit-card">
+					                    <a href="/donate/new?giftcardid=<%= @giftcard.giftcardid %>" class="btn btn-sm btn-base btn-icon fa-credit-card">
 					                        <span>Donate</span>
 					                    </a>
 
