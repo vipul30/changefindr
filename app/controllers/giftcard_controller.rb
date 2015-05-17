@@ -141,6 +141,8 @@ if (session[:userid] != nil)
 
         elsif bhnquote.errorCode == 'exchange.card.value.out.of.range' 
           flash[:notice] = 'Unable to get card balance.  Please contact info@changefindr.com to get balance.'  
+        else
+          flash[:notice] = 'There was an error getting your balance.  Please try again or contact info@changefindr.com to get balance.'
 
         end
 
