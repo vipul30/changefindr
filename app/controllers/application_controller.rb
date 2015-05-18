@@ -159,6 +159,7 @@ require 'aws-sdk'
           
         else
 
+          
             bhnquote.errorCode = bhnresponse['errors'][0]['errorCode']
             bhnquote.errorMessage = bhnresponse['errors'][0]['message']
 

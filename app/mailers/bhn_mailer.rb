@@ -6,7 +6,7 @@ class BhnMailer < ActionMailer::Base
 	    
 	    @emailmessage = emailmessage
 
-	    mail(to: 'vipul@changefindr.com', subject: 'BHN API Error')
+	    mail(to: 'vipul30@gmail.com', subject: 'BHN API Error')
 	end
 
 
