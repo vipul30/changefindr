@@ -35,7 +35,7 @@ class Charity < ActiveRecord::Base
 								:path => "Users/vipul/Sites/changefindr/public/images/photo_attachment/:id/:style/:basename.:extension",
 								:url => "/images/photo_attachment/:id/:style/:basename.:extension",
 								:default_url => "/images/photo_attachment/missing_thumb.png",
-								:size => { :in => 0..500.kilobytes }
+								:size => { :in => 0..600.kilobytes }
 								 }
 
 	validates :charityname, :presence => { :message => "Please enter the name of your cause." },
