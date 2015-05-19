@@ -18,21 +18,21 @@ class Charity < ActiveRecord::Base
 								:size => { :in => 0..500.kilobytes } }
 
 	has_attached_file :image1 , {	styles: {thumb: "60x60#"},
-									:path => "#{Rails.root}/public/images/photo_attachment/:id/:style/:basename.:extension",
+									:path => "Users/vipul/Sites/changefindr/public/images/photo_attachment/:id/:style/:basename.:extension",
 									:url => "/images/photo_attachment/:id/:style/:basename.:extension",
 									:default_url => "/images/photo_attachment/missing_thumb.png",
 									:size => { :in => 0..500.kilobytes }
 								}
 
 	has_attached_file :image2, {	styles: {thumb: "60x60#"},
-								:path => "#{Rails.root}/public/images/photo_attachment/:id/:style/:basename.:extension",
+								:path => "Users/vipul/Sites/changefindr/public/images/photo_attachment/:id/:style/:basename.:extension",
 								:url => "/images/photo_attachment/:id/:style/:basename.:extension",
 								:default_url => "/images/photo_attachment/missing_thumb.png",
 								:size => { :in => 0..500.kilobytes }
 							    }
 
 	has_attached_file :image3, {styles: {thumb: "60x60#"},
-								:path => "#{Rails.root}/public/images/photo_attachment/:id/:style/:basename.:extension",
+								:path => "Users/vipul/Sites/changefindr/public/images/photo_attachment/:id/:style/:basename.:extension",
 								:url => "/images/photo_attachment/:id/:style/:basename.:extension",
 								:default_url => "/images/photo_attachment/missing_thumb.png",
 								:size => { :in => 0..500.kilobytes }
