@@ -6,7 +6,7 @@ class UserMailer < ActionMailer::Base
 	    @user = user
 	    @currenthost = currenthost
 
-	    mail(to: @user.email, subject: 'Welcome to Changefindr')
+	    mail(to: @user.email, subject: 'Welcome to Changefindr').deliver()
 	end
 
 
@@ -15,7 +15,7 @@ class UserMailer < ActionMailer::Base
 	    @currenthost = currenthost
 
 	   
-	    mail(to: @user.email, subject: 'Changefindr - Reset Password')
+	    mail(to: @user.email, subject: 'Changefindr - Reset Password').deliver()
 	end
 
 end

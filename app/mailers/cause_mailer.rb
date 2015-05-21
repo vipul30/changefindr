@@ -6,8 +6,8 @@ class CauseMailer < ActionMailer::Base
 	    @cause = cause
 	    @currenthost = currenthost
 
-	    mail(to: @cause.email, subject: 'Changefindr - New Cause')
-	    mail(bcc: 'vipul30@gmail.com', subject: 'Changefindr - New Cause')
+	    mail(to: @cause.email, subject: 'Changefindr - New Cause').deliver()
+	    mail(bcc: 'vipul30@gmail.com', subject: 'Changefindr - New Cause').deliver()
 	end
 
 

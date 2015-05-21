@@ -13,18 +13,18 @@ class DonateMailer < ActionMailer::Base
 	    end
 
 	    begin
-	    	mail(to: email, subject: 'Changefindr - Donation')
+	    	mail(to: email, subject: 'Changefindr - Donation').deliver()
 	    rescue
 	    end
 
 	    begin
-	    	mail(bcc: 'vipul30@gmail.com', subject: 'Changefindr - Donation')
+	    	mail(to: 'vipul30@gmail.com', subject: 'Changefindr - Donation').deliver()
 	    rescue
 	    	byebug
 	    end
 
 	    begin
-	    	mail(bcc: 'founder921@gmail.com', subject: 'Changefindr - Donation')
+	    	mail(to: 'founder921@gmail.com', subject: 'Changefindr - Donation').deliver()
 	    rescue
 	    end
 	end
