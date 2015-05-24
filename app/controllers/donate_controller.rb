@@ -20,6 +20,7 @@ class DonateController < ApplicationController
 
   def new
 
+
     if params[:partnersite] != nil && params[:partnersite] == 'true'
 
       # comes from a partnersite and do not show header and footer
@@ -71,6 +72,13 @@ class DonateController < ApplicationController
   end
 
   def create
+
+    if !verify_recaptcha
+      flash[:notice] = 'Only humans can donate.  =)' 
+      render('new') 
+      return 
+
+    end
 
     @donation = Donation.new(donate_params)
     @donation.created = Time.now

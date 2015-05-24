@@ -118,6 +118,9 @@ gem 'debugger-ruby_core_source', '~> 1.3.8'
 #gem 'debugger', '~> 1.6.8'
 gem 'pry-byebug'
 
+# google capthca
+gem "recaptcha", :require => "recaptcha/rails"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
