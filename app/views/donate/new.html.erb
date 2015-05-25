@@ -38,7 +38,17 @@
 
                 <br/><br/>
                                 <button id="donation_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button"
-                                onClick="this.form.submit(); this.disabled=true;"
+                                onClick="
+                                //console.log('button click= ' + $('#g-recaptcha-response'));
+                                if ($('#g-recaptcha-response').val() != '')
+                                {
+                                    this.form.submit(); 
+                                    this.disabled=true;
+                                } else {
+                                    alert('Please confirm you are not a robot.');
+                                }
+                                "
+
                                 >
                                     <span>Donate</span>
                                 </button>
