@@ -55,6 +55,8 @@ gem 'aws-sdk-core', '~> 2.0.38'
 gem 'aws-sdk', '< 2.0' # needed to work with amazon S3
 gem 'aws-s3', '~> 0.6.3'
 
+gem 'aws-ses', '~> 0.6.0', :require => 'aws/ses'
+
 # Use unicorn as the app server
 gem 'unicorn'
 
