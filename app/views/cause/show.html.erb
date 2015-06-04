@@ -78,7 +78,8 @@
                                     </button>
                                     <br/>
 
-                                    <% if session[:roleid] == ADMIN_ROLE || session[:userid] == :userid%>
+
+                                    <% if session[:roleid] == ADMIN_ROLE || session[:userid] ==  @cause.userid %>
                                         <%= link_to "Modify Cause", controller: "cause", action: "edit", id: @cause.charityid %>
                                         <br/>
                                     <% end %>

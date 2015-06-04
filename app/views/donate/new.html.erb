@@ -39,14 +39,33 @@
                 <br/><br/>
                                 <button id="donation_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button"
                                 onClick="
-                                //console.log('button click= ' + $('#g-recaptcha-response'));
+                                console.log('button click= ' + $('#giftcard_giftcardname'));
                                 if ($('#g-recaptcha-response').val() != '')
+                                {
+                                    submitform = true;
+                                } else {
+                                    submitform = false;
+                                    alert('Please confirm you are not a robot.');
+                                    return false;
+                                }
+
+                                if ($('#giftcard_giftcardname') != '')
+                                {
+                                    submitform = true;
+                                    
+                                } else {
+                                    submitform = false;
+                                    alert('Please confirm you are not a robot.');
+                                    return false;
+                                }
+
+                                if (submitform)
                                 {
                                     this.form.submit(); 
                                     this.disabled=true;
-                                } else {
-                                    alert('Please confirm you are not a robot.');
                                 }
+
+                                
                                 "
 
                                 >

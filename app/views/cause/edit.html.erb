@@ -29,7 +29,7 @@
 							
 									
                                    
-                                    <% if session[:roleid] == 1 || session[:userid] == :userid%>
+                                    <% if session[:roleid] == ADMIN_ROLE %>
 					                   Is approved for accepting gift card donations?&nbsp;&nbsp;               
 					                  <%= f.check_box :isapproved %>
 					                                    

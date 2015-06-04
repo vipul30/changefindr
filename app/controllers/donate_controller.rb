@@ -73,11 +73,17 @@ class DonateController < ApplicationController
 
   def create
 
+byebug
 
     @donation = Donation.new(donate_params)
     @donation.created = Time.now
     @donation.modified = Time.now
 
+    if params["giftcardname"].empty? && params[:donation][:giftcard_attributes][:merchantid].empty?
+      flash[:notice] = 'Please type in the merchant for your giftcard or select it from the list.' 
+      render('new') 
+      return 
+    end
   
     if params["g-recaptcha-response"].empty? || !verify_recaptcha
       flash[:notice] = 'Only humans can donate.  =)' 
