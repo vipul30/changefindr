@@ -70,39 +70,39 @@ require 'aws-sdk'
         params = { 
 
           
-          :contractId => ENV['bhn_contractId_prod'],
-          :requestId => r.rand(10...5000).to_s + ENV['bhn_requestorId_prod'],
+          :contractId => ENV['bhn_contractId'],
+          :requestId => r.rand(10...5000).to_s + ENV['bhn_requestorId'],
           :previousAttempts => i,
-          :requestorId => ENV['bhn_requestorId_prod'],
+          :requestorId => ENV['bhn_requestorId'],
           
           :card => {:cardNumber => cardnumber, :pinNumber => pinnumber, :productLineId => productlineid} 
           
 
         }
 
-        curl = Curl::Easy.new(ENV['bhn_url_quote_prod'])
+        curl = Curl::Easy.new(ENV['bhn_url_quote'])
         
         curl.headers['Accept'] = 'application/json'
         curl.headers['Content-Type'] = 'application/json'
-        curl.headers["requestorId"] = ENV['bhn_requestorId_prod']
+        curl.headers["requestorId"] = ENV['bhn_requestorId']
         curl.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
         curl.headers['previousAttempts'] = '0'
-        curl.headers['contractId'] = ENV['bhn_contractId_prod']
+        curl.headers['contractId'] = ENV['bhn_contractId']
 
-      if Rails.env == "development"
+      if Rails.env == "development" || Rails.env == "test"
 
-        curl.cert = Rails.root.join(ENV['bhn_cert_prod']).to_s
-        curl.cert_key = Rails.root.join(ENV['bhn_cert_prod']).to_s
+        curl.cert = Rails.root.join(ENV['bhn_cert']).to_s
+        curl.cert_key = Rails.root.join(ENV['bhn_cert']).to_s
 
       else
         curl.certtype = "PEM"
-        curl.cert = Rails.root.join(ENV['bhn_cert_pem_file_prod']).to_s #Rails.root.join(ENV['bhn_cert_prod']).to_s
-        curl.cert_key = Rails.root.join(ENV['bhn_cert_pem_file_prod']).to_s
+        curl.cert = Rails.root.join(ENV['bhn_cert_pem_file']).to_s #Rails.root.join(ENV['bhn_cert_prod']).to_s
+        curl.cert_key = Rails.root.join(ENV['bhn_cert_pem_file']).to_s
       end
 
 
 
-        curl.certpassword = ENV['bhn_cert_password_prod']
+        curl.certpassword = ENV['bhn_cert_password']
         
         curl.follow_location = true
         curl.ssl_verify_host = false
@@ -110,6 +110,7 @@ require 'aws-sdk'
         curl.verbose = true
         curl.timeout = 31
         
+        byebug
 
         begin
           result = curl.http_post(params.to_json) {
@@ -153,8 +154,12 @@ require 'aws-sdk'
 
         elsif bhnresponse['errors'][0]['errorCode'] == 'exchange.card.value.out.of.range'
 
-           bhnquote = bhnbalancecheck(cardnumber, pinnumber, productlineid)
-
+           #bhnquote = bhnbalancecheck(cardnumber, pinnumber, productlineid)
+           bhnquote.responseTimestamp = Time.now
+           bhnquote.actualCardValue = bhnresponse['additionalInfo']['actualCardValue'].to_f
+           bhnquote.errorCode = bhnresponse['errors'][0]['errorCode']
+           bhnquote.errorMessage = bhnresponse['errors'][0]['message']
+           bhnquote.exchangeCardValue = 0.0
            i = 3
           
         else
@@ -227,23 +232,23 @@ require 'aws-sdk'
     
     curl.headers['Accept'] = 'application/json'
     curl.headers['Content-Type'] = 'application/json'
-    curl.headers["requestorId"] = ENV['bhn_requestorId_prod'] 
+    curl.headers["requestorId"] = ENV['bhn_requestorId'] 
     curl.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
     curl.headers['previousAttempts'] = '0'
-    curl.headers['contractId'] = ENV['bhn_contractId_prod']
+    curl.headers['contractId'] = ENV['bhn_contractId']
 
-    if Rails.env == "development"
+    if Rails.env == "development" || Rails.env == "test"
 
-      curl.cert = Rails.root.join(ENV['bhn_cert_prod']).to_s
-      curl.cert_key = Rails.root.join(ENV['bhn_cert_prod']).to_s
+      curl.cert = Rails.root.join(ENV['bhn_cert']).to_s
+      curl.cert_key = Rails.root.join(ENV['bhn_cert']).to_s
 
     else
       curl.certtype = "PEM"
-      curl.cert = Rails.root.join(ENV['bhn_cert_pem_file_prod']).to_s #Rails.root.join(ENV['bhn_cert_prod']).to_s
-      curl.cert_key = Rails.root.join(ENV['bhn_cert_pem_file_prod']).to_s
+      curl.cert = Rails.root.join(ENV['bhn_cert_pem_file']).to_s #Rails.root.join(ENV['bhn_cert_prod']).to_s
+      curl.cert_key = Rails.root.join(ENV['bhn_cert_pem_file']).to_s
     end
 
-    curl.certpassword = ENV['bhn_cert_password_prod']
+    curl.certpassword = ENV['bhn_cert_password']
     curl.ssl_verify_peer = false
     
     curl.follow_location = true
@@ -337,10 +342,10 @@ require 'aws-sdk'
         params = { 
 
           
-          :contractId => ENV['bhn_contractId_prod'],
-          :requestId => r.rand(10...5000).to_s + ENV['bhn_requestorId_prod'],
+          :contractId => ENV['bhn_contractId'],
+          :requestId => r.rand(10...5000).to_s + ENV['bhn_requestorId'],
           :previousAttempts => 0,
-          :requestorId => ENV['bhn_requestorId_prod'],
+          :requestorId => ENV['bhn_requestorId'],
 
           :card => {:cardNumber => donation.giftcard.cardnumber, :pinNumber => donation.giftcard.pin, :productLineId => merchant.productLineId}, 
 
@@ -354,31 +359,31 @@ require 'aws-sdk'
 
         }
 
-        curl = Curl::Easy.new(ENV['bhn_url_acquire_prod'])
+        curl = Curl::Easy.new(ENV['bhn_url_acquire'])
         
         curl.headers['Accept'] = 'application/json'
         curl.headers['Content-Type'] = 'application/json'
-        curl.headers["requestorId"] = ENV['bhn_requestorId_prod']
+        curl.headers["requestorId"] = ENV['bhn_requestorId']
         originalRequestId = r.rand(10...5000).to_s + Time.now.to_s
         curl.headers["requestId"] = originalRequestId
         curl.headers['previousAttempts'] = i.to_s
-        curl.headers['contractId'] = ENV['bhn_contractId_prod']
+        curl.headers['contractId'] = ENV['bhn_contractId']
 
 
-        if Rails.env == "development"
+        if Rails.env == "development" || Rails.env == "test"
 
-            curl.cert = Rails.root.join(ENV['bhn_cert_prod']).to_s
-            curl.cert_key = Rails.root.join(ENV['bhn_cert_prod']).to_s
+            curl.cert = Rails.root.join(ENV['bhn_cert']).to_s
+            curl.cert_key = Rails.root.join(ENV['bhn_cert']).to_s
 
         else
             curl.certtype = "PEM"
-            curl.cert = Rails.root.join(ENV['bhn_cert_pem_file_prod']).to_s #Rails.root.join(ENV['bhn_cert_prod']).to_s
-            curl.cert_key = Rails.root.join(ENV['bhn_cert_pem_file_prod']).to_s
+            curl.cert = Rails.root.join(ENV['bhn_cert_pem_file']).to_s #Rails.root.join(ENV['bhn_cert_prod']).to_s
+            curl.cert_key = Rails.root.join(ENV['bhn_cert_pem_file']).to_s
         end
 
         #curl.cert = ENV['bhn_cert_prod']
         #curl.cert_key = ENV['bhn_cert_pass_file_prod']
-        curl.certpassword = ENV['bhn_cert_password_prod']
+        curl.certpassword = ENV['bhn_cert_password']
         curl.ssl_verify_peer = false
         
         curl.follow_location = true
@@ -462,7 +467,7 @@ require 'aws-sdk'
 
         r = Random.new
 
-        curl = Curl::Easy.new(ENV['bhn_url_acquire_reversal_prod'])
+        curl = Curl::Easy.new(ENV['bhn_url_acquire_reversal'])
         
         params = { 
  
@@ -472,25 +477,25 @@ require 'aws-sdk'
 
         curl.headers['Accept'] = 'application/json'
         curl.headers['Content-Type'] = 'application/json'
-        curl.headers["requestorId"] = ENV['bhn_requestorId_prod']
+        curl.headers["requestorId"] = ENV['bhn_requestorId']
         curl.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
         curl.headers["originalRequestId"] = originalRequestId
         curl.headers['previousAttempts'] = '0'
-        curl.headers['contractId'] = ENV['bhn_contractId_prod']
+        curl.headers['contractId'] = ENV['bhn_contractId']
 
-        if Rails.env == "development"
+        if Rails.env == "development" || Rails.env == "test"
 
-            curl.cert = Rails.root.join(ENV['bhn_cert_prod']).to_s
-            curl.cert_key = Rails.root.join(ENV['bhn_cert_prod']).to_s
+            curl.cert = Rails.root.join(ENV['bhn_cert']).to_s
+            curl.cert_key = Rails.root.join(ENV['bhn_cert']).to_s
 
         else
             curl.certtype = "PEM"
-            curl.cert = Rails.root.join(ENV['bhn_cert_pem_file_prod']).to_s #Rails.root.join(ENV['bhn_cert_prod']).to_s
-            curl.cert_key = Rails.root.join(ENV['bhn_cert_pem_file_prod']).to_s
+            curl.cert = Rails.root.join(ENV['bhn_cert_pem_file']).to_s #Rails.root.join(ENV['bhn_cert_prod']).to_s
+            curl.cert_key = Rails.root.join(ENV['bhn_cert_pem_file']).to_s
         end
 
         
-        curl.certpassword = ENV['bhn_cert_password_prod']
+        curl.certpassword = ENV['bhn_cert_password']
         curl.ssl_verify_peer = false
         
         curl.follow_location = true

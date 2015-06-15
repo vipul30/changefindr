@@ -69,7 +69,7 @@ end
 
   def updatebhnproducts
 
-    curl = Curl::Easy.new(ENV['bhn_url_product_line_prod'])
+    curl = Curl::Easy.new(ENV['bhn_url_product_line'])
 
     
 
@@ -80,23 +80,23 @@ end
       
       curl.headers['Accept'] = 'application/json'
       curl.headers['Content-Type'] = 'application/json'
-      curl.headers["requestorId"] = ENV['bhn_requestorId_prod'] 
+      curl.headers["requestorId"] = ENV['bhn_requestorId'] 
       curl.headers["requestId"] = r.rand(10...5000).to_s + Time.now.to_s
       curl.headers['previousAttempts'] = '0'
-      curl.headers['contractId'] = ENV['bhn_contractId_prod']
+      curl.headers['contractId'] = ENV['bhn_contractId']
 
-      if Rails.env == "development"
+      if Rails.env == "development" || Rails.env == "test"
 
-        curl.cert = Rails.root.join(ENV['bhn_cert_prod']).to_s
-        curl.cert_key = Rails.root.join(ENV['bhn_cert_prod']).to_s
+        curl.cert = Rails.root.join(ENV['bhn_cert']).to_s
+        curl.cert_key = Rails.root.join(ENV['bhn_cert']).to_s
 
       else
         curl.certtype = "PEM"
-        curl.cert = Rails.root.join(ENV['bhn_cert_pem_file_prod']).to_s #Rails.root.join(ENV['bhn_cert_prod']).to_s
-        curl.cert_key = Rails.root.join(ENV['bhn_cert_pem_file_prod']).to_s
+        curl.cert = Rails.root.join(ENV['bhn_cert_pem_file']).to_s #Rails.root.join(ENV['bhn_cert_prod']).to_s
+        curl.cert_key = Rails.root.join(ENV['bhn_cert_pem_file']).to_s
       end
 
-      curl.certpassword = ENV['bhn_cert_password_prod']
+      curl.certpassword = ENV['bhn_cert_password']
       curl.ssl_verify_peer = false
       
       curl.follow_location = true

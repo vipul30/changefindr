@@ -100,7 +100,7 @@ if (session[:userid] != nil)
 
 
 
-      if bhnquote.responsecode == '200' || bhnquote.responsecode == '201'
+      if bhnquote.responsecode == '200' || bhnquote.responsecode == '201' || bhnquote.errorCode == 'exchange.card.value.out.of.range'
 
         @giftcard.balance = bhnquote.actualCardValue
 
