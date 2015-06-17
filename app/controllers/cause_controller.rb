@@ -91,6 +91,7 @@ class CauseController < ApplicationController
 
   def show
     @cause = Charity.where(charityid: params[:id]).first
+    
     @shortcauseurl = request.host_with_port + "/cause/show/" +  @cause.charityid.to_s
   end
 

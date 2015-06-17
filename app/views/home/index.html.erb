@@ -90,28 +90,32 @@
             
             <div class="carousel-inner">
                 <div class="owl-carousel owl-carousel-single no-padding">
-                    <div class="item active">
+                    <div class="item">
                         <div class="row">
-                            <div class="col-md-6">
+                            
+                                <%
+                                    thomascause = Charity.where(:charityid => 177).first
+
+                                    featuredCause = Charity.where(:charityid => 177).first
+                                %>
+
+                          
+
+                            <div class="col-md-12" style="display: inline-block;text-align: center;">
                                 <h2 class="title" style="text-align:center">Featured Cause<br/>
-                                    <a href="/cause/show/172">Thomas House Family Shelter - Run 4 Homeless Children</a>
+                                     <img src="<%=featuredCause.logo.url%>" class="img-responsive" alt="" style="display:inline-block">
+                                    <a href="/cause/show/177">Nepal Earthquake Relief By NAG</a>
                                      <br/> </h2>
 
                                 <br/>
-                                <p>Run 4 Homeless Children The mission of Thomas House is to provide a safe, supportive environment and the resources necessary for homeless families with children to remain together while empowering them to become independent and self-sufficient. Walk, run or ride in a stroller across a gorgeous track. There are six physical bridges runners must cross and one tunnel to run through to reach the finish line. These represent the six hurdles that homeless families must cross to reach self-sufficiency, and passing through the tunnel represents Thomas House being the light at the end of the tunnel. This event is Saturday, March 28, 2015 at Mile Square Regional Park.
+                                <p>Dear Respected Community Members and friends of Nepal, We are very deeply saddened by the tragedy and damages of epic proportion that the recent earthquake caused in our motherland Nepal. Our community deeply grieves over the loss of life in particular, and for those that will continue to have to endure further suffering in coming days and months. The entire Nepalese Association of Georgia (NAG) community, while we mourn and pray, offer our heartfelt condolences and sympathies to the bereaved families affected by this natural disaster. Historic buildings in Kathmandu lay in rubble on the ground. The injured are being treated outside hospitals in chaotic scenes. <a href="/cause/show/177">Read More...</a>
                                 </p>
-                                <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button" onclick="location.href='/donate/new/?charityid=172'">
+                                <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button" onclick="location.href='/donate/new/?charityid=177'">
                                                         <span>Donate Partially-Used Gift Card</span>
                                     </button>
                                 
                             </div>
-                            <div class="col-md-6">
-                                <%
-                                    thomascause = Charity.where(:charityid => 172)
-                                %>
-
-                                <img src="/images/photo_attachment/172/original/r4hc-logo1.png" class="img-responsive" alt="">
-                            </div>
+                            
                         </div>
                     </div>
                     

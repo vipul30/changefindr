@@ -123,6 +123,8 @@ gem 'pry-byebug'
 # google capthca
 gem "recaptcha", :require => "recaptcha/rails"
 
+gem 'postmarkdown', '~> 0.0.10'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
