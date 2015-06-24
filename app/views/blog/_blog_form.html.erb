@@ -1,0 +1,74 @@
+<% if @blog.errors.any? %>
+  <div class="alert alert-danger fade in">
+    <p><b>Please correct the following <%= pluralize(@blog.errors.count, "error") %>:</b></p>
+ 
+    <ul>
+    <% @blog.errors.messages.values.each do |msg| %>
+        <%msg.each do  |m| %>
+            <li><%= m %></li>
+        <%end %>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<div class="row">
+    
+        <div class="col-md-4">
+            <div class="form-group form-group-lg">
+                <label class="">First name</label>
+                
+                <%= f.text_field :first_name, :placeholder=>"", :hidefocus=>"true", :class=>"form-control input-lg" %>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group form-group-lg">
+                <label class="">Last name</label>
+                
+                 <%= f.text_field :last_name, :placeholder=>"", :hidefocus=>"true", :class=>"form-control input-lg" %>
+            </div>
+        </div>
+    </div>           
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group form-group-lg">
+                <label class="">Email</label>
+                
+                 <%= f.text_field :email, :placeholder=>"", :hidefocus=>"true", :class=>"form-control input-lg" %>
+            </div>
+        </div>
+        
+    </div>      
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Title</label>
+                
+                 <%= f.text_field :title, :placeholder=>"", :hidefocus=>"true", :class=>"form-control input-lg" %>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="form-group">
+                <label>Description</label>
+                
+                <%= f.text_area :description, :rows => 10, :cols => 120 %>
+            </div>
+        </div>
+    </div>   
+   
+</div>   
+
+<script>
+
+$(document).ready(function(){ 
+   
+
+      tinymce.init({
+          selector: "textarea"
+       });
+    
+         
+    });
+
+</script>

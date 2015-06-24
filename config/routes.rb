@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
   
+  get 'blog/index'
+
+  get 'blog/show'
+
+  get 'blog/new'
+
+  get 'blog/edit'
+
+  get 'blog/update'
+
+  get 'blog/create'
+
+  get 'blog/delete'
+
   get 'user/new'
 
   get 'user/create'

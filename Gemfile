@@ -125,6 +125,8 @@ gem "recaptcha", :require => "recaptcha/rails"
 
 gem 'postmarkdown', '~> 0.0.10'
 
+gem 'tinymce-rails', '~> 4.1.6'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

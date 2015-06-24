@@ -118,6 +118,12 @@ class CauseController < ApplicationController
                                    .where(isapproved: true)
                                    
     end
+
+    
+
+    #if @searchcauseresults.count == 0
+    #  @searchcauseresults = Charity.new
+    #end
     
     render :json => @searchcauseresults
 

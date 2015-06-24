@@ -104,24 +104,37 @@
 
   $("#searchcause").autocomplete({
 
-
         source: function (request, response) {
             $.ajax({
                 url: '/cause/causeautocomplete', type: "POST", dataType: "json",
                 data: { searchText: request.term, maxResults: 10 },
                 success: function (data) {
 
-                    console.log('success: ', data)
+                    //console.log('success: ', data)
 
-                    // data is an array of objects and must be transformed for autocomplete to use
-                    var array = data.error ? [] : $.map(data, function (m) {
-                        return {
-                            id: m.charityid,
-                            name: m.charityname,
-                            logo: m.logo
+                    var array;
+
+                    if (data.length == 0 ) {
+
+                        array = {id:0};
+
+                    } else {
+                
+
+                        // data is an array of objects and must be transformed for autocomplete to use
+                        array = data.error ? [] : $.map(data, function (m) {
+           
+                            return {
+
+                                id: m.charityid,
+                                name: m.charityname,
+                                logo: m.logo
+                                
+                            };
                             
-                        };
-                    });
+                        });
+                    }
+
                     response(array);
 
 
@@ -133,17 +146,30 @@
         },
         minLength: 1,
         select: function (event, ui) {
-            //console.log('comes in selected item');
+            //console.log('comes in selected item ', ui.item);
             event.preventDefault();
-            window.location.href = "/cause/show/" + ui.item.id;
+            if (ui.item.id == 0)
+            {
+                window.location.href = "/cause/new/";
+            } else
+            {
+
+                window.location.href = "/cause/show/" + ui.item.id;
+            }
  
         }
     })
     .data("ui-autocomplete")._renderItem = function (ul, item) {
 
-        //console.log("logo= ", item.logo);
+        //console.log("item= ", item);
 
-        return $('<li class="ui-menu-item-with-icon"></li>')
+        if (item.id == null) {
+            item.id = 0;
+            item.name = "Cause not found. Click here to request it.";
+            item.logo = "/images/photo_attachment/missing_thumb.png"
+        }
+
+        return $('<li class="ui-menu-item-with-icon" style="width:500px"></li>')
             .data("item.ui-autocomplete", item.charityname)
             .append('<a><img src="' + item.logo + '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + item.name + '</a>')
             .appendTo(ul);

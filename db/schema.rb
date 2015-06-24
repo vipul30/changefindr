@@ -48,6 +48,24 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.string   "errorMessage",      limit: 1000
   end
 
+  create_table "blog", primary_key: "blog_id", force: true do |t|
+    t.string  "title",       limit: 500
+    t.string  "first_name",  limit: 100
+    t.string  "last_name",   limit: 100
+    t.string  "email",       limit: 100
+    t.string  "description", limit: 50000
+    t.integer "user_id"
+  end
+
+  create_table "blog_comment", primary_key: "comment_id", force: true do |t|
+    t.integer "blog_id"
+    t.string  "first_name", limit: nil
+    t.string  "last_name",  limit: nil
+    t.string  "email",      limit: 100
+    t.string  "comment",    limit: 50000
+    t.integer "user_id"
+  end
+
   create_table "campaign", primary_key: "campaignid", force: true do |t|
     t.integer  "charityid",                                           null: false
     t.string   "title",         limit: 500

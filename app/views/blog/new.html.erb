@@ -1,0 +1,50 @@
+ 
+<section class="slice bg-white">
+        <div class="wp-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+<div class="section-title-wr" id="divAddComment">
+	<h3 class="section-title left"><span>New Blog Post</span></h3>
+</div>
+
+<div class="form-body">
+    <%= form_for(@blog, :url => {:action => 'create'}, :html => {:class => 'form-light', :id => "myform"}) do |f| %>
+
+	
+
+				        <%= render(:partial => "blog_form", :locals => {:f => f}) %>
+ 					
+				        <fieldset>               
+				            <section>
+				                <div class="row">
+				                    <div class="col-md-8">
+				                        
+				                        <br/>
+				                        <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button"
+				                        onClick="this.form.submit(); this.disabled=true;"
+				                        >
+				                            <span>Submit Blog</span>
+				                        </button>
+				                    </div>
+				                </div>
+				                    
+				            </section>
+				        </fieldset>
+				 
+
+<!--/form-->
+<% end %> 
+
+</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+ 
+
+
+
