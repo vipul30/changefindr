@@ -127,6 +127,8 @@ gem 'postmarkdown', '~> 0.0.10'
 
 gem 'tinymce-rails', '~> 4.1.6'
 
+gem 'truncate_html', '~> 0.9.3'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -50,7 +50,7 @@
                                     >
                                     <div class="figcaption bg-base"></div>
                                     <div class="figcaption-btn">
-                                        <a href="/donate/new/?charityid=<%= cause.charityid %>" class="btn btn-xs btn-b-white theater"><i class="fa fa-credit-card"></i> Donate</a>
+                                        <a href="/donate/new?charityid=<%= cause.charityid %>" class="btn btn-xs btn-b-white theater"><i class="fa fa-credit-card"></i> Donate</a>
                                         <a href="<%= "http://" +  @userhost + "/cause/show/" +  cause.charityid.to_s %>" class="btn btn-xs btn-b-white"><i class="fa fa-plus-circle"></i> View Details</a>
                                     </div>
                                 </div>
@@ -111,16 +111,12 @@
                 success: function (data) {
 
                     //console.log('success: ', data)
-
+                    
                     var array;
 
                     if (data.length == 0 ) {
-
                         array = {id:0};
-
                     } else {
-                
-
                         // data is an array of objects and must be transformed for autocomplete to use
                         array = data.error ? [] : $.map(data, function (m) {
            
@@ -136,7 +132,6 @@
                     }
 
                     response(array);
-
 
                 },
                 failure: function (data) {

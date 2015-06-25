@@ -8,9 +8,9 @@ Rails.application.routes.draw do
 
   get 'blog/edit'
 
-  get 'blog/update'
+  post 'blog/update'
 
-  get 'blog/create'
+  post 'blog/create'
 
   get 'blog/delete'
 
