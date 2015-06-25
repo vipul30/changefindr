@@ -39,7 +39,8 @@
                                         Posted by <a href="/blog/show?blog_id=<%= blog.blog_id %>"><%= blog.first_name %> <%= blog.last_name %> </a> on <%= blog.created.strftime("%B %d %Y") %>
                                     </span>
                                     <p>
-                                   	<%= truncate_html(blog.description.html_safe, length: 10000) %>
+                                    	<br/>
+                                   	<%= truncate_html(blog.description.html_safe, length: 500) %>
                                    
                                     </p>
                                     <p>
