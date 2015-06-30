@@ -17,9 +17,23 @@ class BlogController < ApplicationController
   end
 
   def edit
+    @blog = Blog.where(blog_id: params[:blog_id]).first
   end
 
   def update
+    @blog = Blog.where(blog_id: params[:blog_id]).first
+    @blog.modified = Time.now
+
+    # Update the object
+    if @blog.update_attributes(blog_params)
+      # If update succeeds, redirect to the index action
+      flash[:notice] = "Updated Blog"
+      redirect_to(:action => 'show', :blog_id => @blog.blog_id)
+    else
+      # If update fails, redisplay the form so user can fix problems
+      render('edit')
+    end
+
   end
 
   def create
@@ -59,10 +73,23 @@ class BlogController < ApplicationController
   end
 
   def delete
+    @blog = Blog.where(blog_id: params[:blog_id]).first
+    @blog.modified = Time.now
+    @blog.is_active = false
+
+    # Update the object
+    if @blog.save
+      # If update succeeds, redirect to the index action
+      flash[:notice] = "Deleted Blog"
+      redirect_to(:action => 'index')
+    else
+      # If update fails, redisplay the form so user can fix problems
+      render('edit')
+    end
   end
 
   def blog_params
-    params.require(:blog).permit(:first_name,:last_name,:title,:description,:email)
+    params.require(:blog).permit(:first_name,:last_name,:title,:description,:email,:keywords)
   end
 
 end

@@ -24,8 +24,37 @@
 	                        </div>
 	                        <div class="post-content">
 	                            <h2 class="post-title"><a href="/blog/show?blog_id=<%= @blog.blog_id %>" hidefocus="true" style="outline: none;"><%= @blog.title %></a></h2>
+
+	                            <% 
+	                            if session[:userid] != nil && (session[:userid] == @blog.user_id || session[:roleid] == ADMIN_ROLE) %>
+	                            	<br/>
+	                            	
+									<a href="/blog/edit?blog_id=<%= @blog.blog_id %>" hidefocus="true" style="outline: none;">Modify</a>
+									<br/>
+									<a href="/blog/delete?blog_id=<%= @blog.blog_id %>" hidefocus="true" style="outline: none;">Delete</a>	
+									<br/>	
+									<br/>                          	
+	                            <% end %>
+
 	                            <span class="post-author">WRITTEN BY <a href="/blog/show?blog_id=<%= @blog.blog_id %>" hidefocus="true" style="outline: none;"><%= @blog.first_name %> <%= @blog.last_name %> </a> on <%= @blog.created.strftime("%B %d %Y") %></span>
 	                            
+	                            <br/>
+	                            <span class="post-author">Keywords:
+
+	                            	<% 
+	                            		if @blog.keywords != nil
+	                            			
+	                            	%>
+	                            			<b><%=@blog.keywords%> <b>
+	                            	<%
+	                            			
+	                            		end
+	                            	%>
+
+
+	                            </span>
+	                            <br/>
+
 	                            <div class="clearfix"></div>
 	                            <div class="post-desc">
 	                            	<br/><br/>
