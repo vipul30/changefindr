@@ -129,6 +129,10 @@ gem 'tinymce-rails', '~> 4.1.6'
 
 gem 'truncate_html', '~> 0.9.3'
 
+# to create api
+gem 'grape'
+gem 'hashie-forbidden_attributes', '~> 0.1.1'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

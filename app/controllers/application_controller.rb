@@ -52,7 +52,10 @@ require 'aws-sdk'
       session[:donationscount] = Donation.where(:userid => user.userid)
                         .count
 
+
       end
+
+      session[:account_id] = user.account_id
 
 
   end

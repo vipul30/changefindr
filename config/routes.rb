@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
   
+  get 'account/index'
+
+  get 'account/show'
+
+  post 'account/create'
+
+  post 'account/update'
+
+  get 'account/edit'
+
+  get 'account/new'
+
+  get 'account/delete'
+
   get 'blog/index'
 
   get 'blog/show'
@@ -148,6 +162,8 @@ Rails.application.routes.draw do
   match '/:id' => "shortener/shortened_urls#show", :via => :get
 
   resources :widgets
+
+  #mount Changfindr::API => '/'
 
   #if Rails.env.production?
    

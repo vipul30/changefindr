@@ -16,6 +16,15 @@ ActiveRecord::Schema.define(version: 20150127233247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "accounts", force: true do |t|
+    t.string   "company_name", limit: 500
+    t.string   "api_key",      limit: 200
+    t.string   "company_url",  limit: 500
+    t.datetime "created"
+    t.datetime "modified"
+    t.integer  "is_active",    limit: 2
+  end
+
   create_table "bhnacquire", primary_key: "bhnacquireid", force: true do |t|
     t.integer  "donationid"
     t.datetime "created"
@@ -114,6 +123,8 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.string   "image3_content_type"
     t.integer  "image3_file_size"
     t.datetime "image3_updated_at"
+    t.integer  "account_id"
+    t.integer  "is_listed",           limit: 2
   end
 
   create_table "donation", primary_key: "donationid", force: true do |t|
@@ -229,6 +240,7 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.string   "passwordresetsalt", limit: 1000
     t.datetime "lastlogin"
     t.string   "facebookresponse",  limit: 50000
+    t.integer  "account_id"
   end
 
   create_table "widgets", force: true do |t|

@@ -95,6 +95,7 @@ class Charity < ActiveRecord::Base
 	validates_attachment_content_type :image3, :content_type => /\Aimage\/.*\Z/,  :message => "Invalid image type for third banner." 
 
     has_many :campaigns, :class_name => 'Campaign', :foreign_key => :charityid
+    has_many :accounts, :class_name => 'Account'
 
 	def self.search(search, page)
 	  paginate :per_page => 9, :page => page,

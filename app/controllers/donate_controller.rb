@@ -2,7 +2,12 @@ class DonateController < ApplicationController
   def index
 
 
-    if session[:roleid] == ADMIN_ROLE && params[:viewall]
+
+    if (session[:account_id] == params[:account_id] || session[:roleid] == ADMIN_ROLE) && params[:account_id] != nil
+       @donations = Donation.where(charityid: params[:charity_id]).order('created DESC').page(params[:page]).per_page(9)
+
+    elsif session[:roleid] == ADMIN_ROLE && params[:viewall]
+      
       @donations = Donation.order('created DESC').page(params[:page]).per_page(9)
 
     elsif session[:userid] == params[:userid] || session[:roleid] == ADMIN_ROLE

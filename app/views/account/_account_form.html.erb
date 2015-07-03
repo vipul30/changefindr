@@ -1,0 +1,50 @@
+<% if @account.errors.any? %>
+  <div class="alert alert-danger fade in">
+    <p><b>Please correct the following <%= pluralize(@account.errors.count, "error") %>:</b></p>
+ 
+    <ul>
+    <% @account.errors.messages.values.each do |msg| %>
+        <%msg.each do  |m| %>
+            <li><%= m %></li>
+        <%end %>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<fieldset class="no-padding"> 
+
+ <section class="no-margin">
+        <div class="row">
+
+            <section class="col-xs-12">
+               
+            	<label>Company Name</label>
+                <label class="input">
+
+                    <i class="icon-append fa fa-user"></i>
+                    <%= f.text_field :company_name, :placeholder=>"" %>                                               
+                </label>
+            
+                <br/>
+                
+
+                <label>Company Website</label>
+                <label class="input">
+
+                    <i class="icon-append fa fa-globe"></i>
+                    <%= f.text_field :company_url, :placeholder=>"Website" %>                                                       
+                </label>
+
+                <br/>                                             
+                
+            </section>
+      
+        </div>
+
+
+    </section>
+
+   
+</fieldset>  
+

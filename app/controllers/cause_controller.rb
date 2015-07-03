@@ -1,14 +1,21 @@
 class CauseController < ApplicationController
   def index
     #@causes = Charity.where(isapproved: true).order('modified DESC').page(params[:page]).per_page(9)
-    if session[:roleid] == ADMIN_ROLE && params[:viewall]
+    
+
+    if (session[:account_id] == params[:account_id] || session[:roleid] == ADMIN_ROLE) && params[:account_id] != nil
+       @causes = Charity.where(account_id: params[:account_id]).order('charityname ASC').page(params[:page]).per_page(9)
+       render('list_view')
+       return
+      
+    elsif session[:roleid] == ADMIN_ROLE #&& params[:viewall]
       @causes = Charity.order('charityname ASC').page(params[:page]).per_page(9)
+      render('list_view')
+      return
       
     else
-
       @causes = Charity.where(isapproved: true).order('charityname ASC').page(params[:page]).per_page(9)
     end
-
 
     @cause = Charity.new
 
@@ -99,7 +106,7 @@ class CauseController < ApplicationController
   end
 
   def cause_params
-    params.require(:charity).permit(:charityname,:website,:facebookurl,:description,:logo,:image1,:image2,:image3,:isapproved,:isfeatured)
+    params.require(:charity).permit(:charityname,:website,:facebookurl,:description,:logo,:image1,:image2,:image3,:isapproved,:isfeatured,:account_id,:is_listed)
   end
 
   #autocomplete :charity, :charityname, :full => true

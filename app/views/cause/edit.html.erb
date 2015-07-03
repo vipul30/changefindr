@@ -32,12 +32,27 @@
                                     <% if session[:roleid] == ADMIN_ROLE %>
 					                   Is approved for accepting gift card donations?&nbsp;&nbsp;               
 					                  <%= f.check_box :isapproved %>
+
+                                      <br/><br/>
+
+                                      Is listed?&nbsp;&nbsp;               
+                                      <%= f.check_box :is_listed %>
 					                                    
 					                   <br/><br/>
 
 					                  Is this a featured cause?&nbsp;&nbsp;           
 					                  <%= f.check_box :isfeatured %>
+
+                                      <br/><br/>
+
+                                      Account:&nbsp;&nbsp;
+
+                                      <%= f.collection_select :account_id, Account.all, :id, :company_name, 
+                                                            :include_blank => true
+                                      %>
+
                                     <% end %>
+
 					                                    
 					                 
 

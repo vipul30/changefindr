@@ -2,8 +2,12 @@ class UserController < ApplicationController
   
   def index
 
-    if session[:roleid] == ADMIN_ROLE
+    if session[:account_id] == params[:account_id] || session[:roleid] == ADMIN_ROLE
+      @users = User.where(account_id: params[:account_id]).order('lastname ASC').page(params[:page]).per_page(9)
+
+    elsif session[:roleid] == ADMIN_ROLE
       @users = User.order('lastname ASC').page(params[:page]).per_page(9)
+
     else
       flash[:notice] = "You are not authorized to view this page."
       redirect_to(:controller => "home", :action => "index")

@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Manage Users</h2>
+                    <h2>Manage Accounts</h2>
                 </div>
                
             </div>
@@ -22,7 +22,7 @@
             <div class="input-group merged">
                 <span class="input-group-addon"><i class="icon-append fa fa-search"></i></span>
                 <input class="form-control" style="width:270px" type="text"
-                       placeholder="Search For A User"
+                       placeholder="Search For An Account"
                        name="searchuser"
                        id="searchuser"
                        value="">
@@ -32,7 +32,7 @@
 
 
 	<div class="col-md-6">
-		<%= will_paginate @users , renderer: BootstrapPagination::Rails %>
+		<%= will_paginate @accounts , renderer: BootstrapPagination::Rails %>
 	</div>
 </div>	
 
@@ -40,21 +40,45 @@
 
                 <div class="row">
                     <div class="col-md-9">
-                
+
+
+                	<a href="/account/new">Add New Account</a>
+                	<br/><br/>
+
                     <table class="table table-responsive table-bordered table-striped">
                         <tbody>
                             <tr>
-                                <th>User ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
+                                <th>Account ID</th>
+                                <th>Company Name</th>
+                                <th>API Key</th>
                                 <th></th>
                             </tr>
-                            <% @users.each do |user| %>
+                            <% @accounts.each do |account| %>
+
+
                                 <tr>
-                                    <td><%= user.userid %></td>
-                                    <td><a href="/user/show/<%= user.userid %>"><%= user.lastname %>, <%= user.firstname %></a></td>
-                                    <td><%= user.email %></td>
-                                    <td><a href="/user/edit/<%= user.userid %>">Edit</a></td>
+                                    <td><%= account.id %></td>
+                                    <td><a href="/account/show/<%= account.id %>"><%= account.company_name %></a></td>
+                                    <td><%= account.api_key %></td>
+                                    <td>
+                                    	<a href="/account/edit/<%= account.id %>">Edit</a>
+
+                                    	<% if account.charities.count > 0 %>
+
+                                    		<br/>
+                                    		<a href="/cause/index?account_id=<%= account.id %>">View Cause(s)</a>
+
+                                    	<% end %>
+
+                                    	<% if account.users.count > 0 %>
+
+                                    		<br/>
+                                    		<a href="/user/index?account_id=<%= account.id %>">View User(s)</a>
+
+                                    	<% end %>
+
+
+                                    </td>
                                 </tr>
                             <% end %>
                             

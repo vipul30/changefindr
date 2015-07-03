@@ -1,0 +1,173 @@
+
+<div class="pg-opt">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Select the cause you want to support</h2>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+<br/><br/>
+<section class="slice bg-white animate-hover-slide">
+        <div class="wp-section work">
+            <div class="container">
+
+<div class="row">
+
+    <div class="col-md-6">
+        <br/>
+            <div class="input-group merged">
+                <span class="input-group-addon"><i class="icon-append fa fa-search"></i></span>
+                <input class="form-control" style="width:270px" type="text"
+                       placeholder="Search For A Cause"
+                       name="searchcause"
+                       id="searchcause"
+                       value="">
+            </div>
+    </div>
+         
+
+
+    <div class="col-md-6">
+        <%= will_paginate @causes , renderer: BootstrapPagination::Rails %>
+    </div>
+</div>  
+
+
+                <div class="row">
+                    <div class="col-md-9">
+                  <table class="table table-responsive table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                
+                                <th></th>
+                            </tr>
+                            <% @causes.each do |cause| %>
+
+
+                                <tr>
+                                    <td style="text-align:center"><img alt="" src="<%=cause.logo.url%>" class="img-responsive center-block"
+                                    style="margin: auto auto; height: auto; width: auto; max-height:150px; max-width:100px;" 
+                                    > <br/>
+                                        <%= cause.charityname  %>
+                                    </td>
+                                    <td>
+                                        <%= link_to "View All Donations", controller: "donate", action: "index", charity_id: cause.charityid, account_id: cause.account_id %>
+                                        <br/>
+                                        <%= link_to "View Cause", controller: "cause", action: "show", id: cause.charityid %>
+                                        <br/>
+                                        <%= link_to "Modify Cause", controller: "cause", action: "edit", id: cause.charityid %>
+                                        <br/>
+                                        
+
+
+                                    </td>
+      
+
+                                </tr>
+                            <% end %>
+                            
+                        </tbody>
+                    </table>  
+
+                </div>
+
+                                        
+                </div>
+
+             
+<div class="row">
+
+    <div class="col-md-6">
+        
+    </div>
+         
+
+
+    <div class="col-md-6">
+        <%= will_paginate @causes , renderer: BootstrapPagination::Rails %>
+    </div>
+</div>  
+
+            </div>      
+        </div>
+    </section>
+
+
+
+<script>
+
+  $("#searchcause").autocomplete({
+
+        source: function (request, response) {
+            $.ajax({
+                url: '/cause/causeautocomplete', type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+
+                    //console.log('success: ', data)
+                    
+                    var array;
+
+                    if (data.length == 0 ) {
+                        array = {id:0};
+                    } else {
+                        // data is an array of objects and must be transformed for autocomplete to use
+                        array = data.error ? [] : $.map(data, function (m) {
+           
+                            return {
+
+                                id: m.charityid,
+                                name: m.charityname,
+                                logo: m.logo
+                                
+                            };
+                            
+                        });
+                    }
+
+                    response(array);
+
+                },
+                failure: function (data) {
+                    console.log('autcomplete failed');
+                }
+            })
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            //console.log('comes in selected item ', ui.item);
+            event.preventDefault();
+            if (ui.item.id == 0)
+            {
+                window.location.href = "/cause/new/";
+            } else
+            {
+
+                window.location.href = "/cause/show/" + ui.item.id;
+            }
+ 
+        }
+    })
+    .data("ui-autocomplete")._renderItem = function (ul, item) {
+
+        //console.log("item= ", item);
+
+        if (item.id == null) {
+            item.id = 0;
+            item.name = "Cause not found. Click here to request it.";
+            item.logo = "/images/photo_attachment/missing_thumb.png"
+        }
+
+        return $('<li class="ui-menu-item-with-icon" style="width:500px"></li>')
+            .data("item.ui-autocomplete", item.charityname)
+            .append('<a><img src="' + item.logo + '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + item.name + '</a>')
+            .appendTo(ul);
+    };
+
+
+</script>

@@ -1,0 +1,70 @@
+
+       
+    <!-- MAIN CONTENT -->
+    
+    <section class="slice slice-lg bg-image" style="background: url(/images/patterns/squairy-light.png) repeat fixed !important;">
+        <div class="wp-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-1">
+                    	<div class="row">
+                    	
+                    		<div class="col-md-9">
+
+							<div class="wp-block default user-form no-margin">
+
+	                            <div class="form-header">
+	                                <h2>Add a new account</h2>
+	                            </div>
+
+
+						      <div class="form-body">
+                                <%= form_for(@account, :url => {:action => 'update', :id => @account.id}, :method => :POST, :html => {:class => 'sky-form', :id => "myform"}) do |f| %>
+
+                                    <%= render(:partial => "account_form", :locals => {:f => f}) %>
+
+                                    <fieldset>          
+                                      
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-12">
+
+                                                	<br/>
+                                                	<% if session[:roleid] == ADMIN_ROLE %>
+									                   Is active?&nbsp;&nbsp;               
+									                  <%= f.check_box :is_active %>
+									                                    
+									                   <br/><br/>
+
+									                 
+				                                    <% end %>
+                                                    
+                                                    <br/>
+                                                    <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button"
+                                                    onClick="this.form.submit(); this.disabled=true;"
+                                                    >
+                                                        <span>Update Account</span>
+                                                    </button>
+                                                </div>
+                                             </div>
+                                                
+                                        </section>
+                                    </fieldset>
+
+                             	<!--/form-->
+                                <% end %>  
+
+			            	</div>
+			       		</div>
+
+			       		
+			    	</div>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+   
