@@ -59,7 +59,7 @@
                                             <dt>Merchant</dt>
                                             <dd>
                                             <span class="pull-left">
-                                            	<img alt="" src="<%= CLOUDFRONT_HOST %>/<%=@donation.giftcard.merchant.logo.url%>" class="img-responsive center-block"
+                                            	<img alt="" src="<%=@donation.giftcard.merchant.logo.url%>" class="img-responsive center-block"
                                             style="margin: auto auto; height: auto; width: auto; max-height:100px; max-width:150px;">  <br/>  
                                             	<%= @donation.giftcard.merchant.merchantname %>
                                             </span>                                                
@@ -82,7 +82,7 @@
 											<hr>
                                             <dt>Balance</dt>
                                             <dd>
-                                            	$<%= @donation.giftcard.balance %>
+                                            	<%= number_to_currency(@donation.giftcard.balance) %>
                                             </span>                                                
                                             </dd>
 
@@ -131,11 +131,13 @@
                                             </dd>
 
                                             <hr>
+                                            <!--
                                             <dt>Status</dt>
                                             <dd>
                                             	status...
                                             </span>                                                
                                             </dd>
+                                            -->
 
                                             <hr>
                                             <dt>Notes</dt>

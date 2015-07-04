@@ -52,7 +52,7 @@
                                 <th>Card #</th>
                                 <th>Balance</th>
                                 <th>Date Donated</th>
-                                <th>Status</th>
+                               <!-- <th>Status</th> -->
                                 <th></th>
                             </tr>
                             <% 
@@ -79,7 +79,7 @@
                                     <td><%= donation.giftcard.cardnumber %></td>
                                     <td><%= number_to_currency(donation.giftcard.balance) %></td>
                                     <td><%= donation.created.to_formatted_s(:db) %></td>
-                                    <td>status...</td>
+                                   <!-- <td>status...</td> -->
                                     <td><a href="/donate/show?donationid=<%= donation.donationid %>&userid=<%=userid%>">Details</a></td>
                                 </tr>
                             <% end %>

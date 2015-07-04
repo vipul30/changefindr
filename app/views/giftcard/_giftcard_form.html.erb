@@ -83,6 +83,20 @@ end
                 </label>
 
                 
+                <% if session[:roleid] == ADMIN_ROLE %>
+                    <br/>
+                    <label>Balance</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-barcode"></i>
+                        <%= f.text_field :balance, :placeholder=>"", :class=>"form-control"  %>
+                        
+                    </label>
+                    
+                
+               <% end %>
+              
+
+                
                 
                 <div id="expdatediv" style="display:none">
                     <br/>
@@ -105,6 +119,9 @@ end
                     </label>
                     <br/>
                 </div>
+
+               
+
 
                   
             </section>

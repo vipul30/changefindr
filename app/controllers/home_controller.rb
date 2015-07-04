@@ -1,8 +1,6 @@
 class HomeController < ApplicationController
   def index
 
-    
-    
     #Merchant.new.updatebhnproducts
 
     #bhnquote = Bhnquote.new
@@ -396,6 +394,20 @@ byebug
 
     #redirect_to(:back) 
     
+  end
+
+  def admin
+
+    if session[:roleid] == ADMIN_ROLE
+      render('admin')
+
+    else
+      flash[:notice] = "You are not authorized to view this page."
+      redirect_to(:controller => "home", :action => "index")
+      return
+    end
+
+
   end
 
   def mailerlayout

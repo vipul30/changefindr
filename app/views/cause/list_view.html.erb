@@ -56,7 +56,8 @@
                                         <%= cause.charityname  %>
                                     </td>
                                     <td>
-                                        <%= link_to "View All Donations", controller: "donate", action: "index", charity_id: cause.charityid, account_id: cause.account_id %>
+                                        <a href="/donate/index?charity_id=<%= cause.charityid %>&account_id=<%= cause.account_id %>">View All Donations</a>
+                                        
                                         <br/>
                                         <%= link_to "View Cause", controller: "cause", action: "show", id: cause.charityid %>
                                         <br/>

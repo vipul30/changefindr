@@ -2,7 +2,6 @@ class DonateController < ApplicationController
   def index
 
 
-
     if (session[:account_id] == params[:account_id] || session[:roleid] == ADMIN_ROLE) && params[:account_id] != nil
        @donations = Donation.where(charityid: params[:charity_id]).order('created DESC').page(params[:page]).per_page(9)
 
@@ -338,7 +337,7 @@ byebug
     @donation.giftcard.modified = Time.now
     @giftcard = @donation.giftcard
 
-
+    byebug
     
     # Update the object
     if @donation.update_attributes(donate_params)
@@ -369,7 +368,7 @@ byebug
   end
 
   def donate_params
-    params.require(:donation).permit({:giftcard_attributes =>  [:cardnumber,:merchantid,:pin,:expdate,:eventnumber]},
+    params.require(:donation).permit({:giftcard_attributes =>  [:cardnumber,:merchantid,:pin,:expdate,:eventnumber,:balance]},
                                      :firstname,:lastname,:email,:comments,:donationwall,:charityid)
   end
 

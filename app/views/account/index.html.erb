@@ -50,7 +50,7 @@
                             <tr>
                                 <th>Account ID</th>
                                 <th>Company Name</th>
-                                <th>API Key</th>
+                                <th>URL</th>
                                 <th></th>
                             </tr>
                             <% @accounts.each do |account| %>
@@ -59,7 +59,7 @@
                                 <tr>
                                     <td><%= account.id %></td>
                                     <td><a href="/account/show/<%= account.id %>"><%= account.company_name %></a></td>
-                                    <td><%= account.api_key %></td>
+                                    <td><%= account.company_url %></td>
                                     <td>
                                     	<a href="/account/edit/<%= account.id %>">Edit</a>
 
