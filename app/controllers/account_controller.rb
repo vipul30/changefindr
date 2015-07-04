@@ -3,7 +3,11 @@ class AccountController < ApplicationController
 
     if (session[:account_id] == params[:account_id] || session[:roleid] == ADMIN_ROLE) && params[:account_id] != nil
 
-      @accounts = Account.where(account_id: params[:account_id]).order('company_name ASC').page(params[:page]).per_page(9)
+      @accounts = Account.where(id: params[:account_id]).order('company_name ASC').page(params[:page]).per_page(9)
+
+      if @accounts.size == 1
+        redirect_to(:controller => "cause", :action => "index", :account_id => params[:account_id])
+      end
 
     elsif session[:roleid] == ADMIN_ROLE  
 

@@ -124,7 +124,8 @@
 
                                 id: m.charityid,
                                 name: m.charityname,
-                                logo: m.logo
+                                logo: m.logo,
+                                account_id: m.account_id
                                 
                             };
                             
@@ -149,7 +150,8 @@
             } else
             {
 
-                window.location.href = "/cause/show/" + ui.item.id;
+                window.location.href = "/cause/index?charity_id" + ui.item.id + "&account_id=" + ui.item.account_id;
+                //window.location.href = "/cause/show/" + ui.item.id;
             }
  
         }
