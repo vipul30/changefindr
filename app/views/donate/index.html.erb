@@ -17,6 +17,8 @@
 
 <div class="row">
 
+<% if session[:roleid] == ADMIN_ROLE %>
+    
     <div class="col-md-6">
         <br/>
             <div class="input-group merged">
@@ -28,6 +30,8 @@
                        value="">
             </div>
     </div>
+
+<% end %>
          
 
 
@@ -40,9 +44,13 @@
 
                 <% 
                 	if @donations.count > 0 
-                	
 
+                        
                 %>
+
+                
+                <h3>Total Donations: <%= number_to_currency(@total_balance) %></h3>
+
                     <table class="table table-responsive table-bordered table-striped">
                         <tbody>
                             <tr>
@@ -56,9 +64,13 @@
                                 <th></th>
                             </tr>
                             <% 
+                                
                             	@donations.each do |donation| 
 
                             	userid = nil
+                                
+
+                                
 
 			                	if donation.userid
 			                		userid = donation.userid
@@ -67,20 +79,39 @@
                             %>
                                 <tr>
                                     <td>
-                                    	<% if donation.userid %>
+                                    	<% if donation.userid && session[:roleid] == ADMIN_ROLE %>
                                     		<a href="/donate/index/?userid=<%= donation.user.userid %>"><%= donation.user.firstname %> <%= donation.user.lastname %><br/><%= donation.user.email %></a>
                                     	<% else %>
                                     		<%= donation.firstname %> <%= donation.lastname %><br/><%= donation.email %>
                                     	<% end %>
 
                                     </td>
-                                    <td><%= donation.charity.charityname %></td>
-                                    <td><%= donation.giftcard.merchant.merchantname %></td>
+                                    <td><a href="/donate/index?charity_id=<%= donation.charity.charityid %>&account_id=<%= donation.charity.account_id %>"><%= donation.charity.charityname %></a></td>
+                                    <td>
+                                        <% 
+
+                                        if donation.giftcard.merchant.merchantid == 85 %>
+                                            Non-BHN Gift Card<br/>
+                                            <%= donation.comments %>
+
+                                        <% else %>
+                                            <%= donation.giftcard.merchant.merchantname %>
+                                        <% end %>
+
+
+                                    </td>
                                     <td><%= donation.giftcard.cardnumber %></td>
                                     <td><%= number_to_currency(donation.giftcard.balance) %></td>
                                     <td><%= donation.created.to_formatted_s(:db) %></td>
                                    <!-- <td>status...</td> -->
-                                    <td><a href="/donate/show?donationid=<%= donation.donationid %>&userid=<%=userid%>">Details</a></td>
+                                    <td>
+
+                                        <% if session[:roleid] == ADMIN_ROLE %>
+
+                                            <a href="/donate/show?donationid=<%= donation.donationid %>&userid=<%=userid%>">Details</a>
+                                        <% end %>
+
+                                    </td>
                                 </tr>
                             <% end %>
                             
@@ -92,6 +123,8 @@
                     	<h4>No donations found.</h4>
 
                     <% end %>
+
+                   
                     
                     <% if session[:roleid] == ADMIN_ROLE %>
                              
@@ -106,7 +139,11 @@
 
 
 
+
+
 <script>
+
+try {
 
   $("#searchuser").autocomplete({
 
@@ -154,6 +191,8 @@
             .append('<a>' + item.lastname + ',' + item.firstname + '</a>')
             .appendTo(ul);
     };
+
+} catch (Exception) {}
 
 
 </script>

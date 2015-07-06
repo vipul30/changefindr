@@ -2,15 +2,18 @@ class DonateController < ApplicationController
   def index
 
 
-    if (session[:account_id] == params[:account_id] || session[:roleid] == ADMIN_ROLE) && params[:account_id] != nil
+    if (session[:account_id] == params[:account_id].to_i || session[:roleid] == ADMIN_ROLE) && params[:account_id] != nil
        @donations = Donation.where(charityid: params[:charity_id]).order('created DESC').page(params[:page]).per_page(9)
+       @donations_for_balance = Donation.where(charityid: params[:charity_id]).order('created DESC')
 
     elsif session[:roleid] == ADMIN_ROLE && params[:viewall]
       
       @donations = Donation.order('created DESC').page(params[:page]).per_page(9)
+      @donations_for_balance = Donation.order('created DESC')
 
-    elsif session[:userid] == params[:userid] || session[:roleid] == ADMIN_ROLE
+    elsif session[:userid] == params[:userid].to_i || session[:roleid] == ADMIN_ROLE
       @donations = Donation.where(userid: params[:userid]).order('created DESC').page(params[:page]).per_page(9)
+      @donations_for_balance = Donation.where(userid: params[:userid]).order('created DESC')
       
     else
       flash[:notice] = "Please login or register in order to view your donations."
@@ -18,7 +21,15 @@ class DonateController < ApplicationController
       return
     end
 
-    
+    @total_balance = 0.0
+
+    @donations_for_balance.each do |donation| 
+
+      if donation.giftcard.balance != nil
+          @total_balance += donation.giftcard.balance 
+      end
+
+    end
 
   end
 

@@ -48,6 +48,10 @@ class UserController < ApplicationController
       @user.lastname = params[:user][:lastname]
     end
 
+    if params[:user][:account_id]
+      @user.account_id = params[:user][:account_id]
+    end
+
     if params[:user][:email]
       @user.email = params[:user][:email]
     end
@@ -85,16 +89,18 @@ class UserController < ApplicationController
   def userautocomplete
     searchtext = params['searchText']
 
-
+    
     # this will do a like search ignoring case
-    @searchcauseresults = User.where("lastname ILIKE ?", "%" + searchtext + "%")
+    @searchcauseresults = #User.where("lastname ILIKE ?", "%" + searchtext + "% or firstname ILIKE ?", "%" + searchtext + "%")
+                          User.where("firstname ILIKE ? or lastname ILIKE ?", "%" + searchtext + "%", "%" + searchtext + "%")
+                             
   
     render :json => @searchcauseresults
 
   end
 
   def user_params
-    params.require(:user).permit(:firstname,:lastname,:email,:roleid)
+    params.require(:user).permit(:firstname,:lastname,:email,:roleid,:account_id)
   end
 
 end

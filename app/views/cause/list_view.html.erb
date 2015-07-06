@@ -17,6 +17,8 @@
 
 <div class="row">
 
+<% if session[:roleid] == ADMIN_ROLE %>
+
     <div class="col-md-6">
         <br/>
             <div class="input-group merged">
@@ -28,6 +30,8 @@
                        value="">
             </div>
     </div>
+
+<% end %>
          
 
 
@@ -102,6 +106,8 @@
 
 <script>
 
+try {
+
   $("#searchcause").autocomplete({
 
         source: function (request, response) {
@@ -171,6 +177,8 @@
             .append('<a><img src="' + item.logo + '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + item.name + '</a>')
             .appendTo(ul);
     };
+
+} catch (Exception) {}
 
 
 </script>

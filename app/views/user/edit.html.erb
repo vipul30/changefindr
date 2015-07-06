@@ -98,6 +98,19 @@
                                                     <span class="pull-left"><%= f.collection_select :roleid, Role.order(:name),:roleid,:name %></span>
                                                     
                                                 </dd>
+
+                                                <hr>
+                                                <dt>Account</dt>
+                                                <dd>
+                                                    <span class="pull-left"><%= f.collection_select :account_id, Account.all.order('company_name ASC'), :id, :company_name, 
+                                                            :include_blank => true %></span>
+                                                    
+                                                </dd>
+
+                                                
+                                                <br/>
+                                                
+                                      
                                             <% end %> 
 
                                             <% if @user.provider == 'facebook' && session[:roleid] == ADMIN_ROLE %>

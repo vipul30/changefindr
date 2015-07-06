@@ -18,7 +18,7 @@
                               
                         <div class="tabs-framed">
                             <ul class="tabs clearfix">
-                                <li class="active"><a href="#tab-1" data-toggle="tab">About</a></li>
+                                <li class="active"><a href="#tab-1" data-toggle="tab"></a></li>
 
                                 
                             </ul>
@@ -27,7 +27,7 @@
                                 <div class="tab-pane fade in active" id="tab-1">
                                     <div class="tab-body">
                                         <dl class="dl-horizontal style-2">
-                                            <h3 class="title title-lg">Personal information</h3>
+                                           
                                             
                                             <hr>
                                             <dt>Company Name</dt>
@@ -46,6 +46,20 @@
                                             <span class="pull-left"><%= @account.api_key %></span>
                                                 
                                             </dd>
+
+                                            <% if @account.charities.count > 0 %>
+
+                                                <hr>
+                                                <dt>Cause(s)</dt>
+                                                <dd>
+                                                <span class="pull-left"><a href="/cause/index?account_id=<%= @account.id %>">View Cause(s)</a></span>
+                                                    
+                                                </dd>
+
+                                           
+                                            
+
+                                            <% end %>
 
                                             <% if session[:roleid] == ADMIN_ROLE %>
                                                 <hr>

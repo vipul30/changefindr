@@ -54,13 +54,31 @@
                                                 
                                             </dd>
 
+                                             <% if @user.account_id != nil %>
+                                                    <hr>
+                                                    <dt>Account</dt>
+                                                    <dd>
+                                                        <span class="pull-left">
+                                                            <a href="/account/show/<%= @user.account_id %>"><%= @user.account.company_name %></a>
+                                                            
+                                                        </span>
+                                                        
+                                                    </dd>
+                                                <% end %>
+
                                             <% if session[:roleid] == ADMIN_ROLE %>
                                                 <hr>
                                                 <dt>Role</dt>
                                                 <dd>
-                                                    <span class="pull-left"><%= @user.role.name %></span>
+                                                    <span class="pull-left">
+                                                        <%= @user.role.name %>
+                                                    </span>
                                                     
                                                 </dd>
+
+                                               
+
+
                                                 <hr>
                                                 <dt>Last Login</dt>
                                                 <dd>

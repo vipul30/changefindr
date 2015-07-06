@@ -1,7 +1,7 @@
 class AccountController < ApplicationController
   def index
 
-    if (session[:account_id] == params[:account_id] || session[:roleid] == ADMIN_ROLE) && params[:account_id] != nil
+    if (session[:account_id] == params[:account_id].to_i || session[:roleid] == ADMIN_ROLE) && params[:account_id] != nil
 
       @accounts = Account.where(id: params[:account_id]).order('company_name ASC').page(params[:page]).per_page(9)
 
@@ -25,7 +25,8 @@ class AccountController < ApplicationController
 
   def show
 
-  if (session[:account_id] == params[:id] || session[:roleid] == ADMIN_ROLE) && params[:id] != nil
+
+  if (session[:account_id] == params[:id].to_i || session[:roleid] == ADMIN_ROLE) && params[:id] != nil
     @account = Account.where(id: params[:id]).first
   else
       flash[:notice] = "You are not authorized to view this page."

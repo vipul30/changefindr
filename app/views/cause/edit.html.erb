@@ -47,7 +47,7 @@
 
                                       Account:&nbsp;&nbsp;
 
-                                      <%= f.collection_select :account_id, Account.all, :id, :company_name, 
+                                      <%= f.collection_select :account_id, Account.all.order('company_name ASC'), :id, :company_name, 
                                                             :include_blank => true
                                       %>
 

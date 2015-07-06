@@ -3,12 +3,12 @@ class CauseController < ApplicationController
     #@causes = Charity.where(isapproved: true).order('modified DESC').page(params[:page]).per_page(9)
     
 
-    if (session[:account_id] == params[:account_id] || session[:roleid] == ADMIN_ROLE) && params[:account_id] != nil
+    if (session[:account_id] == params[:account_id].to_i || session[:roleid] == ADMIN_ROLE) && params[:account_id] != nil
        @causes = Charity.where(account_id: params[:account_id]).order('charityname ASC').page(params[:page]).per_page(9)
        render('list_view')
        return
       
-    elsif session[:roleid] == ADMIN_ROLE #&& params[:viewall]
+    elsif session[:roleid] == ADMIN_ROLE && params[:viewall]
       @causes = Charity.order('charityname ASC').page(params[:page]).per_page(9)
       render('list_view')
       return
