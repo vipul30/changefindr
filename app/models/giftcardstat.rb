@@ -1,3 +1,5 @@
 class Giftcardstat < ActiveRecord::Base
-	self.table_name = 'giftcardstat'
+
+    self.primary_key = :statsid
+
 end

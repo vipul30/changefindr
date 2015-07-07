@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.string   "keywords",    limit: 1000
   end
 
-  create_table "campaign", primary_key: "campaignid", force: true do |t|
+  create_table "campaigns", primary_key: "campaignid", force: true do |t|
     t.integer  "charityid",                                           null: false
     t.string   "title",         limit: 500
     t.string   "description",   limit: 5000
@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.integer  "is_listed",           limit: 2
   end
 
-  create_table "donation", primary_key: "donationid", force: true do |t|
+  create_table "donations", primary_key: "donationid", force: true do |t|
     t.integer  "charityid"
     t.integer  "giftcardid"
     t.integer  "userid"
@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.string   "email",        limit: 100
   end
 
-  create_table "giftcard", primary_key: "giftcardid", force: true do |t|
+  create_table "giftcards", primary_key: "giftcardid", force: true do |t|
     t.integer  "merchantid"
     t.datetime "created"
     t.datetime "modified"
@@ -155,11 +155,11 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.string   "encrypted_pin",        limit: 500
   end
 
-  create_table "giftcardstat", primary_key: "statsid", force: true do |t|
+  create_table "giftcardstats", primary_key: "statsid", force: true do |t|
     t.string "description", limit: 5000
   end
 
-  create_table "merchant", primary_key: "merchantid", force: true do |t|
+  create_table "merchants", primary_key: "merchantid", force: true do |t|
     t.integer  "merchantid_bak",                 null: false
     t.string   "merchantname",      limit: 500,  null: false
     t.string   "logo",              limit: 50
@@ -188,7 +188,7 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.integer  "productLineId"
   end
 
-  create_table "newsletter", primary_key: "newsletterid", force: true do |t|
+  create_table "newsletters", primary_key: "newsletterid", force: true do |t|
     t.string   "email",    limit: 100
     t.datetime "created"
     t.datetime "modified"
@@ -196,7 +196,7 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.integer  "isactive", limit: 2
   end
 
-  create_table "role", primary_key: "roleid", force: true do |t|
+  create_table "roles", primary_key: "roleid", force: true do |t|
     t.string   "name",     limit: 50
     t.datetime "created"
     t.datetime "modified"
@@ -216,7 +216,7 @@ ActiveRecord::Schema.define(version: 20150127233247) do
   add_index "shortened_urls", ["unique_key"], name: "index_shortened_urls_on_unique_key", unique: true, using: :btree
   add_index "shortened_urls", ["url"], name: "index_shortened_urls_on_url", using: :btree
 
-  create_table "user", primary_key: "userid", force: true do |t|
+  create_table "users", primary_key: "userid", force: true do |t|
     t.string   "gender",            limit: 50
     t.datetime "created"
     t.datetime "modified"

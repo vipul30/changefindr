@@ -1,6 +1,8 @@
 class Merchant < ActiveRecord::Base
-    self.table_name = 'merchant'
+
     self.primary_key = :merchantid
+
+    has_many :giftcards, :class_name => 'Giftcard', :foreign_key => :merchantid
 
     has_attached_file :logo, {  styles: {thumb: "75x75#"},
                 :path => "#{Rails.root}/public/images/photo_attachment/:merchantid/:style/:basename.:extension",
@@ -19,16 +21,16 @@ Paperclip.interpolates :path do |attachment, style|
 end
 
 
-	validates :merchantname, :presence => { :message => "Please enter the merchant name." },
-	                        :length => { :maximum => 50 }
+  validates :merchantname, :presence => { :message => "Please enter the merchant name." },
+                          :length => { :maximum => 50 }
 =begin
-	validates :checkbalanceurl, :presence => { :message => "Please enter the website to check balance" },
-						:url => { :message => "Please enter a valid website.  i.e. http://www.changefindr.com" }
+  validates :checkbalanceurl, :presence => { :message => "Please enter the website to check balance" },
+            :url => { :message => "Please enter a valid website.  i.e. http://www.changefindr.com" }
 =end
-    has_attached_file :logo, {	styles: {thumb: "75x75#"},
-								:path => "Users/vipul/Sites/changefindr/public/images/photo_attachment/:id/:style/:basename.:extension",
-								:url => "/images/photo_attachment/:id/:style/:basename.:extension",
-								:default_url => "/images/giftcard-3.jpg",
+    has_attached_file :logo, {  styles: {thumb: "75x75#"},
+                :path => "Users/vipul/Sites/changefindr/public/images/photo_attachment/:id/:style/:basename.:extension",
+                :url => "/images/photo_attachment/:id/:style/:basename.:extension",
+                :default_url => "/images/giftcard-3.jpg",
                 :storage => :s3,
                   :s3_credentials => {
                     :bucket => 'changefindr.com',
@@ -40,9 +42,9 @@ end
                 :s3_host_name => 's3-us-west-1.amazonaws.com',
                 :bucket => 'changefindr.com' }
 
-	#validates :logo, :presence=> { :message => "Please upload an image of your logo." }
-	validates_attachment_size :logo, :less_than => 2.megabytes, :message => "Please ensure size of the logo image is less than 2MB." 
-	validates_attachment_content_type :logo, :content_type => /\Aimage\/.*\Z/,  :message => "Invalid image type for logo." 
+  #validates :logo, :presence=> { :message => "Please upload an image of your logo." }
+  validates_attachment_size :logo, :less_than => 2.megabytes, :message => "Please ensure size of the logo image is less than 2MB." 
+  validates_attachment_content_type :logo, :content_type => /\Aimage\/.*\Z/,  :message => "Invalid image type for logo." 
 
 
   def httpitest
@@ -212,9 +214,9 @@ end
 
   end
 
-	def updateproducts_bak
+  def updateproducts_bak
 
-		  #url = 'https://sandbox.blackhawknetwork.com/productManagement/v1/productLines?first=0&maximum=10&ascending=true&exactMatch=false&caseSensitive=false'
+      #url = 'https://sandbox.blackhawknetwork.com/productManagement/v1/productLines?first=0&maximum=10&ascending=true&exactMatch=false&caseSensitive=false'
 
       request = HTTPI::Request.new('https://sandbox.blackhawknetwork.com/productManagement/v1/productLines?first=0&maximum=500&ascending=true&exactMatch=false&caseSensitive=false')
 
@@ -269,6 +271,6 @@ end
       end
 
 
-	end
+  end
 
 end

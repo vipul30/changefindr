@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-    self.table_name = 'user'
+
     self.primary_key = :userid
 
     belongs_to :role, :class_name => 'Role', :foreign_key => :roleid
@@ -25,5 +25,4 @@ class User < ActiveRecord::Base
 	                    :format => EMAIL_REGEX,
 	                    :confirmation => true,
 	                    :uniqueness => { :message => "There is already a user with this email." }
-    
 end
