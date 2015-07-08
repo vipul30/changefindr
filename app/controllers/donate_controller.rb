@@ -88,7 +88,7 @@ class DonateController < ApplicationController
 
   def create
 
-byebug
+
 
     @donation = Donation.new(donate_params)
     @donation.created = Time.now
@@ -104,7 +104,6 @@ byebug
       flash[:notice] = 'Only humans can donate.  =)' 
       render('new') 
       return 
-
     end
 
     if !params[:donation][:giftcard_attributes][:merchantid].empty? && params[:donation][:giftcard_attributes][:merchantid] != "85"

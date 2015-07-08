@@ -1,4 +1,4 @@
-module Changefindr
+module Changefindrapi
   class API < Grape::API
     version 'v1', using: :header, vendor: 'changefindr'
     format :json
@@ -15,6 +15,12 @@ module Changefindr
     end
 
     resource :statuses do
+
+      desc "Return causes"
+      get :causes do
+        Charity.limit(20)
+      end
+
       desc "Return a public timeline."
       get :public_timeline do
         Status.limit(20)

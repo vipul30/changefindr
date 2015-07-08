@@ -163,7 +163,7 @@ Rails.application.routes.draw do
 
   resources :widgets
 
-  #mount Changfindr::API => '/'
+  mount Changefindrapi::API => '/api'
 
   #if Rails.env.production?
    

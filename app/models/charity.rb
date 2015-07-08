@@ -102,4 +102,14 @@ class Charity < ActiveRecord::Base
 	           :conditions => ['charityname like ?', "%#{search}%"], :order => 'charityname'
 	end
 
+	def slug
+    	charityname.downcase.gsub(" ", "-")  
+  	end
+
+  	def to_param
+    	"#{charityid}-#{slug}"
+  	end
+
+	
+
 end
