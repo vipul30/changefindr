@@ -9,6 +9,9 @@ class HomeController < ApplicationController
     #testbhnwebservice4
 
     # clear the partnersite session
+
+    
+
     session[:partnersite] = nil
 
   	offset = rand(Charity.count)

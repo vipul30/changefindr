@@ -1,5 +1,7 @@
 class CauseController < ApplicationController
   def index
+
+    
     #@causes = Charity.where(isapproved: true).order('modified DESC').page(params[:page]).per_page(9)
     
 
