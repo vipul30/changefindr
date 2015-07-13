@@ -1,0 +1,244 @@
+
+<div class="pg-opt">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>User Gift Cards</h2>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+<br/><br/>
+<section class="slice bg-white animate-hover-slide">
+        <div class="wp-section work">
+            <div class="container">
+
+<div class="row">
+
+<% if session[:roleid] == ADMIN_ROLE %>
+
+    <div class="col-md-6">
+        <br/>
+            <div class="input-group merged">
+                <span class="input-group-addon"><i class="icon-append fa fa-search"></i></span>
+                <input class="form-control" style="width:270px" type="text"
+                       placeholder="Search For A Gift Card"
+                       name="searchcause"
+                       id="searchcause"
+                       value="">
+            </div>
+    </div>
+
+<% end %>
+         
+
+
+    <div class="col-md-6">
+        <%= will_paginate @usergiftcards , renderer: BootstrapPagination::Rails %>
+    </div>
+</div>  
+
+
+                <div class="row">
+                    <div class="col-md-9">
+                  <table class="table table-responsive table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <th>User</th>
+                                <th>Merchant</th>
+                                <th>Balance</th>
+                                <th>Is Donated?</th>
+                                <th>Balance Check Date</th>
+                                <th></th>
+                            </tr>
+                            <% @usergiftcards.each do |giftcard| %>
+
+                                <% donation = Donation.where(:giftcardid => giftcard.giftcardid).first %>
+
+                                <tr>
+                                    <td>
+
+                                        <% if donation != nil && donation.user != nil %>
+
+                                            <a href=""><%= donation.user.firstname %> <%= donation.user.lastname %></a>
+
+                                        <% elsif donation != nil && donation.user == nil %>
+                                            
+                                            <a href=""><%= donation.firstname %> <%= donation.lastname %></a>
+
+                                        <% else %>
+
+                                            <a href=""><%= giftcard.user.firstname %> <%= giftcard.user.lastname %></a>
+
+                                        <% end %>
+
+                                        
+                                    </td>
+
+                                    <td style="text-align:center"><img alt="" src="<%= giftcard.merchant.logo.url %>" class="img-responsive center-block"
+                                    style="margin: auto auto; height: auto; width: auto; max-height:150px; max-width:100px;" 
+                                    > <br/>
+
+                                     <% 
+                                        
+                                        if donation != nil && donation.giftcard.merchant.merchantid == 85 
+                                     %>
+                                            Non-BHN Gift Card<br/>
+                                            <%= donation.comments %>
+
+                                        <% else %>
+                                            <%= giftcard.merchant.merchantname %>
+                                        
+                                        <% 
+                                           
+                                           end
+                                        %>
+
+                                        
+                                    </td>
+
+                                    <td>
+
+                                        <%= number_to_currency(giftcard.balance) %>
+
+                                    </td>
+
+                                     <td>
+
+                                        <%= giftcard.isdonated? ? 'Yes' : 'No' %>
+
+                                       
+
+                                    </td>
+
+                                    <td>
+                                        
+                                        <%= giftcard.balancecheckdate %>
+
+                                    </td>
+
+                                    <td>
+                                       
+                                        
+                                        <br/>
+                                        <%= link_to "View Gift Card", controller: "giftcard", action: "show", id: giftcard.giftcardid %>
+                                        <br/>
+                                        <%= link_to "Modify Gift Card", controller: "giftcard", action: "edit", id: giftcard.giftcardid %>
+                                        <br/>
+                                        
+
+
+                                    </td>
+      
+
+                                </tr>
+                            <% end %>
+                            
+                        </tbody>
+                    </table>  
+
+                </div>
+
+                                        
+                </div>
+
+             
+<div class="row">
+
+    <div class="col-md-6">
+        
+    </div>
+         
+
+
+    <div class="col-md-6">
+        <%= will_paginate @usergiftcards, renderer: BootstrapPagination::Rails %>
+    </div>
+</div>  
+
+            </div>      
+        </div>
+    </section>
+
+
+
+<script>
+
+try {
+
+  $("#searchcause").autocomplete({
+
+        source: function (request, response) {
+            $.ajax({
+                url: '/cause/causeautocomplete', type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+
+                    //console.log('success: ', data)
+                    
+                    var array;
+
+                    if (data.length == 0 ) {
+                        array = {id:0};
+                    } else {
+                        // data is an array of objects and must be transformed for autocomplete to use
+                        array = data.error ? [] : $.map(data, function (m) {
+           
+                            return {
+
+                                id: m.charityid,
+                                name: m.charityname,
+                                logo: m.logo,
+                                account_id: m.account_id
+                                
+                            };
+                            
+                        });
+                    }
+
+                    response(array);
+
+                },
+                failure: function (data) {
+                    console.log('autcomplete failed');
+                }
+            })
+        },
+        minLength: 1,
+        select: function (event, ui) {
+            //console.log('comes in selected item ', ui.item);
+            event.preventDefault();
+            if (ui.item.id == 0)
+            {
+                window.location.href = "/cause/new/";
+            } else
+            {
+
+                window.location.href = "/cause/index?charity_id" + ui.item.id + "&account_id=" + ui.item.account_id;
+                //window.location.href = "/cause/show/" + ui.item.id;
+            }
+ 
+        }
+    })
+    .data("ui-autocomplete")._renderItem = function (ul, item) {
+
+        //console.log("item= ", item);
+
+        if (item.id == null) {
+            item.id = 0;
+            item.name = "Cause not found. Click here to request it.";
+            item.logo = "/images/photo_attachment/missing_thumb.png"
+        }
+
+        return $('<li class="ui-menu-item-with-icon" style="width:500px"></li>')
+            .data("item.ui-autocomplete", item.charityname)
+            .append('<a><img src="' + item.logo + '"height="45px" width="75px">&nbsp;&nbsp;&nbsp;' + item.name + '</a>')
+            .appendTo(ul);
+    };
+
+} catch (Exception) {}
+
+
+</script>

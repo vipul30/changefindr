@@ -17,6 +17,7 @@ class CauseController < ApplicationController
       
     else
       @causes = Charity.where(isapproved: true).order('charityname ASC').page(params[:page]).per_page(9)
+      @causes_all = Charity.where(isapproved: true).order('charityname ASC')
     end
 
     @cause = Charity.new

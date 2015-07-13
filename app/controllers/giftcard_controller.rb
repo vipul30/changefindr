@@ -2,16 +2,7 @@ class GiftcardController < ApplicationController
   def index
 
 if (session[:userid] != nil)
-    if session[:roleid] == ADMIN_ROLE && params[:viewall]
-
-        @usergiftcards = Giftcard.order(modified: :desc)
-                            .page(params[:page]).per_page(9)
-    else
-      @usergiftcards = Giftcard.where(:isdeleted => false)
-                            .where(:userid => session[:userid])
-                            .order(modified: :desc)
-                            .page(params[:page]).per_page(9)
-    end
+    
 
 
     @usergiftcardscount = Giftcard.where(:isdeleted => false)
@@ -22,12 +13,30 @@ if (session[:userid] != nil)
 
    
     @userhost = request.host_with_port
+
+    if session[:roleid] == ADMIN_ROLE && params[:viewall]
+
+        @usergiftcards = Giftcard.order(modified: :desc)
+                            .page(params[:page]).per_page(9)
+
+        render('list_view')
+        return
+    else
+      @usergiftcards = Giftcard.where(:isdeleted => false)
+                            .where(:userid => session[:userid])
+                            .order(modified: :desc)
+                            .page(params[:page]).per_page(9)
+    end
+
+
   else
     flash[:notice] = "Please login or register in order to view your gift cards."
     redirect_to(:controller => "home", :action => "index")
   end
 
   end
+
+
 
   def delete
 

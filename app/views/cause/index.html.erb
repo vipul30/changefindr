@@ -30,14 +30,34 @@
     </div>
          
 
+<div class="row visible-sm visible-xs">
+    <div class="col-sm-9" style="text-align: center;">
 
-	<div class="col-md-6">
+        <br/><br/>
+        <% @causes_all.each do |cause| %>
+
+            <ul>
+                <li>
+                    <a href="/donate/new?charityid=<%= cause.charityid %>"><img alt="" src="<%=cause.logo.url%>" class="img-responsive center-block"
+                    style="margin: auto auto; height: auto; width: auto; max-height:100px; max-width:100px;"></a>
+                    <%= cause.charityname %>
+                    <hr/>
+                </li>
+            </ul>
+
+        <% end %>
+
+    </div>
+</div>
+
+
+<div class="col-md-6 visible-lg visible-md">
 		<%= will_paginate @causes , renderer: BootstrapPagination::Rails %>
 	</div>
 </div>	
 
 
-                <div class="row">       
+                <div class="row visible-lg visible-md">       
                     <div id="ulSorList">
     
                         <% @causes.each do |cause| %>
@@ -81,7 +101,7 @@
                 </div>
 
              
-<div class="row">
+<div class="row visible-lg visible-md">
 
     <div class="col-md-6">
         
