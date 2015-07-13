@@ -16,7 +16,7 @@
                                    
                                 </div>
 
-<% byebug %>
+
                                 <% if @cause.image1.exists? %>
                                 <div id="workCarousel" class="carousel carousel-4 slide color-two-l" data-ride="carousel">
                                     <!-- Indicators -->
@@ -79,7 +79,7 @@
                                     <br/>
 
 
-                                    <% if session[:roleid] == ADMIN_ROLE || session[:userid] ==  @cause.userid %>
+                                    <% if session[:roleid] == ADMIN_ROLE || (session[:userid] ==  @cause.userid && session[:userid] != nil) %>
                                         <%= link_to "Modify Cause", controller: "cause", action: "edit", id: @cause.charityid %>
                                         <br/>
                                     <% end %>
