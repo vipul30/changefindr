@@ -133,6 +133,11 @@ gem 'truncate_html', '~> 0.9.3'
 gem 'grape'
 gem 'grape-rails-routes', '~> 1.0'
 gem 'hashie-forbidden_attributes', '~> 0.1.1'
+gem 'airborne', '~> 0.1.16' # testing api RSpec driven API testing framework
+gem 'rspec-rails', '~> 3.3.3' # rspec-rails is a testing framework for Rails 3.x and 4.x
+gem 'grape-swagger', '~> 0.10.1'
+gem 'swagger-ui', '~> 0.0.2'
+gem 'grape-swagger-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

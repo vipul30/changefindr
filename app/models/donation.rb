@@ -6,6 +6,7 @@ class Donation < ActiveRecord::Base
     belongs_to :giftcard, :class_name => 'Giftcard', :foreign_key => :giftcardid
     belongs_to :user, :class_name => 'User', :foreign_key => :userid
     has_many :bhnacquires, :class_name => 'Bhnacquire', :foreign_key => :donationid
+    belongs_to :account_transaction, :class_name => 'AccountTransaction', :foreign_key => :account_transaction_id
 
     accepts_nested_attributes_for :giftcard, update_only: true
 
@@ -16,5 +17,4 @@ class Donation < ActiveRecord::Base
     validates :email, :presence => {:message => "Please enter a valid email address."}, 
                                     :unless => :userid?,
                                     :format => EMAIL_REGEX
-
 end

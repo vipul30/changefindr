@@ -1,0 +1,89 @@
+
+       
+    <!-- MAIN CONTENT -->
+    	
+
+    <section class="slice slice-lg bg-image" >
+        <div class="wp-section">
+            <div class="container">
+                <div class="row">
+
+                	<div class="col-md-4">
+                    	<!-- SIDEBAR - BLOG -->
+                        <div class="wp-block default user-form no-margin">
+    
+                           <div class="form-header">
+	                                <h3>API Documentation</h3>
+	                                
+
+	                            </div>
+
+
+						      	<div class="form-body">
+                               
+                                    <fieldset>          
+                                      
+                                        <section>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    
+                                                    <ul>
+
+                                                    	<li><a href="#" onclick="hide_all();$('#CreateCauseDiv').show();">Create Cause</a></li>
+                                                        <li><a href="#" onclick="hide_all();$('#UpdateCauseDiv').show();">Update Cause</a></li>
+                                                    	<li>Update Cause</li>
+                                                    	<li>Get Cause</li>
+                                                    	<li>Get Causes</li>
+                                                    	<li>Get Gift Cards</li>
+                                                    	<li>Check Card Balance</li>
+                                                    	<li>Submit Transaction</li>
+                                                    	<li>View Transaction</li>
+                                                    	<li>View Transactions</li>
+
+                                                    </ul>
+                                                    
+                                                </div>
+                                            </div>
+                                                
+                                        </section>
+                                    </fieldset>
+
+                            	</div>
+
+    
+
+                        </div> 
+                    	              
+    				</div>
+
+    				 <div class="col-md-8 col-sm-8">
+
+                        <div id="CreateCauseDiv" style="display:none">
+    				 	  <%= render(:partial => "create_cause_api") %>
+                        </div>
+
+                        <div id="UpdateCauseDiv" style="display:none">
+                          <%= render(:partial => "update_cause_api") %>
+                        </div>
+
+    				 </div>
+    			</div>
+    		</div>
+    	</div>
+
+    </section>
+
+    <script>
+
+        function hide_all() {
+
+            $("#CreateCauseDiv").hide();
+            $("#UpdateCauseDiv").hide();
+
+        }
+
+
+
+    </script>
+
+   

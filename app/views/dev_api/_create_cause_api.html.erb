@@ -1,0 +1,73 @@
+<div class="wp-block default user-form no-margin">
+
+        <div class="form-header">
+            <h2>Create Cause</h2>
+        </div>
+
+
+      	<div class="form-body">
+       
+
+            <fieldset>          
+              
+                <section>
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+                            <p>
+
+                                This operation creates a new cause in order to start accepting donations.
+                                <br/><br/>
+                                <b>HTTP method:</b> POST
+                                <br/><br/>
+                                <b>URL:</b> https://www.changefindr.com/api/create_cause
+
+                                <br/><br/>
+                                <table class="">
+
+
+                               <tbody>
+                                <tr>
+                                 <th class=""><strong>Field</strong></th>
+                                 <th class=""><strong>Type</strong></th>
+                                 <th class=""><span>Required</span></th>
+                                 <th class=""><strong>Description</strong></th>
+                                </tr>
+                                <tr>
+                                 <td class=""><span>apiKey</span></td>
+                                 <td class=""><span>String</span></td>
+                                 <td class="">Y</td>
+                                 <td class=""><span>A value that uniquely identifies the user in order to gain access to the api.  Please contact support@changefindr.com to your key.</span></td>
+                                </tr>
+                                <tr>
+                                 <td class=""><span>previousAttempts</span></td>
+                                 <td class=""><span>Integer</span></td>
+                                 <td class="">Y</td>
+                                 <td class=""><span>The number of times this same request has been attempted unsuccessfully before.&nbsp;A value greater than zero causes the service to view this request as a retry attempt.</span></td>
+                                </tr>
+                                <tr>
+                                 <td colspan="1" class=""><span>contractId</span></td>
+                                 <td colspan="1" class=""><span>String</span></td>
+                                 <td colspan="1" class="">Y</td>
+                                 <td colspan="1" class=""><span>The contract ID. A unique value&nbsp;assigned by Blackhawk to identify a merchant for all transaction processing.</span></td>
+                                </tr>
+                                <tr>
+                                 <td colspan="1" class="">Content-Type</td>
+                                 <td colspan="1" class="">String</td>
+                                 <td colspan="1" class="">Y</td>
+                                 <td colspan="1" class="">Should always be <code>application/json</code>.</td>
+                                </tr>
+                               </tbody>
+                              </table>
+                            </p>
+
+                            
+                        </div>
+                    </div>
+                        
+                </section>
+            </fieldset>
+
+    	</div>
+    
+</div>

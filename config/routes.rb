@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'dev_api/index'
+
   get 'account/index'
 
   get 'account/show'
@@ -164,6 +166,7 @@ Rails.application.routes.draw do
   resources :widgets
 
   mount Changefindrapi::API => '/api'
+  mount GrapeSwaggerRails::Engine => '/swagger'
 
   #if Rails.env.production?
    

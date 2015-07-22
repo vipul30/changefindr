@@ -16,6 +16,22 @@ ActiveRecord::Schema.define(version: 20150127233247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "account_transactions", force: true do |t|
+    t.integer  "account_id"
+    t.string   "customer_transaction_id", limit: 200
+    t.string   "sub_id",                  limit: 200
+    t.datetime "created"
+    t.datetime "modified"
+  end
+
+  create_table "account_urls", force: true do |t|
+    t.integer  "account_id"
+    t.string   "access_url", limit: 500
+    t.datetime "created"
+    t.datetime "modified"
+    t.string   "is_active",  limit: 1
+  end
+
   create_table "accounts", force: true do |t|
     t.string   "company_name", limit: 500
     t.string   "api_key",      limit: 200
@@ -25,18 +41,24 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.integer  "is_active",    limit: 2
   end
 
+  create_table "api_requests", force: true do |t|
+    t.string   "request_object", limit: 100000
+    t.datetime "created"
+  end
+
   create_table "bhnacquire", primary_key: "bhnacquireid", force: true do |t|
     t.integer  "donationid"
     t.datetime "created"
     t.datetime "responseTimestamp"
     t.float    "actualCardValue"
     t.float    "exchangeCardValue"
-    t.string   "transactionId",     limit: 500
-    t.string   "errorCode",         limit: 100
-    t.string   "errorMessage",      limit: 1000
-    t.string   "customerId",        limit: 500
-    t.string   "responsecode",      limit: 100
-    t.string   "isCompleted",       limit: 100
+    t.string   "transactionId",          limit: 500
+    t.string   "errorCode",              limit: 100
+    t.string   "errorMessage",           limit: 1000
+    t.string   "customerId",             limit: 500
+    t.string   "responsecode",           limit: 100
+    t.string   "isCompleted",            limit: 100
+    t.integer  "account_transaction_id"
   end
 
   create_table "bhnmerchantcrossref", primary_key: "crossrefid", force: true do |t|
@@ -51,10 +73,11 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.datetime "created"
     t.float    "actualCardValue"
     t.float    "exchangeCardValue"
-    t.string   "transactionId",     limit: 500
-    t.string   "responsecode",      limit: 50
-    t.string   "errorCode",         limit: 1000
-    t.string   "errorMessage",      limit: 1000
+    t.string   "transactionId",          limit: 500
+    t.string   "responsecode",           limit: 50
+    t.string   "errorCode",              limit: 1000
+    t.string   "errorMessage",           limit: 1000
+    t.integer  "account_transaction_id"
   end
 
   create_table "blog_comments", force: true do |t|
@@ -133,26 +156,28 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.integer  "userid"
     t.datetime "created"
     t.datetime "modified"
-    t.integer  "donationwall", limit: 2
-    t.string   "firstname",    limit: 100
-    t.string   "lastname",     limit: nil
-    t.string   "comments",     limit: 1000
-    t.string   "email",        limit: 100
+    t.integer  "donationwall",           limit: 2
+    t.string   "firstname",              limit: 100
+    t.string   "lastname",               limit: nil
+    t.string   "comments",               limit: 1000
+    t.string   "email",                  limit: 100
+    t.integer  "account_transaction_id"
   end
 
   create_table "giftcards", primary_key: "giftcardid", force: true do |t|
     t.integer  "merchantid"
     t.datetime "created"
     t.datetime "modified"
-    t.string   "encrypted_cardnumber", limit: 1000
+    t.string   "encrypted_cardnumber",   limit: 1000
     t.date     "expdate"
-    t.string   "eventnumber",          limit: 100
+    t.string   "eventnumber",            limit: 100
     t.float    "balance"
     t.integer  "userid"
     t.datetime "balancecheckdate"
-    t.integer  "isdeleted",            limit: 2
-    t.integer  "isdonated",            limit: 2
-    t.string   "encrypted_pin",        limit: 500
+    t.integer  "isdeleted",              limit: 2
+    t.integer  "isdonated",              limit: 2
+    t.string   "encrypted_pin",          limit: 500
+    t.integer  "account_transaction_id"
   end
 
   create_table "giftcardstats", primary_key: "statsid", force: true do |t|

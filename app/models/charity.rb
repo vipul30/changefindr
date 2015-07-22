@@ -110,6 +110,10 @@ class Charity < ActiveRecord::Base
     	"#{charityid}-#{slug}"
   	end
 
+  	def as_json(options = {})
+    super(options.merge({ except: [:created, :modified] }))
+
+  end
 	
 
 end
