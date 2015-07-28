@@ -23,42 +23,162 @@
                                 <b>URL:</b> https://www.changefindr.com/api/create_cause
 
                                 <br/><br/>
-                                <table class="">
+                                
+                                <h5>Request Header Attributes</h5>
+                                
+                                <table class="table table-responsive table-bordered table-striped">
+                                <tbody>
+                                <tr>
+                                 <th><strong>Field</strong></th>
+                                 <th><strong>Type</strong></th>
+                                 <th><span>Required</span></th>
+                                 <th><strong>Description</strong></th>
+                                </tr>
+
+                                <tr>
+                                 <td><span>apiKey</span></td>
+                                 <td><span>String</span></td>
+                                 <td>Y</td>
+                                 <td><span>A value that uniquely identifies the user in order to gain access to the api.  Please contact support@changefindr.com to get your key.</span></td>
+                                </tr>                               
+
+                                <tr>
+                                 <td>Content-Type</td>
+                                 <td>String</td>
+                                 <td>Y</td>
+                                 <td>Should always be <code>application/json</code>.</td>
+                                </tr>
+
+                                </tbody>
+                                </table>
+
+                                <br/><br/>
+
+                                <h5>Request Elements</h5>
+                                
+
+                                <table class="table table-responsive table-bordered table-striped">
+                        
+                                <tbody>
+                                <tr>
+                                 <th><strong>Field</strong></th>
+                                 <th><strong>Type</strong></th>
+                                 <th><span>Required</span></th>
+                                 <th><strong>Description</strong></th>
+                                </tr>
+
+                               
+                                <tr>
+                                 <td><span>causeName</span></td>
+                                 <td><span>String</span></td>
+                                 <td>Y</td>
+                                 <td><span>Name/Title of cause.  Max 100 characters.</span></td>
+                                </tr>
+
+                                <tr>
+                                 <td><span>causeURL</span></td>
+                                 <td><span>String</span></td>
+                                 <td>N</td>
+                                 <td><span>URL of cause.  Must be in format http://www.mycause.com</span></td>
+                                </tr>
+
+                                <tr>
+                                 <td><span>causeFacebookURL</span></td>
+                                 <td><span>String</span></td>
+                                 <td>N</td>
+                                 <td><span>Facebook URL of cause.  Must be in format http://www.facebook.com/mycause</span></td>
+                                </tr>
+
+                                <tr>
+                                 <td><span>causeDescription</span></td>
+                                 <td><span>String</span></td>
+                                 <td>Y</td>
+                                 <td><span>Description of cause.  Description can be in HTML format.  Max 5000 characters.</span></td>
+                                </tr>
+
+                                <tr>
+                                 <td><span>causeLogo</span></td>
+                                 <td><span>Image File</span></td>
+                                 <td>Y</td>
+                                 <td><span>Logo image for cause.  Must be either in jpg or png format.  File size < 5 megs</span></td>
+                                </tr>
+
+                                <tr>
+                                 <td><span>causeImage1</span></td>
+                                 <td><span>Image File</span></td>
+                                 <td>N</td>
+                                 <td><span>Image 1 for cause.  Must be either in jpg or png format.  File size < 5 megs</span></td>
+                                </tr>
+
+                                <tr>
+                                 <td><span>causeImage2</span></td>
+                                 <td><span>Image File</span></td>
+                                 <td>N</td>
+                                 <td><span>Image 2 for cause.  Must be either in jpg or png format.  File size < 5 megs</span></td>
+                                </tr>
+
+                                <tr>
+                                 <td><span>causeImage3</span></td>
+                                 <td><span>Image File</span></td>
+                                 <td>N</td>
+                                 <td><span>Image 3 for cause.  Must be either in jpg or png format.  File size < 5 megs</span></td>
+                                </tr>
+
+                                <tr>
+                                 <td><span>isListed</span></td>
+                                 <td><span>Bool</span></td>
+                                 <td>Y</td>
+                                 <td><span>This will determine whether the cause will be listed on Changefindr's website or not.  Values: true or false</span></td>
+                                </tr>
 
 
-                               <tbody>
+                                </tbody>
+                                </table>
+
+                                <br/><br/>
+                                
+                                <h5>Response Elements</h5>
+                                
+                                <table class="table table-responsive table-bordered table-striped">
+                                <tbody>
                                 <tr>
-                                 <th class=""><strong>Field</strong></th>
-                                 <th class=""><strong>Type</strong></th>
-                                 <th class=""><span>Required</span></th>
-                                 <th class=""><strong>Description</strong></th>
+                                 <th><strong>Name</strong></th>
+                                 <th><strong>Type</strong></th>
+                                 <th><strong>Description</strong></th>
                                 </tr>
+
                                 <tr>
-                                 <td class=""><span>apiKey</span></td>
-                                 <td class=""><span>String</span></td>
-                                 <td class="">Y</td>
-                                 <td class=""><span>A value that uniquely identifies the user in order to gain access to the api.  Please contact support@changefindr.com to your key.</span></td>
-                                </tr>
+                                 <td><span>causeId</span></td>
+                                 <td><span>Integer</span></td>                                 
+                                 <td><span>The cause Id assigned by changefindr.  Reference this ID in other API calls to make updates to the cause and get additional information about donations.</span></td>
+                                </tr>                               
+
+                                </tbody>
+                                </table>
+
+                                <br/><br/>
+
+                                <h5>Error Codes</h5>
+                                
+                                <table class="table table-responsive table-bordered table-striped">
+                                <tbody>
                                 <tr>
-                                 <td class=""><span>previousAttempts</span></td>
-                                 <td class=""><span>Integer</span></td>
-                                 <td class="">Y</td>
-                                 <td class=""><span>The number of times this same request has been attempted unsuccessfully before.&nbsp;A value greater than zero causes the service to view this request as a retry attempt.</span></td>
+                                 <th><strong>HTTP Status</strong></th>
+                                 
+                                 <th><strong>Message</strong></th>
                                 </tr>
+
                                 <tr>
-                                 <td colspan="1" class=""><span>contractId</span></td>
-                                 <td colspan="1" class=""><span>String</span></td>
-                                 <td colspan="1" class="">Y</td>
-                                 <td colspan="1" class=""><span>The contract ID. A unique value&nbsp;assigned by Blackhawk to identify a merchant for all transaction processing.</span></td>
-                                </tr>
-                                <tr>
-                                 <td colspan="1" class="">Content-Type</td>
-                                 <td colspan="1" class="">String</td>
-                                 <td colspan="1" class="">Y</td>
-                                 <td colspan="1" class="">Should always be <code>application/json</code>.</td>
-                                </tr>
-                               </tbody>
-                              </table>
+                                 <td><span>401</span></td>
+                                                               
+                                 <td><span>Unauthorized access.  Either the api key or host trying to access the service is invalid.</span></td>
+                                </tr>                               
+
+                                </tbody>
+                                </table>
+
+                                <br/><br/>
+
                             </p>
 
                             

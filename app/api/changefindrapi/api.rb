@@ -11,8 +11,8 @@ module Changefindrapi
 
 
         api_request = ApiRequest.new
-        #byebug
-        api_request.request_object = request.to_s
+        
+        api_request.request_object = request.env.to_s
         api_request.created = Time.now
         api_request.save
 
@@ -29,11 +29,11 @@ module Changefindrapi
           if account_url != nil
             return true
           else
-            error!('401 Unauthorized', 401)
+            error!('Unauthorized access.  Either the api key or host trying to access the service is invalid.', 401)
           end
 
         else
-          error!('401 Unauthorized', 401)
+          error!('Unauthorized access.  Either the api key or host trying to access the service is invalid.', 401)
         end
 
       end

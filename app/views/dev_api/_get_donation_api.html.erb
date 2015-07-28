@@ -1,7 +1,7 @@
 <div class="wp-block default user-form no-margin">
 
         <div class="form-header">
-            <h2>Update Cause</h2>
+            <h2>Get Donation</h2>
         </div>
 
 
@@ -16,11 +16,11 @@
                             
                             <p>
 
-                                This operation updates an existing cause.
+                                This operation returns information about the donation.
                                 <br/><br/>
-                                <b>HTTP method:</b> POST
+                                <b>HTTP method:</b> REQUEST
                                 <br/><br/>
-                                <b>URL:</b> https://www.changefindr.com/api/update_cause
+                                <b>URL:</b> https://www.changefindr.com/api/get_donation
 
                                 <br/><br/>
                                 
@@ -68,76 +68,12 @@
                                 </tr>
 
                                 <tr>
-                                 <td><span>causeId</span></td>
+                                 <td><span>donationId</span></td>
                                  <td><span>Integer</span></td>
                                  <td>Y</td>
-                                 <td><span>Unique identifier of cause.</span></td>
+                                 <td><span>Unique identifier of donation.</span></td>
                                 </tr>
-                               
-                                <tr>
-                                 <td><span>causeName</span></td>
-                                 <td><span>String</span></td>
-                                 <td>N</td>
-                                 <td><span>Name/Title of cause.  Max 100 characters.</span></td>
-                                </tr>
-
-                                <tr>
-                                 <td><span>causeURL</span></td>
-                                 <td><span>String</span></td>
-                                 <td>N</td>
-                                 <td><span>URL of cause.  Must be in format http://www.mycause.com</span></td>
-                                </tr>
-
-                                <tr>
-                                 <td><span>causeFacebookURL</span></td>
-                                 <td><span>String</span></td>
-                                 <td>N</td>
-                                 <td><span>Facebook URL of cause.  Must be in format http://www.facebook.com/mycause</span></td>
-                                </tr>
-
-                                <tr>
-                                 <td><span>causeDescription</span></td>
-                                 <td><span>String</span></td>
-                                 <td>N</td>
-                                 <td><span>Description of cause.  Description can be in HTML format.  Max 5000 characters.</span></td>
-                                </tr>
-
-                                <tr>
-                                 <td><span>causeLogo</span></td>
-                                 <td><span>Image File</span></td>
-                                 <td>N</td>
-                                 <td><span>Logo image for cause.  Must be either in jpg or png format.  File size < 5 megs</span></td>
-                                </tr>
-
-                                <tr>
-                                 <td><span>causeImage1</span></td>
-                                 <td><span>Image File</span></td>
-                                 <td>N</td>
-                                 <td><span>Image 1 for cause.  Must be either in jpg or png format.  File size < 5 megs</span></td>
-                                </tr>
-
-                                <tr>
-                                 <td><span>causeImage2</span></td>
-                                 <td><span>Image File</span></td>
-                                 <td>N</td>
-                                 <td><span>Image 2 for cause.  Must be either in jpg or png format.  File size < 5 megs</span></td>
-                                </tr>
-
-                                <tr>
-                                 <td><span>causeImage3</span></td>
-                                 <td><span>Image File</span></td>
-                                 <td>N</td>
-                                 <td><span>Image 3 for cause.  Must be either in jpg or png format.  File size < 5 megs</span></td>
-                                </tr>
-
-                                <tr>
-                                 <td><span>isListed</span></td>
-                                 <td><span>Bool</span></td>
-                                 <td>N</td>
-                                 <td><span>This will determine whether the cause will be listed on Changefindr's website or not.  Values: true or false</span></td>
-                                </tr>
-
-
+                              
                                 </tbody>
                                 </table>
 
@@ -156,8 +92,54 @@
                                 <tr>
                                  <td><span>causeId</span></td>
                                  <td><span>Integer</span></td>                                 
-                                 <td><span>The cause Id assigned by changefindr.  Reference this ID in other API calls to make updates to the cause and get additional information about donations.</span></td>
-                                </tr>                               
+                                 <td><span>The cause Id assigned by changefindr.</span></td>
+                                </tr>     
+
+                                <tr>
+                                 <td><span>merchantId</span></td>
+                                 <td><span>Integer</span></td>                                 
+                                 <td><span>The merchant ID associated with the gift card merchant</span></td>
+                                </tr>     
+
+
+                                <tr>
+                                 <td><span>actualCardValue</span></td>
+                                 <td><span>Float</span></td>                                 
+                                 <td><span>The current balance on card.</span></td>
+                                </tr> 
+
+
+                                <tr>
+                                 <td><span>exchangeCardValue</span></td>
+                                 <td><span>Float</span></td>                                 
+                                 <td><span>Dollar amount Changefindr will reiumburse partner.</span></td>
+                                </tr>
+
+                                <tr>
+                                 <td><span>dateDonated</span></td>
+                                 <td><span>Date Timestamp</span></td>                                 
+                                 <td><span>Date and time of donation</span></td>
+                                </tr>
+
+                                <tr>
+                                 <td><span>donationWall</span></td>
+                                 <td><span>Boolean</span></td>
+                                
+                                 <td><span>Display name on donation wall. Values: true or false</span></td>
+                                </tr>
+
+                                <tr>
+                                 <td><span>comments</span></td>
+                                 <td><span>String</span></td>
+                                 <td><span>Comments from the donor about the donation</span></td>
+                                </tr>
+
+                                <tr>
+                                 <td><span>transactionId</span></td>
+                                 <td><span>String</span></td>
+                                 <td><span>Customer transaction id</span></td>
+                                </tr>
+
 
                                 </tbody>
                                 </table>

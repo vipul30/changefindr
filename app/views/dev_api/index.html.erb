@@ -8,12 +8,12 @@
             <div class="container">
                 <div class="row">
 
-                	<div class="col-md-4">
+                	<div class="col-md-3">
                     	<!-- SIDEBAR - BLOG -->
                         <div class="wp-block default user-form no-margin">
     
                            <div class="form-header">
-	                                <h3>API Documentation</h3>
+	                                <h5><a href="#" onclick="hide_all();$('#APIReferenceDiv').show();"><b>API Reference</b></a></h5>
 	                                
 
 	                            </div>
@@ -28,17 +28,29 @@
                                                 <div class="col-md-12">
                                                     
                                                     <ul>
+                                                       
 
+                                                        <li><b>Causes</b></li>
                                                     	<li><a href="#" onclick="hide_all();$('#CreateCauseDiv').show();">Create Cause</a></li>
                                                         <li><a href="#" onclick="hide_all();$('#UpdateCauseDiv').show();">Update Cause</a></li>
-                                                    	<li>Update Cause</li>
-                                                    	<li>Get Cause</li>
-                                                    	<li>Get Causes</li>
-                                                    	<li>Get Gift Cards</li>
-                                                    	<li>Check Card Balance</li>
-                                                    	<li>Submit Transaction</li>
-                                                    	<li>View Transaction</li>
-                                                    	<li>View Transactions</li>
+                                                        <li><a href="#" onclick="hide_all();$('#GetCauseDiv').show();">Get Cause</a></li>
+                                                        <li><a href="#" onclick="hide_all();$('#GetCausesDiv').show();">Get Causes</a></li>
+                                                    	
+
+                                                        <br/>
+
+                                                        <li><b>Gift Cards</b></li>
+                                                    	<li><a href="#" onclick="hide_all();$('#GetMerchantsDiv').show();">Get Merchants</a></li>
+                                                        <li><a href="#" onclick="hide_all();$('#CheckCardBalanceDiv').show();">Check Card Balance</a></li>
+                                                    	
+
+                                                        <br/>
+
+                                                        <li><b>Donations</b></li>
+                                                        <li><a href="#" onclick="hide_all();$('#SubmitDonationDiv').show();">Submit Donation</a></li>
+                                                        <li><a href="#" onclick="hide_all();$('#GetDonationDiv').show();">Get Donation</a></li>
+                                                        <li><a href="#" onclick="hide_all();$('#GetDonationsDiv').show();">Get Donations</a></li>
+                                                    	
 
                                                     </ul>
                                                     
@@ -56,7 +68,15 @@
                     	              
     				</div>
 
-    				 <div class="col-md-8 col-sm-8">
+    				 <div class="col-md-9">
+
+                        <div id="APIReferenceDiv" style="display:none">
+                          <h3>Changefindr API Reference</h3>
+
+<p>The material here documents the Changefindr API.  This service allows you to collect gift card donations from your website or mobile applications.  You will be able to create causes, check gift card balances, donate gift cards, and perform many other requests.  Please submit a request to get access to the APIs by sending an email to support@changefindr.com.</p>
+
+                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                        </div>
 
                         <div id="CreateCauseDiv" style="display:none">
     				 	  <%= render(:partial => "create_cause_api") %>
@@ -64,6 +84,34 @@
 
                         <div id="UpdateCauseDiv" style="display:none">
                           <%= render(:partial => "update_cause_api") %>
+                        </div>
+
+                        <div id="GetCauseDiv" style="display:none">
+                          <%= render(:partial => "get_cause_api") %>
+                        </div>
+
+                        <div id="GetCausesDiv" style="display:none">
+                          <%= render(:partial => "get_causes_api") %>
+                        </div>
+
+                        <div id="GetMerchantsDiv" style="display:none">
+                          <%= render(:partial => "get_merchants_api") %>
+                        </div>
+
+                        <div id="CheckCardBalanceDiv" style="display:none">
+                          <%= render(:partial => "check_card_balance_api") %>
+                        </div>
+
+                        <div id="SubmitDonationDiv" style="display:none">
+                          <%= render(:partial => "submit_donation_api") %>
+                        </div>
+
+                        <div id="GetDonationDiv" style="display:none">
+                          <%= render(:partial => "get_donation_api") %>
+                        </div>
+
+                        <div id="GetDonationsDiv" style="display:none">
+                          <%= render(:partial => "get_donations_api") %>
                         </div>
 
     				 </div>
@@ -75,10 +123,25 @@
 
     <script>
 
+        $( document ).ready(function() {
+            hide_all();
+            $("#APIReferenceDiv").show();
+
+        });
+
+
         function hide_all() {
 
+            $("#APIReferenceDiv").hide();
             $("#CreateCauseDiv").hide();
             $("#UpdateCauseDiv").hide();
+            $("#GetCauseDiv").hide();
+            $("#GetCausesDiv").hide();
+            $("#GetMerchantsDiv").hide();
+            $("#CheckCardBalanceDiv").hide();
+            $("#SubmitDonationDiv").hide();
+            $("#GetDonationDiv").hide();
+            $("#GetDonationsDiv").hide();
 
         }
 

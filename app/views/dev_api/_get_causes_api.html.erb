@@ -1,0 +1,193 @@
+<div class="wp-block default user-form no-margin">
+
+        <div class="form-header">
+            <h2>Get Cause</h2>
+        </div>
+
+
+        <div class="form-body">
+       
+
+            <fieldset>          
+              
+                <section>
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+                            <p>
+
+                                This operation returns a list of all account causes with information about the cause.
+                                <br/><br/>
+                                <b>HTTP method:</b> REQUEST
+                                <br/><br/>
+                                <b>URL:</b> https://www.changefindr.com/api/get_causes
+
+                                <br/><br/>
+                                
+                                <h5>Request Header Attributes</h5>
+                                
+                                <table class="table table-responsive table-bordered table-striped">
+                                <tbody>
+                                <tr>
+                                 <th><strong>Field</strong></th>
+                                 <th><strong>Type</strong></th>
+                                 <th><span>Required</span></th>
+                                 <th><strong>Description</strong></th>
+                                </tr>
+
+                                <tr>
+                                 <td><span>apiKey</span></td>
+                                 <td><span>String</span></td>
+                                 <td>Y</td>
+                                 <td><span>A value that uniquely identifies the user in order to gain access to the api.  Please contact support@changefindr.com to get your key.</span></td>
+                                </tr>                               
+
+                                <tr>
+                                 <td>Content-Type</td>
+                                 <td>String</td>
+                                 <td>Y</td>
+                                 <td>Should always be <code>application/json</code>.</td>
+                                </tr>
+
+                                </tbody>
+                                </table>
+
+                                <br/><br/>
+
+                                <h5>Response Elements</h5>
+
+                                <br/>
+                                <h6>Cause</h6>
+                                <p>(JSON List)</p>
+                                
+                                <table class="table table-responsive table-bordered table-striped">
+                                <tbody>
+                                <tr>
+                                 <th><strong>Name</strong></th>
+                                 <th><strong>Type</strong></th>
+                                 <th><strong>Description</strong></th>
+                                </tr>
+
+                                <tr>
+                                 <td><span>causeId</span></td>
+                                 <td><span>Integer</span></td>                                 
+                                 <td><span>The cause Id assigned by changefindr.  Reference this ID in other API calls to make updates to the cause and get additional information about donations.</span></td>
+                                </tr>     
+
+                                <tr>
+                                 <td><span>causeName</span></td>
+                                 <td><span>String</span></td>                                 
+                                 <td><span>The name of the cause</span></td>
+                                </tr> 
+
+                                <tr>
+                                 <td><span>causeURL</span></td>
+                                 <td><span>String</span></td>                                 
+                                 <td><span>Website of cause</span></td>
+                                </tr>
+
+                                <tr>
+                                 <td><span>causeFacebookURL</span></td>
+                                 <td><span>String</span></td>                                 
+                                 <td><span>Facebook URL of cause</span></td>
+                                 </tr> 
+
+                                 <tr>
+                                 <td><span>causeDescription</span></td>
+                                 <td><span>String</span></td>                                 
+                                 <td><span>Description of cause.  Returned in HTML format.</span></td>
+                                 </tr>
+
+                                 <tr>
+                                 <td><span>logo</span></td>
+                                 <td><span>String</span></td>                                 
+                                 <td><span>URL of logo image</span></td>
+                                 </tr>  
+
+                                 <tr>
+                                 <td><span>image1</span></td>
+                                 <td><span>String</span></td>                                 
+                                 <td><span>URL of image 1</span></td>
+                                 </tr>
+
+                                 <tr>
+                                 <td><span>image2</span></td>
+                                 <td><span>String</span></td>                                 
+                                 <td><span>URL of image 2</span></td>
+                                 </tr>  
+
+                                <tr>
+                                 <td><span>image3</span></td>
+                                 <td><span>String</span></td>                                 
+                                 <td><span>URL of image 3</span></td>
+                                 </tr>
+
+                                 <tr>
+                                 <td><span>createdDate</span></td>
+                                 <td><span>Date Timestamp</span></td>                                 
+                                 <td><span>Date the cause was created</span></td>
+                                 </tr>
+
+                                 <tr>
+                                 <td><span>modifiedDate</span></td>
+                                 <td><span>Date Timestamp</span></td>                                 
+                                 <td><span>Date the cause was modified</span></td>
+                                 </tr>
+
+                                 <tr>
+                                 <td><span>accountId</span></td>
+                                 <td><span>Integer</span></td>                                 
+                                 <td><span>Unique account identifier of API access company.</span></td>
+                                 </tr>
+
+                                 <tr>
+                                 <td><span>isApproved</span></td>
+                                 <td><span>Boolean</span></td>                                 
+                                 <td><span>Is this cause approved to accept donations?  values: true or false.</span></td>
+                                 </tr>  
+
+                                 <tr>
+                                 <td><span>isListed</span></td>
+                                 <td><span>Boolean</span></td>                                 
+                                 <td><span>Is this cause listed on www.changefindr.com?  values: true or false.</span></td>
+                                 </tr>   
+
+
+                                </tbody>
+                                </table>
+
+                                <br/><br/>
+
+                                <h5>Error Codes</h5>
+                                
+                                <table class="table table-responsive table-bordered table-striped">
+                                <tbody>
+                                <tr>
+                                 <th><strong>HTTP Status</strong></th>
+                                 
+                                 <th><strong>Message</strong></th>
+                                </tr>
+
+                                <tr>
+                                 <td><span>401</span></td>
+                                                               
+                                 <td><span>Unauthorized access.  Either the api key or host trying to access the service is invalid.</span></td>
+                                </tr>                               
+
+                                </tbody>
+                                </table>
+
+                                <br/><br/>
+
+                            </p>
+
+                            
+                        </div>
+                    </div>
+                        
+                </section>
+            </fieldset>
+
+        </div>
+    
+</div>
