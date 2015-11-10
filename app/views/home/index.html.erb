@@ -98,26 +98,24 @@
                             <div class="col-md-12">
                                 <p>
                                 <%
-                                    thomascause = Charity.where(:charityid => 177).first
+                                    thomascause = Charity.where(:charityid => 174).first
 
-                                    featuredCause = Charity.where(:charityid => 177).first
+                                    featuredCause = Charity.where(:charityid => 174).first
                                 %>
 
                            
                             <div class="col-md-12" style="display: inline-block;text-align: center;">
                                 <h5 class="title" style="text-align:center;font-size: 30px;">Featured Cause<br/>
                                      <img src="<%=featuredCause.logo.url%>" class="img-responsive" alt="" style="display:inline-block">
-                                    <a href="/cause/show/177">South County Outreach</a>
+                                    <a href="/cause/show/177">Team Red, White, And Blue, Inc.</a>
                                      <br/> </h5>
 
                                 <br/>
-                                <p style="font-size: 15px;">Homeless And Hunger Prevention<br/>
+                                <p style="font-size: 15px;">Team RWB’s Mission Is To Enrich The Lives Of America’s Veterans By Connecting Them To Their Community Through Physical And Social Activity. 
 
-South County Outreach Provides Housing Programs And Professional Case Management Services To Orange County People Who Are Homeless Or On The Verge Of Being Homeless. The Goal Is To Break The Cycle Of Poverty And Get Clients Back On The Road To Self-Sufficiency. 
-
-<a href="/cause/show/186">Read More...</a>
+<a href="/cause/show/174">Read More...</a>
                                 </p>
-                                <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button" onclick="location.href='/donate/new/?charityid=186'">
+                                <button id="register_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button" onclick="location.href='/donate/new/?charityid=174'">
                                                         <span>Donate Partially-Used Gift Card</span>
                                     </button>
                                 <br/><br/>
