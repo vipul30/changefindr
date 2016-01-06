@@ -18,7 +18,8 @@ if @donation.errors.any? %>
                 <%= f.hidden_field :charityid, :value => @donation.charityid %>
 
                 <input type="radio"  name="donation_choice" value="1" checked> Donate Unused Gift Card<br/>
-                <input type="radio" name="donation_choice" value="2"> Donate money using your credit card<br/><br/>
+
+                <input type="radio" name="donation_choice" value="2"> Don't have a gift card to donate?  You can still donate using your credit card.<br/><br/>
                
                <div id="gift_card_form">
 

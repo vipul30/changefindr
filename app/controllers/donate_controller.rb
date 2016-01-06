@@ -25,8 +25,11 @@ class DonateController < ApplicationController
 
     @donations_for_balance.each do |donation| 
 
-      if donation.giftcard.balance != nil
+      if donation.giftcard != nil && donation.giftcard.balance != nil
           @total_balance += donation.giftcard.balance 
+
+      elsif donation.amount != nil
+         @total_balance += donation.amount
       end
 
     end
@@ -109,7 +112,7 @@ class DonateController < ApplicationController
 
     description = "#{Charity.find(params[:charity_id]).id} #{Charity.find(params[:charity_id]).charityname} #{params[:name]} #{params[:email]}"
 
-byebug
+
     # Create the charge on Stripe's servers - this will charge the user's card
     begin
 
@@ -119,8 +122,53 @@ byebug
         :source => token,
         :description => description
       )
-      byebug
-    rescue Stripe::CardError => e
+      
+
+      @donation = Donation.new
+      @donation.charityid = params[:charity_id]
+      @donation.amount = params[:payment].to_f
+      @donation.firstname = params[:name]
+      @donation.lastname = params[:name]
+      @donation.email = params[:email]
+      @donation.created = DateTime.now
+      @donation.modified = DateTime.now
+
+      if session[:userid] != nil
+        @donation.userid = session[:userid]
+      end
+
+      @donation.stripe_response = charge.to_json
+
+
+      @donation.save
+
+        @message = 'Thank you for your donation in the amount of ' + number_to_currency(@donation.amount).to_s + ' to ' + @donation.charity.charityname + '.'
+        
+        flash[:notice] = nil
+        
+        DonateMailer.donate_email(@donation, request.host_with_port).deliver
+
+        # reset everything for a new donation
+        session[:giftcardid] = nil
+        session[:merchantid] = nil
+        session[:donationscount] = 1 # so the option to view donations displays in the menu dropdown for the user
+        
+        if session[:partnersite] == true
+
+          url = session[:returnurl] + '?donor=' + params[:name] + '&donoremail=' + params[:email] 
+
+          encoded_url = URI.encode(url)
+
+          redirect_to encoded_url
+          return
+        else
+          redirect_to(:controller => "donate", :action => "thankyou", :message => @message)
+          return
+        end
+      
+
+
+    rescue Exception => e
       byebug
       # The card has been declined
     end

@@ -12,6 +12,7 @@
       if (response.error) {
         // Show the errors on the form
         $form.find('.payment-errors').text(response.error.message);
+        $form.find('.payment-errors').show();
         $form.find('button').prop('disabled', false);
       } else {
         // token contains id, last4, and card type
@@ -42,9 +43,14 @@
       <input type="hidden" name="charity_id" value=<%= @donation.charityid %>>
 
       <input type="radio"  name="donation_choice" value="1" > Donate Unused Gift Card<br/>
-      <input type="radio" name="donation_choice" value="2" checked> Donate money using your credit card<br/><br/>
+      <input type="radio" name="donation_choice" value="2" checked> Don't have a gift card to donate? You can still donate using your credit card.<br/><br/>
 
-    <span class="payment-errors"></span>
+   
+      <span class="payment-errors alert alert-danger fade in" style="display:none"></span>
+      <br/><br/><br/>
+    
+
+   
 
     <div class="row">
       <div class="col-md-8">

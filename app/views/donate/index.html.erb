@@ -38,7 +38,7 @@
 	<div class="col-md-6">
 		<%= will_paginate @donations , renderer: BootstrapPagination::Rails %>
 	</div>
-</div>	
+</div>  
 
                 <br/><br/><br/>
 
@@ -51,6 +51,8 @@
                 
                 <h3>Total Donations: <%= number_to_currency(@total_balance) %></h3>
 
+<div class="row">
+    <div class="col-md-12">
                     <table class="table table-responsive table-bordered table-striped">
                         <tbody>
                             <tr>
@@ -86,20 +88,29 @@
                                     </td>
                                     <td><a href="/donate/index?charity_id=<%= donation.charity.charityid %>&account_id=<%= donation.charity.account_id %>"><%= donation.charity.charityname %></a></td>
                                     <td>
-                                        <% 
+                                        <% if donation.giftcard != nil %>
+                                            <% if donation.giftcard.merchant.merchantid == 85 %>
+                                                    Non-BHN Gift Card<br/>
+                                                    <%= donation.comments %>
 
-                                        if donation.giftcard.merchant.merchantid == 85 %>
-                                            Non-BHN Gift Card<br/>
-                                            <%= donation.comments %>
-
+                                            <% else %>
+                                                <%= donation.giftcard.merchant.merchantname %>
+                                            <% end %>
                                         <% else %>
-                                            <%= donation.giftcard.merchant.merchantname %>
+
+                                            Credit Card Donation<br/>
+
                                         <% end %>
 
 
                                     </td>
-                                    <td><%= donation.giftcard.cardnumber %></td>
-                                    <td><%= number_to_currency(donation.giftcard.balance) %></td>
+                                    <td><%= donation.giftcard.cardnumber unless donation.giftcard == nil %></td>
+                                    <td><% if donation.giftcard != nil %>
+                                            <%= number_to_currency(donation.giftcard.balance) %>
+                                        <% else %>
+                                            <%= number_to_currency(donation.amount) %>
+                                        <% end %>
+                                    </td>
                                     <td><%= donation.created.to_formatted_s(:db) %></td>
                                    <!-- <td>status...</td> -->
                                     <td>
@@ -114,7 +125,9 @@
                             <% end %>
                             
                         </tbody>
-                    </table>   
+                    </table>  
+                </div>
+                </div> 
 
                     <% else %>
 

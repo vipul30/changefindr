@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127233247) do
+ActiveRecord::Schema.define(version: 20160106173652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,8 @@ ActiveRecord::Schema.define(version: 20150127233247) do
     t.string   "comments",               limit: 1000
     t.string   "email",                  limit: 100
     t.integer  "account_transaction_id"
+    t.json     "stripe_response"
+    t.decimal  "amount"
   end
 
   create_table "giftcards", primary_key: "giftcardid", force: true do |t|
