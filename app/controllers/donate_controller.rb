@@ -101,7 +101,29 @@ class DonateController < ApplicationController
 
   def process_payment
 
-    byebug
+    Stripe.api_key = ENV['stripe_api_key']
+
+    # Get the credit card details submitted by the form
+    token = params[:stripeToken]
+    
+
+    description = "#{Charity.find(params[:charity_id]).id} #{Charity.find(params[:charity_id]).charityname} #{params[:name]} #{params[:email]}"
+
+byebug
+    # Create the charge on Stripe's servers - this will charge the user's card
+    begin
+
+      charge = Stripe::Charge.create(
+        :amount => (params[:payment].to_f * 100).to_i, # amount in cents, again
+        :currency => "usd",
+        :source => token,
+        :description => description
+      )
+      byebug
+    rescue Stripe::CardError => e
+      byebug
+      # The card has been declined
+    end
 
   end
 

@@ -10,7 +10,7 @@
 
 		<div class="wp-block default user-form no-margin">
             <div class="form-header">
-                <h1>Donate Your Unused Gift Card</h2>
+                <h2>Donate Your Unused Gift Card</h2>
 
                 <% if session[:user_firstname] == nil %>
                     <p style="text-align:center">
@@ -31,7 +31,7 @@
 
 
 
-            <%= form_for(@donation, :url => {:action => 'create'}, :html => {:class => 'sky-form', :id => "payment-form", :onsubmit => "filter(); return false;"}) do |f| %>
+            <%= form_for(@donation, :url => {:action => 'create'}, :html => {:class => 'sky-form', :id => "myform"}) do |f| %>
 
                <%= render(:partial => "donation_form", :locals => {:f => f}) %>
 
