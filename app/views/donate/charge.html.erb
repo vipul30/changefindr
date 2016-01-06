@@ -10,7 +10,7 @@
 
 		<div class="wp-block default user-form no-margin">
             <div class="form-header">
-                <h1>Donate Your Unused Gift Card</h2>
+                <h1>Donate money using your credit card</h2>
 
                 <% if session[:user_firstname] == nil %>
                     <p style="text-align:center">
@@ -29,50 +29,12 @@
 
 	      <div class="form-body">
 
+           
 
 
-            <%= form_for(@donation, :url => {:action => 'create'}, :html => {:class => 'sky-form', :id => "payment-form", :onsubmit => "filter(); return false;"}) do |f| %>
+               <%= render(:partial => "charge_form") %>
 
-               <%= render(:partial => "donation_form", :locals => {:f => f}) %>
-
-
-                <br/><br/>
-                                <button id="donation_button" class="btn btn-base btn-icon btn-icon-right btn-sign-in" type="button"
-                                onClick="
-                                console.log('button click= ' + $('#giftcard_giftcardname'));
-                                if ($('#g-recaptcha-response').val() != '')
-                                {
-                                    submitform = true;
-                                } else {
-                                    submitform = false;
-                                    alert('Please confirm you are not a robot.');
-                                    return false;
-                                }
-
-                                if ($('#giftcard_giftcardname') != '')
-                                {
-                                    submitform = true;
-                                    
-                                } else {
-                                    submitform = false;
-                                    alert('Please confirm you are not a robot.');
-                                    return false;
-                                }
-
-                                if (submitform)
-                                {
-                                    this.form.submit(); 
-                                    this.disabled=true;
-                                }
-
-                                
-                                "
-
-                                >
-                                    <span>Donate</span>
-                                </button>
-            <!--/form-->
-            	<% end %>  
+            	
         		</div>
     </div>
 		 </div>
@@ -102,7 +64,7 @@
                     </div>
         
                     
-                    <%= render partial: "widgets/merchantselectedlogo.html.erb" %> 
+                   
 
                 
 

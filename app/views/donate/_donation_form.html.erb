@@ -15,13 +15,19 @@ if @donation.errors.any? %>
 <% end %>
 
 
- <%= f.hidden_field :charityid, :value => @donation.charityid %>
+                <%= f.hidden_field :charityid, :value => @donation.charityid %>
+
+                <input type="radio"  name="donation_choice" value="1" checked> Donate Unused Gift Card<br/>
+                <input type="radio" name="donation_choice" value="2"> Donate money using your credit card<br/><br/>
 
                
+               
+               <div id="gift_card_form">
 
-                <%= f.fields_for :giftcard do |ff| %>
-                    <%= render(:partial => "/giftcard/giftcard_form", :locals => {:f => ff}) %>
-                <% end %>
+                    <%= f.fields_for :giftcard do |ff| %>
+                        <%= render(:partial => "/giftcard/giftcard_form", :locals => {:f => ff}) %>
+                    <% end %>
+                </div>
 
 
                 <fieldset>          
@@ -97,3 +103,22 @@ if @donation.errors.any? %>
                             
                     </section>
                 </fieldset>
+
+<script>
+
+    $("form input:radio").change(function(){
+   
+    console.log('clicked choice');
+
+        if ($(this).val() === '1') {
+          //$('#charge_form').hide();
+          //$('#gift_card_form').show();
+        } else if ($(this).val() === '2') {
+           window.location.href = "/donate/new?charityid=<%=@donation.charityid%>&charge=true";
+          //$('#charge_form').show();
+          //$('#gift_card_form').hide();
+        } 
+
+    });
+
+</script>

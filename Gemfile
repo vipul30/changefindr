@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
+gem 'spring', '~> 1.3.4',        group: :development
 
 # used to rename a project
 gem 'rename'
@@ -138,6 +138,8 @@ gem 'rspec-rails', '~> 3.3.3' # rspec-rails is a testing framework for Rails 3.x
 gem 'grape-swagger', '~> 0.10.1'
 gem 'swagger-ui', '~> 0.0.2'
 gem 'grape-swagger-rails'
+
+gem 'stripe', '~> 1.31'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

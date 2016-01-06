@@ -288,7 +288,7 @@ GEM
     social-share-button (0.1.8)
       coffee-rails
       sass-rails
-    spring (1.3.4)
+    spring (1.3.6)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -298,6 +298,9 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    stripe (1.32.0)
+      json (~> 1.8.1)
+      rest-client (~> 1.4)
     swagger-ui (0.0.2)
       actionpack
     thor (0.19.1)
@@ -388,7 +391,8 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   shortener (~> 0.3.1)
   social-share-button (~> 0.1.8)
-  spring
+  spring (~> 1.3.4)
+  stripe (~> 1.31)
   swagger-ui (~> 0.0.2)
   tinymce-rails (~> 4.1.6)
   truncate_html (~> 0.9.3)

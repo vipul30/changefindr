@@ -152,6 +152,7 @@ Rails.application.routes.draw do
   post 'cause/update'
   post 'donate/create'
   post 'donate/update'
+  post 'donate/process_payment'
   post 'giftcard/update'
   post '/cause/causeautocomplete'
   post '/merchant/merchantautocomplete'

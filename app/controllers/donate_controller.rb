@@ -82,7 +82,26 @@ class DonateController < ApplicationController
     end
 
     @donation.giftcard = @giftcard
+
+    if params[:charge] == 'true'
+      
+      redirect_to(:action => "charge", :charity_id => params[:charityid])
+      return
+    end
     
+
+  end
+
+  def charge
+
+    @donation = Donation.new
+    @donation.charityid = params[:charity_id]
+    
+  end
+
+  def process_payment
+
+    byebug
 
   end
 
@@ -376,6 +395,8 @@ class DonateController < ApplicationController
 
   def delete
   end
+
+  
 
   def donate_params
     params.require(:donation).permit({:giftcard_attributes =>  [:cardnumber,:merchantid,:pin,:expdate,:eventnumber,:balance]},
