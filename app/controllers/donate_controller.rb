@@ -133,6 +133,13 @@ class DonateController < ApplicationController
       @donation.created = DateTime.now
       @donation.modified = DateTime.now
 
+      if @donation.charityid == 199
+        @donation.address = params[:address]
+        @donation.occupation = params[:occupation]
+        @donation.employer = params[:employer]
+      end
+
+
       if session[:userid] != nil
         @donation.userid = session[:userid]
       end
@@ -182,6 +189,8 @@ class DonateController < ApplicationController
     @donation = Donation.new(donate_params)
     @donation.created = Time.now
     @donation.modified = Time.now
+
+byebug
 
     if params["giftcardname"].empty? && params[:donation][:giftcard_attributes][:merchantid].empty?
       flash[:notice] = 'Please type in the merchant for your giftcard or select it from the list.' 
@@ -470,7 +479,7 @@ class DonateController < ApplicationController
 
   def donate_params
     params.require(:donation).permit({:giftcard_attributes =>  [:cardnumber,:merchantid,:pin,:expdate,:eventnumber,:balance]},
-                                     :firstname,:lastname,:email,:comments,:donationwall,:charityid)
+                                     :firstname,:lastname,:email,:comments,:donationwall,:charityid,:address,:occupation,:employer)
   end
 
  

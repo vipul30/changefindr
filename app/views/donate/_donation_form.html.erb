@@ -69,6 +69,44 @@ if @donation.errors.any? %>
                                     </label>
                                 <% end %>
 
+                                <%  # Steven Choi Campaign
+                                    if  @donation.charityid == 199
+                                %>
+
+                                    <br/>
+                                    <label>Address</label>
+                                    <label class="input">
+
+                                        <i class="icon-append fa fa-map-marker"></i>
+                                        <%= f.text_field :address, :placeholder=>"Address" %>
+                                                                                               
+                                    </label>
+
+                                    <br/>
+
+                                    <label>Occupation</label>
+                                    <label class="input">
+
+                                        <i class="icon-append fa fa-briefcase"></i>
+                                        <%= f.text_field :occupation, :placeholder=>"Occupation" %>
+                                                                                               
+                                    </label>
+
+                                    <br/>
+
+                                    <label>Employer</label>
+                                    <label class="input">
+
+                                        <i class="icon-append fa fa-briefcase"></i>
+                                        <%= f.text_field :employer, :placeholder=>"Employer" %>
+                                                                                               
+                                    </label>
+
+                                    <br/>
+
+
+                                <% end %>
+
 
                                 <br>
                                 <h5 id="GiftCardNotFoundDiv2" style="display:none;color:red" >

@@ -78,7 +78,53 @@
     </div>
   </div>
 
+
     <br/>
+
+  <%  # Steven Choi Campaign
+      if  @donation.charityid == 199
+  %>
+
+      <div class="row">
+        <div class="col-md-8">
+          <label>Address</label>
+          <label class="input">
+              <i class="icon-append fa fa-map-marker"></i>
+              <input type="text" size="5" name="address"/>
+                                                                      
+          </label>
+        </div>
+      </div>
+
+      <br/>
+
+      <div class="row">
+        <div class="col-md-8">
+          <label>Occupation</label>
+          <label class="input">
+              <i class="icon-append fa fa-briefcase"></i>
+              <input type="text" size="5" name="occupation"/>
+                                                                      
+          </label>
+        </div>
+      </div>
+
+      <br/>
+
+      <div class="row">
+        <div class="col-md-8">
+          <label>Employer</label>
+          <label class="input">
+              <i class="icon-append fa fa-briefcase"></i>
+              <input type="text" size="5" name="employer"/>
+                                                                      
+          </label>
+        </div>
+      </div>
+
+      <br/>
+
+  <% end %>
 
   <div class="row">
     <div class="col-md-8">
