@@ -37,7 +37,8 @@
 
         // Disable the submit button to prevent repeated clicks
         $form.find('button').prop('disabled', true);
-        Stripe.card.createToken($form, stripeResponseHandler);
+        Stripe.card.createToken($form,
+          stripeResponseHandler);
         // Prevent the form from submitting with the default action
         return false;
       });
@@ -55,8 +56,6 @@
       <span class="payment-errors alert alert-danger fade in" style="display:none"></span>
       <br/><br/><br/>
     
-
-   
 
     <div class="row">
       <div class="col-md-8">
@@ -134,10 +133,11 @@
 
   <div class="row">
     <div class="col-md-8">
-      <label>Card Number</label>
+      <label>Credit Card</label>
       <label class="input">
           <i class="icon-append fa fa-credit-card"></i>
-          <input type="text" size="20" data-stripe="number"/>                                                      
+          <input type="text" size="20" data-stripe="number"/>
+                                                                
       </label>
     </div>
   </div>
