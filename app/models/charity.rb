@@ -72,7 +72,7 @@ class Charity < ActiveRecord::Base
 	                        :length => { :maximum => 50 }
 
 	validates :description, :presence => { :message => "Please enter a description for your cause." },
-	                        :length => { :maximum => 5000, :message => "Description must be less than 5000 characters." }
+	                        :length => { :maximum => 50000, :message => "Description must be less than 50000 characters." }
 
 	validates :website, :presence => { :message => "Please enter the website of your cause." },
 						:url => { :message => "Please enter a valid website.  i.e. http://www.changefindr.com" }
