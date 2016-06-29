@@ -68,9 +68,13 @@
                                             
                                             <a href=""><%= donation.firstname %> <%= donation.lastname %></a>
 
-                                        <% else %>
+                                        <% elsif giftcard.user != nil %>
 
                                             <a href=""><%= giftcard.user.firstname %> <%= giftcard.user.lastname %></a>
+
+                                        <% else %>
+
+                                            Name Not Provided
 
                                         <% end %>
 
